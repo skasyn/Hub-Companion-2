@@ -1,0 +1,28 @@
+{
+  "name": "Hub-Companion-2",
+  "version": "1.0.0",
+  "description": "The new Hub Companion, still track what you need to validate Hub's unit, but in a cooler way",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skasyn/Hub-Companion-2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skasyn/Hub-Companion-2/issues"
+  },
+  "homepage": "https://github.com/skasyn/Hub-Companion-2#readme",
+  "dependencies": {
+    "prisma-client-lib": "^1.34.8"
+  },
+  "devDependencies": {
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  }
+}
