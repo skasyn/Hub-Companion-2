@@ -2,7 +2,388 @@
   // Please don't change this file manually but run `prisma generate` to update it.
   // For more information, please read the docs: https://www.prisma.io/docs/prisma-client/
 
-export const typeDefs = /* GraphQL */ `type AggregatePost {
+export const typeDefs = /* GraphQL */ `type Activity {
+  id: ID!
+  code: String!
+  type: String!
+  investment_type: String
+  investment_points: Int
+  title: String!
+  description: String
+  date: DateTime
+  registered(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+}
+
+type ActivityConnection {
+  pageInfo: PageInfo!
+  edges: [ActivityEdge]!
+  aggregate: AggregateActivity!
+}
+
+input ActivityCreateInput {
+  id: ID
+  code: String!
+  type: String!
+  investment_type: String
+  investment_points: Int
+  title: String!
+  description: String
+  date: DateTime
+  registered: UserCreateManyWithoutActivitiesInput
+}
+
+input ActivityCreateManyWithoutRegisteredInput {
+  create: [ActivityCreateWithoutRegisteredInput!]
+  connect: [ActivityWhereUniqueInput!]
+}
+
+input ActivityCreateWithoutRegisteredInput {
+  id: ID
+  code: String!
+  type: String!
+  investment_type: String
+  investment_points: Int
+  title: String!
+  description: String
+  date: DateTime
+}
+
+type ActivityEdge {
+  node: Activity!
+  cursor: String!
+}
+
+enum ActivityOrderByInput {
+  id_ASC
+  id_DESC
+  code_ASC
+  code_DESC
+  type_ASC
+  type_DESC
+  investment_type_ASC
+  investment_type_DESC
+  investment_points_ASC
+  investment_points_DESC
+  title_ASC
+  title_DESC
+  description_ASC
+  description_DESC
+  date_ASC
+  date_DESC
+}
+
+type ActivityPreviousValues {
+  id: ID!
+  code: String!
+  type: String!
+  investment_type: String
+  investment_points: Int
+  title: String!
+  description: String
+  date: DateTime
+}
+
+input ActivityScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
+  type: String
+  type_not: String
+  type_in: [String!]
+  type_not_in: [String!]
+  type_lt: String
+  type_lte: String
+  type_gt: String
+  type_gte: String
+  type_contains: String
+  type_not_contains: String
+  type_starts_with: String
+  type_not_starts_with: String
+  type_ends_with: String
+  type_not_ends_with: String
+  investment_type: String
+  investment_type_not: String
+  investment_type_in: [String!]
+  investment_type_not_in: [String!]
+  investment_type_lt: String
+  investment_type_lte: String
+  investment_type_gt: String
+  investment_type_gte: String
+  investment_type_contains: String
+  investment_type_not_contains: String
+  investment_type_starts_with: String
+  investment_type_not_starts_with: String
+  investment_type_ends_with: String
+  investment_type_not_ends_with: String
+  investment_points: Int
+  investment_points_not: Int
+  investment_points_in: [Int!]
+  investment_points_not_in: [Int!]
+  investment_points_lt: Int
+  investment_points_lte: Int
+  investment_points_gt: Int
+  investment_points_gte: Int
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  AND: [ActivityScalarWhereInput!]
+  OR: [ActivityScalarWhereInput!]
+  NOT: [ActivityScalarWhereInput!]
+}
+
+type ActivitySubscriptionPayload {
+  mutation: MutationType!
+  node: Activity
+  updatedFields: [String!]
+  previousValues: ActivityPreviousValues
+}
+
+input ActivitySubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ActivityWhereInput
+  AND: [ActivitySubscriptionWhereInput!]
+}
+
+input ActivityUpdateInput {
+  code: String
+  type: String
+  investment_type: String
+  investment_points: Int
+  title: String
+  description: String
+  date: DateTime
+  registered: UserUpdateManyWithoutActivitiesInput
+}
+
+input ActivityUpdateManyDataInput {
+  code: String
+  type: String
+  investment_type: String
+  investment_points: Int
+  title: String
+  description: String
+  date: DateTime
+}
+
+input ActivityUpdateManyMutationInput {
+  code: String
+  type: String
+  investment_type: String
+  investment_points: Int
+  title: String
+  description: String
+  date: DateTime
+}
+
+input ActivityUpdateManyWithoutRegisteredInput {
+  create: [ActivityCreateWithoutRegisteredInput!]
+  delete: [ActivityWhereUniqueInput!]
+  connect: [ActivityWhereUniqueInput!]
+  set: [ActivityWhereUniqueInput!]
+  disconnect: [ActivityWhereUniqueInput!]
+  update: [ActivityUpdateWithWhereUniqueWithoutRegisteredInput!]
+  upsert: [ActivityUpsertWithWhereUniqueWithoutRegisteredInput!]
+  deleteMany: [ActivityScalarWhereInput!]
+  updateMany: [ActivityUpdateManyWithWhereNestedInput!]
+}
+
+input ActivityUpdateManyWithWhereNestedInput {
+  where: ActivityScalarWhereInput!
+  data: ActivityUpdateManyDataInput!
+}
+
+input ActivityUpdateWithoutRegisteredDataInput {
+  code: String
+  type: String
+  investment_type: String
+  investment_points: Int
+  title: String
+  description: String
+  date: DateTime
+}
+
+input ActivityUpdateWithWhereUniqueWithoutRegisteredInput {
+  where: ActivityWhereUniqueInput!
+  data: ActivityUpdateWithoutRegisteredDataInput!
+}
+
+input ActivityUpsertWithWhereUniqueWithoutRegisteredInput {
+  where: ActivityWhereUniqueInput!
+  update: ActivityUpdateWithoutRegisteredDataInput!
+  create: ActivityCreateWithoutRegisteredInput!
+}
+
+input ActivityWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
+  type: String
+  type_not: String
+  type_in: [String!]
+  type_not_in: [String!]
+  type_lt: String
+  type_lte: String
+  type_gt: String
+  type_gte: String
+  type_contains: String
+  type_not_contains: String
+  type_starts_with: String
+  type_not_starts_with: String
+  type_ends_with: String
+  type_not_ends_with: String
+  investment_type: String
+  investment_type_not: String
+  investment_type_in: [String!]
+  investment_type_not_in: [String!]
+  investment_type_lt: String
+  investment_type_lte: String
+  investment_type_gt: String
+  investment_type_gte: String
+  investment_type_contains: String
+  investment_type_not_contains: String
+  investment_type_starts_with: String
+  investment_type_not_starts_with: String
+  investment_type_ends_with: String
+  investment_type_not_ends_with: String
+  investment_points: Int
+  investment_points_not: Int
+  investment_points_in: [Int!]
+  investment_points_not_in: [Int!]
+  investment_points_lt: Int
+  investment_points_lte: Int
+  investment_points_gt: Int
+  investment_points_gte: Int
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  registered_some: UserWhereInput
+  AND: [ActivityWhereInput!]
+}
+
+input ActivityWhereUniqueInput {
+  id: ID
+}
+
+type AggregateActivity {
   count: Int!
 }
 
@@ -14,15 +395,17 @@ type BatchPayload {
   count: Long!
 }
 
+scalar DateTime
+
 scalar Long
 
 type Mutation {
-  createPost(data: PostCreateInput!): Post!
-  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-  updateManyPosts(data: PostUpdateManyMutationInput!, where: PostWhereInput): BatchPayload!
-  upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
-  deletePost(where: PostWhereUniqueInput!): Post
-  deleteManyPosts(where: PostWhereInput): BatchPayload!
+  createActivity(data: ActivityCreateInput!): Activity!
+  updateActivity(data: ActivityUpdateInput!, where: ActivityWhereUniqueInput!): Activity
+  updateManyActivities(data: ActivityUpdateManyMutationInput!, where: ActivityWhereInput): BatchPayload!
+  upsertActivity(where: ActivityWhereUniqueInput!, create: ActivityCreateInput!, update: ActivityUpdateInput!): Activity!
+  deleteActivity(where: ActivityWhereUniqueInput!): Activity
+  deleteManyActivities(where: ActivityWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -48,201 +431,10 @@ type PageInfo {
   endCursor: String
 }
 
-type Post {
-  id: ID!
-  title: String!
-  published: Boolean!
-  author: User
-}
-
-type PostConnection {
-  pageInfo: PageInfo!
-  edges: [PostEdge]!
-  aggregate: AggregatePost!
-}
-
-input PostCreateInput {
-  id: ID
-  title: String!
-  published: Boolean
-  author: UserCreateOneWithoutPostsInput
-}
-
-input PostCreateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connect: [PostWhereUniqueInput!]
-}
-
-input PostCreateWithoutAuthorInput {
-  id: ID
-  title: String!
-  published: Boolean
-}
-
-type PostEdge {
-  node: Post!
-  cursor: String!
-}
-
-enum PostOrderByInput {
-  id_ASC
-  id_DESC
-  title_ASC
-  title_DESC
-  published_ASC
-  published_DESC
-}
-
-type PostPreviousValues {
-  id: ID!
-  title: String!
-  published: Boolean!
-}
-
-input PostScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  title: String
-  title_not: String
-  title_in: [String!]
-  title_not_in: [String!]
-  title_lt: String
-  title_lte: String
-  title_gt: String
-  title_gte: String
-  title_contains: String
-  title_not_contains: String
-  title_starts_with: String
-  title_not_starts_with: String
-  title_ends_with: String
-  title_not_ends_with: String
-  published: Boolean
-  published_not: Boolean
-  AND: [PostScalarWhereInput!]
-  OR: [PostScalarWhereInput!]
-  NOT: [PostScalarWhereInput!]
-}
-
-type PostSubscriptionPayload {
-  mutation: MutationType!
-  node: Post
-  updatedFields: [String!]
-  previousValues: PostPreviousValues
-}
-
-input PostSubscriptionWhereInput {
-  mutation_in: [MutationType!]
-  updatedFields_contains: String
-  updatedFields_contains_every: [String!]
-  updatedFields_contains_some: [String!]
-  node: PostWhereInput
-  AND: [PostSubscriptionWhereInput!]
-}
-
-input PostUpdateInput {
-  title: String
-  published: Boolean
-  author: UserUpdateOneWithoutPostsInput
-}
-
-input PostUpdateManyDataInput {
-  title: String
-  published: Boolean
-}
-
-input PostUpdateManyMutationInput {
-  title: String
-  published: Boolean
-}
-
-input PostUpdateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  delete: [PostWhereUniqueInput!]
-  connect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  disconnect: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
-  deleteMany: [PostScalarWhereInput!]
-  updateMany: [PostUpdateManyWithWhereNestedInput!]
-}
-
-input PostUpdateManyWithWhereNestedInput {
-  where: PostScalarWhereInput!
-  data: PostUpdateManyDataInput!
-}
-
-input PostUpdateWithoutAuthorDataInput {
-  title: String
-  published: Boolean
-}
-
-input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  data: PostUpdateWithoutAuthorDataInput!
-}
-
-input PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  update: PostUpdateWithoutAuthorDataInput!
-  create: PostCreateWithoutAuthorInput!
-}
-
-input PostWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  title: String
-  title_not: String
-  title_in: [String!]
-  title_not_in: [String!]
-  title_lt: String
-  title_lte: String
-  title_gt: String
-  title_gte: String
-  title_contains: String
-  title_not_contains: String
-  title_starts_with: String
-  title_not_starts_with: String
-  title_ends_with: String
-  title_not_ends_with: String
-  published: Boolean
-  published_not: Boolean
-  author: UserWhereInput
-  AND: [PostWhereInput!]
-}
-
-input PostWhereUniqueInput {
-  id: ID
-}
-
 type Query {
-  post(where: PostWhereUniqueInput!): Post
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
-  postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
+  activity(where: ActivityWhereUniqueInput!): Activity
+  activities(where: ActivityWhereInput, orderBy: ActivityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Activity]!
+  activitiesConnection(where: ActivityWhereInput, orderBy: ActivityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ActivityConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -250,15 +442,23 @@ type Query {
 }
 
 type Subscription {
-  post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
+  activity(where: ActivitySubscriptionWhereInput): ActivitySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
 type User {
   id: ID!
-  email: String
   name: String!
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  email: String!
+  token: String!
+  year: Int
+  plan: Int
+  acculturation: Int
+  experimentation: Int
+  fruition: Int
+  sharing: Int
+  privilege: Int
+  activities(where: ActivityWhereInput, orderBy: ActivityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Activity!]
 }
 
 type UserConnection {
@@ -269,20 +469,36 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  email: String
   name: String!
-  posts: PostCreateManyWithoutAuthorInput
+  email: String!
+  token: String!
+  year: Int
+  plan: Int
+  acculturation: Int
+  experimentation: Int
+  fruition: Int
+  sharing: Int
+  privilege: Int
+  activities: ActivityCreateManyWithoutRegisteredInput
 }
 
-input UserCreateOneWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
-  connect: UserWhereUniqueInput
+input UserCreateManyWithoutActivitiesInput {
+  create: [UserCreateWithoutActivitiesInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
-input UserCreateWithoutPostsInput {
+input UserCreateWithoutActivitiesInput {
   id: ID
-  email: String
   name: String!
+  email: String!
+  token: String!
+  year: Int
+  plan: Int
+  acculturation: Int
+  experimentation: Int
+  fruition: Int
+  sharing: Int
+  privilege: Int
 }
 
 type UserEdge {
@@ -293,16 +509,158 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  email_ASC
-  email_DESC
   name_ASC
   name_DESC
+  email_ASC
+  email_DESC
+  token_ASC
+  token_DESC
+  year_ASC
+  year_DESC
+  plan_ASC
+  plan_DESC
+  acculturation_ASC
+  acculturation_DESC
+  experimentation_ASC
+  experimentation_DESC
+  fruition_ASC
+  fruition_DESC
+  sharing_ASC
+  sharing_DESC
+  privilege_ASC
+  privilege_DESC
 }
 
 type UserPreviousValues {
   id: ID!
-  email: String
   name: String!
+  email: String!
+  token: String!
+  year: Int
+  plan: Int
+  acculturation: Int
+  experimentation: Int
+  fruition: Int
+  sharing: Int
+  privilege: Int
+}
+
+input UserScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  token: String
+  token_not: String
+  token_in: [String!]
+  token_not_in: [String!]
+  token_lt: String
+  token_lte: String
+  token_gt: String
+  token_gte: String
+  token_contains: String
+  token_not_contains: String
+  token_starts_with: String
+  token_not_starts_with: String
+  token_ends_with: String
+  token_not_ends_with: String
+  year: Int
+  year_not: Int
+  year_in: [Int!]
+  year_not_in: [Int!]
+  year_lt: Int
+  year_lte: Int
+  year_gt: Int
+  year_gte: Int
+  plan: Int
+  plan_not: Int
+  plan_in: [Int!]
+  plan_not_in: [Int!]
+  plan_lt: Int
+  plan_lte: Int
+  plan_gt: Int
+  plan_gte: Int
+  acculturation: Int
+  acculturation_not: Int
+  acculturation_in: [Int!]
+  acculturation_not_in: [Int!]
+  acculturation_lt: Int
+  acculturation_lte: Int
+  acculturation_gt: Int
+  acculturation_gte: Int
+  experimentation: Int
+  experimentation_not: Int
+  experimentation_in: [Int!]
+  experimentation_not_in: [Int!]
+  experimentation_lt: Int
+  experimentation_lte: Int
+  experimentation_gt: Int
+  experimentation_gte: Int
+  fruition: Int
+  fruition_not: Int
+  fruition_in: [Int!]
+  fruition_not_in: [Int!]
+  fruition_lt: Int
+  fruition_lte: Int
+  fruition_gt: Int
+  fruition_gte: Int
+  sharing: Int
+  sharing_not: Int
+  sharing_in: [Int!]
+  sharing_not_in: [Int!]
+  sharing_lt: Int
+  sharing_lte: Int
+  sharing_gt: Int
+  sharing_gte: Int
+  privilege: Int
+  privilege_not: Int
+  privilege_in: [Int!]
+  privilege_not_in: [Int!]
+  privilege_lt: Int
+  privilege_lte: Int
+  privilege_gt: Int
+  privilege_gte: Int
+  AND: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
 }
 
 type UserSubscriptionPayload {
@@ -322,33 +680,84 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
-  email: String
   name: String
-  posts: PostUpdateManyWithoutAuthorInput
+  email: String
+  token: String
+  year: Int
+  plan: Int
+  acculturation: Int
+  experimentation: Int
+  fruition: Int
+  sharing: Int
+  privilege: Int
+  activities: ActivityUpdateManyWithoutRegisteredInput
+}
+
+input UserUpdateManyDataInput {
+  name: String
+  email: String
+  token: String
+  year: Int
+  plan: Int
+  acculturation: Int
+  experimentation: Int
+  fruition: Int
+  sharing: Int
+  privilege: Int
 }
 
 input UserUpdateManyMutationInput {
-  email: String
   name: String
-}
-
-input UserUpdateOneWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
-  update: UserUpdateWithoutPostsDataInput
-  upsert: UserUpsertWithoutPostsInput
-  delete: Boolean
-  disconnect: Boolean
-  connect: UserWhereUniqueInput
-}
-
-input UserUpdateWithoutPostsDataInput {
   email: String
-  name: String
+  token: String
+  year: Int
+  plan: Int
+  acculturation: Int
+  experimentation: Int
+  fruition: Int
+  sharing: Int
+  privilege: Int
 }
 
-input UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput!
-  create: UserCreateWithoutPostsInput!
+input UserUpdateManyWithoutActivitiesInput {
+  create: [UserCreateWithoutActivitiesInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutActivitiesInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutActivitiesInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
+input UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput!
+  data: UserUpdateManyDataInput!
+}
+
+input UserUpdateWithoutActivitiesDataInput {
+  name: String
+  email: String
+  token: String
+  year: Int
+  plan: Int
+  acculturation: Int
+  experimentation: Int
+  fruition: Int
+  sharing: Int
+  privilege: Int
+}
+
+input UserUpdateWithWhereUniqueWithoutActivitiesInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateWithoutActivitiesDataInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutActivitiesInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateWithoutActivitiesDataInput!
+  create: UserCreateWithoutActivitiesInput!
 }
 
 input UserWhereInput {
@@ -366,20 +775,6 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  email: String
-  email_not: String
-  email_in: [String!]
-  email_not_in: [String!]
-  email_lt: String
-  email_lte: String
-  email_gt: String
-  email_gte: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -394,12 +789,95 @@ input UserWhereInput {
   name_not_starts_with: String
   name_ends_with: String
   name_not_ends_with: String
-  posts_some: PostWhereInput
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
+  token: String
+  token_not: String
+  token_in: [String!]
+  token_not_in: [String!]
+  token_lt: String
+  token_lte: String
+  token_gt: String
+  token_gte: String
+  token_contains: String
+  token_not_contains: String
+  token_starts_with: String
+  token_not_starts_with: String
+  token_ends_with: String
+  token_not_ends_with: String
+  year: Int
+  year_not: Int
+  year_in: [Int!]
+  year_not_in: [Int!]
+  year_lt: Int
+  year_lte: Int
+  year_gt: Int
+  year_gte: Int
+  plan: Int
+  plan_not: Int
+  plan_in: [Int!]
+  plan_not_in: [Int!]
+  plan_lt: Int
+  plan_lte: Int
+  plan_gt: Int
+  plan_gte: Int
+  acculturation: Int
+  acculturation_not: Int
+  acculturation_in: [Int!]
+  acculturation_not_in: [Int!]
+  acculturation_lt: Int
+  acculturation_lte: Int
+  acculturation_gt: Int
+  acculturation_gte: Int
+  experimentation: Int
+  experimentation_not: Int
+  experimentation_in: [Int!]
+  experimentation_not_in: [Int!]
+  experimentation_lt: Int
+  experimentation_lte: Int
+  experimentation_gt: Int
+  experimentation_gte: Int
+  fruition: Int
+  fruition_not: Int
+  fruition_in: [Int!]
+  fruition_not_in: [Int!]
+  fruition_lt: Int
+  fruition_lte: Int
+  fruition_gt: Int
+  fruition_gte: Int
+  sharing: Int
+  sharing_not: Int
+  sharing_in: [Int!]
+  sharing_not_in: [Int!]
+  sharing_lt: Int
+  sharing_lte: Int
+  sharing_gt: Int
+  sharing_gte: Int
+  privilege: Int
+  privilege_not: Int
+  privilege_in: [Int!]
+  privilege_not_in: [Int!]
+  privilege_lt: Int
+  privilege_lte: Int
+  privilege_gt: Int
+  privilege_gte: Int
+  activities_some: ActivityWhereInput
   AND: [UserWhereInput!]
 }
 
 input UserWhereUniqueInput {
   id: ID
-  email: String
 }
 `
