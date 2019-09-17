@@ -381,6 +381,7 @@ input ActivityWhereInput {
 
 input ActivityWhereUniqueInput {
   id: ID
+  code: String
 }
 
 type AggregateActivity {
@@ -879,5 +880,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  email: String
+  token: String
 }
 `

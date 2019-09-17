@@ -1,8 +1,8 @@
 type User {
   id: ID! @id
   name: String!
-  email: String!
-  token: String!
+  email: String! @unique
+  token: String! @unique
   year: Int @default(value: 0)
   plan: Int @default(value: -1)
   acculturation: Int @default(value: 0)
@@ -10,18 +10,18 @@ type User {
   fruition: Int @default(value: 0)
   sharing: Int @default(value: 0)
   privilege: Int @default(value: 0)
-  activities: [Activity!]! @relation(name: "AllActivities")
+  activities: [Activity!]! @relation(name: "AllActivities", link: INLINE)
 }
 type Activity {
     id: ID! @id
-    code: String!
+    code: String! @unique
     type: String!
     investment_type: String
     investment_points: Int
     title: String!
     description: String
     date: DateTime
-    registered: [User!]! @relation(name: "AllActivities", link: INLINE)
+    registered: [User!]! @relation(name: "AllActivities")
 }
 
 #type User {
