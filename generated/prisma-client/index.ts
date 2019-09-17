@@ -184,307 +184,6 @@ export type ActivityOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export type ActivityWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface UserWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  email?: Maybe<String>;
-  email_not?: Maybe<String>;
-  email_in?: Maybe<String[] | String>;
-  email_not_in?: Maybe<String[] | String>;
-  email_lt?: Maybe<String>;
-  email_lte?: Maybe<String>;
-  email_gt?: Maybe<String>;
-  email_gte?: Maybe<String>;
-  email_contains?: Maybe<String>;
-  email_not_contains?: Maybe<String>;
-  email_starts_with?: Maybe<String>;
-  email_not_starts_with?: Maybe<String>;
-  email_ends_with?: Maybe<String>;
-  email_not_ends_with?: Maybe<String>;
-  token?: Maybe<String>;
-  token_not?: Maybe<String>;
-  token_in?: Maybe<String[] | String>;
-  token_not_in?: Maybe<String[] | String>;
-  token_lt?: Maybe<String>;
-  token_lte?: Maybe<String>;
-  token_gt?: Maybe<String>;
-  token_gte?: Maybe<String>;
-  token_contains?: Maybe<String>;
-  token_not_contains?: Maybe<String>;
-  token_starts_with?: Maybe<String>;
-  token_not_starts_with?: Maybe<String>;
-  token_ends_with?: Maybe<String>;
-  token_not_ends_with?: Maybe<String>;
-  year?: Maybe<Int>;
-  year_not?: Maybe<Int>;
-  year_in?: Maybe<Int[] | Int>;
-  year_not_in?: Maybe<Int[] | Int>;
-  year_lt?: Maybe<Int>;
-  year_lte?: Maybe<Int>;
-  year_gt?: Maybe<Int>;
-  year_gte?: Maybe<Int>;
-  plan?: Maybe<Int>;
-  plan_not?: Maybe<Int>;
-  plan_in?: Maybe<Int[] | Int>;
-  plan_not_in?: Maybe<Int[] | Int>;
-  plan_lt?: Maybe<Int>;
-  plan_lte?: Maybe<Int>;
-  plan_gt?: Maybe<Int>;
-  plan_gte?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  acculturation_not?: Maybe<Int>;
-  acculturation_in?: Maybe<Int[] | Int>;
-  acculturation_not_in?: Maybe<Int[] | Int>;
-  acculturation_lt?: Maybe<Int>;
-  acculturation_lte?: Maybe<Int>;
-  acculturation_gt?: Maybe<Int>;
-  acculturation_gte?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  experimentation_not?: Maybe<Int>;
-  experimentation_in?: Maybe<Int[] | Int>;
-  experimentation_not_in?: Maybe<Int[] | Int>;
-  experimentation_lt?: Maybe<Int>;
-  experimentation_lte?: Maybe<Int>;
-  experimentation_gt?: Maybe<Int>;
-  experimentation_gte?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  fruition_not?: Maybe<Int>;
-  fruition_in?: Maybe<Int[] | Int>;
-  fruition_not_in?: Maybe<Int[] | Int>;
-  fruition_lt?: Maybe<Int>;
-  fruition_lte?: Maybe<Int>;
-  fruition_gt?: Maybe<Int>;
-  fruition_gte?: Maybe<Int>;
-  sharing?: Maybe<Int>;
-  sharing_not?: Maybe<Int>;
-  sharing_in?: Maybe<Int[] | Int>;
-  sharing_not_in?: Maybe<Int[] | Int>;
-  sharing_lt?: Maybe<Int>;
-  sharing_lte?: Maybe<Int>;
-  sharing_gt?: Maybe<Int>;
-  sharing_gte?: Maybe<Int>;
-  privilege?: Maybe<Int>;
-  privilege_not?: Maybe<Int>;
-  privilege_in?: Maybe<Int[] | Int>;
-  privilege_not_in?: Maybe<Int[] | Int>;
-  privilege_lt?: Maybe<Int>;
-  privilege_lte?: Maybe<Int>;
-  privilege_gt?: Maybe<Int>;
-  privilege_gte?: Maybe<Int>;
-  activities_some?: Maybe<ActivityWhereInput>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
-}
-
-export interface ActivityWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  code?: Maybe<String>;
-  code_not?: Maybe<String>;
-  code_in?: Maybe<String[] | String>;
-  code_not_in?: Maybe<String[] | String>;
-  code_lt?: Maybe<String>;
-  code_lte?: Maybe<String>;
-  code_gt?: Maybe<String>;
-  code_gte?: Maybe<String>;
-  code_contains?: Maybe<String>;
-  code_not_contains?: Maybe<String>;
-  code_starts_with?: Maybe<String>;
-  code_not_starts_with?: Maybe<String>;
-  code_ends_with?: Maybe<String>;
-  code_not_ends_with?: Maybe<String>;
-  type?: Maybe<String>;
-  type_not?: Maybe<String>;
-  type_in?: Maybe<String[] | String>;
-  type_not_in?: Maybe<String[] | String>;
-  type_lt?: Maybe<String>;
-  type_lte?: Maybe<String>;
-  type_gt?: Maybe<String>;
-  type_gte?: Maybe<String>;
-  type_contains?: Maybe<String>;
-  type_not_contains?: Maybe<String>;
-  type_starts_with?: Maybe<String>;
-  type_not_starts_with?: Maybe<String>;
-  type_ends_with?: Maybe<String>;
-  type_not_ends_with?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_type_not?: Maybe<String>;
-  investment_type_in?: Maybe<String[] | String>;
-  investment_type_not_in?: Maybe<String[] | String>;
-  investment_type_lt?: Maybe<String>;
-  investment_type_lte?: Maybe<String>;
-  investment_type_gt?: Maybe<String>;
-  investment_type_gte?: Maybe<String>;
-  investment_type_contains?: Maybe<String>;
-  investment_type_not_contains?: Maybe<String>;
-  investment_type_starts_with?: Maybe<String>;
-  investment_type_not_starts_with?: Maybe<String>;
-  investment_type_ends_with?: Maybe<String>;
-  investment_type_not_ends_with?: Maybe<String>;
-  investment_points?: Maybe<Int>;
-  investment_points_not?: Maybe<Int>;
-  investment_points_in?: Maybe<Int[] | Int>;
-  investment_points_not_in?: Maybe<Int[] | Int>;
-  investment_points_lt?: Maybe<Int>;
-  investment_points_lte?: Maybe<Int>;
-  investment_points_gt?: Maybe<Int>;
-  investment_points_gte?: Maybe<Int>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
-  date_not?: Maybe<DateTimeInput>;
-  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_lt?: Maybe<DateTimeInput>;
-  date_lte?: Maybe<DateTimeInput>;
-  date_gt?: Maybe<DateTimeInput>;
-  date_gte?: Maybe<DateTimeInput>;
-  registered_some?: Maybe<UserWhereInput>;
-  AND?: Maybe<ActivityWhereInput[] | ActivityWhereInput>;
-}
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface ActivityCreateInput {
-  id?: Maybe<ID_Input>;
-  code: String;
-  type: String;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
-  title: String;
-  description?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
-  registered?: Maybe<UserCreateManyWithoutActivitiesInput>;
-}
-
-export interface UserCreateManyWithoutActivitiesInput {
-  create?: Maybe<
-    UserCreateWithoutActivitiesInput[] | UserCreateWithoutActivitiesInput
-  >;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-}
-
-export interface UserCreateWithoutActivitiesInput {
-  id?: Maybe<ID_Input>;
-  name: String;
-  email: String;
-  token: String;
-  year?: Maybe<Int>;
-  plan?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  sharing?: Maybe<Int>;
-  privilege?: Maybe<Int>;
-}
-
-export interface ActivityUpdateInput {
-  code?: Maybe<String>;
-  type?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
-  title?: Maybe<String>;
-  description?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
-  registered?: Maybe<UserUpdateManyWithoutActivitiesInput>;
-}
-
-export interface UserUpdateManyWithoutActivitiesInput {
-  create?: Maybe<
-    UserCreateWithoutActivitiesInput[] | UserCreateWithoutActivitiesInput
-  >;
-  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
-  update?: Maybe<
-    | UserUpdateWithWhereUniqueWithoutActivitiesInput[]
-    | UserUpdateWithWhereUniqueWithoutActivitiesInput
-  >;
-  upsert?: Maybe<
-    | UserUpsertWithWhereUniqueWithoutActivitiesInput[]
-    | UserUpsertWithWhereUniqueWithoutActivitiesInput
-  >;
-  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
-  updateMany?: Maybe<
-    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface UserUpdateWithWhereUniqueWithoutActivitiesInput {
-  where: UserWhereUniqueInput;
-  data: UserUpdateWithoutActivitiesDataInput;
-}
-
 export interface UserUpdateWithoutActivitiesDataInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
@@ -498,10 +197,24 @@ export interface UserUpdateWithoutActivitiesDataInput {
   privilege?: Maybe<Int>;
 }
 
-export interface UserUpsertWithWhereUniqueWithoutActivitiesInput {
-  where: UserWhereUniqueInput;
-  update: UserUpdateWithoutActivitiesDataInput;
-  create: UserCreateWithoutActivitiesInput;
+export type ActivityWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  code?: Maybe<String>;
+}>;
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  name: String;
+  email: String;
+  token: String;
+  year?: Maybe<Int>;
+  plan?: Maybe<Int>;
+  acculturation?: Maybe<Int>;
+  experimentation?: Maybe<Int>;
+  fruition?: Maybe<Int>;
+  sharing?: Maybe<Int>;
+  privilege?: Maybe<Int>;
+  activities?: Maybe<ActivityCreateManyWithoutRegisteredInput>;
 }
 
 export interface UserScalarWhereInput {
@@ -622,12 +335,35 @@ export interface UserScalarWhereInput {
   NOT?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
 }
 
-export interface UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput;
-  data: UserUpdateManyDataInput;
+export interface ActivityCreateInput {
+  id?: Maybe<ID_Input>;
+  code: String;
+  type: String;
+  investment_type?: Maybe<String>;
+  investment_points?: Maybe<Int>;
+  title: String;
+  description?: Maybe<String>;
+  date?: Maybe<DateTimeInput>;
+  registered?: Maybe<UserCreateManyWithoutActivitiesInput>;
 }
 
-export interface UserUpdateManyDataInput {
+export interface UserSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+}
+
+export interface UserCreateManyWithoutActivitiesInput {
+  create?: Maybe<
+    UserCreateWithoutActivitiesInput[] | UserCreateWithoutActivitiesInput
+  >;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+}
+
+export interface UserUpdateManyMutationInput {
   name?: Maybe<String>;
   email?: Maybe<String>;
   token?: Maybe<String>;
@@ -640,17 +376,7 @@ export interface UserUpdateManyDataInput {
   privilege?: Maybe<Int>;
 }
 
-export interface ActivityUpdateManyMutationInput {
-  code?: Maybe<String>;
-  type?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
-  title?: Maybe<String>;
-  description?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
-}
-
-export interface UserCreateInput {
+export interface UserCreateWithoutActivitiesInput {
   id?: Maybe<ID_Input>;
   name: String;
   email: String;
@@ -662,40 +388,61 @@ export interface UserCreateInput {
   fruition?: Maybe<Int>;
   sharing?: Maybe<Int>;
   privilege?: Maybe<Int>;
-  activities?: Maybe<ActivityCreateManyWithoutRegisteredInput>;
 }
 
-export interface ActivityCreateManyWithoutRegisteredInput {
-  create?: Maybe<
-    | ActivityCreateWithoutRegisteredInput[]
-    | ActivityCreateWithoutRegisteredInput
-  >;
-  connect?: Maybe<ActivityWhereUniqueInput[] | ActivityWhereUniqueInput>;
+export interface ActivityUpdateManyWithWhereNestedInput {
+  where: ActivityScalarWhereInput;
+  data: ActivityUpdateManyDataInput;
 }
 
-export interface ActivityCreateWithoutRegisteredInput {
-  id?: Maybe<ID_Input>;
-  code: String;
-  type: String;
+export interface ActivityUpdateInput {
+  code?: Maybe<String>;
+  type?: Maybe<String>;
   investment_type?: Maybe<String>;
   investment_points?: Maybe<Int>;
-  title: String;
+  title?: Maybe<String>;
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
+  registered?: Maybe<UserUpdateManyWithoutActivitiesInput>;
 }
 
-export interface UserUpdateInput {
-  name?: Maybe<String>;
+export interface ActivityUpsertWithWhereUniqueWithoutRegisteredInput {
+  where: ActivityWhereUniqueInput;
+  update: ActivityUpdateWithoutRegisteredDataInput;
+  create: ActivityCreateWithoutRegisteredInput;
+}
+
+export interface UserUpdateManyWithoutActivitiesInput {
+  create?: Maybe<
+    UserCreateWithoutActivitiesInput[] | UserCreateWithoutActivitiesInput
+  >;
+  delete?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  connect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  set?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  disconnect?: Maybe<UserWhereUniqueInput[] | UserWhereUniqueInput>;
+  update?: Maybe<
+    | UserUpdateWithWhereUniqueWithoutActivitiesInput[]
+    | UserUpdateWithWhereUniqueWithoutActivitiesInput
+  >;
+  upsert?: Maybe<
+    | UserUpsertWithWhereUniqueWithoutActivitiesInput[]
+    | UserUpsertWithWhereUniqueWithoutActivitiesInput
+  >;
+  deleteMany?: Maybe<UserScalarWhereInput[] | UserScalarWhereInput>;
+  updateMany?: Maybe<
+    UserUpdateManyWithWhereNestedInput[] | UserUpdateManyWithWhereNestedInput
+  >;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
   email?: Maybe<String>;
   token?: Maybe<String>;
-  year?: Maybe<Int>;
-  plan?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  sharing?: Maybe<Int>;
-  privilege?: Maybe<Int>;
-  activities?: Maybe<ActivityUpdateManyWithoutRegisteredInput>;
+}>;
+
+export interface UserUpdateWithWhereUniqueWithoutActivitiesInput {
+  where: UserWhereUniqueInput;
+  data: UserUpdateWithoutActivitiesDataInput;
 }
 
 export interface ActivityUpdateManyWithoutRegisteredInput {
@@ -722,9 +469,253 @@ export interface ActivityUpdateManyWithoutRegisteredInput {
   >;
 }
 
-export interface ActivityUpdateWithWhereUniqueWithoutRegisteredInput {
-  where: ActivityWhereUniqueInput;
-  data: ActivityUpdateWithoutRegisteredDataInput;
+export interface ActivityCreateWithoutRegisteredInput {
+  id?: Maybe<ID_Input>;
+  code: String;
+  type: String;
+  investment_type?: Maybe<String>;
+  investment_points?: Maybe<Int>;
+  title: String;
+  description?: Maybe<String>;
+  date?: Maybe<DateTimeInput>;
+}
+
+export interface ActivityWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  code?: Maybe<String>;
+  code_not?: Maybe<String>;
+  code_in?: Maybe<String[] | String>;
+  code_not_in?: Maybe<String[] | String>;
+  code_lt?: Maybe<String>;
+  code_lte?: Maybe<String>;
+  code_gt?: Maybe<String>;
+  code_gte?: Maybe<String>;
+  code_contains?: Maybe<String>;
+  code_not_contains?: Maybe<String>;
+  code_starts_with?: Maybe<String>;
+  code_not_starts_with?: Maybe<String>;
+  code_ends_with?: Maybe<String>;
+  code_not_ends_with?: Maybe<String>;
+  type?: Maybe<String>;
+  type_not?: Maybe<String>;
+  type_in?: Maybe<String[] | String>;
+  type_not_in?: Maybe<String[] | String>;
+  type_lt?: Maybe<String>;
+  type_lte?: Maybe<String>;
+  type_gt?: Maybe<String>;
+  type_gte?: Maybe<String>;
+  type_contains?: Maybe<String>;
+  type_not_contains?: Maybe<String>;
+  type_starts_with?: Maybe<String>;
+  type_not_starts_with?: Maybe<String>;
+  type_ends_with?: Maybe<String>;
+  type_not_ends_with?: Maybe<String>;
+  investment_type?: Maybe<String>;
+  investment_type_not?: Maybe<String>;
+  investment_type_in?: Maybe<String[] | String>;
+  investment_type_not_in?: Maybe<String[] | String>;
+  investment_type_lt?: Maybe<String>;
+  investment_type_lte?: Maybe<String>;
+  investment_type_gt?: Maybe<String>;
+  investment_type_gte?: Maybe<String>;
+  investment_type_contains?: Maybe<String>;
+  investment_type_not_contains?: Maybe<String>;
+  investment_type_starts_with?: Maybe<String>;
+  investment_type_not_starts_with?: Maybe<String>;
+  investment_type_ends_with?: Maybe<String>;
+  investment_type_not_ends_with?: Maybe<String>;
+  investment_points?: Maybe<Int>;
+  investment_points_not?: Maybe<Int>;
+  investment_points_in?: Maybe<Int[] | Int>;
+  investment_points_not_in?: Maybe<Int[] | Int>;
+  investment_points_lt?: Maybe<Int>;
+  investment_points_lte?: Maybe<Int>;
+  investment_points_gt?: Maybe<Int>;
+  investment_points_gte?: Maybe<Int>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  date?: Maybe<DateTimeInput>;
+  date_not?: Maybe<DateTimeInput>;
+  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_lt?: Maybe<DateTimeInput>;
+  date_lte?: Maybe<DateTimeInput>;
+  date_gt?: Maybe<DateTimeInput>;
+  date_gte?: Maybe<DateTimeInput>;
+  registered_some?: Maybe<UserWhereInput>;
+  AND?: Maybe<ActivityWhereInput[] | ActivityWhereInput>;
+}
+
+export interface UserUpsertWithWhereUniqueWithoutActivitiesInput {
+  where: UserWhereUniqueInput;
+  update: UserUpdateWithoutActivitiesDataInput;
+  create: UserCreateWithoutActivitiesInput;
+}
+
+export interface ActivityUpdateManyDataInput {
+  code?: Maybe<String>;
+  type?: Maybe<String>;
+  investment_type?: Maybe<String>;
+  investment_points?: Maybe<Int>;
+  title?: Maybe<String>;
+  description?: Maybe<String>;
+  date?: Maybe<DateTimeInput>;
+}
+
+export interface UserWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  token?: Maybe<String>;
+  token_not?: Maybe<String>;
+  token_in?: Maybe<String[] | String>;
+  token_not_in?: Maybe<String[] | String>;
+  token_lt?: Maybe<String>;
+  token_lte?: Maybe<String>;
+  token_gt?: Maybe<String>;
+  token_gte?: Maybe<String>;
+  token_contains?: Maybe<String>;
+  token_not_contains?: Maybe<String>;
+  token_starts_with?: Maybe<String>;
+  token_not_starts_with?: Maybe<String>;
+  token_ends_with?: Maybe<String>;
+  token_not_ends_with?: Maybe<String>;
+  year?: Maybe<Int>;
+  year_not?: Maybe<Int>;
+  year_in?: Maybe<Int[] | Int>;
+  year_not_in?: Maybe<Int[] | Int>;
+  year_lt?: Maybe<Int>;
+  year_lte?: Maybe<Int>;
+  year_gt?: Maybe<Int>;
+  year_gte?: Maybe<Int>;
+  plan?: Maybe<Int>;
+  plan_not?: Maybe<Int>;
+  plan_in?: Maybe<Int[] | Int>;
+  plan_not_in?: Maybe<Int[] | Int>;
+  plan_lt?: Maybe<Int>;
+  plan_lte?: Maybe<Int>;
+  plan_gt?: Maybe<Int>;
+  plan_gte?: Maybe<Int>;
+  acculturation?: Maybe<Int>;
+  acculturation_not?: Maybe<Int>;
+  acculturation_in?: Maybe<Int[] | Int>;
+  acculturation_not_in?: Maybe<Int[] | Int>;
+  acculturation_lt?: Maybe<Int>;
+  acculturation_lte?: Maybe<Int>;
+  acculturation_gt?: Maybe<Int>;
+  acculturation_gte?: Maybe<Int>;
+  experimentation?: Maybe<Int>;
+  experimentation_not?: Maybe<Int>;
+  experimentation_in?: Maybe<Int[] | Int>;
+  experimentation_not_in?: Maybe<Int[] | Int>;
+  experimentation_lt?: Maybe<Int>;
+  experimentation_lte?: Maybe<Int>;
+  experimentation_gt?: Maybe<Int>;
+  experimentation_gte?: Maybe<Int>;
+  fruition?: Maybe<Int>;
+  fruition_not?: Maybe<Int>;
+  fruition_in?: Maybe<Int[] | Int>;
+  fruition_not_in?: Maybe<Int[] | Int>;
+  fruition_lt?: Maybe<Int>;
+  fruition_lte?: Maybe<Int>;
+  fruition_gt?: Maybe<Int>;
+  fruition_gte?: Maybe<Int>;
+  sharing?: Maybe<Int>;
+  sharing_not?: Maybe<Int>;
+  sharing_in?: Maybe<Int[] | Int>;
+  sharing_not_in?: Maybe<Int[] | Int>;
+  sharing_lt?: Maybe<Int>;
+  sharing_lte?: Maybe<Int>;
+  sharing_gt?: Maybe<Int>;
+  sharing_gte?: Maybe<Int>;
+  privilege?: Maybe<Int>;
+  privilege_not?: Maybe<Int>;
+  privilege_in?: Maybe<Int[] | Int>;
+  privilege_not_in?: Maybe<Int[] | Int>;
+  privilege_lt?: Maybe<Int>;
+  privilege_lte?: Maybe<Int>;
+  privilege_gt?: Maybe<Int>;
+  privilege_gte?: Maybe<Int>;
+  activities_some?: Maybe<ActivityWhereInput>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
 export interface ActivityUpdateWithoutRegisteredDataInput {
@@ -737,10 +728,45 @@ export interface ActivityUpdateWithoutRegisteredDataInput {
   date?: Maybe<DateTimeInput>;
 }
 
-export interface ActivityUpsertWithWhereUniqueWithoutRegisteredInput {
+export interface ActivityCreateManyWithoutRegisteredInput {
+  create?: Maybe<
+    | ActivityCreateWithoutRegisteredInput[]
+    | ActivityCreateWithoutRegisteredInput
+  >;
+  connect?: Maybe<ActivityWhereUniqueInput[] | ActivityWhereUniqueInput>;
+}
+
+export interface ActivityUpdateManyMutationInput {
+  code?: Maybe<String>;
+  type?: Maybe<String>;
+  investment_type?: Maybe<String>;
+  investment_points?: Maybe<Int>;
+  title?: Maybe<String>;
+  description?: Maybe<String>;
+  date?: Maybe<DateTimeInput>;
+}
+
+export interface UserUpdateManyDataInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  token?: Maybe<String>;
+  year?: Maybe<Int>;
+  plan?: Maybe<Int>;
+  acculturation?: Maybe<Int>;
+  experimentation?: Maybe<Int>;
+  fruition?: Maybe<Int>;
+  sharing?: Maybe<Int>;
+  privilege?: Maybe<Int>;
+}
+
+export interface UserUpdateManyWithWhereNestedInput {
+  where: UserScalarWhereInput;
+  data: UserUpdateManyDataInput;
+}
+
+export interface ActivityUpdateWithWhereUniqueWithoutRegisteredInput {
   where: ActivityWhereUniqueInput;
-  update: ActivityUpdateWithoutRegisteredDataInput;
-  create: ActivityCreateWithoutRegisteredInput;
+  data: ActivityUpdateWithoutRegisteredDataInput;
 }
 
 export interface ActivityScalarWhereInput {
@@ -849,34 +875,6 @@ export interface ActivityScalarWhereInput {
   NOT?: Maybe<ActivityScalarWhereInput[] | ActivityScalarWhereInput>;
 }
 
-export interface ActivityUpdateManyWithWhereNestedInput {
-  where: ActivityScalarWhereInput;
-  data: ActivityUpdateManyDataInput;
-}
-
-export interface ActivityUpdateManyDataInput {
-  code?: Maybe<String>;
-  type?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
-  title?: Maybe<String>;
-  description?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
-}
-
-export interface UserUpdateManyMutationInput {
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  token?: Maybe<String>;
-  year?: Maybe<Int>;
-  plan?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  sharing?: Maybe<Int>;
-  privilege?: Maybe<Int>;
-}
-
 export interface ActivitySubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -888,20 +886,115 @@ export interface ActivitySubscriptionWhereInput {
   >;
 }
 
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+export interface UserUpdateInput {
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  token?: Maybe<String>;
+  year?: Maybe<Int>;
+  plan?: Maybe<Int>;
+  acculturation?: Maybe<Int>;
+  experimentation?: Maybe<Int>;
+  fruition?: Maybe<Int>;
+  sharing?: Maybe<Int>;
+  privilege?: Maybe<Int>;
+  activities?: Maybe<ActivityUpdateManyWithoutRegisteredInput>;
 }
 
 export interface NodeNode {
   id: ID_Output;
 }
 
-export interface Activity {
+export interface UserPreviousValues {
+  id: ID_Output;
+  name: String;
+  email: String;
+  token: String;
+  year?: Int;
+  plan?: Int;
+  acculturation?: Int;
+  experimentation?: Int;
+  fruition?: Int;
+  sharing?: Int;
+  privilege?: Int;
+}
+
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  token: () => Promise<String>;
+  year: () => Promise<Int>;
+  plan: () => Promise<Int>;
+  acculturation: () => Promise<Int>;
+  experimentation: () => Promise<Int>;
+  fruition: () => Promise<Int>;
+  sharing: () => Promise<Int>;
+  privilege: () => Promise<Int>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  token: () => Promise<AsyncIterator<String>>;
+  year: () => Promise<AsyncIterator<Int>>;
+  plan: () => Promise<AsyncIterator<Int>>;
+  acculturation: () => Promise<AsyncIterator<Int>>;
+  experimentation: () => Promise<AsyncIterator<Int>>;
+  fruition: () => Promise<AsyncIterator<Int>>;
+  sharing: () => Promise<AsyncIterator<Int>>;
+  privilege: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ActivityEdge {
+  node: Activity;
+  cursor: String;
+}
+
+export interface ActivityEdgePromise
+  extends Promise<ActivityEdge>,
+    Fragmentable {
+  node: <T = ActivityPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ActivityEdgeSubscription
+  extends Promise<AsyncIterator<ActivityEdge>>,
+    Fragmentable {
+  node: <T = ActivitySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ActivitySubscriptionPayload {
+  mutation: MutationType;
+  node: Activity;
+  updatedFields: String[];
+  previousValues: ActivityPreviousValues;
+}
+
+export interface ActivitySubscriptionPayloadPromise
+  extends Promise<ActivitySubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ActivityPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ActivityPreviousValuesPromise>() => T;
+}
+
+export interface ActivitySubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ActivitySubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ActivitySubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ActivityPreviousValuesSubscription>() => T;
+}
+
+export interface ActivityPreviousValues {
   id: ID_Output;
   code: String;
   type: String;
@@ -912,7 +1005,9 @@ export interface Activity {
   date?: DateTimeOutput;
 }
 
-export interface ActivityPromise extends Promise<Activity>, Fragmentable {
+export interface ActivityPreviousValuesPromise
+  extends Promise<ActivityPreviousValues>,
+    Fragmentable {
   id: () => Promise<ID_Output>;
   code: () => Promise<String>;
   type: () => Promise<String>;
@@ -921,19 +1016,10 @@ export interface ActivityPromise extends Promise<Activity>, Fragmentable {
   title: () => Promise<String>;
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
-  registered: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
 }
 
-export interface ActivitySubscription
-  extends Promise<AsyncIterator<Activity>>,
+export interface ActivityPreviousValuesSubscription
+  extends Promise<AsyncIterator<ActivityPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   code: () => Promise<AsyncIterator<String>>;
@@ -943,37 +1029,45 @@ export interface ActivitySubscription
   title: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
-  registered: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
 }
 
-export interface ActivityNullablePromise
-  extends Promise<Activity | null>,
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
     Fragmentable {
-  id: () => Promise<ID_Output>;
-  code: () => Promise<String>;
-  type: () => Promise<String>;
-  investment_type: () => Promise<String>;
-  investment_points: () => Promise<Int>;
-  title: () => Promise<String>;
-  description: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
-  registered: <T = FragmentableArray<User>>(args?: {
-    where?: UserWhereInput;
-    orderBy?: UserOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface User {
@@ -1063,6 +1157,81 @@ export interface UserNullablePromise
   }) => T;
 }
 
+export interface Activity {
+  id: ID_Output;
+  code: String;
+  type: String;
+  investment_type?: String;
+  investment_points?: Int;
+  title: String;
+  description?: String;
+  date?: DateTimeOutput;
+}
+
+export interface ActivityPromise extends Promise<Activity>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
+  type: () => Promise<String>;
+  investment_type: () => Promise<String>;
+  investment_points: () => Promise<Int>;
+  title: () => Promise<String>;
+  description: () => Promise<String>;
+  date: () => Promise<DateTimeOutput>;
+  registered: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ActivitySubscription
+  extends Promise<AsyncIterator<Activity>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  code: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<String>>;
+  investment_type: () => Promise<AsyncIterator<String>>;
+  investment_points: () => Promise<AsyncIterator<Int>>;
+  title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  registered: <T = Promise<AsyncIterator<UserSubscription>>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
+export interface ActivityNullablePromise
+  extends Promise<Activity | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
+  type: () => Promise<String>;
+  investment_type: () => Promise<String>;
+  investment_points: () => Promise<Int>;
+  title: () => Promise<String>;
+  description: () => Promise<String>;
+  date: () => Promise<DateTimeOutput>;
+  registered: <T = FragmentableArray<User>>(args?: {
+    where?: UserWhereInput;
+    orderBy?: UserOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
+}
+
 export interface ActivityConnection {
   pageInfo: PageInfo;
   edges: ActivityEdge[];
@@ -1084,46 +1253,62 @@ export interface ActivityConnectionSubscription
   aggregate: <T = AggregateActivitySubscription>() => T;
 }
 
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
+export interface BatchPayload {
+  count: Long;
 }
 
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
     Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
+  count: () => Promise<Long>;
 }
 
-export interface ActivityEdge {
-  node: Activity;
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface UserEdge {
+  node: User;
   cursor: String;
 }
 
-export interface ActivityEdgePromise
-  extends Promise<ActivityEdge>,
-    Fragmentable {
-  node: <T = ActivityPromise>() => T;
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface ActivityEdgeSubscription
-  extends Promise<AsyncIterator<ActivityEdge>>,
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
     Fragmentable {
-  node: <T = ActivitySubscription>() => T;
+  node: <T = UserSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
 export interface AggregateActivity {
@@ -1163,204 +1348,6 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface ActivitySubscriptionPayload {
-  mutation: MutationType;
-  node: Activity;
-  updatedFields: String[];
-  previousValues: ActivityPreviousValues;
-}
-
-export interface ActivitySubscriptionPayloadPromise
-  extends Promise<ActivitySubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ActivityPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ActivityPreviousValuesPromise>() => T;
-}
-
-export interface ActivitySubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ActivitySubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ActivitySubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ActivityPreviousValuesSubscription>() => T;
-}
-
-export interface ActivityPreviousValues {
-  id: ID_Output;
-  code: String;
-  type: String;
-  investment_type?: String;
-  investment_points?: Int;
-  title: String;
-  description?: String;
-  date?: DateTimeOutput;
-}
-
-export interface ActivityPreviousValuesPromise
-  extends Promise<ActivityPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  code: () => Promise<String>;
-  type: () => Promise<String>;
-  investment_type: () => Promise<String>;
-  investment_points: () => Promise<Int>;
-  title: () => Promise<String>;
-  description: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
-}
-
-export interface ActivityPreviousValuesSubscription
-  extends Promise<AsyncIterator<ActivityPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  code: () => Promise<AsyncIterator<String>>;
-  type: () => Promise<AsyncIterator<String>>;
-  investment_type: () => Promise<AsyncIterator<String>>;
-  investment_points: () => Promise<AsyncIterator<Int>>;
-  title: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  date: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
-}
-
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
-}
-
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
-}
-
-export interface UserPreviousValues {
-  id: ID_Output;
-  name: String;
-  email: String;
-  token: String;
-  year?: Int;
-  plan?: Int;
-  acculturation?: Int;
-  experimentation?: Int;
-  fruition?: Int;
-  sharing?: Int;
-  privilege?: Int;
-}
-
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  token: () => Promise<String>;
-  year: () => Promise<Int>;
-  plan: () => Promise<Int>;
-  acculturation: () => Promise<Int>;
-  experimentation: () => Promise<Int>;
-  fruition: () => Promise<Int>;
-  sharing: () => Promise<Int>;
-  privilege: () => Promise<Int>;
-}
-
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  token: () => Promise<AsyncIterator<String>>;
-  year: () => Promise<AsyncIterator<Int>>;
-  plan: () => Promise<AsyncIterator<Int>>;
-  acculturation: () => Promise<AsyncIterator<Int>>;
-  experimentation: () => Promise<AsyncIterator<Int>>;
-  fruition: () => Promise<AsyncIterator<Int>>;
-  sharing: () => Promise<AsyncIterator<Int>>;
-  privilege: () => Promise<AsyncIterator<Int>>;
-}
-
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
-
-/*
-The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
-*/
-export type Int = number;
-
 /*
 DateTime scalar input type, allowing Date
 */
@@ -1371,12 +1358,28 @@ DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
 
+export type Long = string;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+/*
+The `Int` scalar type represents non-fractional signed whole numeric values. Int can represent values between -(2^31) and 2^31 - 1.
+*/
+export type Int = number;
+
 /*
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
 
-export type Long = string;
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
 
 /**
  * Model Metadata
