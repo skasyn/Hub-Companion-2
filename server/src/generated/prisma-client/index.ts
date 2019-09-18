@@ -153,14 +153,8 @@ export type UserOrderByInput =
   | "year_DESC"
   | "plan_ASC"
   | "plan_DESC"
-  | "acculturation_ASC"
-  | "acculturation_DESC"
-  | "experimentation_ASC"
-  | "experimentation_DESC"
-  | "fruition_ASC"
-  | "fruition_DESC"
-  | "sharing_ASC"
-  | "sharing_DESC"
+  | "xp_ASC"
+  | "xp_DESC"
   | "privilege_ASC"
   | "privilege_DESC";
 
@@ -171,10 +165,8 @@ export type ActivityOrderByInput =
   | "code_DESC"
   | "type_ASC"
   | "type_DESC"
-  | "investment_type_ASC"
-  | "investment_type_DESC"
-  | "investment_points_ASC"
-  | "investment_points_DESC"
+  | "xp_ASC"
+  | "xp_DESC"
   | "title_ASC"
   | "title_DESC"
   | "description_ASC"
@@ -190,10 +182,7 @@ export interface UserUpdateWithoutActivitiesDataInput {
   token?: Maybe<String>;
   year?: Maybe<Int>;
   plan?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  sharing?: Maybe<Int>;
+  xp?: Maybe<Int>;
   privilege?: Maybe<Int>;
 }
 
@@ -209,10 +198,7 @@ export interface UserCreateInput {
   token: String;
   year?: Maybe<Int>;
   plan?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  sharing?: Maybe<Int>;
+  xp?: Maybe<Int>;
   privilege?: Maybe<Int>;
   activities?: Maybe<ActivityCreateManyWithoutRegisteredInput>;
 }
@@ -290,38 +276,14 @@ export interface UserScalarWhereInput {
   plan_lte?: Maybe<Int>;
   plan_gt?: Maybe<Int>;
   plan_gte?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  acculturation_not?: Maybe<Int>;
-  acculturation_in?: Maybe<Int[] | Int>;
-  acculturation_not_in?: Maybe<Int[] | Int>;
-  acculturation_lt?: Maybe<Int>;
-  acculturation_lte?: Maybe<Int>;
-  acculturation_gt?: Maybe<Int>;
-  acculturation_gte?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  experimentation_not?: Maybe<Int>;
-  experimentation_in?: Maybe<Int[] | Int>;
-  experimentation_not_in?: Maybe<Int[] | Int>;
-  experimentation_lt?: Maybe<Int>;
-  experimentation_lte?: Maybe<Int>;
-  experimentation_gt?: Maybe<Int>;
-  experimentation_gte?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  fruition_not?: Maybe<Int>;
-  fruition_in?: Maybe<Int[] | Int>;
-  fruition_not_in?: Maybe<Int[] | Int>;
-  fruition_lt?: Maybe<Int>;
-  fruition_lte?: Maybe<Int>;
-  fruition_gt?: Maybe<Int>;
-  fruition_gte?: Maybe<Int>;
-  sharing?: Maybe<Int>;
-  sharing_not?: Maybe<Int>;
-  sharing_in?: Maybe<Int[] | Int>;
-  sharing_not_in?: Maybe<Int[] | Int>;
-  sharing_lt?: Maybe<Int>;
-  sharing_lte?: Maybe<Int>;
-  sharing_gt?: Maybe<Int>;
-  sharing_gte?: Maybe<Int>;
+  xp?: Maybe<Int>;
+  xp_not?: Maybe<Int>;
+  xp_in?: Maybe<Int[] | Int>;
+  xp_not_in?: Maybe<Int[] | Int>;
+  xp_lt?: Maybe<Int>;
+  xp_lte?: Maybe<Int>;
+  xp_gt?: Maybe<Int>;
+  xp_gte?: Maybe<Int>;
   privilege?: Maybe<Int>;
   privilege_not?: Maybe<Int>;
   privilege_in?: Maybe<Int[] | Int>;
@@ -339,8 +301,7 @@ export interface ActivityCreateInput {
   id?: Maybe<ID_Input>;
   code: String;
   type: String;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
+  xp?: Maybe<Int>;
   title: String;
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
@@ -369,10 +330,7 @@ export interface UserUpdateManyMutationInput {
   token?: Maybe<String>;
   year?: Maybe<Int>;
   plan?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  sharing?: Maybe<Int>;
+  xp?: Maybe<Int>;
   privilege?: Maybe<Int>;
 }
 
@@ -383,10 +341,7 @@ export interface UserCreateWithoutActivitiesInput {
   token: String;
   year?: Maybe<Int>;
   plan?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  sharing?: Maybe<Int>;
+  xp?: Maybe<Int>;
   privilege?: Maybe<Int>;
 }
 
@@ -398,8 +353,7 @@ export interface ActivityUpdateManyWithWhereNestedInput {
 export interface ActivityUpdateInput {
   code?: Maybe<String>;
   type?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
+  xp?: Maybe<Int>;
   title?: Maybe<String>;
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
@@ -473,8 +427,7 @@ export interface ActivityCreateWithoutRegisteredInput {
   id?: Maybe<ID_Input>;
   code: String;
   type: String;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
+  xp?: Maybe<Int>;
   title: String;
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
@@ -523,28 +476,14 @@ export interface ActivityWhereInput {
   type_not_starts_with?: Maybe<String>;
   type_ends_with?: Maybe<String>;
   type_not_ends_with?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_type_not?: Maybe<String>;
-  investment_type_in?: Maybe<String[] | String>;
-  investment_type_not_in?: Maybe<String[] | String>;
-  investment_type_lt?: Maybe<String>;
-  investment_type_lte?: Maybe<String>;
-  investment_type_gt?: Maybe<String>;
-  investment_type_gte?: Maybe<String>;
-  investment_type_contains?: Maybe<String>;
-  investment_type_not_contains?: Maybe<String>;
-  investment_type_starts_with?: Maybe<String>;
-  investment_type_not_starts_with?: Maybe<String>;
-  investment_type_ends_with?: Maybe<String>;
-  investment_type_not_ends_with?: Maybe<String>;
-  investment_points?: Maybe<Int>;
-  investment_points_not?: Maybe<Int>;
-  investment_points_in?: Maybe<Int[] | Int>;
-  investment_points_not_in?: Maybe<Int[] | Int>;
-  investment_points_lt?: Maybe<Int>;
-  investment_points_lte?: Maybe<Int>;
-  investment_points_gt?: Maybe<Int>;
-  investment_points_gte?: Maybe<Int>;
+  xp?: Maybe<Int>;
+  xp_not?: Maybe<Int>;
+  xp_in?: Maybe<Int[] | Int>;
+  xp_not_in?: Maybe<Int[] | Int>;
+  xp_lt?: Maybe<Int>;
+  xp_lte?: Maybe<Int>;
+  xp_gt?: Maybe<Int>;
+  xp_gte?: Maybe<Int>;
   title?: Maybe<String>;
   title_not?: Maybe<String>;
   title_in?: Maybe<String[] | String>;
@@ -594,8 +533,7 @@ export interface UserUpsertWithWhereUniqueWithoutActivitiesInput {
 export interface ActivityUpdateManyDataInput {
   code?: Maybe<String>;
   type?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
+  xp?: Maybe<Int>;
   title?: Maybe<String>;
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
@@ -674,38 +612,14 @@ export interface UserWhereInput {
   plan_lte?: Maybe<Int>;
   plan_gt?: Maybe<Int>;
   plan_gte?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  acculturation_not?: Maybe<Int>;
-  acculturation_in?: Maybe<Int[] | Int>;
-  acculturation_not_in?: Maybe<Int[] | Int>;
-  acculturation_lt?: Maybe<Int>;
-  acculturation_lte?: Maybe<Int>;
-  acculturation_gt?: Maybe<Int>;
-  acculturation_gte?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  experimentation_not?: Maybe<Int>;
-  experimentation_in?: Maybe<Int[] | Int>;
-  experimentation_not_in?: Maybe<Int[] | Int>;
-  experimentation_lt?: Maybe<Int>;
-  experimentation_lte?: Maybe<Int>;
-  experimentation_gt?: Maybe<Int>;
-  experimentation_gte?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  fruition_not?: Maybe<Int>;
-  fruition_in?: Maybe<Int[] | Int>;
-  fruition_not_in?: Maybe<Int[] | Int>;
-  fruition_lt?: Maybe<Int>;
-  fruition_lte?: Maybe<Int>;
-  fruition_gt?: Maybe<Int>;
-  fruition_gte?: Maybe<Int>;
-  sharing?: Maybe<Int>;
-  sharing_not?: Maybe<Int>;
-  sharing_in?: Maybe<Int[] | Int>;
-  sharing_not_in?: Maybe<Int[] | Int>;
-  sharing_lt?: Maybe<Int>;
-  sharing_lte?: Maybe<Int>;
-  sharing_gt?: Maybe<Int>;
-  sharing_gte?: Maybe<Int>;
+  xp?: Maybe<Int>;
+  xp_not?: Maybe<Int>;
+  xp_in?: Maybe<Int[] | Int>;
+  xp_not_in?: Maybe<Int[] | Int>;
+  xp_lt?: Maybe<Int>;
+  xp_lte?: Maybe<Int>;
+  xp_gt?: Maybe<Int>;
+  xp_gte?: Maybe<Int>;
   privilege?: Maybe<Int>;
   privilege_not?: Maybe<Int>;
   privilege_in?: Maybe<Int[] | Int>;
@@ -721,8 +635,7 @@ export interface UserWhereInput {
 export interface ActivityUpdateWithoutRegisteredDataInput {
   code?: Maybe<String>;
   type?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
+  xp?: Maybe<Int>;
   title?: Maybe<String>;
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
@@ -739,8 +652,7 @@ export interface ActivityCreateManyWithoutRegisteredInput {
 export interface ActivityUpdateManyMutationInput {
   code?: Maybe<String>;
   type?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_points?: Maybe<Int>;
+  xp?: Maybe<Int>;
   title?: Maybe<String>;
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
@@ -752,10 +664,7 @@ export interface UserUpdateManyDataInput {
   token?: Maybe<String>;
   year?: Maybe<Int>;
   plan?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  sharing?: Maybe<Int>;
+  xp?: Maybe<Int>;
   privilege?: Maybe<Int>;
 }
 
@@ -812,28 +721,14 @@ export interface ActivityScalarWhereInput {
   type_not_starts_with?: Maybe<String>;
   type_ends_with?: Maybe<String>;
   type_not_ends_with?: Maybe<String>;
-  investment_type?: Maybe<String>;
-  investment_type_not?: Maybe<String>;
-  investment_type_in?: Maybe<String[] | String>;
-  investment_type_not_in?: Maybe<String[] | String>;
-  investment_type_lt?: Maybe<String>;
-  investment_type_lte?: Maybe<String>;
-  investment_type_gt?: Maybe<String>;
-  investment_type_gte?: Maybe<String>;
-  investment_type_contains?: Maybe<String>;
-  investment_type_not_contains?: Maybe<String>;
-  investment_type_starts_with?: Maybe<String>;
-  investment_type_not_starts_with?: Maybe<String>;
-  investment_type_ends_with?: Maybe<String>;
-  investment_type_not_ends_with?: Maybe<String>;
-  investment_points?: Maybe<Int>;
-  investment_points_not?: Maybe<Int>;
-  investment_points_in?: Maybe<Int[] | Int>;
-  investment_points_not_in?: Maybe<Int[] | Int>;
-  investment_points_lt?: Maybe<Int>;
-  investment_points_lte?: Maybe<Int>;
-  investment_points_gt?: Maybe<Int>;
-  investment_points_gte?: Maybe<Int>;
+  xp?: Maybe<Int>;
+  xp_not?: Maybe<Int>;
+  xp_in?: Maybe<Int[] | Int>;
+  xp_not_in?: Maybe<Int[] | Int>;
+  xp_lt?: Maybe<Int>;
+  xp_lte?: Maybe<Int>;
+  xp_gt?: Maybe<Int>;
+  xp_gte?: Maybe<Int>;
   title?: Maybe<String>;
   title_not?: Maybe<String>;
   title_in?: Maybe<String[] | String>;
@@ -892,10 +787,7 @@ export interface UserUpdateInput {
   token?: Maybe<String>;
   year?: Maybe<Int>;
   plan?: Maybe<Int>;
-  acculturation?: Maybe<Int>;
-  experimentation?: Maybe<Int>;
-  fruition?: Maybe<Int>;
-  sharing?: Maybe<Int>;
+  xp?: Maybe<Int>;
   privilege?: Maybe<Int>;
   activities?: Maybe<ActivityUpdateManyWithoutRegisteredInput>;
 }
@@ -911,10 +803,7 @@ export interface UserPreviousValues {
   token: String;
   year?: Int;
   plan?: Int;
-  acculturation?: Int;
-  experimentation?: Int;
-  fruition?: Int;
-  sharing?: Int;
+  xp?: Int;
   privilege?: Int;
 }
 
@@ -927,10 +816,7 @@ export interface UserPreviousValuesPromise
   token: () => Promise<String>;
   year: () => Promise<Int>;
   plan: () => Promise<Int>;
-  acculturation: () => Promise<Int>;
-  experimentation: () => Promise<Int>;
-  fruition: () => Promise<Int>;
-  sharing: () => Promise<Int>;
+  xp: () => Promise<Int>;
   privilege: () => Promise<Int>;
 }
 
@@ -943,10 +829,7 @@ export interface UserPreviousValuesSubscription
   token: () => Promise<AsyncIterator<String>>;
   year: () => Promise<AsyncIterator<Int>>;
   plan: () => Promise<AsyncIterator<Int>>;
-  acculturation: () => Promise<AsyncIterator<Int>>;
-  experimentation: () => Promise<AsyncIterator<Int>>;
-  fruition: () => Promise<AsyncIterator<Int>>;
-  sharing: () => Promise<AsyncIterator<Int>>;
+  xp: () => Promise<AsyncIterator<Int>>;
   privilege: () => Promise<AsyncIterator<Int>>;
 }
 
@@ -998,8 +881,7 @@ export interface ActivityPreviousValues {
   id: ID_Output;
   code: String;
   type: String;
-  investment_type?: String;
-  investment_points?: Int;
+  xp?: Int;
   title: String;
   description?: String;
   date?: DateTimeOutput;
@@ -1011,8 +893,7 @@ export interface ActivityPreviousValuesPromise
   id: () => Promise<ID_Output>;
   code: () => Promise<String>;
   type: () => Promise<String>;
-  investment_type: () => Promise<String>;
-  investment_points: () => Promise<Int>;
+  xp: () => Promise<Int>;
   title: () => Promise<String>;
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
@@ -1024,8 +905,7 @@ export interface ActivityPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   code: () => Promise<AsyncIterator<String>>;
   type: () => Promise<AsyncIterator<String>>;
-  investment_type: () => Promise<AsyncIterator<String>>;
-  investment_points: () => Promise<AsyncIterator<Int>>;
+  xp: () => Promise<AsyncIterator<Int>>;
   title: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -1077,10 +957,7 @@ export interface User {
   token: String;
   year?: Int;
   plan?: Int;
-  acculturation?: Int;
-  experimentation?: Int;
-  fruition?: Int;
-  sharing?: Int;
+  xp?: Int;
   privilege?: Int;
 }
 
@@ -1091,10 +968,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   token: () => Promise<String>;
   year: () => Promise<Int>;
   plan: () => Promise<Int>;
-  acculturation: () => Promise<Int>;
-  experimentation: () => Promise<Int>;
-  fruition: () => Promise<Int>;
-  sharing: () => Promise<Int>;
+  xp: () => Promise<Int>;
   privilege: () => Promise<Int>;
   activities: <T = FragmentableArray<Activity>>(args?: {
     where?: ActivityWhereInput;
@@ -1116,10 +990,7 @@ export interface UserSubscription
   token: () => Promise<AsyncIterator<String>>;
   year: () => Promise<AsyncIterator<Int>>;
   plan: () => Promise<AsyncIterator<Int>>;
-  acculturation: () => Promise<AsyncIterator<Int>>;
-  experimentation: () => Promise<AsyncIterator<Int>>;
-  fruition: () => Promise<AsyncIterator<Int>>;
-  sharing: () => Promise<AsyncIterator<Int>>;
+  xp: () => Promise<AsyncIterator<Int>>;
   privilege: () => Promise<AsyncIterator<Int>>;
   activities: <T = Promise<AsyncIterator<ActivitySubscription>>>(args?: {
     where?: ActivityWhereInput;
@@ -1141,10 +1012,7 @@ export interface UserNullablePromise
   token: () => Promise<String>;
   year: () => Promise<Int>;
   plan: () => Promise<Int>;
-  acculturation: () => Promise<Int>;
-  experimentation: () => Promise<Int>;
-  fruition: () => Promise<Int>;
-  sharing: () => Promise<Int>;
+  xp: () => Promise<Int>;
   privilege: () => Promise<Int>;
   activities: <T = FragmentableArray<Activity>>(args?: {
     where?: ActivityWhereInput;
@@ -1161,8 +1029,7 @@ export interface Activity {
   id: ID_Output;
   code: String;
   type: String;
-  investment_type?: String;
-  investment_points?: Int;
+  xp?: Int;
   title: String;
   description?: String;
   date?: DateTimeOutput;
@@ -1172,8 +1039,7 @@ export interface ActivityPromise extends Promise<Activity>, Fragmentable {
   id: () => Promise<ID_Output>;
   code: () => Promise<String>;
   type: () => Promise<String>;
-  investment_type: () => Promise<String>;
-  investment_points: () => Promise<Int>;
+  xp: () => Promise<Int>;
   title: () => Promise<String>;
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
@@ -1194,8 +1060,7 @@ export interface ActivitySubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   code: () => Promise<AsyncIterator<String>>;
   type: () => Promise<AsyncIterator<String>>;
-  investment_type: () => Promise<AsyncIterator<String>>;
-  investment_points: () => Promise<AsyncIterator<Int>>;
+  xp: () => Promise<AsyncIterator<Int>>;
   title: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -1216,8 +1081,7 @@ export interface ActivityNullablePromise
   id: () => Promise<ID_Output>;
   code: () => Promise<String>;
   type: () => Promise<String>;
-  investment_type: () => Promise<String>;
-  investment_points: () => Promise<Int>;
+  xp: () => Promise<Int>;
   title: () => Promise<String>;
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;

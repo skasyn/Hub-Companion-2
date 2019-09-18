@@ -6,8 +6,7 @@ export const typeDefs = /* GraphQL */ `type Activity {
   id: ID!
   code: String!
   type: String!
-  investment_type: String
-  investment_points: Int
+  xp: Int
   title: String!
   description: String
   date: DateTime
@@ -24,8 +23,7 @@ input ActivityCreateInput {
   id: ID
   code: String!
   type: String!
-  investment_type: String
-  investment_points: Int
+  xp: Int
   title: String!
   description: String
   date: DateTime
@@ -41,8 +39,7 @@ input ActivityCreateWithoutRegisteredInput {
   id: ID
   code: String!
   type: String!
-  investment_type: String
-  investment_points: Int
+  xp: Int
   title: String!
   description: String
   date: DateTime
@@ -60,10 +57,8 @@ enum ActivityOrderByInput {
   code_DESC
   type_ASC
   type_DESC
-  investment_type_ASC
-  investment_type_DESC
-  investment_points_ASC
-  investment_points_DESC
+  xp_ASC
+  xp_DESC
   title_ASC
   title_DESC
   description_ASC
@@ -76,8 +71,7 @@ type ActivityPreviousValues {
   id: ID!
   code: String!
   type: String!
-  investment_type: String
-  investment_points: Int
+  xp: Int
   title: String!
   description: String
   date: DateTime
@@ -126,28 +120,14 @@ input ActivityScalarWhereInput {
   type_not_starts_with: String
   type_ends_with: String
   type_not_ends_with: String
-  investment_type: String
-  investment_type_not: String
-  investment_type_in: [String!]
-  investment_type_not_in: [String!]
-  investment_type_lt: String
-  investment_type_lte: String
-  investment_type_gt: String
-  investment_type_gte: String
-  investment_type_contains: String
-  investment_type_not_contains: String
-  investment_type_starts_with: String
-  investment_type_not_starts_with: String
-  investment_type_ends_with: String
-  investment_type_not_ends_with: String
-  investment_points: Int
-  investment_points_not: Int
-  investment_points_in: [Int!]
-  investment_points_not_in: [Int!]
-  investment_points_lt: Int
-  investment_points_lte: Int
-  investment_points_gt: Int
-  investment_points_gte: Int
+  xp: Int
+  xp_not: Int
+  xp_in: [Int!]
+  xp_not_in: [Int!]
+  xp_lt: Int
+  xp_lte: Int
+  xp_gt: Int
+  xp_gte: Int
   title: String
   title_not: String
   title_in: [String!]
@@ -208,8 +188,7 @@ input ActivitySubscriptionWhereInput {
 input ActivityUpdateInput {
   code: String
   type: String
-  investment_type: String
-  investment_points: Int
+  xp: Int
   title: String
   description: String
   date: DateTime
@@ -219,8 +198,7 @@ input ActivityUpdateInput {
 input ActivityUpdateManyDataInput {
   code: String
   type: String
-  investment_type: String
-  investment_points: Int
+  xp: Int
   title: String
   description: String
   date: DateTime
@@ -229,8 +207,7 @@ input ActivityUpdateManyDataInput {
 input ActivityUpdateManyMutationInput {
   code: String
   type: String
-  investment_type: String
-  investment_points: Int
+  xp: Int
   title: String
   description: String
   date: DateTime
@@ -256,8 +233,7 @@ input ActivityUpdateManyWithWhereNestedInput {
 input ActivityUpdateWithoutRegisteredDataInput {
   code: String
   type: String
-  investment_type: String
-  investment_points: Int
+  xp: Int
   title: String
   description: String
   date: DateTime
@@ -317,28 +293,14 @@ input ActivityWhereInput {
   type_not_starts_with: String
   type_ends_with: String
   type_not_ends_with: String
-  investment_type: String
-  investment_type_not: String
-  investment_type_in: [String!]
-  investment_type_not_in: [String!]
-  investment_type_lt: String
-  investment_type_lte: String
-  investment_type_gt: String
-  investment_type_gte: String
-  investment_type_contains: String
-  investment_type_not_contains: String
-  investment_type_starts_with: String
-  investment_type_not_starts_with: String
-  investment_type_ends_with: String
-  investment_type_not_ends_with: String
-  investment_points: Int
-  investment_points_not: Int
-  investment_points_in: [Int!]
-  investment_points_not_in: [Int!]
-  investment_points_lt: Int
-  investment_points_lte: Int
-  investment_points_gt: Int
-  investment_points_gte: Int
+  xp: Int
+  xp_not: Int
+  xp_in: [Int!]
+  xp_not_in: [Int!]
+  xp_lt: Int
+  xp_lte: Int
+  xp_gt: Int
+  xp_gte: Int
   title: String
   title_not: String
   title_in: [String!]
@@ -454,10 +416,7 @@ type User {
   token: String!
   year: Int
   plan: Int
-  acculturation: Int
-  experimentation: Int
-  fruition: Int
-  sharing: Int
+  xp: Int
   privilege: Int
   activities(where: ActivityWhereInput, orderBy: ActivityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Activity!]
 }
@@ -475,10 +434,7 @@ input UserCreateInput {
   token: String!
   year: Int
   plan: Int
-  acculturation: Int
-  experimentation: Int
-  fruition: Int
-  sharing: Int
+  xp: Int
   privilege: Int
   activities: ActivityCreateManyWithoutRegisteredInput
 }
@@ -495,10 +451,7 @@ input UserCreateWithoutActivitiesInput {
   token: String!
   year: Int
   plan: Int
-  acculturation: Int
-  experimentation: Int
-  fruition: Int
-  sharing: Int
+  xp: Int
   privilege: Int
 }
 
@@ -520,14 +473,8 @@ enum UserOrderByInput {
   year_DESC
   plan_ASC
   plan_DESC
-  acculturation_ASC
-  acculturation_DESC
-  experimentation_ASC
-  experimentation_DESC
-  fruition_ASC
-  fruition_DESC
-  sharing_ASC
-  sharing_DESC
+  xp_ASC
+  xp_DESC
   privilege_ASC
   privilege_DESC
 }
@@ -539,10 +486,7 @@ type UserPreviousValues {
   token: String!
   year: Int
   plan: Int
-  acculturation: Int
-  experimentation: Int
-  fruition: Int
-  sharing: Int
+  xp: Int
   privilege: Int
 }
 
@@ -619,38 +563,14 @@ input UserScalarWhereInput {
   plan_lte: Int
   plan_gt: Int
   plan_gte: Int
-  acculturation: Int
-  acculturation_not: Int
-  acculturation_in: [Int!]
-  acculturation_not_in: [Int!]
-  acculturation_lt: Int
-  acculturation_lte: Int
-  acculturation_gt: Int
-  acculturation_gte: Int
-  experimentation: Int
-  experimentation_not: Int
-  experimentation_in: [Int!]
-  experimentation_not_in: [Int!]
-  experimentation_lt: Int
-  experimentation_lte: Int
-  experimentation_gt: Int
-  experimentation_gte: Int
-  fruition: Int
-  fruition_not: Int
-  fruition_in: [Int!]
-  fruition_not_in: [Int!]
-  fruition_lt: Int
-  fruition_lte: Int
-  fruition_gt: Int
-  fruition_gte: Int
-  sharing: Int
-  sharing_not: Int
-  sharing_in: [Int!]
-  sharing_not_in: [Int!]
-  sharing_lt: Int
-  sharing_lte: Int
-  sharing_gt: Int
-  sharing_gte: Int
+  xp: Int
+  xp_not: Int
+  xp_in: [Int!]
+  xp_not_in: [Int!]
+  xp_lt: Int
+  xp_lte: Int
+  xp_gt: Int
+  xp_gte: Int
   privilege: Int
   privilege_not: Int
   privilege_in: [Int!]
@@ -686,10 +606,7 @@ input UserUpdateInput {
   token: String
   year: Int
   plan: Int
-  acculturation: Int
-  experimentation: Int
-  fruition: Int
-  sharing: Int
+  xp: Int
   privilege: Int
   activities: ActivityUpdateManyWithoutRegisteredInput
 }
@@ -700,10 +617,7 @@ input UserUpdateManyDataInput {
   token: String
   year: Int
   plan: Int
-  acculturation: Int
-  experimentation: Int
-  fruition: Int
-  sharing: Int
+  xp: Int
   privilege: Int
 }
 
@@ -713,10 +627,7 @@ input UserUpdateManyMutationInput {
   token: String
   year: Int
   plan: Int
-  acculturation: Int
-  experimentation: Int
-  fruition: Int
-  sharing: Int
+  xp: Int
   privilege: Int
 }
 
@@ -743,10 +654,7 @@ input UserUpdateWithoutActivitiesDataInput {
   token: String
   year: Int
   plan: Int
-  acculturation: Int
-  experimentation: Int
-  fruition: Int
-  sharing: Int
+  xp: Int
   privilege: Int
 }
 
@@ -834,38 +742,14 @@ input UserWhereInput {
   plan_lte: Int
   plan_gt: Int
   plan_gte: Int
-  acculturation: Int
-  acculturation_not: Int
-  acculturation_in: [Int!]
-  acculturation_not_in: [Int!]
-  acculturation_lt: Int
-  acculturation_lte: Int
-  acculturation_gt: Int
-  acculturation_gte: Int
-  experimentation: Int
-  experimentation_not: Int
-  experimentation_in: [Int!]
-  experimentation_not_in: [Int!]
-  experimentation_lt: Int
-  experimentation_lte: Int
-  experimentation_gt: Int
-  experimentation_gte: Int
-  fruition: Int
-  fruition_not: Int
-  fruition_in: [Int!]
-  fruition_not_in: [Int!]
-  fruition_lt: Int
-  fruition_lte: Int
-  fruition_gt: Int
-  fruition_gte: Int
-  sharing: Int
-  sharing_not: Int
-  sharing_in: [Int!]
-  sharing_not_in: [Int!]
-  sharing_lt: Int
-  sharing_lte: Int
-  sharing_gt: Int
-  sharing_gte: Int
+  xp: Int
+  xp_not: Int
+  xp_in: [Int!]
+  xp_not_in: [Int!]
+  xp_lt: Int
+  xp_lte: Int
+  xp_gt: Int
+  xp_gte: Int
   privilege: Int
   privilege_not: Int
   privilege_in: [Int!]

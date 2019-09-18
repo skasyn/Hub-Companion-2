@@ -5,10 +5,7 @@ type User {
   token: String! @unique
   year: Int @default(value: 0)
   plan: Int @default(value: -1)
-  acculturation: Int @default(value: 0)
-  experimentation: Int @default(value: 0)
-  fruition: Int @default(value: 0)
-  sharing: Int @default(value: 0)
+  xp: Int @default(value: 0)
   privilege: Int @default(value: 0)
   activities: [Activity!]! @relation(name: "AllActivities", link: INLINE)
 }
@@ -16,24 +13,9 @@ type Activity {
     id: ID! @id
     code: String! @unique
     type: String!
-    investment_type: String
-    investment_points: Int
+    xp: Int @default(value: 0)
     title: String!
     description: String
     date: DateTime
     registered: [User!]! @relation(name: "AllActivities")
 }
-
-#type User {
-#  id: ID! @id
-#  email: String @unique
-#  name: String!
-#  posts: [Post!]!
-#}
-#
-#type Post {
-#  id: ID! @id
-#  title: String!
-#  published: Boolean! @default(value: false)
-#  author: User @relation(link: INLINE)
-#}

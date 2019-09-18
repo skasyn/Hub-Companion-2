@@ -1,0 +1,28 @@
+scalar DateTime
+
+type Query {
+  test(name: String!) User
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  token: String!
+  year: Int
+  plan: Int
+  xp: Int
+  privilege: Int
+  activities: [Activity!]!
+}
+
+type Activity {
+  id: ID!
+  code: String!
+  type: String!
+  xp: Int
+  title: String!
+  description: String
+  date: DateTime
+  registered: [User!]!
+}
