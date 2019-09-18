@@ -1,34 +1,34 @@
 {
-  "name": "Hub-Companion-2",
-  "version": "1.0.0",
-  "description": "The new Hub Companion, still track what you need to validate Hub's unit, but in a cooler way",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "ts-node index.ts",
-    "dev": "ts-node-dev --no-notify --respawn --transpileOnly ./"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/skasyn/Hub-Companion-2.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/skasyn/Hub-Companion-2/issues"
-  },
-  "homepage": "https://github.com/skasyn/Hub-Companion-2#readme",
+  "name": "hackernews-react-apollo",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
+    "apollo-boost": "^0.4.4",
     "graphql": "^14.5.6",
-    "graphql-yoga": "^1.18.3",
-    "nexus": "^0.11.7",
-    "nexus-prisma": "^0.3.8",
-    "prisma-client-lib": "^1.34.8"
+    "react": "^16.9.0",
+    "react-apollo": "^3.1.1",
+    "react-dom": "^16.9.0",
+    "react-scripts": "3.1.1"
   },
-  "devDependencies": {
-    "ts-node": "^8.4.1",
-    "ts-node-dev": "^1.0.0-pre.42",
-    "typescript": "^3.6.3"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
