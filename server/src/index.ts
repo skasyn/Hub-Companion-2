@@ -8,7 +8,7 @@ import { GraphQLServer } from 'graphql-yoga'
 const Query = prismaObjectType({
   name: 'Query',
   definition(t) {
-    t.prismaFields(['user']);
+    t.prismaFields(['user', 'users']);
     // t.list.field('feed', {
     //   type: 'User',
     //   resolve: (_, args, ctx) =>

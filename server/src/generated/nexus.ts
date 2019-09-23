@@ -294,6 +294,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     user: NexusGenRootTypes['User'] | null; // User
     UserbyEmail: NexusGenRootTypes['User'][]; // [User!]!
+    users: NexusGenRootTypes['User'][]; // [User!]!
   }
   User: { // field return type
     activities: NexusGenRootTypes['Activity'][] | null; // [Activity!]
@@ -338,6 +339,15 @@ export interface NexusGenArgTypes {
     }
     UserbyEmail: { // args
       email?: string | null; // String
+    }
+    users: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserOrderByInput'] | null; // UserOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
   User: {
