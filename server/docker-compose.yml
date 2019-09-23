@@ -19,8 +19,16 @@ services:
       MONGO_INITDB_ROOT_USERNAME: prisma
       MONGO_INITDB_ROOT_PASSWORD: prisma
     ports:
-      - '27018'
+      - '127.0.0.1:27018:27018'
     volumes:
       - mongo:/var/lib/mongo
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: npm start
+    ports:
+      - '127.0.0.1:4000:4000'
 volumes:
   mongo: ~

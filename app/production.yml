@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: app/Dockerfile.production
+    environment:
+      - NODE_ENV=production
