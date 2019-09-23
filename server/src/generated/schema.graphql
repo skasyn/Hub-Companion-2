@@ -152,6 +152,7 @@ type Mutation {
 type Query {
   user(where: UserWhereUniqueInput!): User
   UserbyEmail(email: String): [User!]!
+  users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
 }
 
 type User {
