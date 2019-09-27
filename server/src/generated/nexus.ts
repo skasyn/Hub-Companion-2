@@ -11,19 +11,6 @@ declare global {
 }
 
 export interface NexusGenInputs {
-  ActivityCreateManyWithoutRegisteredInput: { // input type
-    connect?: NexusGenInputs['ActivityWhereUniqueInput'][] | null; // [ActivityWhereUniqueInput!]
-    create?: NexusGenInputs['ActivityCreateWithoutRegisteredInput'][] | null; // [ActivityCreateWithoutRegisteredInput!]
-  }
-  ActivityCreateWithoutRegisteredInput: { // input type
-    code: string; // String!
-    date?: any | null; // DateTime
-    description?: string | null; // String
-    id?: string | null; // ID
-    title: string; // String!
-    type: string; // String!
-    xp?: number | null; // Int
-  }
   ActivityWhereInput: { // input type
     AND?: NexusGenInputs['ActivityWhereInput'][] | null; // [ActivityWhereInput!]
     code?: string | null; // String
@@ -114,21 +101,6 @@ export interface NexusGenInputs {
     xp_not?: number | null; // Int
     xp_not_in?: number[] | null; // [Int!]
   }
-  ActivityWhereUniqueInput: { // input type
-    code?: string | null; // String
-    id?: string | null; // ID
-  }
-  UserCreateInput: { // input type
-    activities?: NexusGenInputs['ActivityCreateManyWithoutRegisteredInput'] | null; // ActivityCreateManyWithoutRegisteredInput
-    email: string; // String!
-    id?: string | null; // ID
-    name: string; // String!
-    plan?: number | null; // Int
-    privilege?: number | null; // Int
-    token: string; // String!
-    xp?: number | null; // Int
-    year?: number | null; // Int
-  }
   UserWhereInput: { // input type
     activities_some?: NexusGenInputs['ActivityWhereInput'] | null; // ActivityWhereInput
     AND?: NexusGenInputs['UserWhereInput'][] | null; // [UserWhereInput!]
@@ -174,6 +146,20 @@ export interface NexusGenInputs {
     name_not_in?: string[] | null; // [String!]
     name_not_starts_with?: string | null; // String
     name_starts_with?: string | null; // String
+    outlookid?: string | null; // String
+    outlookid_contains?: string | null; // String
+    outlookid_ends_with?: string | null; // String
+    outlookid_gt?: string | null; // String
+    outlookid_gte?: string | null; // String
+    outlookid_in?: string[] | null; // [String!]
+    outlookid_lt?: string | null; // String
+    outlookid_lte?: string | null; // String
+    outlookid_not?: string | null; // String
+    outlookid_not_contains?: string | null; // String
+    outlookid_not_ends_with?: string | null; // String
+    outlookid_not_in?: string[] | null; // [String!]
+    outlookid_not_starts_with?: string | null; // String
+    outlookid_starts_with?: string | null; // String
     plan?: number | null; // Int
     plan_gt?: number | null; // Int
     plan_gte?: number | null; // Int
@@ -190,20 +176,6 @@ export interface NexusGenInputs {
     privilege_lte?: number | null; // Int
     privilege_not?: number | null; // Int
     privilege_not_in?: number[] | null; // [Int!]
-    token?: string | null; // String
-    token_contains?: string | null; // String
-    token_ends_with?: string | null; // String
-    token_gt?: string | null; // String
-    token_gte?: string | null; // String
-    token_in?: string[] | null; // [String!]
-    token_lt?: string | null; // String
-    token_lte?: string | null; // String
-    token_not?: string | null; // String
-    token_not_contains?: string | null; // String
-    token_not_ends_with?: string | null; // String
-    token_not_in?: string[] | null; // [String!]
-    token_not_starts_with?: string | null; // String
-    token_starts_with?: string | null; // String
     xp?: number | null; // Int
     xp_gt?: number | null; // Int
     xp_gte?: number | null; // Int
@@ -224,13 +196,13 @@ export interface NexusGenInputs {
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
     id?: string | null; // ID
-    token?: string | null; // String
+    outlookid?: string | null; // String
   }
 }
 
 export interface NexusGenEnums {
   ActivityOrderByInput: "code_ASC" | "code_DESC" | "date_ASC" | "date_DESC" | "description_ASC" | "description_DESC" | "id_ASC" | "id_DESC" | "title_ASC" | "title_DESC" | "type_ASC" | "type_DESC" | "xp_ASC" | "xp_DESC"
-  UserOrderByInput: "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "plan_ASC" | "plan_DESC" | "privilege_ASC" | "privilege_DESC" | "token_ASC" | "token_DESC" | "xp_ASC" | "xp_DESC" | "year_ASC" | "year_DESC"
+  UserOrderByInput: "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "outlookid_ASC" | "outlookid_DESC" | "plan_ASC" | "plan_DESC" | "privilege_ASC" | "privilege_DESC" | "xp_ASC" | "xp_DESC" | "year_ASC" | "year_DESC"
 }
 
 export interface NexusGenRootTypes {
@@ -243,15 +215,14 @@ export interface NexusGenRootTypes {
     type: string; // String!
     xp?: number | null; // Int
   }
-  Mutation: {};
   Query: {};
   User: { // root type
     email: string; // String!
     id: string; // ID!
     name: string; // String!
+    outlookid: string; // String!
     plan?: number | null; // Int
     privilege?: number | null; // Int
-    token: string; // String!
     xp?: number | null; // Int
     year?: number | null; // Int
   }
@@ -264,11 +235,7 @@ export interface NexusGenRootTypes {
 }
 
 export interface NexusGenAllTypes extends NexusGenRootTypes {
-  ActivityCreateManyWithoutRegisteredInput: NexusGenInputs['ActivityCreateManyWithoutRegisteredInput'];
-  ActivityCreateWithoutRegisteredInput: NexusGenInputs['ActivityCreateWithoutRegisteredInput'];
   ActivityWhereInput: NexusGenInputs['ActivityWhereInput'];
-  ActivityWhereUniqueInput: NexusGenInputs['ActivityWhereUniqueInput'];
-  UserCreateInput: NexusGenInputs['UserCreateInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
   ActivityOrderByInput: NexusGenEnums['ActivityOrderByInput'];
@@ -286,14 +253,9 @@ export interface NexusGenFieldTypes {
     type: string; // String!
     xp: number | null; // Int
   }
-  Mutation: { // field return type
-    createDraft: NexusGenRootTypes['User']; // User!
-    createUser: NexusGenRootTypes['User']; // User!
-    deleteActivity: NexusGenRootTypes['Activity'] | null; // Activity
-  }
   Query: { // field return type
+    login: NexusGenRootTypes['User']; // User!
     user: NexusGenRootTypes['User'] | null; // User
-    UserbyEmail: NexusGenRootTypes['User'][]; // [User!]!
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
   User: { // field return type
@@ -301,9 +263,9 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // ID!
     name: string; // String!
+    outlookid: string; // String!
     plan: number | null; // Int
     privilege: number | null; // Int
-    token: string; // String!
     xp: number | null; // Int
     year: number | null; // Int
   }
@@ -321,24 +283,12 @@ export interface NexusGenArgTypes {
       where?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
     }
   }
-  Mutation: {
-    createDraft: { // args
-      id?: string | null; // ID
-      name?: string | null; // String
-    }
-    createUser: { // args
-      data: NexusGenInputs['UserCreateInput']; // UserCreateInput!
-    }
-    deleteActivity: { // args
-      where: NexusGenInputs['ActivityWhereUniqueInput']; // ActivityWhereUniqueInput!
-    }
-  }
   Query: {
+    login: { // args
+      code?: string | null; // String
+    }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
-    }
-    UserbyEmail: { // args
-      email?: string | null; // String
     }
     users: { // args
       after?: string | null; // String
@@ -368,9 +318,9 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Activity" | "Mutation" | "Query" | "User";
+export type NexusGenObjectNames = "Activity" | "Query" | "User";
 
-export type NexusGenInputNames = "ActivityCreateManyWithoutRegisteredInput" | "ActivityCreateWithoutRegisteredInput" | "ActivityWhereInput" | "ActivityWhereUniqueInput" | "UserCreateInput" | "UserWhereInput" | "UserWhereUniqueInput";
+export type NexusGenInputNames = "ActivityWhereInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
 export type NexusGenEnumNames = "ActivityOrderByInput" | "UserOrderByInput";
 

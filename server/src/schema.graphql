@@ -1,14 +1,14 @@
 scalar DateTime
 
 type Query {
-  test(name: String!) User
+  login(code: String!): User!
 }
 
 type User {
   id: ID!
+  outlookid: String!
   name: String!
   email: String!
-  token: String!
   year: Int
   plan: Int
   xp: Int

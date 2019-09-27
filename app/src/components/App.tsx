@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React/*, { Component }*/ from 'react';
 import logo from '../logo.svg';
 import '../styles/App.css';
 import gql from 'graphql-tag';
-import { Query } from 'react-apollo';
+import { useQuery } from 'react-apollo';
 
-const FEED_QUERY = gql`
-  {
-    users(where: {name: "eude"}) {
+require('dotenv').config()
+
+const LOGIN: any = gql`
+  query LOGIN($code: String) {
+    login(code: $code) {
       id
       name
       xp
@@ -18,18 +20,6 @@ const FEED_QUERY = gql`
   }
 `
 
-class Test extends Component<{key: Number, name: String}> {
-  render() {
-    return (
-      <div>
-        <div>
-          {this.props.name}
-        </div>
-      </div>
-    )
-  }
-}
-
 interface User {
   id: String,
   name: String,
@@ -38,32 +28,48 @@ interface User {
   activities: Array<{title: String}>
 }
 
-interface Data {
-  users: Array<User>
+interface UserData {
+  login: User
 }
 
-class TestList extends Component {
-  render() {
+interface UserVars {
+  code: String
+}
+
+const PageNotLogged: React.FC = () => {
+  let query = new URLSearchParams(window.location.search);
+  let code = "";
+  if (query.get('code')) {
+    let get = query.get('code');
+    if (get == null) {
+      code = ""
+    } else {
+      code = get
+    }
+  }
+  const { loading, data } = useQuery<UserData, UserVars>(
+    LOGIN,
+    { variables: { code: code }}
+  )
+  if (data === undefined) {
     return (
-      <Query<Data> query={FEED_QUERY}>
-        {({ loading, error, data}) => {
-          if (loading) return <div>Fetching</div>
-          if (error || data === undefined) return <div>Error</div>
-
-          const renderList = data.users
-
-          return (
-            <div>
-              {renderList.map((test, index) => <Test key={index} name={test.email} />)}
-            </div>
-          )
-        }}
-      </Query>
+      <div><p>....</p></div>
     )
   }
+  return (
+    <div>
+      <h3>User : </h3>
+      {loading ? (
+        <p>Loading ...</p>
+      ) : (
+        <div><a>Hello {data.login.name} </a></div>
+      )}
+    </div>
+  )
 }
 
 const App: React.FC = () => {
+  console.log(process.env.REACT_APP_OFFICELINK)
   return (
     <div className="App">
       <header className="App-header">
@@ -79,7 +85,8 @@ const App: React.FC = () => {
         >
           Learn React
         </a>
-        <TestList/>
+        <a href={process.env.REACT_APP_OFFICELINK}> CLick here </a>
+        <PageNotLogged/>
         </header>
     </div>
   );

@@ -411,9 +411,9 @@ type Subscription {
 
 type User {
   id: ID!
+  outlookid: String!
   name: String!
   email: String!
-  token: String!
   year: Int
   plan: Int
   xp: Int
@@ -429,9 +429,9 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
+  outlookid: String!
   name: String!
   email: String!
-  token: String!
   year: Int
   plan: Int
   xp: Int
@@ -446,9 +446,9 @@ input UserCreateManyWithoutActivitiesInput {
 
 input UserCreateWithoutActivitiesInput {
   id: ID
+  outlookid: String!
   name: String!
   email: String!
-  token: String!
   year: Int
   plan: Int
   xp: Int
@@ -463,12 +463,12 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
+  outlookid_ASC
+  outlookid_DESC
   name_ASC
   name_DESC
   email_ASC
   email_DESC
-  token_ASC
-  token_DESC
   year_ASC
   year_DESC
   plan_ASC
@@ -481,9 +481,9 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
+  outlookid: String!
   name: String!
   email: String!
-  token: String!
   year: Int
   plan: Int
   xp: Int
@@ -505,6 +505,20 @@ input UserScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  outlookid: String
+  outlookid_not: String
+  outlookid_in: [String!]
+  outlookid_not_in: [String!]
+  outlookid_lt: String
+  outlookid_lte: String
+  outlookid_gt: String
+  outlookid_gte: String
+  outlookid_contains: String
+  outlookid_not_contains: String
+  outlookid_starts_with: String
+  outlookid_not_starts_with: String
+  outlookid_ends_with: String
+  outlookid_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -533,20 +547,6 @@ input UserScalarWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
-  token: String
-  token_not: String
-  token_in: [String!]
-  token_not_in: [String!]
-  token_lt: String
-  token_lte: String
-  token_gt: String
-  token_gte: String
-  token_contains: String
-  token_not_contains: String
-  token_starts_with: String
-  token_not_starts_with: String
-  token_ends_with: String
-  token_not_ends_with: String
   year: Int
   year_not: Int
   year_in: [Int!]
@@ -601,9 +601,9 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
+  outlookid: String
   name: String
   email: String
-  token: String
   year: Int
   plan: Int
   xp: Int
@@ -612,9 +612,9 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyDataInput {
+  outlookid: String
   name: String
   email: String
-  token: String
   year: Int
   plan: Int
   xp: Int
@@ -622,9 +622,9 @@ input UserUpdateManyDataInput {
 }
 
 input UserUpdateManyMutationInput {
+  outlookid: String
   name: String
   email: String
-  token: String
   year: Int
   plan: Int
   xp: Int
@@ -649,9 +649,9 @@ input UserUpdateManyWithWhereNestedInput {
 }
 
 input UserUpdateWithoutActivitiesDataInput {
+  outlookid: String
   name: String
   email: String
-  token: String
   year: Int
   plan: Int
   xp: Int
@@ -684,6 +684,20 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  outlookid: String
+  outlookid_not: String
+  outlookid_in: [String!]
+  outlookid_not_in: [String!]
+  outlookid_lt: String
+  outlookid_lte: String
+  outlookid_gt: String
+  outlookid_gte: String
+  outlookid_contains: String
+  outlookid_not_contains: String
+  outlookid_starts_with: String
+  outlookid_not_starts_with: String
+  outlookid_ends_with: String
+  outlookid_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -712,20 +726,6 @@ input UserWhereInput {
   email_not_starts_with: String
   email_ends_with: String
   email_not_ends_with: String
-  token: String
-  token_not: String
-  token_in: [String!]
-  token_not_in: [String!]
-  token_lt: String
-  token_lte: String
-  token_gt: String
-  token_gte: String
-  token_contains: String
-  token_not_contains: String
-  token_starts_with: String
-  token_not_starts_with: String
-  token_ends_with: String
-  token_not_ends_with: String
   year: Int
   year_not: Int
   year_in: [Int!]
@@ -764,7 +764,7 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
+  outlookid: String
   email: String
-  token: String
 }
 `

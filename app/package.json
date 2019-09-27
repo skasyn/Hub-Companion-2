@@ -8,9 +8,11 @@
     "@types/react": "16.9.2",
     "@types/react-dom": "16.9.0",
     "apollo-boost": "^0.4.4",
+    "dotenv": "^8.1.0",
     "graphql": "^14.5.7",
     "react": "^16.9.0",
     "react-apollo": "^3.1.1",
+    "react-cookie": "^1.0.5",
     "react-dom": "^16.9.0",
     "react-scripts": "3.1.2",
     "typescript": "3.6.3"
