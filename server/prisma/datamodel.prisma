@@ -1,8 +1,8 @@
 type User {
   id: ID! @id
+  outlookid: String! @unique
   name: String!
   email: String! @unique
-  token: String! @unique
   year: Int @default(value: 0)
   plan: Int @default(value: -1)
   xp: Int @default(value: 0)

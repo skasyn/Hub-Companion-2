@@ -13,21 +13,6 @@ type Activity {
   xp: Int
 }
 
-input ActivityCreateManyWithoutRegisteredInput {
-  connect: [ActivityWhereUniqueInput!]
-  create: [ActivityCreateWithoutRegisteredInput!]
-}
-
-input ActivityCreateWithoutRegisteredInput {
-  code: String!
-  date: DateTime
-  description: String
-  id: ID
-  title: String!
-  type: String!
-  xp: Int
-}
-
 enum ActivityOrderByInput {
   code_ASC
   code_DESC
@@ -136,22 +121,11 @@ input ActivityWhereInput {
   xp_not_in: [Int!]
 }
 
-input ActivityWhereUniqueInput {
-  code: String
-  id: ID
-}
-
 scalar DateTime
 
-type Mutation {
-  createDraft(id: ID, name: String): User!
-  createUser(data: UserCreateInput!): User!
-  deleteActivity(where: ActivityWhereUniqueInput!): Activity
-}
-
 type Query {
+  login(code: String): User!
   user(where: UserWhereUniqueInput!): User
-  UserbyEmail(email: String): [User!]!
   users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
 }
 
@@ -160,21 +134,9 @@ type User {
   email: String!
   id: ID!
   name: String!
+  outlookid: String!
   plan: Int
   privilege: Int
-  token: String!
-  xp: Int
-  year: Int
-}
-
-input UserCreateInput {
-  activities: ActivityCreateManyWithoutRegisteredInput
-  email: String!
-  id: ID
-  name: String!
-  plan: Int
-  privilege: Int
-  token: String!
   xp: Int
   year: Int
 }
@@ -186,12 +148,12 @@ enum UserOrderByInput {
   id_DESC
   name_ASC
   name_DESC
+  outlookid_ASC
+  outlookid_DESC
   plan_ASC
   plan_DESC
   privilege_ASC
   privilege_DESC
-  token_ASC
-  token_DESC
   xp_ASC
   xp_DESC
   year_ASC
@@ -243,6 +205,20 @@ input UserWhereInput {
   name_not_in: [String!]
   name_not_starts_with: String
   name_starts_with: String
+  outlookid: String
+  outlookid_contains: String
+  outlookid_ends_with: String
+  outlookid_gt: String
+  outlookid_gte: String
+  outlookid_in: [String!]
+  outlookid_lt: String
+  outlookid_lte: String
+  outlookid_not: String
+  outlookid_not_contains: String
+  outlookid_not_ends_with: String
+  outlookid_not_in: [String!]
+  outlookid_not_starts_with: String
+  outlookid_starts_with: String
   plan: Int
   plan_gt: Int
   plan_gte: Int
@@ -259,20 +235,6 @@ input UserWhereInput {
   privilege_lte: Int
   privilege_not: Int
   privilege_not_in: [Int!]
-  token: String
-  token_contains: String
-  token_ends_with: String
-  token_gt: String
-  token_gte: String
-  token_in: [String!]
-  token_lt: String
-  token_lte: String
-  token_not: String
-  token_not_contains: String
-  token_not_ends_with: String
-  token_not_in: [String!]
-  token_not_starts_with: String
-  token_starts_with: String
   xp: Int
   xp_gt: Int
   xp_gte: Int
@@ -294,5 +256,5 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   email: String
   id: ID
-  token: String
+  outlookid: String
 }
