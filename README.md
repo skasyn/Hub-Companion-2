@@ -3,14 +3,8 @@ The new Hub Companion, still track what you need to validate Hub's unit, but in 
 
 ## Startup
 
-To launch the application, use the following command :
+To launch the application, use the following command at the root of the repository:
 
 ```
-dc -f production.yml -f docker-compose.yml -f server/docker-compose.yml up
-```
-
-To stop it, use the following command :
-
-```
-dc -f production.yml -f docker-compose.yml -f server/docker-compose.yml down
+$ docker-compose up
 ```
