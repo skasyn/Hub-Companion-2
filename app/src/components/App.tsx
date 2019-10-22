@@ -9,7 +9,6 @@ import { GlobalStateProvider, useGlobalState } from "../reducers/reducers";
 const LoginDispatch: React.FC = () => {
   const [user] = useGlobalState('user');
 
-  console.log('there ?');
   if (Object.keys(user).length === 0) {
     return (
       <PageNotLogged/>

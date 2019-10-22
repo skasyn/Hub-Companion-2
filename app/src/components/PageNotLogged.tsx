@@ -5,7 +5,6 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import {LOGIN, LOGIN_COOKIE} from '../query/query';
 import {LoginCookieData, LoginData, LoginVars} from '../types/types';
 import { dispatch } from "../reducers/reducers";
-import Cookies from "universal-cookie";
 
 require('dotenv').config();
 
@@ -55,13 +54,12 @@ export const LoadingConnectionOffice: React.FC<LoadingConnectionProps> = (props)
 export const PageNotLogged: React.FC = () => {
   let query = new URLSearchParams(window.location.search);
   const code = query.get('code');
-  const cookies = new Cookies();
-  const cookieId = cookies.get<String>('id');
+  const cookieId = window.document.cookie.match(/(?<=( id=))([^;]*)/gm);
 
-  if (cookieId !== null && cookieId !== undefined && cookieId !== "") {
+  if (cookieId !== null && cookieId !== undefined && cookieId[0] !== "") {
     return (
       <div>
-        <LoadingConnectionCookie code={cookieId}/>
+        <LoadingConnectionCookie code={cookieId[0]}/>
       </div>
     )
   } else if (code != null) {

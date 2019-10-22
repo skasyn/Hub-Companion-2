@@ -16,10 +16,7 @@
     "react-apollo": "^3.1.1",
     "react-dom": "^16.9.0",
     "react-hooks-global-state": "^0.15.1",
-    "react-scripts": "3.1.2",
-    "universal-cookie": "^2.1.2",
-    "universal-cookie-express": "^2.1.2",
-    "react-cookie": "^2.1.2"
+    "react-scripts": "3.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,9 +43,6 @@
   "devDependencies": {
     "ts-node": "^8.4.1",
     "tslint": "^5.20.0",
-    "typescript": "^3.6.3",
-    "@types/universal-cookie": "git+ssh://git@github.com:S64/types-universal-cookie.git#v2.1.2-2",
-    "@types/universal-cookie-express": "git+ssh://git@github.com:S64/types-universal-cookie-express.git#v2.1.2-2",
-    "@types/react-cookie": "git+ssh://git@github.com:S64/types-react-cookie.git#v2.1.2-2"
+    "typescript": "^3.6.3"
   }
 }

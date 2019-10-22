@@ -11,7 +11,7 @@ const schema = makePrismaSchema({
   prisma: {
     datamodelInfo,
     client: new Prisma({
-      endpoint: 'http://localhost:4466',
+      endpoint: 'http://prisma:4466',
       // To change to http://prisma:4466 when dockerized
     }),
   },
@@ -28,7 +28,7 @@ const server = new GraphQLServer({
   context: req => ({
     ...req,
     db: new Prisma({
-      endpoint: 'http://localhost:4466',
+      endpoint: 'http://prisma:4466',
     }),
   }),
 } as any);

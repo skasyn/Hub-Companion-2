@@ -7,8 +7,9 @@ type User {
   plan: Int @default(value: -1)
   xp: Int @default(value: 0)
   privilege: Int @default(value: 0)
-  activities: [Activity!]! @relation(name: "AllActivities", link: INLINE)
+  activities: [UserPresence!]! @relation(name: "PresenceUser", link: INLINE)
 }
+
 type Activity {
     id: ID! @id
     code: String! @unique
@@ -17,5 +18,12 @@ type Activity {
     title: String!
     description: String
     date: DateTime
-    registered: [User!]! @relation(name: "AllActivities")
+    registered: [UserPresence!]! @relation(name: "PresenceActivity", link: INLINE)
+}
+
+type UserPresence {
+    id: ID! @id
+    user: User! @relation(name: "PresenceUser")
+    activity: Activity! @relation(name: "PresenceActivity")
+    presence: Boolean
 }

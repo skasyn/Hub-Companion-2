@@ -18,11 +18,8 @@ type User {
   plan: Int
   xp: Int
   privilege: Int
-  activities: [Activity!]!
+  activities: [UserPresence!]!
 }
-
-
-#TODO UserPresence User! Acitivity! IsPresent: Boolean!
 
 type Activity {
   id: ID!
@@ -32,5 +29,11 @@ type Activity {
   title: String!
   description: String
   date: DateTime
-  registered: [User!]!
+  registered: [UserPresence!]!
+}
+
+type UserPresence {
+  user: User!
+  activity: Activity!
+  presence: Boolean
 }

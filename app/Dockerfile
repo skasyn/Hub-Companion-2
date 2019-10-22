@@ -1,13 +1,14 @@
-FROM node:12.10.0-alpine
+FROM node:12.10.0-slim
 
-# Create a work directory
-RUN mkdir /app
 WORKDIR /app
 
-COPY /src /app/src
-COPY /public /app/public
-COPY ["package.json", "package-lock.json", "./"]
+#Commented for development purposes (hot reload)
+#COPY /src /app/src
+#COPY /public /app/public
+#COPY ["package.json", ".env", "./"]
 
-RUN npm install --silent
+RUN npm install
+
+CMD ["npm", "start"]
 
 EXPOSE 3000

@@ -10,7 +10,7 @@ export const typeDefs = /* GraphQL */ `type Activity {
   title: String!
   description: String
   date: DateTime
-  registered(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  registered(where: UserPresenceWhereInput, orderBy: UserPresenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserPresence!]
 }
 
 type ActivityConnection {
@@ -27,12 +27,12 @@ input ActivityCreateInput {
   title: String!
   description: String
   date: DateTime
-  registered: UserCreateManyWithoutActivitiesInput
+  registered: UserPresenceCreateManyWithoutActivityInput
 }
 
-input ActivityCreateManyWithoutRegisteredInput {
-  create: [ActivityCreateWithoutRegisteredInput!]
-  connect: [ActivityWhereUniqueInput!]
+input ActivityCreateOneWithoutRegisteredInput {
+  create: ActivityCreateWithoutRegisteredInput
+  connect: ActivityWhereUniqueInput
 }
 
 input ActivityCreateWithoutRegisteredInput {
@@ -77,98 +77,6 @@ type ActivityPreviousValues {
   date: DateTime
 }
 
-input ActivityScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  code: String
-  code_not: String
-  code_in: [String!]
-  code_not_in: [String!]
-  code_lt: String
-  code_lte: String
-  code_gt: String
-  code_gte: String
-  code_contains: String
-  code_not_contains: String
-  code_starts_with: String
-  code_not_starts_with: String
-  code_ends_with: String
-  code_not_ends_with: String
-  type: String
-  type_not: String
-  type_in: [String!]
-  type_not_in: [String!]
-  type_lt: String
-  type_lte: String
-  type_gt: String
-  type_gte: String
-  type_contains: String
-  type_not_contains: String
-  type_starts_with: String
-  type_not_starts_with: String
-  type_ends_with: String
-  type_not_ends_with: String
-  xp: Int
-  xp_not: Int
-  xp_in: [Int!]
-  xp_not_in: [Int!]
-  xp_lt: Int
-  xp_lte: Int
-  xp_gt: Int
-  xp_gte: Int
-  title: String
-  title_not: String
-  title_in: [String!]
-  title_not_in: [String!]
-  title_lt: String
-  title_lte: String
-  title_gt: String
-  title_gte: String
-  title_contains: String
-  title_not_contains: String
-  title_starts_with: String
-  title_not_starts_with: String
-  title_ends_with: String
-  title_not_ends_with: String
-  description: String
-  description_not: String
-  description_in: [String!]
-  description_not_in: [String!]
-  description_lt: String
-  description_lte: String
-  description_gt: String
-  description_gte: String
-  description_contains: String
-  description_not_contains: String
-  description_starts_with: String
-  description_not_starts_with: String
-  description_ends_with: String
-  description_not_ends_with: String
-  date: DateTime
-  date_not: DateTime
-  date_in: [DateTime!]
-  date_not_in: [DateTime!]
-  date_lt: DateTime
-  date_lte: DateTime
-  date_gt: DateTime
-  date_gte: DateTime
-  AND: [ActivityScalarWhereInput!]
-  OR: [ActivityScalarWhereInput!]
-  NOT: [ActivityScalarWhereInput!]
-}
-
 type ActivitySubscriptionPayload {
   mutation: MutationType!
   node: Activity
@@ -192,16 +100,7 @@ input ActivityUpdateInput {
   title: String
   description: String
   date: DateTime
-  registered: UserUpdateManyWithoutActivitiesInput
-}
-
-input ActivityUpdateManyDataInput {
-  code: String
-  type: String
-  xp: Int
-  title: String
-  description: String
-  date: DateTime
+  registered: UserPresenceUpdateManyWithoutActivityInput
 }
 
 input ActivityUpdateManyMutationInput {
@@ -213,21 +112,11 @@ input ActivityUpdateManyMutationInput {
   date: DateTime
 }
 
-input ActivityUpdateManyWithoutRegisteredInput {
-  create: [ActivityCreateWithoutRegisteredInput!]
-  delete: [ActivityWhereUniqueInput!]
-  connect: [ActivityWhereUniqueInput!]
-  set: [ActivityWhereUniqueInput!]
-  disconnect: [ActivityWhereUniqueInput!]
-  update: [ActivityUpdateWithWhereUniqueWithoutRegisteredInput!]
-  upsert: [ActivityUpsertWithWhereUniqueWithoutRegisteredInput!]
-  deleteMany: [ActivityScalarWhereInput!]
-  updateMany: [ActivityUpdateManyWithWhereNestedInput!]
-}
-
-input ActivityUpdateManyWithWhereNestedInput {
-  where: ActivityScalarWhereInput!
-  data: ActivityUpdateManyDataInput!
+input ActivityUpdateOneRequiredWithoutRegisteredInput {
+  create: ActivityCreateWithoutRegisteredInput
+  update: ActivityUpdateWithoutRegisteredDataInput
+  upsert: ActivityUpsertWithoutRegisteredInput
+  connect: ActivityWhereUniqueInput
 }
 
 input ActivityUpdateWithoutRegisteredDataInput {
@@ -239,13 +128,7 @@ input ActivityUpdateWithoutRegisteredDataInput {
   date: DateTime
 }
 
-input ActivityUpdateWithWhereUniqueWithoutRegisteredInput {
-  where: ActivityWhereUniqueInput!
-  data: ActivityUpdateWithoutRegisteredDataInput!
-}
-
-input ActivityUpsertWithWhereUniqueWithoutRegisteredInput {
-  where: ActivityWhereUniqueInput!
+input ActivityUpsertWithoutRegisteredInput {
   update: ActivityUpdateWithoutRegisteredDataInput!
   create: ActivityCreateWithoutRegisteredInput!
 }
@@ -337,7 +220,7 @@ input ActivityWhereInput {
   date_lte: DateTime
   date_gt: DateTime
   date_gte: DateTime
-  registered_some: UserWhereInput
+  registered_some: UserPresenceWhereInput
   AND: [ActivityWhereInput!]
 }
 
@@ -351,6 +234,10 @@ type AggregateActivity {
 }
 
 type AggregateUser {
+  count: Int!
+}
+
+type AggregateUserPresence {
   count: Int!
 }
 
@@ -375,6 +262,12 @@ type Mutation {
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createUserPresence(data: UserPresenceCreateInput!): UserPresence!
+  updateUserPresence(data: UserPresenceUpdateInput!, where: UserPresenceWhereUniqueInput!): UserPresence
+  updateManyUserPresences(data: UserPresenceUpdateManyMutationInput!, where: UserPresenceWhereInput): BatchPayload!
+  upsertUserPresence(where: UserPresenceWhereUniqueInput!, create: UserPresenceCreateInput!, update: UserPresenceUpdateInput!): UserPresence!
+  deleteUserPresence(where: UserPresenceWhereUniqueInput!): UserPresence
+  deleteManyUserPresences(where: UserPresenceWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -401,12 +294,16 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  userPresence(where: UserPresenceWhereUniqueInput!): UserPresence
+  userPresences(where: UserPresenceWhereInput, orderBy: UserPresenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserPresence]!
+  userPresencesConnection(where: UserPresenceWhereInput, orderBy: UserPresenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserPresenceConnection!
   node(id: ID!): Node
 }
 
 type Subscription {
   activity(where: ActivitySubscriptionWhereInput): ActivitySubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  userPresence(where: UserPresenceSubscriptionWhereInput): UserPresenceSubscriptionPayload
 }
 
 type User {
@@ -418,7 +315,7 @@ type User {
   plan: Int
   xp: Int
   privilege: Int
-  activities(where: ActivityWhereInput, orderBy: ActivityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Activity!]
+  activities(where: UserPresenceWhereInput, orderBy: UserPresenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserPresence!]
 }
 
 type UserConnection {
@@ -436,12 +333,12 @@ input UserCreateInput {
   plan: Int
   xp: Int
   privilege: Int
-  activities: ActivityCreateManyWithoutRegisteredInput
+  activities: UserPresenceCreateManyWithoutUserInput
 }
 
-input UserCreateManyWithoutActivitiesInput {
-  create: [UserCreateWithoutActivitiesInput!]
-  connect: [UserWhereUniqueInput!]
+input UserCreateOneWithoutActivitiesInput {
+  create: UserCreateWithoutActivitiesInput
+  connect: UserWhereUniqueInput
 }
 
 input UserCreateWithoutActivitiesInput {
@@ -479,18 +376,66 @@ enum UserOrderByInput {
   privilege_DESC
 }
 
-type UserPreviousValues {
+type UserPresence {
   id: ID!
-  outlookId: String!
-  name: String!
-  email: String!
-  year: Int
-  plan: Int
-  xp: Int
-  privilege: Int
+  user: User!
+  activity: Activity!
+  presence: Boolean
 }
 
-input UserScalarWhereInput {
+type UserPresenceConnection {
+  pageInfo: PageInfo!
+  edges: [UserPresenceEdge]!
+  aggregate: AggregateUserPresence!
+}
+
+input UserPresenceCreateInput {
+  id: ID
+  user: UserCreateOneWithoutActivitiesInput!
+  activity: ActivityCreateOneWithoutRegisteredInput!
+  presence: Boolean
+}
+
+input UserPresenceCreateManyWithoutActivityInput {
+  create: [UserPresenceCreateWithoutActivityInput!]
+  connect: [UserPresenceWhereUniqueInput!]
+}
+
+input UserPresenceCreateManyWithoutUserInput {
+  create: [UserPresenceCreateWithoutUserInput!]
+  connect: [UserPresenceWhereUniqueInput!]
+}
+
+input UserPresenceCreateWithoutActivityInput {
+  id: ID
+  user: UserCreateOneWithoutActivitiesInput!
+  presence: Boolean
+}
+
+input UserPresenceCreateWithoutUserInput {
+  id: ID
+  activity: ActivityCreateOneWithoutRegisteredInput!
+  presence: Boolean
+}
+
+type UserPresenceEdge {
+  node: UserPresence!
+  cursor: String!
+}
+
+enum UserPresenceOrderByInput {
+  id_ASC
+  id_DESC
+  presence_ASC
+  presence_DESC
+}
+
+type UserPresencePreviousValues {
+  id: ID!
+  presence: Boolean
+}
+
+input UserPresenceScalarWhereInput {
   id: ID
   id_not: ID
   id_in: [ID!]
@@ -505,83 +450,139 @@ input UserScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  outlookId: String
-  outlookId_not: String
-  outlookId_in: [String!]
-  outlookId_not_in: [String!]
-  outlookId_lt: String
-  outlookId_lte: String
-  outlookId_gt: String
-  outlookId_gte: String
-  outlookId_contains: String
-  outlookId_not_contains: String
-  outlookId_starts_with: String
-  outlookId_not_starts_with: String
-  outlookId_ends_with: String
-  outlookId_not_ends_with: String
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  email: String
-  email_not: String
-  email_in: [String!]
-  email_not_in: [String!]
-  email_lt: String
-  email_lte: String
-  email_gt: String
-  email_gte: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
+  presence: Boolean
+  presence_not: Boolean
+  AND: [UserPresenceScalarWhereInput!]
+  OR: [UserPresenceScalarWhereInput!]
+  NOT: [UserPresenceScalarWhereInput!]
+}
+
+type UserPresenceSubscriptionPayload {
+  mutation: MutationType!
+  node: UserPresence
+  updatedFields: [String!]
+  previousValues: UserPresencePreviousValues
+}
+
+input UserPresenceSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserPresenceWhereInput
+  AND: [UserPresenceSubscriptionWhereInput!]
+}
+
+input UserPresenceUpdateInput {
+  user: UserUpdateOneRequiredWithoutActivitiesInput
+  activity: ActivityUpdateOneRequiredWithoutRegisteredInput
+  presence: Boolean
+}
+
+input UserPresenceUpdateManyDataInput {
+  presence: Boolean
+}
+
+input UserPresenceUpdateManyMutationInput {
+  presence: Boolean
+}
+
+input UserPresenceUpdateManyWithoutActivityInput {
+  create: [UserPresenceCreateWithoutActivityInput!]
+  delete: [UserPresenceWhereUniqueInput!]
+  connect: [UserPresenceWhereUniqueInput!]
+  set: [UserPresenceWhereUniqueInput!]
+  disconnect: [UserPresenceWhereUniqueInput!]
+  update: [UserPresenceUpdateWithWhereUniqueWithoutActivityInput!]
+  upsert: [UserPresenceUpsertWithWhereUniqueWithoutActivityInput!]
+  deleteMany: [UserPresenceScalarWhereInput!]
+  updateMany: [UserPresenceUpdateManyWithWhereNestedInput!]
+}
+
+input UserPresenceUpdateManyWithoutUserInput {
+  create: [UserPresenceCreateWithoutUserInput!]
+  delete: [UserPresenceWhereUniqueInput!]
+  connect: [UserPresenceWhereUniqueInput!]
+  set: [UserPresenceWhereUniqueInput!]
+  disconnect: [UserPresenceWhereUniqueInput!]
+  update: [UserPresenceUpdateWithWhereUniqueWithoutUserInput!]
+  upsert: [UserPresenceUpsertWithWhereUniqueWithoutUserInput!]
+  deleteMany: [UserPresenceScalarWhereInput!]
+  updateMany: [UserPresenceUpdateManyWithWhereNestedInput!]
+}
+
+input UserPresenceUpdateManyWithWhereNestedInput {
+  where: UserPresenceScalarWhereInput!
+  data: UserPresenceUpdateManyDataInput!
+}
+
+input UserPresenceUpdateWithoutActivityDataInput {
+  user: UserUpdateOneRequiredWithoutActivitiesInput
+  presence: Boolean
+}
+
+input UserPresenceUpdateWithoutUserDataInput {
+  activity: ActivityUpdateOneRequiredWithoutRegisteredInput
+  presence: Boolean
+}
+
+input UserPresenceUpdateWithWhereUniqueWithoutActivityInput {
+  where: UserPresenceWhereUniqueInput!
+  data: UserPresenceUpdateWithoutActivityDataInput!
+}
+
+input UserPresenceUpdateWithWhereUniqueWithoutUserInput {
+  where: UserPresenceWhereUniqueInput!
+  data: UserPresenceUpdateWithoutUserDataInput!
+}
+
+input UserPresenceUpsertWithWhereUniqueWithoutActivityInput {
+  where: UserPresenceWhereUniqueInput!
+  update: UserPresenceUpdateWithoutActivityDataInput!
+  create: UserPresenceCreateWithoutActivityInput!
+}
+
+input UserPresenceUpsertWithWhereUniqueWithoutUserInput {
+  where: UserPresenceWhereUniqueInput!
+  update: UserPresenceUpdateWithoutUserDataInput!
+  create: UserPresenceCreateWithoutUserInput!
+}
+
+input UserPresenceWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  user: UserWhereInput
+  activity: ActivityWhereInput
+  presence: Boolean
+  presence_not: Boolean
+  AND: [UserPresenceWhereInput!]
+}
+
+input UserPresenceWhereUniqueInput {
+  id: ID
+}
+
+type UserPreviousValues {
+  id: ID!
+  outlookId: String!
+  name: String!
+  email: String!
   year: Int
-  year_not: Int
-  year_in: [Int!]
-  year_not_in: [Int!]
-  year_lt: Int
-  year_lte: Int
-  year_gt: Int
-  year_gte: Int
   plan: Int
-  plan_not: Int
-  plan_in: [Int!]
-  plan_not_in: [Int!]
-  plan_lt: Int
-  plan_lte: Int
-  plan_gt: Int
-  plan_gte: Int
   xp: Int
-  xp_not: Int
-  xp_in: [Int!]
-  xp_not_in: [Int!]
-  xp_lt: Int
-  xp_lte: Int
-  xp_gt: Int
-  xp_gte: Int
   privilege: Int
-  privilege_not: Int
-  privilege_in: [Int!]
-  privilege_not_in: [Int!]
-  privilege_lt: Int
-  privilege_lte: Int
-  privilege_gt: Int
-  privilege_gte: Int
-  AND: [UserScalarWhereInput!]
-  OR: [UserScalarWhereInput!]
-  NOT: [UserScalarWhereInput!]
 }
 
 type UserSubscriptionPayload {
@@ -608,17 +609,7 @@ input UserUpdateInput {
   plan: Int
   xp: Int
   privilege: Int
-  activities: ActivityUpdateManyWithoutRegisteredInput
-}
-
-input UserUpdateManyDataInput {
-  outlookId: String
-  name: String
-  email: String
-  year: Int
-  plan: Int
-  xp: Int
-  privilege: Int
+  activities: UserPresenceUpdateManyWithoutUserInput
 }
 
 input UserUpdateManyMutationInput {
@@ -631,21 +622,11 @@ input UserUpdateManyMutationInput {
   privilege: Int
 }
 
-input UserUpdateManyWithoutActivitiesInput {
-  create: [UserCreateWithoutActivitiesInput!]
-  delete: [UserWhereUniqueInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  update: [UserUpdateWithWhereUniqueWithoutActivitiesInput!]
-  upsert: [UserUpsertWithWhereUniqueWithoutActivitiesInput!]
-  deleteMany: [UserScalarWhereInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-}
-
-input UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput!
-  data: UserUpdateManyDataInput!
+input UserUpdateOneRequiredWithoutActivitiesInput {
+  create: UserCreateWithoutActivitiesInput
+  update: UserUpdateWithoutActivitiesDataInput
+  upsert: UserUpsertWithoutActivitiesInput
+  connect: UserWhereUniqueInput
 }
 
 input UserUpdateWithoutActivitiesDataInput {
@@ -658,13 +639,7 @@ input UserUpdateWithoutActivitiesDataInput {
   privilege: Int
 }
 
-input UserUpdateWithWhereUniqueWithoutActivitiesInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateWithoutActivitiesDataInput!
-}
-
-input UserUpsertWithWhereUniqueWithoutActivitiesInput {
-  where: UserWhereUniqueInput!
+input UserUpsertWithoutActivitiesInput {
   update: UserUpdateWithoutActivitiesDataInput!
   create: UserCreateWithoutActivitiesInput!
 }
@@ -758,7 +733,7 @@ input UserWhereInput {
   privilege_lte: Int
   privilege_gt: Int
   privilege_gte: Int
-  activities_some: ActivityWhereInput
+  activities_some: UserPresenceWhereInput
   AND: [UserWhereInput!]
 }
 

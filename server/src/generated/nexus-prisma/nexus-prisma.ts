@@ -16,6 +16,7 @@ export interface NexusPrismaTypes {
     fields: {
       Query: QueryObject
       User: UserObject
+      UserPresence: UserPresenceObject
       Activity: ActivityObject
       UserConnection: UserConnectionObject
       PageInfo: PageInfoObject
@@ -24,6 +25,9 @@ export interface NexusPrismaTypes {
       ActivityConnection: ActivityConnectionObject
       ActivityEdge: ActivityEdgeObject
       AggregateActivity: AggregateActivityObject
+      UserPresenceConnection: UserPresenceConnectionObject
+      UserPresenceEdge: UserPresenceEdgeObject
+      AggregateUserPresence: AggregateUserPresenceObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
@@ -31,10 +35,13 @@ export interface NexusPrismaTypes {
       UserPreviousValues: UserPreviousValuesObject
       ActivitySubscriptionPayload: ActivitySubscriptionPayloadObject
       ActivityPreviousValues: ActivityPreviousValuesObject
+      UserPresenceSubscriptionPayload: UserPresenceSubscriptionPayloadObject
+      UserPresencePreviousValues: UserPresencePreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
       User: UserFieldDetails
+      UserPresence: UserPresenceFieldDetails
       Activity: ActivityFieldDetails
       UserConnection: UserConnectionFieldDetails
       PageInfo: PageInfoFieldDetails
@@ -43,6 +50,9 @@ export interface NexusPrismaTypes {
       ActivityConnection: ActivityConnectionFieldDetails
       ActivityEdge: ActivityEdgeFieldDetails
       AggregateActivity: AggregateActivityFieldDetails
+      UserPresenceConnection: UserPresenceConnectionFieldDetails
+      UserPresenceEdge: UserPresenceEdgeFieldDetails
+      AggregateUserPresence: AggregateUserPresenceFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
@@ -50,45 +60,61 @@ export interface NexusPrismaTypes {
       UserPreviousValues: UserPreviousValuesFieldDetails
       ActivitySubscriptionPayload: ActivitySubscriptionPayloadFieldDetails
       ActivityPreviousValues: ActivityPreviousValuesFieldDetails
+      UserPresenceSubscriptionPayload: UserPresenceSubscriptionPayloadFieldDetails
+      UserPresencePreviousValues: UserPresencePreviousValuesFieldDetails
     }
   }
   inputTypes: {
     fields: {
       UserWhereUniqueInput: UserWhereUniqueInputInputObject
-      ActivityWhereInput: ActivityWhereInputInputObject
+      UserPresenceWhereInput: UserPresenceWhereInputInputObject
       UserWhereInput: UserWhereInputInputObject
+      ActivityWhereInput: ActivityWhereInputInputObject
       ActivityWhereUniqueInput: ActivityWhereUniqueInputInputObject
+      UserPresenceWhereUniqueInput: UserPresenceWhereUniqueInputInputObject
       UserCreateInput: UserCreateInputInputObject
-      ActivityCreateManyWithoutRegisteredInput: ActivityCreateManyWithoutRegisteredInputInputObject
+      UserPresenceCreateManyWithoutUserInput: UserPresenceCreateManyWithoutUserInputInputObject
+      UserPresenceCreateWithoutUserInput: UserPresenceCreateWithoutUserInputInputObject
+      ActivityCreateOneWithoutRegisteredInput: ActivityCreateOneWithoutRegisteredInputInputObject
       ActivityCreateWithoutRegisteredInput: ActivityCreateWithoutRegisteredInputInputObject
       UserUpdateInput: UserUpdateInputInputObject
-      ActivityUpdateManyWithoutRegisteredInput: ActivityUpdateManyWithoutRegisteredInputInputObject
-      ActivityUpdateWithWhereUniqueWithoutRegisteredInput: ActivityUpdateWithWhereUniqueWithoutRegisteredInputInputObject
+      UserPresenceUpdateManyWithoutUserInput: UserPresenceUpdateManyWithoutUserInputInputObject
+      UserPresenceUpdateWithWhereUniqueWithoutUserInput: UserPresenceUpdateWithWhereUniqueWithoutUserInputInputObject
+      UserPresenceUpdateWithoutUserDataInput: UserPresenceUpdateWithoutUserDataInputInputObject
+      ActivityUpdateOneRequiredWithoutRegisteredInput: ActivityUpdateOneRequiredWithoutRegisteredInputInputObject
       ActivityUpdateWithoutRegisteredDataInput: ActivityUpdateWithoutRegisteredDataInputInputObject
-      ActivityUpsertWithWhereUniqueWithoutRegisteredInput: ActivityUpsertWithWhereUniqueWithoutRegisteredInputInputObject
-      ActivityScalarWhereInput: ActivityScalarWhereInputInputObject
-      ActivityUpdateManyWithWhereNestedInput: ActivityUpdateManyWithWhereNestedInputInputObject
-      ActivityUpdateManyDataInput: ActivityUpdateManyDataInputInputObject
+      ActivityUpsertWithoutRegisteredInput: ActivityUpsertWithoutRegisteredInputInputObject
+      UserPresenceUpsertWithWhereUniqueWithoutUserInput: UserPresenceUpsertWithWhereUniqueWithoutUserInputInputObject
+      UserPresenceScalarWhereInput: UserPresenceScalarWhereInputInputObject
+      UserPresenceUpdateManyWithWhereNestedInput: UserPresenceUpdateManyWithWhereNestedInputInputObject
+      UserPresenceUpdateManyDataInput: UserPresenceUpdateManyDataInputInputObject
       UserUpdateManyMutationInput: UserUpdateManyMutationInputInputObject
       ActivityCreateInput: ActivityCreateInputInputObject
-      UserCreateManyWithoutActivitiesInput: UserCreateManyWithoutActivitiesInputInputObject
+      UserPresenceCreateManyWithoutActivityInput: UserPresenceCreateManyWithoutActivityInputInputObject
+      UserPresenceCreateWithoutActivityInput: UserPresenceCreateWithoutActivityInputInputObject
+      UserCreateOneWithoutActivitiesInput: UserCreateOneWithoutActivitiesInputInputObject
       UserCreateWithoutActivitiesInput: UserCreateWithoutActivitiesInputInputObject
       ActivityUpdateInput: ActivityUpdateInputInputObject
-      UserUpdateManyWithoutActivitiesInput: UserUpdateManyWithoutActivitiesInputInputObject
-      UserUpdateWithWhereUniqueWithoutActivitiesInput: UserUpdateWithWhereUniqueWithoutActivitiesInputInputObject
+      UserPresenceUpdateManyWithoutActivityInput: UserPresenceUpdateManyWithoutActivityInputInputObject
+      UserPresenceUpdateWithWhereUniqueWithoutActivityInput: UserPresenceUpdateWithWhereUniqueWithoutActivityInputInputObject
+      UserPresenceUpdateWithoutActivityDataInput: UserPresenceUpdateWithoutActivityDataInputInputObject
+      UserUpdateOneRequiredWithoutActivitiesInput: UserUpdateOneRequiredWithoutActivitiesInputInputObject
       UserUpdateWithoutActivitiesDataInput: UserUpdateWithoutActivitiesDataInputInputObject
-      UserUpsertWithWhereUniqueWithoutActivitiesInput: UserUpsertWithWhereUniqueWithoutActivitiesInputInputObject
-      UserScalarWhereInput: UserScalarWhereInputInputObject
-      UserUpdateManyWithWhereNestedInput: UserUpdateManyWithWhereNestedInputInputObject
-      UserUpdateManyDataInput: UserUpdateManyDataInputInputObject
+      UserUpsertWithoutActivitiesInput: UserUpsertWithoutActivitiesInputInputObject
+      UserPresenceUpsertWithWhereUniqueWithoutActivityInput: UserPresenceUpsertWithWhereUniqueWithoutActivityInputInputObject
       ActivityUpdateManyMutationInput: ActivityUpdateManyMutationInputInputObject
+      UserPresenceCreateInput: UserPresenceCreateInputInputObject
+      UserPresenceUpdateInput: UserPresenceUpdateInputInputObject
+      UserPresenceUpdateManyMutationInput: UserPresenceUpdateManyMutationInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       ActivitySubscriptionWhereInput: ActivitySubscriptionWhereInputInputObject
+      UserPresenceSubscriptionWhereInput: UserPresenceSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
-    ActivityOrderByInput: ActivityOrderByInputValues,
+    UserPresenceOrderByInput: UserPresenceOrderByInputValues,
     UserOrderByInput: UserOrderByInputValues,
+    ActivityOrderByInput: ActivityOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -103,6 +129,9 @@ type QueryObject =
   | { name: 'activity', args?: QueryActivityArgs[] | false, alias?: string  } 
   | { name: 'activities', args?: QueryActivitiesArgs[] | false, alias?: string  } 
   | { name: 'activitiesConnection', args?: QueryActivitiesConnectionArgs[] | false, alias?: string  } 
+  | { name: 'userPresence', args?: QueryUserPresenceArgs[] | false, alias?: string  } 
+  | { name: 'userPresences', args?: QueryUserPresencesArgs[] | false, alias?: string  } 
+  | { name: 'userPresencesConnection', args?: QueryUserPresencesConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'user'
@@ -111,6 +140,9 @@ type QueryFields =
   | 'activity'
   | 'activities'
   | 'activitiesConnection'
+  | 'userPresence'
+  | 'userPresences'
+  | 'userPresencesConnection'
 
 
 type QueryUserArgs =
@@ -142,6 +174,24 @@ type QueryActivitiesArgs =
   | 'first'
   | 'last'
 type QueryActivitiesConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryUserPresenceArgs =
+  | 'where'
+type QueryUserPresencesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryUserPresencesConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -229,6 +279,45 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.ActivityConnection> | prisma.ActivityConnection
+  }
+  userPresence: {
+    type: 'UserPresence'
+    args: Record<QueryUserPresenceArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: UserPresenceWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresence | null> | prisma.UserPresence | null
+  }
+  userPresences: {
+    type: 'UserPresence'
+    args: Record<QueryUserPresencesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: UserPresenceWhereInput | null, orderBy?: prisma.UserPresenceOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresence[]> | prisma.UserPresence[]
+  }
+  userPresencesConnection: {
+    type: 'UserPresenceConnection'
+    args: Record<QueryUserPresencesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: UserPresenceWhereInput | null, orderBy?: prisma.UserPresenceOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresenceConnection> | prisma.UserPresenceConnection
   }
 }
   
@@ -335,17 +424,82 @@ export interface UserFieldDetails {
     resolve: undefined
   }
   activities: {
-    type: 'Activity'
+    type: 'UserPresence'
     args: Record<UserActivitiesArgs, core.NexusArgDef<string>>
     description: string
     list: true
     nullable: false
     resolve: (
       root: core.RootValue<"User">,
-      args: { where?: ActivityWhereInput | null, orderBy?: prisma.ActivityOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      args: { where?: UserPresenceWhereInput | null, orderBy?: prisma.UserPresenceOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
-    ) => Promise<prisma.Activity[]> | prisma.Activity[]
+    ) => Promise<prisma.UserPresence[]> | prisma.UserPresence[]
+  }
+}
+  
+
+// Types for UserPresence
+
+type UserPresenceObject =
+  | UserPresenceFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'user', args?: [] | false, alias?: string  } 
+  | { name: 'activity', args?: [] | false, alias?: string  } 
+  | { name: 'presence', args?: [] | false, alias?: string  } 
+
+type UserPresenceFields =
+  | 'id'
+  | 'user'
+  | 'activity'
+  | 'presence'
+
+
+
+  
+
+export interface UserPresenceFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  user: {
+    type: 'User'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPresence">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User> | prisma.User
+  }
+  activity: {
+    type: 'Activity'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPresence">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Activity> | prisma.Activity
+  }
+  presence: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
   }
 }
   
@@ -442,17 +596,17 @@ export interface ActivityFieldDetails {
     resolve: undefined
   }
   registered: {
-    type: 'User'
+    type: 'UserPresence'
     args: Record<ActivityRegisteredArgs, core.NexusArgDef<string>>
     description: string
     list: true
     nullable: false
     resolve: (
       root: core.RootValue<"Activity">,
-      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      args: { where?: UserPresenceWhereInput | null, orderBy?: prisma.UserPresenceOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
-    ) => Promise<prisma.User[]> | prisma.User[]
+    ) => Promise<prisma.UserPresence[]> | prisma.UserPresence[]
   }
 }
   
@@ -762,6 +916,131 @@ export interface AggregateActivityFieldDetails {
 }
   
 
+// Types for UserPresenceConnection
+
+type UserPresenceConnectionObject =
+  | UserPresenceConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type UserPresenceConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface UserPresenceConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPresenceConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'UserPresenceEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPresenceConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresenceEdge[]> | prisma.UserPresenceEdge[]
+  }
+  aggregate: {
+    type: 'AggregateUserPresence'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPresenceConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateUserPresence> | prisma.AggregateUserPresence
+  }
+}
+  
+
+// Types for UserPresenceEdge
+
+type UserPresenceEdgeObject =
+  | UserPresenceEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type UserPresenceEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface UserPresenceEdgeFieldDetails {
+  node: {
+    type: 'UserPresence'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPresenceEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresence> | prisma.UserPresence
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateUserPresence
+
+type AggregateUserPresenceObject =
+  | AggregateUserPresenceFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateUserPresenceFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateUserPresenceFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -778,6 +1057,12 @@ type MutationObject =
   | { name: 'upsertActivity', args?: MutationUpsertActivityArgs[] | false, alias?: string  } 
   | { name: 'deleteActivity', args?: MutationDeleteActivityArgs[] | false, alias?: string  } 
   | { name: 'deleteManyActivities', args?: MutationDeleteManyActivitiesArgs[] | false, alias?: string  } 
+  | { name: 'createUserPresence', args?: MutationCreateUserPresenceArgs[] | false, alias?: string  } 
+  | { name: 'updateUserPresence', args?: MutationUpdateUserPresenceArgs[] | false, alias?: string  } 
+  | { name: 'updateManyUserPresences', args?: MutationUpdateManyUserPresencesArgs[] | false, alias?: string  } 
+  | { name: 'upsertUserPresence', args?: MutationUpsertUserPresenceArgs[] | false, alias?: string  } 
+  | { name: 'deleteUserPresence', args?: MutationDeleteUserPresenceArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyUserPresences', args?: MutationDeleteManyUserPresencesArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createUser'
@@ -792,6 +1077,12 @@ type MutationFields =
   | 'upsertActivity'
   | 'deleteActivity'
   | 'deleteManyActivities'
+  | 'createUserPresence'
+  | 'updateUserPresence'
+  | 'updateManyUserPresences'
+  | 'upsertUserPresence'
+  | 'deleteUserPresence'
+  | 'deleteManyUserPresences'
 
 
 type MutationCreateUserArgs =
@@ -825,6 +1116,22 @@ type MutationUpsertActivityArgs =
 type MutationDeleteActivityArgs =
   | 'where'
 type MutationDeleteManyActivitiesArgs =
+  | 'where'
+type MutationCreateUserPresenceArgs =
+  | 'data'
+type MutationUpdateUserPresenceArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyUserPresencesArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertUserPresenceArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteUserPresenceArgs =
+  | 'where'
+type MutationDeleteManyUserPresencesArgs =
   | 'where'
   
 
@@ -985,6 +1292,84 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createUserPresence: {
+    type: 'UserPresence'
+    args: Record<MutationCreateUserPresenceArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: UserPresenceCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresence> | prisma.UserPresence
+  }
+  updateUserPresence: {
+    type: 'UserPresence'
+    args: Record<MutationUpdateUserPresenceArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: UserPresenceUpdateInput, where: UserPresenceWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresence | null> | prisma.UserPresence | null
+  }
+  updateManyUserPresences: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyUserPresencesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: UserPresenceUpdateManyMutationInput, where?: UserPresenceWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertUserPresence: {
+    type: 'UserPresence'
+    args: Record<MutationUpsertUserPresenceArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: UserPresenceWhereUniqueInput, create: UserPresenceCreateInput, update: UserPresenceUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresence> | prisma.UserPresence
+  }
+  deleteUserPresence: {
+    type: 'UserPresence'
+    args: Record<MutationDeleteUserPresenceArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: UserPresenceWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresence | null> | prisma.UserPresence | null
+  }
+  deleteManyUserPresences: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyUserPresencesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: UserPresenceWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -1019,15 +1404,19 @@ type SubscriptionObject =
   | SubscriptionFields
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
   | { name: 'activity', args?: SubscriptionActivityArgs[] | false, alias?: string  } 
+  | { name: 'userPresence', args?: SubscriptionUserPresenceArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'user'
   | 'activity'
+  | 'userPresence'
 
 
 type SubscriptionUserArgs =
   | 'where'
 type SubscriptionActivityArgs =
+  | 'where'
+type SubscriptionUserPresenceArgs =
   | 'where'
   
 
@@ -1057,6 +1446,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.ActivitySubscriptionPayload | null> | prisma.ActivitySubscriptionPayload | null
+  }
+  userPresence: {
+    type: 'UserPresenceSubscriptionPayload'
+    args: Record<SubscriptionUserPresenceArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: UserPresenceSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresenceSubscriptionPayload | null> | prisma.UserPresenceSubscriptionPayload | null
   }
 }
   
@@ -1381,6 +1783,111 @@ export interface ActivityPreviousValuesFieldDetails {
 }
   
 
+// Types for UserPresenceSubscriptionPayload
+
+type UserPresenceSubscriptionPayloadObject =
+  | UserPresenceSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type UserPresenceSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface UserPresenceSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserPresenceSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'UserPresence'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"UserPresenceSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresence | null> | prisma.UserPresence | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'UserPresencePreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"UserPresenceSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserPresencePreviousValues | null> | prisma.UserPresencePreviousValues | null
+  }
+}
+  
+
+// Types for UserPresencePreviousValues
+
+type UserPresencePreviousValuesObject =
+  | UserPresencePreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'presence', args?: [] | false, alias?: string  } 
+
+type UserPresencePreviousValuesFields =
+  | 'id'
+  | 'presence'
+
+
+
+  
+
+export interface UserPresencePreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  presence: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+}
+  
+
 
 export interface UserWhereUniqueInput {
   id?: string | null
@@ -1393,7 +1900,7 @@ export type UserWhereUniqueInputInputObject =
   | { name: 'outlookId', alias?: string  } 
   | { name: 'email', alias?: string  } 
   
-export interface ActivityWhereInput {
+export interface UserPresenceWhereInput {
   id?: string | null
   id_not?: string | null
   id_in?: string[]
@@ -1408,83 +1915,14 @@ export interface ActivityWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  code?: string | null
-  code_not?: string | null
-  code_in?: string[]
-  code_not_in?: string[]
-  code_lt?: string | null
-  code_lte?: string | null
-  code_gt?: string | null
-  code_gte?: string | null
-  code_contains?: string | null
-  code_not_contains?: string | null
-  code_starts_with?: string | null
-  code_not_starts_with?: string | null
-  code_ends_with?: string | null
-  code_not_ends_with?: string | null
-  type?: string | null
-  type_not?: string | null
-  type_in?: string[]
-  type_not_in?: string[]
-  type_lt?: string | null
-  type_lte?: string | null
-  type_gt?: string | null
-  type_gte?: string | null
-  type_contains?: string | null
-  type_not_contains?: string | null
-  type_starts_with?: string | null
-  type_not_starts_with?: string | null
-  type_ends_with?: string | null
-  type_not_ends_with?: string | null
-  xp?: number | null
-  xp_not?: number | null
-  xp_in?: number[]
-  xp_not_in?: number[]
-  xp_lt?: number | null
-  xp_lte?: number | null
-  xp_gt?: number | null
-  xp_gte?: number | null
-  title?: string | null
-  title_not?: string | null
-  title_in?: string[]
-  title_not_in?: string[]
-  title_lt?: string | null
-  title_lte?: string | null
-  title_gt?: string | null
-  title_gte?: string | null
-  title_contains?: string | null
-  title_not_contains?: string | null
-  title_starts_with?: string | null
-  title_not_starts_with?: string | null
-  title_ends_with?: string | null
-  title_not_ends_with?: string | null
-  description?: string | null
-  description_not?: string | null
-  description_in?: string[]
-  description_not_in?: string[]
-  description_lt?: string | null
-  description_lte?: string | null
-  description_gt?: string | null
-  description_gte?: string | null
-  description_contains?: string | null
-  description_not_contains?: string | null
-  description_starts_with?: string | null
-  description_not_starts_with?: string | null
-  description_ends_with?: string | null
-  description_not_ends_with?: string | null
-  date?: string | null
-  date_not?: string | null
-  date_in?: string[]
-  date_not_in?: string[]
-  date_lt?: string | null
-  date_lte?: string | null
-  date_gt?: string | null
-  date_gte?: string | null
-  registered_some?: UserWhereInput | null
-  AND?: ActivityWhereInput[]
+  user?: UserWhereInput | null
+  activity?: ActivityWhereInput | null
+  presence?: boolean | null
+  presence_not?: boolean | null
+  AND?: UserPresenceWhereInput[]
 }
-export type ActivityWhereInputInputObject =
-  | Extract<keyof ActivityWhereInput, string>
+export type UserPresenceWhereInputInputObject =
+  | Extract<keyof UserPresenceWhereInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'id_not', alias?: string  } 
   | { name: 'id_in', alias?: string  } 
@@ -1499,79 +1937,10 @@ export type ActivityWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'code', alias?: string  } 
-  | { name: 'code_not', alias?: string  } 
-  | { name: 'code_in', alias?: string  } 
-  | { name: 'code_not_in', alias?: string  } 
-  | { name: 'code_lt', alias?: string  } 
-  | { name: 'code_lte', alias?: string  } 
-  | { name: 'code_gt', alias?: string  } 
-  | { name: 'code_gte', alias?: string  } 
-  | { name: 'code_contains', alias?: string  } 
-  | { name: 'code_not_contains', alias?: string  } 
-  | { name: 'code_starts_with', alias?: string  } 
-  | { name: 'code_not_starts_with', alias?: string  } 
-  | { name: 'code_ends_with', alias?: string  } 
-  | { name: 'code_not_ends_with', alias?: string  } 
-  | { name: 'type', alias?: string  } 
-  | { name: 'type_not', alias?: string  } 
-  | { name: 'type_in', alias?: string  } 
-  | { name: 'type_not_in', alias?: string  } 
-  | { name: 'type_lt', alias?: string  } 
-  | { name: 'type_lte', alias?: string  } 
-  | { name: 'type_gt', alias?: string  } 
-  | { name: 'type_gte', alias?: string  } 
-  | { name: 'type_contains', alias?: string  } 
-  | { name: 'type_not_contains', alias?: string  } 
-  | { name: 'type_starts_with', alias?: string  } 
-  | { name: 'type_not_starts_with', alias?: string  } 
-  | { name: 'type_ends_with', alias?: string  } 
-  | { name: 'type_not_ends_with', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
-  | { name: 'xp_not', alias?: string  } 
-  | { name: 'xp_in', alias?: string  } 
-  | { name: 'xp_not_in', alias?: string  } 
-  | { name: 'xp_lt', alias?: string  } 
-  | { name: 'xp_lte', alias?: string  } 
-  | { name: 'xp_gt', alias?: string  } 
-  | { name: 'xp_gte', alias?: string  } 
-  | { name: 'title', alias?: string  } 
-  | { name: 'title_not', alias?: string  } 
-  | { name: 'title_in', alias?: string  } 
-  | { name: 'title_not_in', alias?: string  } 
-  | { name: 'title_lt', alias?: string  } 
-  | { name: 'title_lte', alias?: string  } 
-  | { name: 'title_gt', alias?: string  } 
-  | { name: 'title_gte', alias?: string  } 
-  | { name: 'title_contains', alias?: string  } 
-  | { name: 'title_not_contains', alias?: string  } 
-  | { name: 'title_starts_with', alias?: string  } 
-  | { name: 'title_not_starts_with', alias?: string  } 
-  | { name: 'title_ends_with', alias?: string  } 
-  | { name: 'title_not_ends_with', alias?: string  } 
-  | { name: 'description', alias?: string  } 
-  | { name: 'description_not', alias?: string  } 
-  | { name: 'description_in', alias?: string  } 
-  | { name: 'description_not_in', alias?: string  } 
-  | { name: 'description_lt', alias?: string  } 
-  | { name: 'description_lte', alias?: string  } 
-  | { name: 'description_gt', alias?: string  } 
-  | { name: 'description_gte', alias?: string  } 
-  | { name: 'description_contains', alias?: string  } 
-  | { name: 'description_not_contains', alias?: string  } 
-  | { name: 'description_starts_with', alias?: string  } 
-  | { name: 'description_not_starts_with', alias?: string  } 
-  | { name: 'description_ends_with', alias?: string  } 
-  | { name: 'description_not_ends_with', alias?: string  } 
-  | { name: 'date', alias?: string  } 
-  | { name: 'date_not', alias?: string  } 
-  | { name: 'date_in', alias?: string  } 
-  | { name: 'date_not_in', alias?: string  } 
-  | { name: 'date_lt', alias?: string  } 
-  | { name: 'date_lte', alias?: string  } 
-  | { name: 'date_gt', alias?: string  } 
-  | { name: 'date_gte', alias?: string  } 
-  | { name: 'registered_some', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'activity', alias?: string  } 
+  | { name: 'presence', alias?: string  } 
+  | { name: 'presence_not', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface UserWhereInput {
@@ -1663,7 +2032,7 @@ export interface UserWhereInput {
   privilege_lte?: number | null
   privilege_gt?: number | null
   privilege_gte?: number | null
-  activities_some?: ActivityWhereInput | null
+  activities_some?: UserPresenceWhereInput | null
   AND?: UserWhereInput[]
 }
 export type UserWhereInputInputObject =
@@ -1759,148 +2128,7 @@ export type UserWhereInputInputObject =
   | { name: 'activities_some', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
-export interface ActivityWhereUniqueInput {
-  id?: string | null
-  code?: string | null
-}
-export type ActivityWhereUniqueInputInputObject =
-  | Extract<keyof ActivityWhereUniqueInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'code', alias?: string  } 
-  
-export interface UserCreateInput {
-  id?: string | null
-  outlookId?: string
-  name?: string
-  email?: string
-  year?: number | null
-  plan?: number | null
-  xp?: number | null
-  privilege?: number | null
-  activities?: ActivityCreateManyWithoutRegisteredInput | null
-}
-export type UserCreateInputInputObject =
-  | Extract<keyof UserCreateInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'outlookId', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'year', alias?: string  } 
-  | { name: 'plan', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
-  | { name: 'privilege', alias?: string  } 
-  | { name: 'activities', alias?: string  } 
-  
-export interface ActivityCreateManyWithoutRegisteredInput {
-  create?: ActivityCreateWithoutRegisteredInput[]
-  connect?: ActivityWhereUniqueInput[]
-}
-export type ActivityCreateManyWithoutRegisteredInputInputObject =
-  | Extract<keyof ActivityCreateManyWithoutRegisteredInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  
-export interface ActivityCreateWithoutRegisteredInput {
-  id?: string | null
-  code?: string
-  type?: string
-  xp?: number | null
-  title?: string
-  description?: string | null
-  date?: string | null
-}
-export type ActivityCreateWithoutRegisteredInputInputObject =
-  | Extract<keyof ActivityCreateWithoutRegisteredInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'code', alias?: string  } 
-  | { name: 'type', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
-  | { name: 'title', alias?: string  } 
-  | { name: 'description', alias?: string  } 
-  | { name: 'date', alias?: string  } 
-  
-export interface UserUpdateInput {
-  outlookId?: string | null
-  name?: string | null
-  email?: string | null
-  year?: number | null
-  plan?: number | null
-  xp?: number | null
-  privilege?: number | null
-  activities?: ActivityUpdateManyWithoutRegisteredInput | null
-}
-export type UserUpdateInputInputObject =
-  | Extract<keyof UserUpdateInput, string>
-  | { name: 'outlookId', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'year', alias?: string  } 
-  | { name: 'plan', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
-  | { name: 'privilege', alias?: string  } 
-  | { name: 'activities', alias?: string  } 
-  
-export interface ActivityUpdateManyWithoutRegisteredInput {
-  create?: ActivityCreateWithoutRegisteredInput[]
-  delete?: ActivityWhereUniqueInput[]
-  connect?: ActivityWhereUniqueInput[]
-  set?: ActivityWhereUniqueInput[]
-  disconnect?: ActivityWhereUniqueInput[]
-  update?: ActivityUpdateWithWhereUniqueWithoutRegisteredInput[]
-  upsert?: ActivityUpsertWithWhereUniqueWithoutRegisteredInput[]
-  deleteMany?: ActivityScalarWhereInput[]
-  updateMany?: ActivityUpdateManyWithWhereNestedInput[]
-}
-export type ActivityUpdateManyWithoutRegisteredInputInputObject =
-  | Extract<keyof ActivityUpdateManyWithoutRegisteredInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'delete', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
-  | { name: 'set', alias?: string  } 
-  | { name: 'disconnect', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'upsert', alias?: string  } 
-  | { name: 'deleteMany', alias?: string  } 
-  | { name: 'updateMany', alias?: string  } 
-  
-export interface ActivityUpdateWithWhereUniqueWithoutRegisteredInput {
-  where?: ActivityWhereUniqueInput
-  data?: ActivityUpdateWithoutRegisteredDataInput
-}
-export type ActivityUpdateWithWhereUniqueWithoutRegisteredInputInputObject =
-  | Extract<keyof ActivityUpdateWithWhereUniqueWithoutRegisteredInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface ActivityUpdateWithoutRegisteredDataInput {
-  code?: string | null
-  type?: string | null
-  xp?: number | null
-  title?: string | null
-  description?: string | null
-  date?: string | null
-}
-export type ActivityUpdateWithoutRegisteredDataInputInputObject =
-  | Extract<keyof ActivityUpdateWithoutRegisteredDataInput, string>
-  | { name: 'code', alias?: string  } 
-  | { name: 'type', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
-  | { name: 'title', alias?: string  } 
-  | { name: 'description', alias?: string  } 
-  | { name: 'date', alias?: string  } 
-  
-export interface ActivityUpsertWithWhereUniqueWithoutRegisteredInput {
-  where?: ActivityWhereUniqueInput
-  update?: ActivityUpdateWithoutRegisteredDataInput
-  create?: ActivityCreateWithoutRegisteredInput
-}
-export type ActivityUpsertWithWhereUniqueWithoutRegisteredInputInputObject =
-  | Extract<keyof ActivityUpsertWithWhereUniqueWithoutRegisteredInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'create', alias?: string  } 
-  
-export interface ActivityScalarWhereInput {
+export interface ActivityWhereInput {
   id?: string | null
   id_not?: string | null
   id_in?: string[]
@@ -1987,12 +2215,11 @@ export interface ActivityScalarWhereInput {
   date_lte?: string | null
   date_gt?: string | null
   date_gte?: string | null
-  AND?: ActivityScalarWhereInput[]
-  OR?: ActivityScalarWhereInput[]
-  NOT?: ActivityScalarWhereInput[]
+  registered_some?: UserPresenceWhereInput | null
+  AND?: ActivityWhereInput[]
 }
-export type ActivityScalarWhereInputInputObject =
-  | Extract<keyof ActivityScalarWhereInput, string>
+export type ActivityWhereInputInputObject =
+  | Extract<keyof ActivityWhereInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'id_not', alias?: string  } 
   | { name: 'id_in', alias?: string  } 
@@ -2079,20 +2306,172 @@ export type ActivityScalarWhereInputInputObject =
   | { name: 'date_lte', alias?: string  } 
   | { name: 'date_gt', alias?: string  } 
   | { name: 'date_gte', alias?: string  } 
+  | { name: 'registered_some', alias?: string  } 
   | { name: 'AND', alias?: string  } 
-  | { name: 'OR', alias?: string  } 
-  | { name: 'NOT', alias?: string  } 
   
-export interface ActivityUpdateManyWithWhereNestedInput {
-  where?: ActivityScalarWhereInput
-  data?: ActivityUpdateManyDataInput
+export interface ActivityWhereUniqueInput {
+  id?: string | null
+  code?: string | null
 }
-export type ActivityUpdateManyWithWhereNestedInputInputObject =
-  | Extract<keyof ActivityUpdateManyWithWhereNestedInput, string>
+export type ActivityWhereUniqueInputInputObject =
+  | Extract<keyof ActivityWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'code', alias?: string  } 
+  
+export interface UserPresenceWhereUniqueInput {
+  id?: string | null
+}
+export type UserPresenceWhereUniqueInputInputObject =
+  | Extract<keyof UserPresenceWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface UserCreateInput {
+  id?: string | null
+  outlookId?: string
+  name?: string
+  email?: string
+  year?: number | null
+  plan?: number | null
+  xp?: number | null
+  privilege?: number | null
+  activities?: UserPresenceCreateManyWithoutUserInput | null
+}
+export type UserCreateInputInputObject =
+  | Extract<keyof UserCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'year', alias?: string  } 
+  | { name: 'plan', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
+  | { name: 'privilege', alias?: string  } 
+  | { name: 'activities', alias?: string  } 
+  
+export interface UserPresenceCreateManyWithoutUserInput {
+  create?: UserPresenceCreateWithoutUserInput[]
+  connect?: UserPresenceWhereUniqueInput[]
+}
+export type UserPresenceCreateManyWithoutUserInputInputObject =
+  | Extract<keyof UserPresenceCreateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserPresenceCreateWithoutUserInput {
+  id?: string | null
+  activity?: ActivityCreateOneWithoutRegisteredInput
+  presence?: boolean | null
+}
+export type UserPresenceCreateWithoutUserInputInputObject =
+  | Extract<keyof UserPresenceCreateWithoutUserInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'activity', alias?: string  } 
+  | { name: 'presence', alias?: string  } 
+  
+export interface ActivityCreateOneWithoutRegisteredInput {
+  create?: ActivityCreateWithoutRegisteredInput | null
+  connect?: ActivityWhereUniqueInput | null
+}
+export type ActivityCreateOneWithoutRegisteredInputInputObject =
+  | Extract<keyof ActivityCreateOneWithoutRegisteredInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ActivityCreateWithoutRegisteredInput {
+  id?: string | null
+  code?: string
+  type?: string
+  xp?: number | null
+  title?: string
+  description?: string | null
+  date?: string | null
+}
+export type ActivityCreateWithoutRegisteredInputInputObject =
+  | Extract<keyof ActivityCreateWithoutRegisteredInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'code', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
+  | { name: 'title', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  
+export interface UserUpdateInput {
+  outlookId?: string | null
+  name?: string | null
+  email?: string | null
+  year?: number | null
+  plan?: number | null
+  xp?: number | null
+  privilege?: number | null
+  activities?: UserPresenceUpdateManyWithoutUserInput | null
+}
+export type UserUpdateInputInputObject =
+  | Extract<keyof UserUpdateInput, string>
+  | { name: 'outlookId', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'year', alias?: string  } 
+  | { name: 'plan', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
+  | { name: 'privilege', alias?: string  } 
+  | { name: 'activities', alias?: string  } 
+  
+export interface UserPresenceUpdateManyWithoutUserInput {
+  create?: UserPresenceCreateWithoutUserInput[]
+  delete?: UserPresenceWhereUniqueInput[]
+  connect?: UserPresenceWhereUniqueInput[]
+  set?: UserPresenceWhereUniqueInput[]
+  disconnect?: UserPresenceWhereUniqueInput[]
+  update?: UserPresenceUpdateWithWhereUniqueWithoutUserInput[]
+  upsert?: UserPresenceUpsertWithWhereUniqueWithoutUserInput[]
+  deleteMany?: UserPresenceScalarWhereInput[]
+  updateMany?: UserPresenceUpdateManyWithWhereNestedInput[]
+}
+export type UserPresenceUpdateManyWithoutUserInputInputObject =
+  | Extract<keyof UserPresenceUpdateManyWithoutUserInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserPresenceUpdateWithWhereUniqueWithoutUserInput {
+  where?: UserPresenceWhereUniqueInput
+  data?: UserPresenceUpdateWithoutUserDataInput
+}
+export type UserPresenceUpdateWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof UserPresenceUpdateWithWhereUniqueWithoutUserInput, string>
   | { name: 'where', alias?: string  } 
   | { name: 'data', alias?: string  } 
   
-export interface ActivityUpdateManyDataInput {
+export interface UserPresenceUpdateWithoutUserDataInput {
+  activity?: ActivityUpdateOneRequiredWithoutRegisteredInput | null
+  presence?: boolean | null
+}
+export type UserPresenceUpdateWithoutUserDataInputInputObject =
+  | Extract<keyof UserPresenceUpdateWithoutUserDataInput, string>
+  | { name: 'activity', alias?: string  } 
+  | { name: 'presence', alias?: string  } 
+  
+export interface ActivityUpdateOneRequiredWithoutRegisteredInput {
+  create?: ActivityCreateWithoutRegisteredInput | null
+  update?: ActivityUpdateWithoutRegisteredDataInput | null
+  upsert?: ActivityUpsertWithoutRegisteredInput | null
+  connect?: ActivityWhereUniqueInput | null
+}
+export type ActivityUpdateOneRequiredWithoutRegisteredInputInputObject =
+  | Extract<keyof ActivityUpdateOneRequiredWithoutRegisteredInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ActivityUpdateWithoutRegisteredDataInput {
   code?: string | null
   type?: string | null
   xp?: number | null
@@ -2100,14 +2479,93 @@ export interface ActivityUpdateManyDataInput {
   description?: string | null
   date?: string | null
 }
-export type ActivityUpdateManyDataInputInputObject =
-  | Extract<keyof ActivityUpdateManyDataInput, string>
+export type ActivityUpdateWithoutRegisteredDataInputInputObject =
+  | Extract<keyof ActivityUpdateWithoutRegisteredDataInput, string>
   | { name: 'code', alias?: string  } 
   | { name: 'type', alias?: string  } 
   | { name: 'xp', alias?: string  } 
   | { name: 'title', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'date', alias?: string  } 
+  
+export interface ActivityUpsertWithoutRegisteredInput {
+  update?: ActivityUpdateWithoutRegisteredDataInput
+  create?: ActivityCreateWithoutRegisteredInput
+}
+export type ActivityUpsertWithoutRegisteredInputInputObject =
+  | Extract<keyof ActivityUpsertWithoutRegisteredInput, string>
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserPresenceUpsertWithWhereUniqueWithoutUserInput {
+  where?: UserPresenceWhereUniqueInput
+  update?: UserPresenceUpdateWithoutUserDataInput
+  create?: UserPresenceCreateWithoutUserInput
+}
+export type UserPresenceUpsertWithWhereUniqueWithoutUserInputInputObject =
+  | Extract<keyof UserPresenceUpsertWithWhereUniqueWithoutUserInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserPresenceScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  presence?: boolean | null
+  presence_not?: boolean | null
+  AND?: UserPresenceScalarWhereInput[]
+  OR?: UserPresenceScalarWhereInput[]
+  NOT?: UserPresenceScalarWhereInput[]
+}
+export type UserPresenceScalarWhereInputInputObject =
+  | Extract<keyof UserPresenceScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'presence', alias?: string  } 
+  | { name: 'presence_not', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface UserPresenceUpdateManyWithWhereNestedInput {
+  where?: UserPresenceScalarWhereInput
+  data?: UserPresenceUpdateManyDataInput
+}
+export type UserPresenceUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof UserPresenceUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserPresenceUpdateManyDataInput {
+  presence?: boolean | null
+}
+export type UserPresenceUpdateManyDataInputInputObject =
+  | Extract<keyof UserPresenceUpdateManyDataInput, string>
+  | { name: 'presence', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
   outlookId?: string | null
@@ -2136,7 +2594,7 @@ export interface ActivityCreateInput {
   title?: string
   description?: string | null
   date?: string | null
-  registered?: UserCreateManyWithoutActivitiesInput | null
+  registered?: UserPresenceCreateManyWithoutActivityInput | null
 }
 export type ActivityCreateInputInputObject =
   | Extract<keyof ActivityCreateInput, string>
@@ -2149,12 +2607,32 @@ export type ActivityCreateInputInputObject =
   | { name: 'date', alias?: string  } 
   | { name: 'registered', alias?: string  } 
   
-export interface UserCreateManyWithoutActivitiesInput {
-  create?: UserCreateWithoutActivitiesInput[]
-  connect?: UserWhereUniqueInput[]
+export interface UserPresenceCreateManyWithoutActivityInput {
+  create?: UserPresenceCreateWithoutActivityInput[]
+  connect?: UserPresenceWhereUniqueInput[]
 }
-export type UserCreateManyWithoutActivitiesInputInputObject =
-  | Extract<keyof UserCreateManyWithoutActivitiesInput, string>
+export type UserPresenceCreateManyWithoutActivityInputInputObject =
+  | Extract<keyof UserPresenceCreateManyWithoutActivityInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserPresenceCreateWithoutActivityInput {
+  id?: string | null
+  user?: UserCreateOneWithoutActivitiesInput
+  presence?: boolean | null
+}
+export type UserPresenceCreateWithoutActivityInputInputObject =
+  | Extract<keyof UserPresenceCreateWithoutActivityInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'presence', alias?: string  } 
+  
+export interface UserCreateOneWithoutActivitiesInput {
+  create?: UserCreateWithoutActivitiesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserCreateOneWithoutActivitiesInputInputObject =
+  | Extract<keyof UserCreateOneWithoutActivitiesInput, string>
   | { name: 'create', alias?: string  } 
   | { name: 'connect', alias?: string  } 
   
@@ -2186,7 +2664,7 @@ export interface ActivityUpdateInput {
   title?: string | null
   description?: string | null
   date?: string | null
-  registered?: UserUpdateManyWithoutActivitiesInput | null
+  registered?: UserPresenceUpdateManyWithoutActivityInput | null
 }
 export type ActivityUpdateInputInputObject =
   | Extract<keyof ActivityUpdateInput, string>
@@ -2198,19 +2676,19 @@ export type ActivityUpdateInputInputObject =
   | { name: 'date', alias?: string  } 
   | { name: 'registered', alias?: string  } 
   
-export interface UserUpdateManyWithoutActivitiesInput {
-  create?: UserCreateWithoutActivitiesInput[]
-  delete?: UserWhereUniqueInput[]
-  connect?: UserWhereUniqueInput[]
-  set?: UserWhereUniqueInput[]
-  disconnect?: UserWhereUniqueInput[]
-  update?: UserUpdateWithWhereUniqueWithoutActivitiesInput[]
-  upsert?: UserUpsertWithWhereUniqueWithoutActivitiesInput[]
-  deleteMany?: UserScalarWhereInput[]
-  updateMany?: UserUpdateManyWithWhereNestedInput[]
+export interface UserPresenceUpdateManyWithoutActivityInput {
+  create?: UserPresenceCreateWithoutActivityInput[]
+  delete?: UserPresenceWhereUniqueInput[]
+  connect?: UserPresenceWhereUniqueInput[]
+  set?: UserPresenceWhereUniqueInput[]
+  disconnect?: UserPresenceWhereUniqueInput[]
+  update?: UserPresenceUpdateWithWhereUniqueWithoutActivityInput[]
+  upsert?: UserPresenceUpsertWithWhereUniqueWithoutActivityInput[]
+  deleteMany?: UserPresenceScalarWhereInput[]
+  updateMany?: UserPresenceUpdateManyWithWhereNestedInput[]
 }
-export type UserUpdateManyWithoutActivitiesInputInputObject =
-  | Extract<keyof UserUpdateManyWithoutActivitiesInput, string>
+export type UserPresenceUpdateManyWithoutActivityInputInputObject =
+  | Extract<keyof UserPresenceUpdateManyWithoutActivityInput, string>
   | { name: 'create', alias?: string  } 
   | { name: 'delete', alias?: string  } 
   | { name: 'connect', alias?: string  } 
@@ -2221,14 +2699,36 @@ export type UserUpdateManyWithoutActivitiesInputInputObject =
   | { name: 'deleteMany', alias?: string  } 
   | { name: 'updateMany', alias?: string  } 
   
-export interface UserUpdateWithWhereUniqueWithoutActivitiesInput {
-  where?: UserWhereUniqueInput
-  data?: UserUpdateWithoutActivitiesDataInput
+export interface UserPresenceUpdateWithWhereUniqueWithoutActivityInput {
+  where?: UserPresenceWhereUniqueInput
+  data?: UserPresenceUpdateWithoutActivityDataInput
 }
-export type UserUpdateWithWhereUniqueWithoutActivitiesInputInputObject =
-  | Extract<keyof UserUpdateWithWhereUniqueWithoutActivitiesInput, string>
+export type UserPresenceUpdateWithWhereUniqueWithoutActivityInputInputObject =
+  | Extract<keyof UserPresenceUpdateWithWhereUniqueWithoutActivityInput, string>
   | { name: 'where', alias?: string  } 
   | { name: 'data', alias?: string  } 
+  
+export interface UserPresenceUpdateWithoutActivityDataInput {
+  user?: UserUpdateOneRequiredWithoutActivitiesInput | null
+  presence?: boolean | null
+}
+export type UserPresenceUpdateWithoutActivityDataInputInputObject =
+  | Extract<keyof UserPresenceUpdateWithoutActivityDataInput, string>
+  | { name: 'user', alias?: string  } 
+  | { name: 'presence', alias?: string  } 
+  
+export interface UserUpdateOneRequiredWithoutActivitiesInput {
+  create?: UserCreateWithoutActivitiesInput | null
+  update?: UserUpdateWithoutActivitiesDataInput | null
+  upsert?: UserUpsertWithoutActivitiesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+export type UserUpdateOneRequiredWithoutActivitiesInputInputObject =
+  | Extract<keyof UserUpdateOneRequiredWithoutActivitiesInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
   
 export interface UserUpdateWithoutActivitiesDataInput {
   outlookId?: string | null
@@ -2249,231 +2749,25 @@ export type UserUpdateWithoutActivitiesDataInputInputObject =
   | { name: 'xp', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
   
-export interface UserUpsertWithWhereUniqueWithoutActivitiesInput {
-  where?: UserWhereUniqueInput
+export interface UserUpsertWithoutActivitiesInput {
   update?: UserUpdateWithoutActivitiesDataInput
   create?: UserCreateWithoutActivitiesInput
 }
-export type UserUpsertWithWhereUniqueWithoutActivitiesInputInputObject =
-  | Extract<keyof UserUpsertWithWhereUniqueWithoutActivitiesInput, string>
-  | { name: 'where', alias?: string  } 
+export type UserUpsertWithoutActivitiesInputInputObject =
+  | Extract<keyof UserUpsertWithoutActivitiesInput, string>
   | { name: 'update', alias?: string  } 
   | { name: 'create', alias?: string  } 
   
-export interface UserScalarWhereInput {
-  id?: string | null
-  id_not?: string | null
-  id_in?: string[]
-  id_not_in?: string[]
-  id_lt?: string | null
-  id_lte?: string | null
-  id_gt?: string | null
-  id_gte?: string | null
-  id_contains?: string | null
-  id_not_contains?: string | null
-  id_starts_with?: string | null
-  id_not_starts_with?: string | null
-  id_ends_with?: string | null
-  id_not_ends_with?: string | null
-  outlookId?: string | null
-  outlookId_not?: string | null
-  outlookId_in?: string[]
-  outlookId_not_in?: string[]
-  outlookId_lt?: string | null
-  outlookId_lte?: string | null
-  outlookId_gt?: string | null
-  outlookId_gte?: string | null
-  outlookId_contains?: string | null
-  outlookId_not_contains?: string | null
-  outlookId_starts_with?: string | null
-  outlookId_not_starts_with?: string | null
-  outlookId_ends_with?: string | null
-  outlookId_not_ends_with?: string | null
-  name?: string | null
-  name_not?: string | null
-  name_in?: string[]
-  name_not_in?: string[]
-  name_lt?: string | null
-  name_lte?: string | null
-  name_gt?: string | null
-  name_gte?: string | null
-  name_contains?: string | null
-  name_not_contains?: string | null
-  name_starts_with?: string | null
-  name_not_starts_with?: string | null
-  name_ends_with?: string | null
-  name_not_ends_with?: string | null
-  email?: string | null
-  email_not?: string | null
-  email_in?: string[]
-  email_not_in?: string[]
-  email_lt?: string | null
-  email_lte?: string | null
-  email_gt?: string | null
-  email_gte?: string | null
-  email_contains?: string | null
-  email_not_contains?: string | null
-  email_starts_with?: string | null
-  email_not_starts_with?: string | null
-  email_ends_with?: string | null
-  email_not_ends_with?: string | null
-  year?: number | null
-  year_not?: number | null
-  year_in?: number[]
-  year_not_in?: number[]
-  year_lt?: number | null
-  year_lte?: number | null
-  year_gt?: number | null
-  year_gte?: number | null
-  plan?: number | null
-  plan_not?: number | null
-  plan_in?: number[]
-  plan_not_in?: number[]
-  plan_lt?: number | null
-  plan_lte?: number | null
-  plan_gt?: number | null
-  plan_gte?: number | null
-  xp?: number | null
-  xp_not?: number | null
-  xp_in?: number[]
-  xp_not_in?: number[]
-  xp_lt?: number | null
-  xp_lte?: number | null
-  xp_gt?: number | null
-  xp_gte?: number | null
-  privilege?: number | null
-  privilege_not?: number | null
-  privilege_in?: number[]
-  privilege_not_in?: number[]
-  privilege_lt?: number | null
-  privilege_lte?: number | null
-  privilege_gt?: number | null
-  privilege_gte?: number | null
-  AND?: UserScalarWhereInput[]
-  OR?: UserScalarWhereInput[]
-  NOT?: UserScalarWhereInput[]
+export interface UserPresenceUpsertWithWhereUniqueWithoutActivityInput {
+  where?: UserPresenceWhereUniqueInput
+  update?: UserPresenceUpdateWithoutActivityDataInput
+  create?: UserPresenceCreateWithoutActivityInput
 }
-export type UserScalarWhereInputInputObject =
-  | Extract<keyof UserScalarWhereInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
-  | { name: 'id_contains', alias?: string  } 
-  | { name: 'id_not_contains', alias?: string  } 
-  | { name: 'id_starts_with', alias?: string  } 
-  | { name: 'id_not_starts_with', alias?: string  } 
-  | { name: 'id_ends_with', alias?: string  } 
-  | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'outlookId', alias?: string  } 
-  | { name: 'outlookId_not', alias?: string  } 
-  | { name: 'outlookId_in', alias?: string  } 
-  | { name: 'outlookId_not_in', alias?: string  } 
-  | { name: 'outlookId_lt', alias?: string  } 
-  | { name: 'outlookId_lte', alias?: string  } 
-  | { name: 'outlookId_gt', alias?: string  } 
-  | { name: 'outlookId_gte', alias?: string  } 
-  | { name: 'outlookId_contains', alias?: string  } 
-  | { name: 'outlookId_not_contains', alias?: string  } 
-  | { name: 'outlookId_starts_with', alias?: string  } 
-  | { name: 'outlookId_not_starts_with', alias?: string  } 
-  | { name: 'outlookId_ends_with', alias?: string  } 
-  | { name: 'outlookId_not_ends_with', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'name_not', alias?: string  } 
-  | { name: 'name_in', alias?: string  } 
-  | { name: 'name_not_in', alias?: string  } 
-  | { name: 'name_lt', alias?: string  } 
-  | { name: 'name_lte', alias?: string  } 
-  | { name: 'name_gt', alias?: string  } 
-  | { name: 'name_gte', alias?: string  } 
-  | { name: 'name_contains', alias?: string  } 
-  | { name: 'name_not_contains', alias?: string  } 
-  | { name: 'name_starts_with', alias?: string  } 
-  | { name: 'name_not_starts_with', alias?: string  } 
-  | { name: 'name_ends_with', alias?: string  } 
-  | { name: 'name_not_ends_with', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'email_not', alias?: string  } 
-  | { name: 'email_in', alias?: string  } 
-  | { name: 'email_not_in', alias?: string  } 
-  | { name: 'email_lt', alias?: string  } 
-  | { name: 'email_lte', alias?: string  } 
-  | { name: 'email_gt', alias?: string  } 
-  | { name: 'email_gte', alias?: string  } 
-  | { name: 'email_contains', alias?: string  } 
-  | { name: 'email_not_contains', alias?: string  } 
-  | { name: 'email_starts_with', alias?: string  } 
-  | { name: 'email_not_starts_with', alias?: string  } 
-  | { name: 'email_ends_with', alias?: string  } 
-  | { name: 'email_not_ends_with', alias?: string  } 
-  | { name: 'year', alias?: string  } 
-  | { name: 'year_not', alias?: string  } 
-  | { name: 'year_in', alias?: string  } 
-  | { name: 'year_not_in', alias?: string  } 
-  | { name: 'year_lt', alias?: string  } 
-  | { name: 'year_lte', alias?: string  } 
-  | { name: 'year_gt', alias?: string  } 
-  | { name: 'year_gte', alias?: string  } 
-  | { name: 'plan', alias?: string  } 
-  | { name: 'plan_not', alias?: string  } 
-  | { name: 'plan_in', alias?: string  } 
-  | { name: 'plan_not_in', alias?: string  } 
-  | { name: 'plan_lt', alias?: string  } 
-  | { name: 'plan_lte', alias?: string  } 
-  | { name: 'plan_gt', alias?: string  } 
-  | { name: 'plan_gte', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
-  | { name: 'xp_not', alias?: string  } 
-  | { name: 'xp_in', alias?: string  } 
-  | { name: 'xp_not_in', alias?: string  } 
-  | { name: 'xp_lt', alias?: string  } 
-  | { name: 'xp_lte', alias?: string  } 
-  | { name: 'xp_gt', alias?: string  } 
-  | { name: 'xp_gte', alias?: string  } 
-  | { name: 'privilege', alias?: string  } 
-  | { name: 'privilege_not', alias?: string  } 
-  | { name: 'privilege_in', alias?: string  } 
-  | { name: 'privilege_not_in', alias?: string  } 
-  | { name: 'privilege_lt', alias?: string  } 
-  | { name: 'privilege_lte', alias?: string  } 
-  | { name: 'privilege_gt', alias?: string  } 
-  | { name: 'privilege_gte', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
-  | { name: 'OR', alias?: string  } 
-  | { name: 'NOT', alias?: string  } 
-  
-export interface UserUpdateManyWithWhereNestedInput {
-  where?: UserScalarWhereInput
-  data?: UserUpdateManyDataInput
-}
-export type UserUpdateManyWithWhereNestedInputInputObject =
-  | Extract<keyof UserUpdateManyWithWhereNestedInput, string>
+export type UserPresenceUpsertWithWhereUniqueWithoutActivityInputInputObject =
+  | Extract<keyof UserPresenceUpsertWithWhereUniqueWithoutActivityInput, string>
   | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface UserUpdateManyDataInput {
-  outlookId?: string | null
-  name?: string | null
-  email?: string | null
-  year?: number | null
-  plan?: number | null
-  xp?: number | null
-  privilege?: number | null
-}
-export type UserUpdateManyDataInputInputObject =
-  | Extract<keyof UserUpdateManyDataInput, string>
-  | { name: 'outlookId', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'year', alias?: string  } 
-  | { name: 'plan', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
-  | { name: 'privilege', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
   
 export interface ActivityUpdateManyMutationInput {
   code?: string | null
@@ -2491,6 +2785,37 @@ export type ActivityUpdateManyMutationInputInputObject =
   | { name: 'title', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'date', alias?: string  } 
+  
+export interface UserPresenceCreateInput {
+  id?: string | null
+  user?: UserCreateOneWithoutActivitiesInput
+  activity?: ActivityCreateOneWithoutRegisteredInput
+  presence?: boolean | null
+}
+export type UserPresenceCreateInputInputObject =
+  | Extract<keyof UserPresenceCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'activity', alias?: string  } 
+  | { name: 'presence', alias?: string  } 
+  
+export interface UserPresenceUpdateInput {
+  user?: UserUpdateOneRequiredWithoutActivitiesInput | null
+  activity?: ActivityUpdateOneRequiredWithoutRegisteredInput | null
+  presence?: boolean | null
+}
+export type UserPresenceUpdateInputInputObject =
+  | Extract<keyof UserPresenceUpdateInput, string>
+  | { name: 'user', alias?: string  } 
+  | { name: 'activity', alias?: string  } 
+  | { name: 'presence', alias?: string  } 
+  
+export interface UserPresenceUpdateManyMutationInput {
+  presence?: boolean | null
+}
+export type UserPresenceUpdateManyMutationInputInputObject =
+  | Extract<keyof UserPresenceUpdateManyMutationInput, string>
+  | { name: 'presence', alias?: string  } 
   
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -2526,22 +2851,29 @@ export type ActivitySubscriptionWhereInputInputObject =
   | { name: 'node', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface UserPresenceSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: UserPresenceWhereInput | null
+  AND?: UserPresenceSubscriptionWhereInput[]
+}
+export type UserPresenceSubscriptionWhereInputInputObject =
+  | Extract<keyof UserPresenceSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 
-export type ActivityOrderByInputValues =
+export type UserPresenceOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
-  | 'code_ASC'
-  | 'code_DESC'
-  | 'type_ASC'
-  | 'type_DESC'
-  | 'xp_ASC'
-  | 'xp_DESC'
-  | 'title_ASC'
-  | 'title_DESC'
-  | 'description_ASC'
-  | 'description_DESC'
-  | 'date_ASC'
-  | 'date_DESC'
+  | 'presence_ASC'
+  | 'presence_DESC'
   
 export type UserOrderByInputValues =
   | 'id_ASC'
@@ -2560,6 +2892,22 @@ export type UserOrderByInputValues =
   | 'xp_DESC'
   | 'privilege_ASC'
   | 'privilege_DESC'
+  
+export type ActivityOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'code_ASC'
+  | 'code_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
+  | 'xp_ASC'
+  | 'xp_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'date_ASC'
+  | 'date_DESC'
   
 export type MutationTypeValues =
   | 'CREATED'

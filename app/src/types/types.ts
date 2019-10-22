@@ -9,11 +9,10 @@ export interface User {
 export interface LoginData {
   login: User
 }
+export interface LoginVars {
+  code: String
+}
 
 export interface LoginCookieData {
   loginCookie: User
-}
-
-export interface LoginVars {
-  code: String
 }
