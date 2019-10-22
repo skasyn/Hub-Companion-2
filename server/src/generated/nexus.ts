@@ -146,20 +146,20 @@ export interface NexusGenInputs {
     name_not_in?: string[] | null; // [String!]
     name_not_starts_with?: string | null; // String
     name_starts_with?: string | null; // String
-    outlookid?: string | null; // String
-    outlookid_contains?: string | null; // String
-    outlookid_ends_with?: string | null; // String
-    outlookid_gt?: string | null; // String
-    outlookid_gte?: string | null; // String
-    outlookid_in?: string[] | null; // [String!]
-    outlookid_lt?: string | null; // String
-    outlookid_lte?: string | null; // String
-    outlookid_not?: string | null; // String
-    outlookid_not_contains?: string | null; // String
-    outlookid_not_ends_with?: string | null; // String
-    outlookid_not_in?: string[] | null; // [String!]
-    outlookid_not_starts_with?: string | null; // String
-    outlookid_starts_with?: string | null; // String
+    outlookId?: string | null; // String
+    outlookId_contains?: string | null; // String
+    outlookId_ends_with?: string | null; // String
+    outlookId_gt?: string | null; // String
+    outlookId_gte?: string | null; // String
+    outlookId_in?: string[] | null; // [String!]
+    outlookId_lt?: string | null; // String
+    outlookId_lte?: string | null; // String
+    outlookId_not?: string | null; // String
+    outlookId_not_contains?: string | null; // String
+    outlookId_not_ends_with?: string | null; // String
+    outlookId_not_in?: string[] | null; // [String!]
+    outlookId_not_starts_with?: string | null; // String
+    outlookId_starts_with?: string | null; // String
     plan?: number | null; // Int
     plan_gt?: number | null; // Int
     plan_gte?: number | null; // Int
@@ -196,13 +196,13 @@ export interface NexusGenInputs {
   UserWhereUniqueInput: { // input type
     email?: string | null; // String
     id?: string | null; // ID
-    outlookid?: string | null; // String
+    outlookId?: string | null; // String
   }
 }
 
 export interface NexusGenEnums {
   ActivityOrderByInput: "code_ASC" | "code_DESC" | "date_ASC" | "date_DESC" | "description_ASC" | "description_DESC" | "id_ASC" | "id_DESC" | "title_ASC" | "title_DESC" | "type_ASC" | "type_DESC" | "xp_ASC" | "xp_DESC"
-  UserOrderByInput: "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "outlookid_ASC" | "outlookid_DESC" | "plan_ASC" | "plan_DESC" | "privilege_ASC" | "privilege_DESC" | "xp_ASC" | "xp_DESC" | "year_ASC" | "year_DESC"
+  UserOrderByInput: "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "outlookId_ASC" | "outlookId_DESC" | "plan_ASC" | "plan_DESC" | "privilege_ASC" | "privilege_DESC" | "xp_ASC" | "xp_DESC" | "year_ASC" | "year_DESC"
 }
 
 export interface NexusGenRootTypes {
@@ -215,12 +215,13 @@ export interface NexusGenRootTypes {
     type: string; // String!
     xp?: number | null; // Int
   }
+  Mutation: {};
   Query: {};
   User: { // root type
     email: string; // String!
     id: string; // ID!
     name: string; // String!
-    outlookid: string; // String!
+    outlookId: string; // String!
     plan?: number | null; // Int
     privilege?: number | null; // Int
     xp?: number | null; // Int
@@ -253,8 +254,12 @@ export interface NexusGenFieldTypes {
     type: string; // String!
     xp: number | null; // Int
   }
+  Mutation: { // field return type
+    refresh: boolean; // Boolean!
+  }
   Query: { // field return type
     login: NexusGenRootTypes['User']; // User!
+    loginCookie: NexusGenRootTypes['User']; // User!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
@@ -263,7 +268,7 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // ID!
     name: string; // String!
-    outlookid: string; // String!
+    outlookId: string; // String!
     plan: number | null; // Int
     privilege: number | null; // Int
     xp: number | null; // Int
@@ -285,6 +290,9 @@ export interface NexusGenArgTypes {
   }
   Query: {
     login: { // args
+      code?: string | null; // String
+    }
+    loginCookie: { // args
       code?: string | null; // String
     }
     user: { // args
@@ -318,7 +326,7 @@ export interface NexusGenAbstractResolveReturnTypes {
 
 export interface NexusGenInheritedFields {}
 
-export type NexusGenObjectNames = "Activity" | "Query" | "User";
+export type NexusGenObjectNames = "Activity" | "Mutation" | "Query" | "User";
 
 export type NexusGenInputNames = "ActivityWhereInput" | "UserWhereInput" | "UserWhereUniqueInput";
 

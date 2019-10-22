@@ -1,16 +1,13 @@
-// import { GraphQLServer } from 'graphql-yoga';
-// import { prisma } from './generated/prisma-client';
-// import { resolvers } from './resolvers';
-
-import { prisma, Prisma } from './generated/prisma-client'
+import { Prisma } from './generated/prisma-client'
 import datamodelInfo from './generated/nexus-prisma'
 import * as path from 'path'
 import { makePrismaSchema } from 'nexus-prisma'
 import { GraphQLServer } from 'graphql-yoga'
 import { Query } from './resolvers/Query';
+import {Mutation} from "./resolvers/Mutation";
 
 const schema = makePrismaSchema({
-  types: [Query],
+  types: [Query, Mutation],
   prisma: {
     datamodelInfo,
     client: new Prisma({

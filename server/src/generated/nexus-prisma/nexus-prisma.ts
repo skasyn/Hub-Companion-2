@@ -238,7 +238,7 @@ export interface QueryFieldDetails {
 type UserObject =
   | UserFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'outlookid', args?: [] | false, alias?: string  } 
+  | { name: 'outlookId', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'year', args?: [] | false, alias?: string  } 
@@ -249,7 +249,7 @@ type UserObject =
 
 type UserFields =
   | 'id'
-  | 'outlookid'
+  | 'outlookId'
   | 'name'
   | 'email'
   | 'year'
@@ -278,7 +278,7 @@ export interface UserFieldDetails {
     nullable: false
     resolve: undefined
   }
-  outlookid: {
+  outlookId: {
     type: 'String'
     args: {}
     description: string
@@ -1136,7 +1136,7 @@ export interface UserSubscriptionPayloadFieldDetails {
 type UserPreviousValuesObject =
   | UserPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'outlookid', args?: [] | false, alias?: string  } 
+  | { name: 'outlookId', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'year', args?: [] | false, alias?: string  } 
@@ -1146,7 +1146,7 @@ type UserPreviousValuesObject =
 
 type UserPreviousValuesFields =
   | 'id'
-  | 'outlookid'
+  | 'outlookId'
   | 'name'
   | 'email'
   | 'year'
@@ -1167,7 +1167,7 @@ export interface UserPreviousValuesFieldDetails {
     nullable: false
     resolve: undefined
   }
-  outlookid: {
+  outlookId: {
     type: 'String'
     args: {}
     description: string
@@ -1384,13 +1384,13 @@ export interface ActivityPreviousValuesFieldDetails {
 
 export interface UserWhereUniqueInput {
   id?: string | null
-  outlookid?: string | null
+  outlookId?: string | null
   email?: string | null
 }
 export type UserWhereUniqueInputInputObject =
   | Extract<keyof UserWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'outlookid', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
   | { name: 'email', alias?: string  } 
   
 export interface ActivityWhereInput {
@@ -1589,20 +1589,20 @@ export interface UserWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  outlookid?: string | null
-  outlookid_not?: string | null
-  outlookid_in?: string[]
-  outlookid_not_in?: string[]
-  outlookid_lt?: string | null
-  outlookid_lte?: string | null
-  outlookid_gt?: string | null
-  outlookid_gte?: string | null
-  outlookid_contains?: string | null
-  outlookid_not_contains?: string | null
-  outlookid_starts_with?: string | null
-  outlookid_not_starts_with?: string | null
-  outlookid_ends_with?: string | null
-  outlookid_not_ends_with?: string | null
+  outlookId?: string | null
+  outlookId_not?: string | null
+  outlookId_in?: string[]
+  outlookId_not_in?: string[]
+  outlookId_lt?: string | null
+  outlookId_lte?: string | null
+  outlookId_gt?: string | null
+  outlookId_gte?: string | null
+  outlookId_contains?: string | null
+  outlookId_not_contains?: string | null
+  outlookId_starts_with?: string | null
+  outlookId_not_starts_with?: string | null
+  outlookId_ends_with?: string | null
+  outlookId_not_ends_with?: string | null
   name?: string | null
   name_not?: string | null
   name_in?: string[]
@@ -1682,20 +1682,20 @@ export type UserWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'outlookid', alias?: string  } 
-  | { name: 'outlookid_not', alias?: string  } 
-  | { name: 'outlookid_in', alias?: string  } 
-  | { name: 'outlookid_not_in', alias?: string  } 
-  | { name: 'outlookid_lt', alias?: string  } 
-  | { name: 'outlookid_lte', alias?: string  } 
-  | { name: 'outlookid_gt', alias?: string  } 
-  | { name: 'outlookid_gte', alias?: string  } 
-  | { name: 'outlookid_contains', alias?: string  } 
-  | { name: 'outlookid_not_contains', alias?: string  } 
-  | { name: 'outlookid_starts_with', alias?: string  } 
-  | { name: 'outlookid_not_starts_with', alias?: string  } 
-  | { name: 'outlookid_ends_with', alias?: string  } 
-  | { name: 'outlookid_not_ends_with', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
+  | { name: 'outlookId_not', alias?: string  } 
+  | { name: 'outlookId_in', alias?: string  } 
+  | { name: 'outlookId_not_in', alias?: string  } 
+  | { name: 'outlookId_lt', alias?: string  } 
+  | { name: 'outlookId_lte', alias?: string  } 
+  | { name: 'outlookId_gt', alias?: string  } 
+  | { name: 'outlookId_gte', alias?: string  } 
+  | { name: 'outlookId_contains', alias?: string  } 
+  | { name: 'outlookId_not_contains', alias?: string  } 
+  | { name: 'outlookId_starts_with', alias?: string  } 
+  | { name: 'outlookId_not_starts_with', alias?: string  } 
+  | { name: 'outlookId_ends_with', alias?: string  } 
+  | { name: 'outlookId_not_ends_with', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'name_not', alias?: string  } 
   | { name: 'name_in', alias?: string  } 
@@ -1770,7 +1770,7 @@ export type ActivityWhereUniqueInputInputObject =
   
 export interface UserCreateInput {
   id?: string | null
-  outlookid?: string
+  outlookId?: string
   name?: string
   email?: string
   year?: number | null
@@ -1782,7 +1782,7 @@ export interface UserCreateInput {
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'outlookid', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -1820,7 +1820,7 @@ export type ActivityCreateWithoutRegisteredInputInputObject =
   | { name: 'date', alias?: string  } 
   
 export interface UserUpdateInput {
-  outlookid?: string | null
+  outlookId?: string | null
   name?: string | null
   email?: string | null
   year?: number | null
@@ -1831,7 +1831,7 @@ export interface UserUpdateInput {
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
-  | { name: 'outlookid', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -2110,7 +2110,7 @@ export type ActivityUpdateManyDataInputInputObject =
   | { name: 'date', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
-  outlookid?: string | null
+  outlookId?: string | null
   name?: string | null
   email?: string | null
   year?: number | null
@@ -2120,7 +2120,7 @@ export interface UserUpdateManyMutationInput {
 }
 export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
-  | { name: 'outlookid', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -2160,7 +2160,7 @@ export type UserCreateManyWithoutActivitiesInputInputObject =
   
 export interface UserCreateWithoutActivitiesInput {
   id?: string | null
-  outlookid?: string
+  outlookId?: string
   name?: string
   email?: string
   year?: number | null
@@ -2171,7 +2171,7 @@ export interface UserCreateWithoutActivitiesInput {
 export type UserCreateWithoutActivitiesInputInputObject =
   | Extract<keyof UserCreateWithoutActivitiesInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'outlookid', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -2231,7 +2231,7 @@ export type UserUpdateWithWhereUniqueWithoutActivitiesInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserUpdateWithoutActivitiesDataInput {
-  outlookid?: string | null
+  outlookId?: string | null
   name?: string | null
   email?: string | null
   year?: number | null
@@ -2241,7 +2241,7 @@ export interface UserUpdateWithoutActivitiesDataInput {
 }
 export type UserUpdateWithoutActivitiesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutActivitiesDataInput, string>
-  | { name: 'outlookid', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -2275,20 +2275,20 @@ export interface UserScalarWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  outlookid?: string | null
-  outlookid_not?: string | null
-  outlookid_in?: string[]
-  outlookid_not_in?: string[]
-  outlookid_lt?: string | null
-  outlookid_lte?: string | null
-  outlookid_gt?: string | null
-  outlookid_gte?: string | null
-  outlookid_contains?: string | null
-  outlookid_not_contains?: string | null
-  outlookid_starts_with?: string | null
-  outlookid_not_starts_with?: string | null
-  outlookid_ends_with?: string | null
-  outlookid_not_ends_with?: string | null
+  outlookId?: string | null
+  outlookId_not?: string | null
+  outlookId_in?: string[]
+  outlookId_not_in?: string[]
+  outlookId_lt?: string | null
+  outlookId_lte?: string | null
+  outlookId_gt?: string | null
+  outlookId_gte?: string | null
+  outlookId_contains?: string | null
+  outlookId_not_contains?: string | null
+  outlookId_starts_with?: string | null
+  outlookId_not_starts_with?: string | null
+  outlookId_ends_with?: string | null
+  outlookId_not_ends_with?: string | null
   name?: string | null
   name_not?: string | null
   name_in?: string[]
@@ -2369,20 +2369,20 @@ export type UserScalarWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'outlookid', alias?: string  } 
-  | { name: 'outlookid_not', alias?: string  } 
-  | { name: 'outlookid_in', alias?: string  } 
-  | { name: 'outlookid_not_in', alias?: string  } 
-  | { name: 'outlookid_lt', alias?: string  } 
-  | { name: 'outlookid_lte', alias?: string  } 
-  | { name: 'outlookid_gt', alias?: string  } 
-  | { name: 'outlookid_gte', alias?: string  } 
-  | { name: 'outlookid_contains', alias?: string  } 
-  | { name: 'outlookid_not_contains', alias?: string  } 
-  | { name: 'outlookid_starts_with', alias?: string  } 
-  | { name: 'outlookid_not_starts_with', alias?: string  } 
-  | { name: 'outlookid_ends_with', alias?: string  } 
-  | { name: 'outlookid_not_ends_with', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
+  | { name: 'outlookId_not', alias?: string  } 
+  | { name: 'outlookId_in', alias?: string  } 
+  | { name: 'outlookId_not_in', alias?: string  } 
+  | { name: 'outlookId_lt', alias?: string  } 
+  | { name: 'outlookId_lte', alias?: string  } 
+  | { name: 'outlookId_gt', alias?: string  } 
+  | { name: 'outlookId_gte', alias?: string  } 
+  | { name: 'outlookId_contains', alias?: string  } 
+  | { name: 'outlookId_not_contains', alias?: string  } 
+  | { name: 'outlookId_starts_with', alias?: string  } 
+  | { name: 'outlookId_not_starts_with', alias?: string  } 
+  | { name: 'outlookId_ends_with', alias?: string  } 
+  | { name: 'outlookId_not_ends_with', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'name_not', alias?: string  } 
   | { name: 'name_in', alias?: string  } 
@@ -2457,7 +2457,7 @@ export type UserUpdateManyWithWhereNestedInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserUpdateManyDataInput {
-  outlookid?: string | null
+  outlookId?: string | null
   name?: string | null
   email?: string | null
   year?: number | null
@@ -2467,7 +2467,7 @@ export interface UserUpdateManyDataInput {
 }
 export type UserUpdateManyDataInputInputObject =
   | Extract<keyof UserUpdateManyDataInput, string>
-  | { name: 'outlookid', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -2546,8 +2546,8 @@ export type ActivityOrderByInputValues =
 export type UserOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
-  | 'outlookid_ASC'
-  | 'outlookid_DESC'
+  | 'outlookId_ASC'
+  | 'outlookId_DESC'
   | 'name_ASC'
   | 'name_DESC'
   | 'email_ASC'

@@ -1,6 +1,6 @@
 type User {
   id: ID! @id
-  outlookid: String! @unique
+  outlookId: String! @unique
   name: String!
   email: String! @unique
   year: Int @default(value: 0)

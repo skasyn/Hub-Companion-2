@@ -2,11 +2,16 @@ scalar DateTime
 
 type Query {
   login(code: String!): User!
+  loginCookie(code: String!): User!
+}
+
+type Mutation {
+  refresh: Boolean!
 }
 
 type User {
   id: ID!
-  outlookid: String!
+  outlookId: String!
   name: String!
   email: String!
   year: Int
@@ -15,6 +20,9 @@ type User {
   privilege: Int
   activities: [Activity!]!
 }
+
+
+#TODO UserPresence User! Acitivity! IsPresent: Boolean!
 
 type Activity {
   id: ID!

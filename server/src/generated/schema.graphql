@@ -123,8 +123,13 @@ input ActivityWhereInput {
 
 scalar DateTime
 
+type Mutation {
+  refresh: Boolean!
+}
+
 type Query {
   login(code: String): User!
+  loginCookie(code: String): User!
   user(where: UserWhereUniqueInput!): User
   users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
 }
@@ -134,7 +139,7 @@ type User {
   email: String!
   id: ID!
   name: String!
-  outlookid: String!
+  outlookId: String!
   plan: Int
   privilege: Int
   xp: Int
@@ -148,8 +153,8 @@ enum UserOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  outlookid_ASC
-  outlookid_DESC
+  outlookId_ASC
+  outlookId_DESC
   plan_ASC
   plan_DESC
   privilege_ASC
@@ -205,20 +210,20 @@ input UserWhereInput {
   name_not_in: [String!]
   name_not_starts_with: String
   name_starts_with: String
-  outlookid: String
-  outlookid_contains: String
-  outlookid_ends_with: String
-  outlookid_gt: String
-  outlookid_gte: String
-  outlookid_in: [String!]
-  outlookid_lt: String
-  outlookid_lte: String
-  outlookid_not: String
-  outlookid_not_contains: String
-  outlookid_not_ends_with: String
-  outlookid_not_in: [String!]
-  outlookid_not_starts_with: String
-  outlookid_starts_with: String
+  outlookId: String
+  outlookId_contains: String
+  outlookId_ends_with: String
+  outlookId_gt: String
+  outlookId_gte: String
+  outlookId_in: [String!]
+  outlookId_lt: String
+  outlookId_lte: String
+  outlookId_not: String
+  outlookId_not_contains: String
+  outlookId_not_ends_with: String
+  outlookId_not_in: [String!]
+  outlookId_not_starts_with: String
+  outlookId_starts_with: String
   plan: Int
   plan_gt: Int
   plan_gte: Int
@@ -256,5 +261,5 @@ input UserWhereInput {
 input UserWhereUniqueInput {
   email: String
   id: ID
-  outlookid: String
+  outlookId: String
 }

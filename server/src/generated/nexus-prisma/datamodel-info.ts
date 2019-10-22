@@ -5,7 +5,7 @@
 
 export default {
   uniqueFieldsByModel: {
-    User: ['id', 'outlookid', 'email'],
+    User: ['id', 'outlookId', 'email'],
     Activity: ['id', 'code']
   },
   embeddedTypes: [],
@@ -487,7 +487,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -553,7 +553,7 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "args": [],
             "type": {
@@ -1939,7 +1939,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1949,7 +1949,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not",
+            "name": "outlookId_not",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -1959,7 +1959,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_in",
+            "name": "outlookId_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -1977,7 +1977,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not_in",
+            "name": "outlookId_not_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -1995,7 +1995,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_lt",
+            "name": "outlookId_lt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2005,7 +2005,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_lte",
+            "name": "outlookId_lte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2015,7 +2015,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_gt",
+            "name": "outlookId_gt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2025,7 +2025,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_gte",
+            "name": "outlookId_gte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2035,7 +2035,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_contains",
+            "name": "outlookId_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2045,7 +2045,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not_contains",
+            "name": "outlookId_not_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2055,7 +2055,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_starts_with",
+            "name": "outlookId_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2065,7 +2065,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not_starts_with",
+            "name": "outlookId_not_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2075,7 +2075,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_ends_with",
+            "name": "outlookId_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -2085,7 +2085,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not_ends_with",
+            "name": "outlookId_not_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -3141,13 +3141,13 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "outlookid_ASC",
+            "name": "outlookId_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "outlookid_DESC",
+            "name": "outlookId_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -4108,7 +4108,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -4351,7 +4351,7 @@ export default {
         "fields": null,
         "inputFields": [
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -5925,7 +5925,7 @@ export default {
         "fields": null,
         "inputFields": [
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6203,7 +6203,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -6589,7 +6589,7 @@ export default {
         "fields": null,
         "inputFields": [
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6879,7 +6879,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6889,7 +6889,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not",
+            "name": "outlookId_not",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6899,7 +6899,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_in",
+            "name": "outlookId_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -6917,7 +6917,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not_in",
+            "name": "outlookId_not_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -6935,7 +6935,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_lt",
+            "name": "outlookId_lt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6945,7 +6945,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_lte",
+            "name": "outlookId_lte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6955,7 +6955,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_gt",
+            "name": "outlookId_gt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6965,7 +6965,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_gte",
+            "name": "outlookId_gte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6975,7 +6975,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_contains",
+            "name": "outlookId_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6985,7 +6985,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not_contains",
+            "name": "outlookId_not_contains",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6995,7 +6995,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_starts_with",
+            "name": "outlookId_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7005,7 +7005,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not_starts_with",
+            "name": "outlookId_not_starts_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7015,7 +7015,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_ends_with",
+            "name": "outlookId_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7025,7 +7025,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "outlookid_not_ends_with",
+            "name": "outlookId_not_ends_with",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7835,7 +7835,7 @@ export default {
         "fields": null,
         "inputFields": [
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -8262,7 +8262,7 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "outlookid",
+            "name": "outlookId",
             "description": null,
             "args": [],
             "type": {
