@@ -16,7 +16,6 @@ type User {
   email: String!
   year: Int
   plan: Int
-  xp: Int
   privilege: Int
   activities: [UserPresence!]!
 }
@@ -37,5 +36,6 @@ type UserPresence {
   code: String!
   user: User!
   activity: Activity!
-  presence: Boolean
+  presence: Boolean!
+  xp: Int!
 }

@@ -16,3 +16,10 @@ export interface LoginVars {
 export interface LoginCookieData {
   loginCookie: User
 }
+
+export interface XpData {
+  getXp: Number
+}
+export interface XpVars {
+  code: String
+}

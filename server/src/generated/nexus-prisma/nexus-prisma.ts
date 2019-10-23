@@ -332,7 +332,6 @@ type UserObject =
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'year', args?: [] | false, alias?: string  } 
   | { name: 'plan', args?: [] | false, alias?: string  } 
-  | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'privilege', args?: [] | false, alias?: string  } 
   | { name: 'activities', args?: UserActivitiesArgs[] | false, alias?: string  } 
 
@@ -343,7 +342,6 @@ type UserFields =
   | 'email'
   | 'year'
   | 'plan'
-  | 'xp'
   | 'privilege'
   | 'activities'
 
@@ -407,14 +405,6 @@ export interface UserFieldDetails {
     nullable: true
     resolve: undefined
   }
-  xp: {
-    type: 'Int'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: undefined
-  }
   privilege: {
     type: 'Int'
     args: {}
@@ -448,6 +438,7 @@ type UserPresenceObject =
   | { name: 'user', args?: [] | false, alias?: string  } 
   | { name: 'activity', args?: [] | false, alias?: string  } 
   | { name: 'presence', args?: [] | false, alias?: string  } 
+  | { name: 'xp', args?: [] | false, alias?: string  } 
 
 type UserPresenceFields =
   | 'id'
@@ -455,6 +446,7 @@ type UserPresenceFields =
   | 'user'
   | 'activity'
   | 'presence'
+  | 'xp'
 
 
 
@@ -508,7 +500,15 @@ export interface UserPresenceFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
+    resolve: undefined
+  }
+  xp: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
     resolve: undefined
   }
 }
@@ -1553,7 +1553,6 @@ type UserPreviousValuesObject =
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'year', args?: [] | false, alias?: string  } 
   | { name: 'plan', args?: [] | false, alias?: string  } 
-  | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'privilege', args?: [] | false, alias?: string  } 
 
 type UserPreviousValuesFields =
@@ -1563,7 +1562,6 @@ type UserPreviousValuesFields =
   | 'email'
   | 'year'
   | 'plan'
-  | 'xp'
   | 'privilege'
 
 
@@ -1612,14 +1610,6 @@ export interface UserPreviousValuesFieldDetails {
     resolve: undefined
   }
   plan: {
-    type: 'Int'
-    args: {}
-    description: string
-    list: undefined
-    nullable: true
-    resolve: undefined
-  }
-  xp: {
     type: 'Int'
     args: {}
     description: string
@@ -1870,11 +1860,13 @@ type UserPresencePreviousValuesObject =
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'code', args?: [] | false, alias?: string  } 
   | { name: 'presence', args?: [] | false, alias?: string  } 
+  | { name: 'xp', args?: [] | false, alias?: string  } 
 
 type UserPresencePreviousValuesFields =
   | 'id'
   | 'code'
   | 'presence'
+  | 'xp'
 
 
 
@@ -1902,7 +1894,15 @@ export interface UserPresencePreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
+    resolve: undefined
+  }
+  xp: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
     resolve: undefined
   }
 }
@@ -1953,6 +1953,14 @@ export interface UserPresenceWhereInput {
   activity?: ActivityWhereInput | null
   presence?: boolean | null
   presence_not?: boolean | null
+  xp?: number | null
+  xp_not?: number | null
+  xp_in?: number[]
+  xp_not_in?: number[]
+  xp_lt?: number | null
+  xp_lte?: number | null
+  xp_gt?: number | null
+  xp_gte?: number | null
   AND?: UserPresenceWhereInput[]
 }
 export type UserPresenceWhereInputInputObject =
@@ -1989,6 +1997,14 @@ export type UserPresenceWhereInputInputObject =
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   | { name: 'presence_not', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
+  | { name: 'xp_not', alias?: string  } 
+  | { name: 'xp_in', alias?: string  } 
+  | { name: 'xp_not_in', alias?: string  } 
+  | { name: 'xp_lt', alias?: string  } 
+  | { name: 'xp_lte', alias?: string  } 
+  | { name: 'xp_gt', alias?: string  } 
+  | { name: 'xp_gte', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface UserWhereInput {
@@ -2064,14 +2080,6 @@ export interface UserWhereInput {
   plan_lte?: number | null
   plan_gt?: number | null
   plan_gte?: number | null
-  xp?: number | null
-  xp_not?: number | null
-  xp_in?: number[]
-  xp_not_in?: number[]
-  xp_lt?: number | null
-  xp_lte?: number | null
-  xp_gt?: number | null
-  xp_gte?: number | null
   privilege?: number | null
   privilege_not?: number | null
   privilege_in?: number[]
@@ -2157,14 +2165,6 @@ export type UserWhereInputInputObject =
   | { name: 'plan_lte', alias?: string  } 
   | { name: 'plan_gt', alias?: string  } 
   | { name: 'plan_gte', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
-  | { name: 'xp_not', alias?: string  } 
-  | { name: 'xp_in', alias?: string  } 
-  | { name: 'xp_not_in', alias?: string  } 
-  | { name: 'xp_lt', alias?: string  } 
-  | { name: 'xp_lte', alias?: string  } 
-  | { name: 'xp_gt', alias?: string  } 
-  | { name: 'xp_gte', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
   | { name: 'privilege_not', alias?: string  } 
   | { name: 'privilege_in', alias?: string  } 
@@ -2382,7 +2382,6 @@ export interface UserCreateInput {
   email?: string
   year?: number | null
   plan?: number | null
-  xp?: number | null
   privilege?: number | null
   activities?: UserPresenceCreateManyWithoutUserInput | null
 }
@@ -2394,7 +2393,6 @@ export type UserCreateInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
   | { name: 'plan', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
   | { name: 'activities', alias?: string  } 
   
@@ -2411,7 +2409,8 @@ export interface UserPresenceCreateWithoutUserInput {
   id?: string | null
   code?: string
   activity?: ActivityCreateOneWithoutRegisteredInput
-  presence?: boolean | null
+  presence?: boolean
+  xp?: number
 }
 export type UserPresenceCreateWithoutUserInputInputObject =
   | Extract<keyof UserPresenceCreateWithoutUserInput, string>
@@ -2419,6 +2418,7 @@ export type UserPresenceCreateWithoutUserInputInputObject =
   | { name: 'code', alias?: string  } 
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   
 export interface ActivityCreateOneWithoutRegisteredInput {
   create?: ActivityCreateWithoutRegisteredInput | null
@@ -2454,7 +2454,6 @@ export interface UserUpdateInput {
   email?: string | null
   year?: number | null
   plan?: number | null
-  xp?: number | null
   privilege?: number | null
   activities?: UserPresenceUpdateManyWithoutUserInput | null
 }
@@ -2465,7 +2464,6 @@ export type UserUpdateInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
   | { name: 'plan', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
   | { name: 'activities', alias?: string  } 
   
@@ -2505,12 +2503,14 @@ export interface UserPresenceUpdateWithoutUserDataInput {
   code?: string | null
   activity?: ActivityUpdateOneRequiredWithoutRegisteredInput | null
   presence?: boolean | null
+  xp?: number | null
 }
 export type UserPresenceUpdateWithoutUserDataInputInputObject =
   | Extract<keyof UserPresenceUpdateWithoutUserDataInput, string>
   | { name: 'code', alias?: string  } 
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   
 export interface ActivityUpdateOneRequiredWithoutRegisteredInput {
   create?: ActivityCreateWithoutRegisteredInput | null
@@ -2593,6 +2593,14 @@ export interface UserPresenceScalarWhereInput {
   code_not_ends_with?: string | null
   presence?: boolean | null
   presence_not?: boolean | null
+  xp?: number | null
+  xp_not?: number | null
+  xp_in?: number[]
+  xp_not_in?: number[]
+  xp_lt?: number | null
+  xp_lte?: number | null
+  xp_gt?: number | null
+  xp_gte?: number | null
   AND?: UserPresenceScalarWhereInput[]
   OR?: UserPresenceScalarWhereInput[]
   NOT?: UserPresenceScalarWhereInput[]
@@ -2629,6 +2637,14 @@ export type UserPresenceScalarWhereInputInputObject =
   | { name: 'code_not_ends_with', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   | { name: 'presence_not', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
+  | { name: 'xp_not', alias?: string  } 
+  | { name: 'xp_in', alias?: string  } 
+  | { name: 'xp_not_in', alias?: string  } 
+  | { name: 'xp_lt', alias?: string  } 
+  | { name: 'xp_lte', alias?: string  } 
+  | { name: 'xp_gt', alias?: string  } 
+  | { name: 'xp_gte', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   | { name: 'OR', alias?: string  } 
   | { name: 'NOT', alias?: string  } 
@@ -2645,11 +2661,13 @@ export type UserPresenceUpdateManyWithWhereNestedInputInputObject =
 export interface UserPresenceUpdateManyDataInput {
   code?: string | null
   presence?: boolean | null
+  xp?: number | null
 }
 export type UserPresenceUpdateManyDataInputInputObject =
   | Extract<keyof UserPresenceUpdateManyDataInput, string>
   | { name: 'code', alias?: string  } 
   | { name: 'presence', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
   outlookId?: string | null
@@ -2657,7 +2675,6 @@ export interface UserUpdateManyMutationInput {
   email?: string | null
   year?: number | null
   plan?: number | null
-  xp?: number | null
   privilege?: number | null
 }
 export type UserUpdateManyMutationInputInputObject =
@@ -2667,7 +2684,6 @@ export type UserUpdateManyMutationInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
   | { name: 'plan', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
   
 export interface ActivityCreateInput {
@@ -2704,7 +2720,8 @@ export interface UserPresenceCreateWithoutActivityInput {
   id?: string | null
   code?: string
   user?: UserCreateOneWithoutActivitiesInput
-  presence?: boolean | null
+  presence?: boolean
+  xp?: number
 }
 export type UserPresenceCreateWithoutActivityInputInputObject =
   | Extract<keyof UserPresenceCreateWithoutActivityInput, string>
@@ -2712,6 +2729,7 @@ export type UserPresenceCreateWithoutActivityInputInputObject =
   | { name: 'code', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'presence', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   
 export interface UserCreateOneWithoutActivitiesInput {
   create?: UserCreateWithoutActivitiesInput | null
@@ -2729,7 +2747,6 @@ export interface UserCreateWithoutActivitiesInput {
   email?: string
   year?: number | null
   plan?: number | null
-  xp?: number | null
   privilege?: number | null
 }
 export type UserCreateWithoutActivitiesInputInputObject =
@@ -2740,7 +2757,6 @@ export type UserCreateWithoutActivitiesInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
   | { name: 'plan', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
   
 export interface ActivityUpdateInput {
@@ -2798,12 +2814,14 @@ export interface UserPresenceUpdateWithoutActivityDataInput {
   code?: string | null
   user?: UserUpdateOneRequiredWithoutActivitiesInput | null
   presence?: boolean | null
+  xp?: number | null
 }
 export type UserPresenceUpdateWithoutActivityDataInputInputObject =
   | Extract<keyof UserPresenceUpdateWithoutActivityDataInput, string>
   | { name: 'code', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'presence', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   
 export interface UserUpdateOneRequiredWithoutActivitiesInput {
   create?: UserCreateWithoutActivitiesInput | null
@@ -2824,7 +2842,6 @@ export interface UserUpdateWithoutActivitiesDataInput {
   email?: string | null
   year?: number | null
   plan?: number | null
-  xp?: number | null
   privilege?: number | null
 }
 export type UserUpdateWithoutActivitiesDataInputInputObject =
@@ -2834,7 +2851,6 @@ export type UserUpdateWithoutActivitiesDataInputInputObject =
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
   | { name: 'plan', alias?: string  } 
-  | { name: 'xp', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
   
 export interface UserUpsertWithoutActivitiesInput {
@@ -2879,7 +2895,8 @@ export interface UserPresenceCreateInput {
   code?: string
   user?: UserCreateOneWithoutActivitiesInput
   activity?: ActivityCreateOneWithoutRegisteredInput
-  presence?: boolean | null
+  presence?: boolean
+  xp?: number
 }
 export type UserPresenceCreateInputInputObject =
   | Extract<keyof UserPresenceCreateInput, string>
@@ -2888,12 +2905,14 @@ export type UserPresenceCreateInputInputObject =
   | { name: 'user', alias?: string  } 
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   
 export interface UserPresenceUpdateInput {
   code?: string | null
   user?: UserUpdateOneRequiredWithoutActivitiesInput | null
   activity?: ActivityUpdateOneRequiredWithoutRegisteredInput | null
   presence?: boolean | null
+  xp?: number | null
 }
 export type UserPresenceUpdateInputInputObject =
   | Extract<keyof UserPresenceUpdateInput, string>
@@ -2901,15 +2920,18 @@ export type UserPresenceUpdateInputInputObject =
   | { name: 'user', alias?: string  } 
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   
 export interface UserPresenceUpdateManyMutationInput {
   code?: string | null
   presence?: boolean | null
+  xp?: number | null
 }
 export type UserPresenceUpdateManyMutationInputInputObject =
   | Extract<keyof UserPresenceUpdateManyMutationInput, string>
   | { name: 'code', alias?: string  } 
   | { name: 'presence', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
@@ -2970,6 +2992,8 @@ export type UserPresenceOrderByInputValues =
   | 'code_DESC'
   | 'presence_ASC'
   | 'presence_DESC'
+  | 'xp_ASC'
+  | 'xp_DESC'
   
 export type UserOrderByInputValues =
   | 'id_ASC'
@@ -2984,8 +3008,6 @@ export type UserOrderByInputValues =
   | 'year_DESC'
   | 'plan_ASC'
   | 'plan_DESC'
-  | 'xp_ASC'
-  | 'xp_DESC'
   | 'privilege_ASC'
   | 'privilege_DESC'
   

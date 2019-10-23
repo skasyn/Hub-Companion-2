@@ -5,7 +5,6 @@ export const LOGIN: any = gql`
     login(code: $code) {
       id
       name
-      xp
       email
     }
   }
@@ -16,8 +15,13 @@ export const LOGIN_COOKIE: any = gql`
     loginCookie(code: $code) {
       id
       name
-      xp
       email
     }
+  }
+`;
+
+export const GET_XP: any = gql`
+  query GET_XP($code: String) {
+    getXp(code: $code)
   }
 `;

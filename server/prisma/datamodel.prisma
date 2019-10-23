@@ -5,7 +5,6 @@ type User {
   email: String! @unique
   year: Int @default(value: 0)
   plan: Int @default(value: -1)
-  xp: Int @default(value: 0)
   privilege: Int @default(value: 0)
   activities: [UserPresence!]! @relation(name: "PresenceUser", link: INLINE)
 }
@@ -26,5 +25,6 @@ type UserPresence {
     code: String! @unique
     user: User! @relation(name: "PresenceUser")
     activity: Activity! @relation(name: "PresenceActivity")
-    presence: Boolean
+    presence: Boolean!
+    xp: Int!
 }

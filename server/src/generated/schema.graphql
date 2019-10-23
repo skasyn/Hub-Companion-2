@@ -111,6 +111,7 @@ type Mutation {
 }
 
 type Query {
+  getXp(code: String): Int!
   login(code: String): User!
   loginCookie(code: String): User!
   user(where: UserWhereUniqueInput!): User
@@ -125,7 +126,6 @@ type User {
   outlookId: String!
   plan: Int
   privilege: Int
-  xp: Int
   year: Int
 }
 
@@ -142,8 +142,6 @@ enum UserOrderByInput {
   plan_DESC
   privilege_ASC
   privilege_DESC
-  xp_ASC
-  xp_DESC
   year_ASC
   year_DESC
 }
@@ -152,8 +150,9 @@ type UserPresence {
   activity: Activity!
   code: String!
   id: ID!
-  presence: Boolean
+  presence: Boolean!
   user: User!
+  xp: Int!
 }
 
 enum UserPresenceOrderByInput {
@@ -163,6 +162,8 @@ enum UserPresenceOrderByInput {
   id_DESC
   presence_ASC
   presence_DESC
+  xp_ASC
+  xp_DESC
 }
 
 input UserPresenceWhereInput {
@@ -199,6 +200,14 @@ input UserPresenceWhereInput {
   presence: Boolean
   presence_not: Boolean
   user: UserWhereInput
+  xp: Int
+  xp_gt: Int
+  xp_gte: Int
+  xp_in: [Int!]
+  xp_lt: Int
+  xp_lte: Int
+  xp_not: Int
+  xp_not_in: [Int!]
 }
 
 input UserWhereInput {
@@ -276,14 +285,6 @@ input UserWhereInput {
   privilege_lte: Int
   privilege_not: Int
   privilege_not_in: [Int!]
-  xp: Int
-  xp_gt: Int
-  xp_gte: Int
-  xp_in: [Int!]
-  xp_lt: Int
-  xp_lte: Int
-  xp_not: Int
-  xp_not_in: [Int!]
   year: Int
   year_gt: Int
   year_gte: Int

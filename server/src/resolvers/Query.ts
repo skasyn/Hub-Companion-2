@@ -1,5 +1,5 @@
 import { prismaObjectType } from 'nexus-prisma';
-import { stringArg } from 'nexus';
+import {idArg, stringArg} from 'nexus';
 const axios = require("axios").default;
 const querystring = require("querystring");
 
@@ -46,6 +46,24 @@ async function loginCookie(parent, args, context) {
   });
 }
 
+async function getXp(parent, args, context) {
+  if (args.code === undefined || args.code === '') {
+    throw new Error('Empty code');
+  }
+  let activities = await context.db.user({
+    id: args.code
+  }).activities();
+  if (activities === null) {
+   throw new Error('User not found');
+  }
+  let xp = 0;
+  for (let activityPresence of activities) {
+      xp += activityPresence.xp;
+  }
+  console.log('Here');
+  console.log(xp);
+  return xp;
+}
 export const Query = prismaObjectType({
   name: 'Query',
   definition(t) {
@@ -60,6 +78,11 @@ export const Query = prismaObjectType({
       args: { code: stringArg() },
       resolve: loginCookie,
     });
+    t.field('getXp', {
+      type: 'Int',
+      args: { code: stringArg() },
+      resolve: getXp,
+    })
   },
 });
 

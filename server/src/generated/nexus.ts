@@ -135,6 +135,14 @@ export interface NexusGenInputs {
     presence?: boolean | null; // Boolean
     presence_not?: boolean | null; // Boolean
     user?: NexusGenInputs['UserWhereInput'] | null; // UserWhereInput
+    xp?: number | null; // Int
+    xp_gt?: number | null; // Int
+    xp_gte?: number | null; // Int
+    xp_in?: number[] | null; // [Int!]
+    xp_lt?: number | null; // Int
+    xp_lte?: number | null; // Int
+    xp_not?: number | null; // Int
+    xp_not_in?: number[] | null; // [Int!]
   }
   UserWhereInput: { // input type
     activities_some?: NexusGenInputs['UserPresenceWhereInput'] | null; // UserPresenceWhereInput
@@ -211,14 +219,6 @@ export interface NexusGenInputs {
     privilege_lte?: number | null; // Int
     privilege_not?: number | null; // Int
     privilege_not_in?: number[] | null; // [Int!]
-    xp?: number | null; // Int
-    xp_gt?: number | null; // Int
-    xp_gte?: number | null; // Int
-    xp_in?: number[] | null; // [Int!]
-    xp_lt?: number | null; // Int
-    xp_lte?: number | null; // Int
-    xp_not?: number | null; // Int
-    xp_not_in?: number[] | null; // [Int!]
     year?: number | null; // Int
     year_gt?: number | null; // Int
     year_gte?: number | null; // Int
@@ -236,8 +236,8 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
-  UserOrderByInput: "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "outlookId_ASC" | "outlookId_DESC" | "plan_ASC" | "plan_DESC" | "privilege_ASC" | "privilege_DESC" | "xp_ASC" | "xp_DESC" | "year_ASC" | "year_DESC"
-  UserPresenceOrderByInput: "code_ASC" | "code_DESC" | "id_ASC" | "id_DESC" | "presence_ASC" | "presence_DESC"
+  UserOrderByInput: "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "outlookId_ASC" | "outlookId_DESC" | "plan_ASC" | "plan_DESC" | "privilege_ASC" | "privilege_DESC" | "year_ASC" | "year_DESC"
+  UserPresenceOrderByInput: "code_ASC" | "code_DESC" | "id_ASC" | "id_DESC" | "presence_ASC" | "presence_DESC" | "xp_ASC" | "xp_DESC"
 }
 
 export interface NexusGenRootTypes {
@@ -259,13 +259,13 @@ export interface NexusGenRootTypes {
     outlookId: string; // String!
     plan?: number | null; // Int
     privilege?: number | null; // Int
-    xp?: number | null; // Int
     year?: number | null; // Int
   }
   UserPresence: { // root type
     code: string; // String!
     id: string; // ID!
-    presence?: boolean | null; // Boolean
+    presence: boolean; // Boolean!
+    xp: number; // Int!
   }
   String: string;
   Int: number;
@@ -299,6 +299,7 @@ export interface NexusGenFieldTypes {
     refresh: boolean; // Boolean!
   }
   Query: { // field return type
+    getXp: number; // Int!
     login: NexusGenRootTypes['User']; // User!
     loginCookie: NexusGenRootTypes['User']; // User!
     user: NexusGenRootTypes['User'] | null; // User
@@ -312,15 +313,15 @@ export interface NexusGenFieldTypes {
     outlookId: string; // String!
     plan: number | null; // Int
     privilege: number | null; // Int
-    xp: number | null; // Int
     year: number | null; // Int
   }
   UserPresence: { // field return type
     activity: NexusGenRootTypes['Activity']; // Activity!
     code: string; // String!
     id: string; // ID!
-    presence: boolean | null; // Boolean
+    presence: boolean; // Boolean!
     user: NexusGenRootTypes['User']; // User!
+    xp: number; // Int!
   }
 }
 
@@ -337,6 +338,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    getXp: { // args
+      code?: string | null; // String
+    }
     login: { // args
       code?: string | null; // String
     }
