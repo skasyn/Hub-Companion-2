@@ -444,12 +444,14 @@ export interface UserFieldDetails {
 type UserPresenceObject =
   | UserPresenceFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'code', args?: [] | false, alias?: string  } 
   | { name: 'user', args?: [] | false, alias?: string  } 
   | { name: 'activity', args?: [] | false, alias?: string  } 
   | { name: 'presence', args?: [] | false, alias?: string  } 
 
 type UserPresenceFields =
   | 'id'
+  | 'code'
   | 'user'
   | 'activity'
   | 'presence'
@@ -461,6 +463,14 @@ type UserPresenceFields =
 export interface UserPresenceFieldDetails {
   id: {
     type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  code: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -1858,10 +1868,12 @@ export interface UserPresenceSubscriptionPayloadFieldDetails {
 type UserPresencePreviousValuesObject =
   | UserPresencePreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'code', args?: [] | false, alias?: string  } 
   | { name: 'presence', args?: [] | false, alias?: string  } 
 
 type UserPresencePreviousValuesFields =
   | 'id'
+  | 'code'
   | 'presence'
 
 
@@ -1871,6 +1883,14 @@ type UserPresencePreviousValuesFields =
 export interface UserPresencePreviousValuesFieldDetails {
   id: {
     type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  code: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -1915,6 +1935,20 @@ export interface UserPresenceWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
+  code?: string | null
+  code_not?: string | null
+  code_in?: string[]
+  code_not_in?: string[]
+  code_lt?: string | null
+  code_lte?: string | null
+  code_gt?: string | null
+  code_gte?: string | null
+  code_contains?: string | null
+  code_not_contains?: string | null
+  code_starts_with?: string | null
+  code_not_starts_with?: string | null
+  code_ends_with?: string | null
+  code_not_ends_with?: string | null
   user?: UserWhereInput | null
   activity?: ActivityWhereInput | null
   presence?: boolean | null
@@ -1937,6 +1971,20 @@ export type UserPresenceWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'code', alias?: string  } 
+  | { name: 'code_not', alias?: string  } 
+  | { name: 'code_in', alias?: string  } 
+  | { name: 'code_not_in', alias?: string  } 
+  | { name: 'code_lt', alias?: string  } 
+  | { name: 'code_lte', alias?: string  } 
+  | { name: 'code_gt', alias?: string  } 
+  | { name: 'code_gte', alias?: string  } 
+  | { name: 'code_contains', alias?: string  } 
+  | { name: 'code_not_contains', alias?: string  } 
+  | { name: 'code_starts_with', alias?: string  } 
+  | { name: 'code_not_starts_with', alias?: string  } 
+  | { name: 'code_ends_with', alias?: string  } 
+  | { name: 'code_not_ends_with', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
@@ -2320,10 +2368,12 @@ export type ActivityWhereUniqueInputInputObject =
   
 export interface UserPresenceWhereUniqueInput {
   id?: string | null
+  code?: string | null
 }
 export type UserPresenceWhereUniqueInputInputObject =
   | Extract<keyof UserPresenceWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'code', alias?: string  } 
   
 export interface UserCreateInput {
   id?: string | null
@@ -2359,12 +2409,14 @@ export type UserPresenceCreateManyWithoutUserInputInputObject =
   
 export interface UserPresenceCreateWithoutUserInput {
   id?: string | null
+  code?: string
   activity?: ActivityCreateOneWithoutRegisteredInput
   presence?: boolean | null
 }
 export type UserPresenceCreateWithoutUserInputInputObject =
   | Extract<keyof UserPresenceCreateWithoutUserInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'code', alias?: string  } 
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   
@@ -2450,11 +2502,13 @@ export type UserPresenceUpdateWithWhereUniqueWithoutUserInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserPresenceUpdateWithoutUserDataInput {
+  code?: string | null
   activity?: ActivityUpdateOneRequiredWithoutRegisteredInput | null
   presence?: boolean | null
 }
 export type UserPresenceUpdateWithoutUserDataInputInputObject =
   | Extract<keyof UserPresenceUpdateWithoutUserDataInput, string>
+  | { name: 'code', alias?: string  } 
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   
@@ -2523,6 +2577,20 @@ export interface UserPresenceScalarWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
+  code?: string | null
+  code_not?: string | null
+  code_in?: string[]
+  code_not_in?: string[]
+  code_lt?: string | null
+  code_lte?: string | null
+  code_gt?: string | null
+  code_gte?: string | null
+  code_contains?: string | null
+  code_not_contains?: string | null
+  code_starts_with?: string | null
+  code_not_starts_with?: string | null
+  code_ends_with?: string | null
+  code_not_ends_with?: string | null
   presence?: boolean | null
   presence_not?: boolean | null
   AND?: UserPresenceScalarWhereInput[]
@@ -2545,6 +2613,20 @@ export type UserPresenceScalarWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'code', alias?: string  } 
+  | { name: 'code_not', alias?: string  } 
+  | { name: 'code_in', alias?: string  } 
+  | { name: 'code_not_in', alias?: string  } 
+  | { name: 'code_lt', alias?: string  } 
+  | { name: 'code_lte', alias?: string  } 
+  | { name: 'code_gt', alias?: string  } 
+  | { name: 'code_gte', alias?: string  } 
+  | { name: 'code_contains', alias?: string  } 
+  | { name: 'code_not_contains', alias?: string  } 
+  | { name: 'code_starts_with', alias?: string  } 
+  | { name: 'code_not_starts_with', alias?: string  } 
+  | { name: 'code_ends_with', alias?: string  } 
+  | { name: 'code_not_ends_with', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   | { name: 'presence_not', alias?: string  } 
   | { name: 'AND', alias?: string  } 
@@ -2561,10 +2643,12 @@ export type UserPresenceUpdateManyWithWhereNestedInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserPresenceUpdateManyDataInput {
+  code?: string | null
   presence?: boolean | null
 }
 export type UserPresenceUpdateManyDataInputInputObject =
   | Extract<keyof UserPresenceUpdateManyDataInput, string>
+  | { name: 'code', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
@@ -2618,12 +2702,14 @@ export type UserPresenceCreateManyWithoutActivityInputInputObject =
   
 export interface UserPresenceCreateWithoutActivityInput {
   id?: string | null
+  code?: string
   user?: UserCreateOneWithoutActivitiesInput
   presence?: boolean | null
 }
 export type UserPresenceCreateWithoutActivityInputInputObject =
   | Extract<keyof UserPresenceCreateWithoutActivityInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'code', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   
@@ -2709,11 +2795,13 @@ export type UserPresenceUpdateWithWhereUniqueWithoutActivityInputInputObject =
   | { name: 'data', alias?: string  } 
   
 export interface UserPresenceUpdateWithoutActivityDataInput {
+  code?: string | null
   user?: UserUpdateOneRequiredWithoutActivitiesInput | null
   presence?: boolean | null
 }
 export type UserPresenceUpdateWithoutActivityDataInputInputObject =
   | Extract<keyof UserPresenceUpdateWithoutActivityDataInput, string>
+  | { name: 'code', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   
@@ -2788,6 +2876,7 @@ export type ActivityUpdateManyMutationInputInputObject =
   
 export interface UserPresenceCreateInput {
   id?: string | null
+  code?: string
   user?: UserCreateOneWithoutActivitiesInput
   activity?: ActivityCreateOneWithoutRegisteredInput
   presence?: boolean | null
@@ -2795,26 +2884,31 @@ export interface UserPresenceCreateInput {
 export type UserPresenceCreateInputInputObject =
   | Extract<keyof UserPresenceCreateInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'code', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   
 export interface UserPresenceUpdateInput {
+  code?: string | null
   user?: UserUpdateOneRequiredWithoutActivitiesInput | null
   activity?: ActivityUpdateOneRequiredWithoutRegisteredInput | null
   presence?: boolean | null
 }
 export type UserPresenceUpdateInputInputObject =
   | Extract<keyof UserPresenceUpdateInput, string>
+  | { name: 'code', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'activity', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   
 export interface UserPresenceUpdateManyMutationInput {
+  code?: string | null
   presence?: boolean | null
 }
 export type UserPresenceUpdateManyMutationInputInputObject =
   | Extract<keyof UserPresenceUpdateManyMutationInput, string>
+  | { name: 'code', alias?: string  } 
   | { name: 'presence', alias?: string  } 
   
 export interface UserSubscriptionWhereInput {
@@ -2872,6 +2966,8 @@ export type UserPresenceSubscriptionWhereInputInputObject =
 export type UserPresenceOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
+  | 'code_ASC'
+  | 'code_DESC'
   | 'presence_ASC'
   | 'presence_DESC'
   

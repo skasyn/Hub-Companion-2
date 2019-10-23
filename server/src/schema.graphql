@@ -33,6 +33,8 @@ type Activity {
 }
 
 type UserPresence {
+  id: ID!
+  code: String!
   user: User!
   activity: Activity!
   presence: Boolean

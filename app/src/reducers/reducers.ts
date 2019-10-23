@@ -19,7 +19,6 @@ export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
         };
       }
       case 'loginUserCookie': {
-        console.log(action.user);
         return {
           ...state,
           user: action.user

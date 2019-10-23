@@ -188,6 +188,8 @@ export interface ClientConstructor<T> {
 export type UserPresenceOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "code_ASC"
+  | "code_DESC"
   | "presence_ASC"
   | "presence_DESC";
 
@@ -260,6 +262,20 @@ export interface UserPresenceWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  code?: Maybe<String>;
+  code_not?: Maybe<String>;
+  code_in?: Maybe<String[] | String>;
+  code_not_in?: Maybe<String[] | String>;
+  code_lt?: Maybe<String>;
+  code_lte?: Maybe<String>;
+  code_gt?: Maybe<String>;
+  code_gte?: Maybe<String>;
+  code_contains?: Maybe<String>;
+  code_not_contains?: Maybe<String>;
+  code_starts_with?: Maybe<String>;
+  code_not_starts_with?: Maybe<String>;
+  code_ends_with?: Maybe<String>;
+  code_not_ends_with?: Maybe<String>;
   user?: Maybe<UserWhereInput>;
   activity?: Maybe<ActivityWhereInput>;
   presence?: Maybe<Boolean>;
@@ -282,6 +298,20 @@ export interface UserPresenceScalarWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  code?: Maybe<String>;
+  code_not?: Maybe<String>;
+  code_in?: Maybe<String[] | String>;
+  code_not_in?: Maybe<String[] | String>;
+  code_lt?: Maybe<String>;
+  code_lte?: Maybe<String>;
+  code_gt?: Maybe<String>;
+  code_gte?: Maybe<String>;
+  code_contains?: Maybe<String>;
+  code_not_contains?: Maybe<String>;
+  code_starts_with?: Maybe<String>;
+  code_not_starts_with?: Maybe<String>;
+  code_ends_with?: Maybe<String>;
+  code_not_ends_with?: Maybe<String>;
   presence?: Maybe<Boolean>;
   presence_not?: Maybe<Boolean>;
   AND?: Maybe<UserPresenceScalarWhereInput[] | UserPresenceScalarWhereInput>;
@@ -382,6 +412,7 @@ export interface ActivityWhereInput {
 
 export interface UserPresenceCreateWithoutActivityInput {
   id?: Maybe<ID_Input>;
+  code: String;
   user: UserCreateOneWithoutActivitiesInput;
   presence?: Maybe<Boolean>;
 }
@@ -436,6 +467,7 @@ export interface ActivityUpdateInput {
 }
 
 export interface UserPresenceUpdateManyMutationInput {
+  code?: Maybe<String>;
   presence?: Maybe<Boolean>;
 }
 
@@ -471,6 +503,7 @@ export interface UserPresenceUpdateManyWithoutActivityInput {
 
 export interface UserPresenceCreateInput {
   id?: Maybe<ID_Input>;
+  code: String;
   user: UserCreateOneWithoutActivitiesInput;
   activity: ActivityCreateOneWithoutRegisteredInput;
   presence?: Maybe<Boolean>;
@@ -492,6 +525,7 @@ export interface UserUpdateManyMutationInput {
 }
 
 export interface UserPresenceUpdateWithoutActivityDataInput {
+  code?: Maybe<String>;
   user?: Maybe<UserUpdateOneRequiredWithoutActivitiesInput>;
   presence?: Maybe<Boolean>;
 }
@@ -532,6 +566,7 @@ export interface UserPresenceUpdateManyWithoutUserInput {
 
 export type UserPresenceWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
+  code?: Maybe<String>;
 }>;
 
 export interface UserUpdateWithoutActivitiesDataInput {
@@ -545,6 +580,7 @@ export interface UserUpdateWithoutActivitiesDataInput {
 }
 
 export interface UserPresenceUpdateWithoutUserDataInput {
+  code?: Maybe<String>;
   activity?: Maybe<ActivityUpdateOneRequiredWithoutRegisteredInput>;
   presence?: Maybe<Boolean>;
 }
@@ -705,6 +741,7 @@ export interface ActivityUpdateWithoutRegisteredDataInput {
 }
 
 export interface UserPresenceUpdateManyDataInput {
+  code?: Maybe<String>;
   presence?: Maybe<Boolean>;
 }
 
@@ -727,6 +764,7 @@ export interface UserCreateInput {
 
 export interface UserPresenceCreateWithoutUserInput {
   id?: Maybe<ID_Input>;
+  code: String;
   activity: ActivityCreateOneWithoutRegisteredInput;
   presence?: Maybe<Boolean>;
 }
@@ -770,6 +808,7 @@ export interface UserPresenceUpsertWithWhereUniqueWithoutUserInput {
 }
 
 export interface UserPresenceUpdateInput {
+  code?: Maybe<String>;
   user?: Maybe<UserUpdateOneRequiredWithoutActivitiesInput>;
   activity?: Maybe<ActivityUpdateOneRequiredWithoutRegisteredInput>;
   presence?: Maybe<Boolean>;
@@ -792,6 +831,7 @@ export interface NodeNode {
 
 export interface UserPresencePreviousValues {
   id: ID_Output;
+  code: String;
   presence?: Boolean;
 }
 
@@ -799,6 +839,7 @@ export interface UserPresencePreviousValuesPromise
   extends Promise<UserPresencePreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
   presence: () => Promise<Boolean>;
 }
 
@@ -806,6 +847,7 @@ export interface UserPresencePreviousValuesSubscription
   extends Promise<AsyncIterator<UserPresencePreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  code: () => Promise<AsyncIterator<String>>;
   presence: () => Promise<AsyncIterator<Boolean>>;
 }
 
@@ -1198,6 +1240,7 @@ export interface ActivityConnectionSubscription
 
 export interface UserPresence {
   id: ID_Output;
+  code: String;
   presence?: Boolean;
 }
 
@@ -1205,6 +1248,7 @@ export interface UserPresencePromise
   extends Promise<UserPresence>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
   user: <T = UserPromise>() => T;
   activity: <T = ActivityPromise>() => T;
   presence: () => Promise<Boolean>;
@@ -1214,6 +1258,7 @@ export interface UserPresenceSubscription
   extends Promise<AsyncIterator<UserPresence>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  code: () => Promise<AsyncIterator<String>>;
   user: <T = UserSubscription>() => T;
   activity: <T = ActivitySubscription>() => T;
   presence: () => Promise<AsyncIterator<Boolean>>;
@@ -1223,6 +1268,7 @@ export interface UserPresenceNullablePromise
   extends Promise<UserPresence | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
   user: <T = UserPromise>() => T;
   activity: <T = ActivityPromise>() => T;
   presence: () => Promise<Boolean>;

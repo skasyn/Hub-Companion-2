@@ -23,6 +23,7 @@ type Activity {
 
 type UserPresence {
     id: ID! @id
+    code: String! @unique
     user: User! @relation(name: "PresenceUser")
     activity: Activity! @relation(name: "PresenceActivity")
     presence: Boolean

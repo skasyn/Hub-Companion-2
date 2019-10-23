@@ -378,6 +378,7 @@ enum UserOrderByInput {
 
 type UserPresence {
   id: ID!
+  code: String!
   user: User!
   activity: Activity!
   presence: Boolean
@@ -391,6 +392,7 @@ type UserPresenceConnection {
 
 input UserPresenceCreateInput {
   id: ID
+  code: String!
   user: UserCreateOneWithoutActivitiesInput!
   activity: ActivityCreateOneWithoutRegisteredInput!
   presence: Boolean
@@ -408,12 +410,14 @@ input UserPresenceCreateManyWithoutUserInput {
 
 input UserPresenceCreateWithoutActivityInput {
   id: ID
+  code: String!
   user: UserCreateOneWithoutActivitiesInput!
   presence: Boolean
 }
 
 input UserPresenceCreateWithoutUserInput {
   id: ID
+  code: String!
   activity: ActivityCreateOneWithoutRegisteredInput!
   presence: Boolean
 }
@@ -426,12 +430,15 @@ type UserPresenceEdge {
 enum UserPresenceOrderByInput {
   id_ASC
   id_DESC
+  code_ASC
+  code_DESC
   presence_ASC
   presence_DESC
 }
 
 type UserPresencePreviousValues {
   id: ID!
+  code: String!
   presence: Boolean
 }
 
@@ -450,6 +457,20 @@ input UserPresenceScalarWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
   presence: Boolean
   presence_not: Boolean
   AND: [UserPresenceScalarWhereInput!]
@@ -474,16 +495,19 @@ input UserPresenceSubscriptionWhereInput {
 }
 
 input UserPresenceUpdateInput {
+  code: String
   user: UserUpdateOneRequiredWithoutActivitiesInput
   activity: ActivityUpdateOneRequiredWithoutRegisteredInput
   presence: Boolean
 }
 
 input UserPresenceUpdateManyDataInput {
+  code: String
   presence: Boolean
 }
 
 input UserPresenceUpdateManyMutationInput {
+  code: String
   presence: Boolean
 }
 
@@ -517,11 +541,13 @@ input UserPresenceUpdateManyWithWhereNestedInput {
 }
 
 input UserPresenceUpdateWithoutActivityDataInput {
+  code: String
   user: UserUpdateOneRequiredWithoutActivitiesInput
   presence: Boolean
 }
 
 input UserPresenceUpdateWithoutUserDataInput {
+  code: String
   activity: ActivityUpdateOneRequiredWithoutRegisteredInput
   presence: Boolean
 }
@@ -563,6 +589,20 @@ input UserPresenceWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  code: String
+  code_not: String
+  code_in: [String!]
+  code_not_in: [String!]
+  code_lt: String
+  code_lte: String
+  code_gt: String
+  code_gte: String
+  code_contains: String
+  code_not_contains: String
+  code_starts_with: String
+  code_not_starts_with: String
+  code_ends_with: String
+  code_not_ends_with: String
   user: UserWhereInput
   activity: ActivityWhereInput
   presence: Boolean
@@ -572,6 +612,7 @@ input UserPresenceWhereInput {
 
 input UserPresenceWhereUniqueInput {
   id: ID
+  code: String
 }
 
 type UserPreviousValues {

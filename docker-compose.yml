@@ -52,6 +52,10 @@ services:
       networks:
         - front-back
         - back-prisma
+      volumes:
+        - type: bind
+          source: ./server
+          target: /server
 
 networks:
   front-back:

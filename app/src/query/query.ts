@@ -7,9 +7,6 @@ export const LOGIN: any = gql`
       name
       xp
       email
-      activities {
-        title
-      }
     }
   }
 `;
@@ -21,9 +18,6 @@ export const LOGIN_COOKIE: any = gql`
       name
       xp
       email
-      activities {
-        title
-      }
     }
   }
 `;

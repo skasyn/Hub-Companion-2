@@ -4,9 +4,9 @@ FROM node:12.10.0-alpine
 RUN mkdir /server
 WORKDIR /server
 
-COPY /src /server/src
-COPY /prisma /server/prisma
-COPY ["package.json", "tsconfig.json", ".env", "./"]
+#COPY /src /server/src
+#COPY /prisma /server/prisma
+#COPY ["package.json", "tsconfig.json", ".env", "./"]
 
 RUN npm install --silent
 

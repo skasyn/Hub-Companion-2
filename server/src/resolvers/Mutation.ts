@@ -20,36 +20,68 @@ function getDescription(event, activity): String {
 async function activityUpsert(event, activity, studentList, hubModule) {
   let title = activity.title || event.title;
   let description = getDescription(event, activity).toString();
-  let date = event.begin || event.end;
-  let xp = 5; //TODO
+  let dateString = event.begin || event.end;
+  let date = new Date(dateString);
+  let type = activity.type_title;
+  let xp = (() => {
+    switch (type) {
+      case "Hackathon": return 6;
+      case "Workshop": return 3;
+      case "Talk": return 1;
+    }
+  })();
 
-  await prisma.upsertActivity({
+  dateString = date.toISOString();
+  let createdActivity = await prisma.upsertActivity({
     where: {
       code: event.code
     },
     create: {
       code: event.code,
-      type: event.type_title,
+      type: activity.type_title,
       xp: xp,
       title: title,
       description: description,
-      date: date,
-      registered: studentList,
+      date: dateString,
     },
     update: {
       code: event.code,
-      type: event.type_title,
+      type: activity.type_title,
       xp: xp,
       title: title,
       description: description,
-      date: date,
-      registered: studentList,
+      date: dateString,
     }
   });
+  for (let student of studentList) {
+    let user_found = await prisma.user({
+      email: student.email
+    });
+    if (user_found !== null) {
+      await prisma.upsertUserPresence({
+        where: {
+          code: user_found.email + '-' + event.code
+        },
+        create: {
+          code: user_found.email + '-' + event.code,
+          user: {
+            connect: { email: user_found.email }
+          },
+          activity: {
+            connect: { code: createdActivity.code }
+          },
+          presence: (student.present === 'present' || student.present == 'N/A')
+        },
+        update: {
+          presence: (student.present === 'present' || student.present == 'N/A')
+        }
+      })
+    }
+  }
 }
 
 async function getEvents(year, hubModule, city, event, activity) {
-  const responseEvent = await axios.get(`${process.env.URLAUTO}module/${year}/${hubModule}/${city}-0-1/${activity.codeacti}/${event.code}/registered?format=json`);
+  const responseEvent = await axios.get(`${process.env.URLAUTO}module/${year}/${hubModule}/${city}-0-1/${activity.codeacti}/${event.code}/registered?format=json`).catch((e) => {console.log(e);});
   if (responseEvent.data !== undefined && responseEvent.data !== null && !isEmpty(responseEvent.data)) {
     let studentList = [];
     for (let student of responseEvent.data) {
@@ -60,11 +92,13 @@ async function getEvents(year, hubModule, city, event, activity) {
 }
 
 async function getActivities(year, hubModule, city) {
-  const responseActivities = await axios.get(`${process.env.URLAUTO}module/${year}/${hubModule}/${city}-0-1?format=json`);
+  const responseActivities = await axios.get(`${process.env.URLAUTO}module/${year}/${hubModule}/${city}-0-1?format=json`).catch((e) => {console.log(e);});
+  if (responseActivities === undefined)
+    return;
   for (let activity of responseActivities.data.activites) {
     if (activity.events !== undefined && activity.events.length !== 0) {
       for (let event of activity.events) {
-        await getEvents(year, hubModule, city, event, activity);
+        getEvents(year, hubModule, city, event, activity);
       }
     }
   }
@@ -74,11 +108,9 @@ async function refresh(parent, args, context) {
   // TODO: Change into custom fields
   const year = "2019";
   const hubModule = "B-INN-000";
-  const talkModule = "B-INN-001";
   const city = "PAR";
 
   await getActivities(year, hubModule, city);
-  await getActivities(year, talkModule, city);
   return true;
 }
 

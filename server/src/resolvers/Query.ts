@@ -31,7 +31,8 @@ async function login(parent, args, context) {
       outlookId: user_data.data.id,
       name: user_data.data.displayName,
       email: user_data.data.mail,
-    })
+    });
+    //TODO Refresh database on new user??
   }
   return user_found;
 }
