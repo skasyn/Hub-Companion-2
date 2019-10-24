@@ -5,6 +5,7 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import {LOGIN, LOGIN_COOKIE} from '../query/query';
 import {LoginCookieData, LoginData, LoginVars} from '../types/types';
 import { dispatch } from "../reducers/reducers";
+import { Card, Grid, CardMedia, CardContent, makeStyles } from "@material-ui/core";
 
 require('dotenv').config();
 
@@ -51,28 +52,81 @@ export const LoadingConnectionOffice: React.FC<LoadingConnectionProps> = (props)
   );
 };
 
-export const PageNotLogged: React.FC = () => {
+const useStyles = makeStyles({
+  card: {
+    maxWidth: 700,
+  },
+  cardContent: {
+    textAlign: 'center',
+  },
+  media: {
+    height: 110,
+    width: 652,
+  },
+  root: {
+    flexGrow: 1,
+  }
+});
+
+const CardNotLoggedContent: React.FC = () => {
   let query = new URLSearchParams(window.location.search);
   const code = query.get('code');
   const cookieId = /(; |^)(id=([^;]*))/gm.exec(window.document.cookie);
 
   if (cookieId !== null && cookieId !== undefined && cookieId[3] !== "") {
     return (
-      <div>
-        <LoadingConnectionCookie code={cookieId[3]}/>
-      </div>
+        <div>
+          <LoadingConnectionCookie code={cookieId[3]}/>
+        </div>
     )
   } else if (code != null) {
     return (
-      <div>
-        <LoadingConnectionOffice code={code}/>
-      </div>
+        <div>
+          <LoadingConnectionOffice code={code}/>
+        </div>
     );
   } else {
     return (
-      <div>
-        <LoginButton/>
-      </div>
+        <div>
+          <LoginButton/>
+        </div>
     );
   }
+};
+
+const ConnectionDispatch: React.FC = () => {
+  const classes = useStyles();
+
+  return(
+      <Card className={classes.card} elevation={0}>
+        <CardMedia
+            className={classes.media}
+            image={require('../assets/hub_companion_2.png')}
+        />
+        <CardContent className={classes.cardContent}>
+          <CardNotLoggedContent/>
+        </CardContent>
+      </Card>
+  );
+};
+
+export const PageNotLogged: React.FC = () => {
+  const classes = useStyles();
+
+  return (
+      <div className={classes.root}>
+        <Grid
+            container={true}
+            spacing={3}
+            alignItems="center"
+            direction="column"
+            justify="center"
+            style={{ minHeight: '100vh' }}
+        >
+          <Grid item xs={12}>
+            <ConnectionDispatch/>
+          </Grid>
+        </Grid>
+      </div>
+  )
 };

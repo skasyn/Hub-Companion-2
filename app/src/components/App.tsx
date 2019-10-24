@@ -5,14 +5,13 @@ import { PageNotLogged } from './PageNotLogged';
 import { Navigation } from './Navigation';
 import { GlobalStateProvider, useGlobalState } from "../reducers/reducers";
 
-
 const LoginDispatch: React.FC = () => {
   const [user] = useGlobalState('user');
 
   if (Object.keys(user).length === 0) {
     return (
-      <PageNotLogged/>
-    )
+        <PageNotLogged/>
+    );
   } else {
     return (
       <Navigation/>
@@ -24,9 +23,7 @@ const App: React.FC = () => {
   return (
     <StrictMode>
       <GlobalStateProvider>
-        <div>
-          <LoginDispatch/>
-        </div>
+        <LoginDispatch/>
       </GlobalStateProvider>
     </StrictMode>
   );
