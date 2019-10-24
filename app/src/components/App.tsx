@@ -2,7 +2,7 @@ import React from 'react';
 import { StrictMode } from 'react';
 import '../styles/App.css';
 import { PageNotLogged } from './PageNotLogged';
-import { HomePage } from './HomePage';
+import { Navigation } from './Navigation';
 import { GlobalStateProvider, useGlobalState } from "../reducers/reducers";
 
 
@@ -15,7 +15,7 @@ const LoginDispatch: React.FC = () => {
     )
   } else {
     return (
-      <HomePage/>
+      <Navigation/>
     );
   }
 };

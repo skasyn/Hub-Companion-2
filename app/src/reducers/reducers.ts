@@ -3,7 +3,8 @@ import { createStore } from 'react-hooks-global-state';
 
 export type Action =
   | { type: 'loginUser', user: User }
-  | { type: 'loginUserCookie', user: User };
+  | { type: 'loginUserCookie', user: User }
+  | { type: 'changePage', page: Number };
 
 export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
   (state, action: Action) => {
@@ -24,6 +25,12 @@ export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
           user: action.user
         };
       }
+      case 'changePage': {
+        return {
+          ...state,
+          currentPage: action.page
+        };
+      }
       default: return state;
     }
   },
@@ -31,5 +38,6 @@ export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
     user: {} as User,
     error: false,
     loading: false,
+    currentPage: 0 as Number
   },
 );

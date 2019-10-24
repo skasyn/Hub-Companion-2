@@ -12,7 +12,6 @@ const schema = makePrismaSchema({
     datamodelInfo,
     client: new Prisma({
       endpoint: 'http://prisma:4466',
-      // To change to http://prisma:4466 when dockerized
     }),
   },
 

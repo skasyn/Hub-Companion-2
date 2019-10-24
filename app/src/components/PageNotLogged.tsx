@@ -54,7 +54,7 @@ export const LoadingConnectionOffice: React.FC<LoadingConnectionProps> = (props)
 export const PageNotLogged: React.FC = () => {
   let query = new URLSearchParams(window.location.search);
   const code = query.get('code');
-  const cookieId = /(;|^)(id=([^;]*))/gm.exec(window.document.cookie);
+  const cookieId = /(; |^)(id=([^;]*))/gm.exec(window.document.cookie);
 
   if (cookieId !== null && cookieId !== undefined && cookieId[3] !== "") {
     return (
