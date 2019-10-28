@@ -6,6 +6,15 @@ export interface User {
   activities: Array<{title: String}>
 }
 
+export interface Activity {
+  presence: Boolean,
+  activity: {
+    title: String,
+    description: String,
+    date: String,
+  }
+}
+
 export interface LoginData {
   login: User
 }
@@ -22,4 +31,12 @@ export interface XpData {
 }
 export interface XpVars {
   code: String
+}
+
+export interface ActivityData {
+  userPresences: Activity[]
+}
+
+export interface ActivityVars {
+  email: String
 }

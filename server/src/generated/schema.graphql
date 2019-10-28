@@ -115,6 +115,7 @@ type Query {
   login(code: String): User!
   loginCookie(code: String): User!
   user(where: UserWhereUniqueInput!): User
+  userPresences(after: String, before: String, first: Int, last: Int, orderBy: UserPresenceOrderByInput, skip: Int, where: UserPresenceWhereInput): [UserPresence!]!
   users(after: String, before: String, first: Int, last: Int, orderBy: UserOrderByInput, skip: Int, where: UserWhereInput): [User!]!
 }
 

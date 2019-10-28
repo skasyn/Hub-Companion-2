@@ -3,6 +3,7 @@ scalar DateTime
 type Query {
   login(code: String!): User!
   loginCookie(code: String!): User!
+  userActivities(code: String!): [Activity!]!
 }
 
 type Mutation {

@@ -303,6 +303,7 @@ export interface NexusGenFieldTypes {
     login: NexusGenRootTypes['User']; // User!
     loginCookie: NexusGenRootTypes['User']; // User!
     user: NexusGenRootTypes['User'] | null; // User
+    userPresences: NexusGenRootTypes['UserPresence'][]; // [UserPresence!]!
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
   User: { // field return type
@@ -349,6 +350,15 @@ export interface NexusGenArgTypes {
     }
     user: { // args
       where: NexusGenInputs['UserWhereUniqueInput']; // UserWhereUniqueInput!
+    }
+    userPresences: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['UserPresenceOrderByInput'] | null; // UserPresenceOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['UserPresenceWhereInput'] | null; // UserPresenceWhereInput
     }
     users: { // args
       after?: string | null; // String

@@ -12,6 +12,7 @@
     "apollo-boost": "^0.4.4",
     "dotenv": "^8.1.0",
     "graphql": "^14.5.7",
+    "material-table": "^1.53.0",
     "react": "^16.9.0",
     "react-apollo": "^3.1.1",
     "react-dom": "^16.9.0",

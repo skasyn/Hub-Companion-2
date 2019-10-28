@@ -1,5 +1,4 @@
 import React from 'react';
-import { StrictMode } from 'react';
 import '../styles/App.css';
 import { PageNotLogged } from './PageNotLogged';
 import { Navigation } from './Navigation';
@@ -21,11 +20,9 @@ const LoginDispatch: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <StrictMode>
-      <GlobalStateProvider>
-        <LoginDispatch/>
-      </GlobalStateProvider>
-    </StrictMode>
+    <GlobalStateProvider>
+      <LoginDispatch/>
+    </GlobalStateProvider>
   );
 };
 

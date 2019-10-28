@@ -64,10 +64,11 @@ async function getXp(parent, args, context) {
   console.log(xp);
   return xp;
 }
+
 export const Query = prismaObjectType({
   name: 'Query',
   definition(t) {
-    t.prismaFields(['user', 'users']);
+    t.prismaFields(['user', 'users', 'userPresences']);
     t.field('login', {
       type: 'User',
       args: { code: stringArg() },
@@ -82,14 +83,6 @@ export const Query = prismaObjectType({
       type: 'Int',
       args: { code: stringArg() },
       resolve: getXp,
-    })
+    });
   },
 });
-
-// export const Query = {
-//   userbyemail
-// };
-
-// module.exports = {
-//   Query,
-// }

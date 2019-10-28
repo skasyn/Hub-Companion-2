@@ -25,3 +25,23 @@ export const GET_XP: any = gql`
     getXp(code: $code)
   }
 `;
+
+export const GET_ACTIVITIES: any = gql`
+    query GET_ACTIVITIES($mail: String) {
+        userPresences(
+            where: {
+                user: {
+                    email: $mail
+                }
+            }
+        ) {
+            presence
+            activity {
+                title
+                description
+                date
+                type
+            }
+        }
+    }
+`;

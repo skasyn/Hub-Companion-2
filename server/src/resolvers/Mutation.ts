@@ -57,7 +57,7 @@ async function activityUpsert(event, activity, studentList, hubModule) {
     let user_found = await prisma.user({
       email: student.email
     });
-    let isPresent = (student.present === 'present' || student.present == 'N/A')
+    let isPresent = (student.present === 'present' || student.present == 'N/A');
 
     if (user_found !== null) {
       await prisma.upsertUserPresence({
