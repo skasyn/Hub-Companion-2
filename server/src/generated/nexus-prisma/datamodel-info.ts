@@ -3260,7 +3260,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date",
+            "name": "begin",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -3270,7 +3270,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date_not",
+            "name": "begin_not",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -3280,7 +3280,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date_in",
+            "name": "begin_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -3298,7 +3298,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date_not_in",
+            "name": "begin_not_in",
             "description": null,
             "type": {
               "kind": "LIST",
@@ -3316,7 +3316,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date_lt",
+            "name": "begin_lt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -3326,7 +3326,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date_lte",
+            "name": "begin_lte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -3336,7 +3336,7 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date_gt",
+            "name": "begin_gt",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -3346,7 +3346,103 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date_gte",
+            "name": "begin_gte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end_not",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end_not_in",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end_lt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end_lte",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end_gt",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end_gte",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -3668,7 +3764,19 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "date",
+            "name": "begin",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end",
             "description": null,
             "args": [],
             "type": {
@@ -4183,13 +4291,25 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "date_ASC",
+            "name": "begin_ASC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "date_DESC",
+            "name": "begin_DESC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end_ASC",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end_DESC",
             "description": null,
             "isDeprecated": false,
             "deprecationReason": null
@@ -5547,7 +5667,17 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date",
+            "name": "begin",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6013,7 +6143,17 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date",
+            "name": "begin",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -6879,7 +7019,17 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date",
+            "name": "begin",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7208,7 +7358,17 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date",
+            "name": "begin",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -7766,7 +7926,17 @@ export default {
             "defaultValue": null
           },
           {
-            "name": "date",
+            "name": "begin",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "end",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -8635,7 +8805,19 @@ export default {
             "deprecationReason": null
           },
           {
-            "name": "date",
+            "name": "begin",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "end",
             "description": null,
             "args": [],
             "type": {

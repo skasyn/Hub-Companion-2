@@ -9,7 +9,8 @@ export const typeDefs = /* GraphQL */ `type Activity {
   xp: Int
   title: String!
   description: String
-  date: DateTime
+  begin: DateTime
+  end: DateTime
   registered(where: UserPresenceWhereInput, orderBy: UserPresenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserPresence!]
 }
 
@@ -26,7 +27,8 @@ input ActivityCreateInput {
   xp: Int
   title: String!
   description: String
-  date: DateTime
+  begin: DateTime
+  end: DateTime
   registered: UserPresenceCreateManyWithoutActivityInput
 }
 
@@ -42,7 +44,8 @@ input ActivityCreateWithoutRegisteredInput {
   xp: Int
   title: String!
   description: String
-  date: DateTime
+  begin: DateTime
+  end: DateTime
 }
 
 type ActivityEdge {
@@ -63,8 +66,10 @@ enum ActivityOrderByInput {
   title_DESC
   description_ASC
   description_DESC
-  date_ASC
-  date_DESC
+  begin_ASC
+  begin_DESC
+  end_ASC
+  end_DESC
 }
 
 type ActivityPreviousValues {
@@ -74,7 +79,8 @@ type ActivityPreviousValues {
   xp: Int
   title: String!
   description: String
-  date: DateTime
+  begin: DateTime
+  end: DateTime
 }
 
 type ActivitySubscriptionPayload {
@@ -99,7 +105,8 @@ input ActivityUpdateInput {
   xp: Int
   title: String
   description: String
-  date: DateTime
+  begin: DateTime
+  end: DateTime
   registered: UserPresenceUpdateManyWithoutActivityInput
 }
 
@@ -109,7 +116,8 @@ input ActivityUpdateManyMutationInput {
   xp: Int
   title: String
   description: String
-  date: DateTime
+  begin: DateTime
+  end: DateTime
 }
 
 input ActivityUpdateOneRequiredWithoutRegisteredInput {
@@ -125,7 +133,8 @@ input ActivityUpdateWithoutRegisteredDataInput {
   xp: Int
   title: String
   description: String
-  date: DateTime
+  begin: DateTime
+  end: DateTime
 }
 
 input ActivityUpsertWithoutRegisteredInput {
@@ -212,14 +221,22 @@ input ActivityWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
-  date: DateTime
-  date_not: DateTime
-  date_in: [DateTime!]
-  date_not_in: [DateTime!]
-  date_lt: DateTime
-  date_lte: DateTime
-  date_gt: DateTime
-  date_gte: DateTime
+  begin: DateTime
+  begin_not: DateTime
+  begin_in: [DateTime!]
+  begin_not_in: [DateTime!]
+  begin_lt: DateTime
+  begin_lte: DateTime
+  begin_gt: DateTime
+  begin_gte: DateTime
+  end: DateTime
+  end_not: DateTime
+  end_in: [DateTime!]
+  end_not_in: [DateTime!]
+  end_lt: DateTime
+  end_lte: DateTime
+  end_gt: DateTime
+  end_gte: DateTime
   registered_some: UserPresenceWhereInput
   AND: [ActivityWhereInput!]
 }

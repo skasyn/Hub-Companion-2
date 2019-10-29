@@ -13,6 +13,14 @@ declare global {
 export interface NexusGenInputs {
   ActivityWhereInput: { // input type
     AND?: NexusGenInputs['ActivityWhereInput'][] | null; // [ActivityWhereInput!]
+    begin?: any | null; // DateTime
+    begin_gt?: any | null; // DateTime
+    begin_gte?: any | null; // DateTime
+    begin_in?: any[] | null; // [DateTime!]
+    begin_lt?: any | null; // DateTime
+    begin_lte?: any | null; // DateTime
+    begin_not?: any | null; // DateTime
+    begin_not_in?: any[] | null; // [DateTime!]
     code?: string | null; // String
     code_contains?: string | null; // String
     code_ends_with?: string | null; // String
@@ -27,14 +35,6 @@ export interface NexusGenInputs {
     code_not_in?: string[] | null; // [String!]
     code_not_starts_with?: string | null; // String
     code_starts_with?: string | null; // String
-    date?: any | null; // DateTime
-    date_gt?: any | null; // DateTime
-    date_gte?: any | null; // DateTime
-    date_in?: any[] | null; // [DateTime!]
-    date_lt?: any | null; // DateTime
-    date_lte?: any | null; // DateTime
-    date_not?: any | null; // DateTime
-    date_not_in?: any[] | null; // [DateTime!]
     description?: string | null; // String
     description_contains?: string | null; // String
     description_ends_with?: string | null; // String
@@ -49,6 +49,14 @@ export interface NexusGenInputs {
     description_not_in?: string[] | null; // [String!]
     description_not_starts_with?: string | null; // String
     description_starts_with?: string | null; // String
+    end?: any | null; // DateTime
+    end_gt?: any | null; // DateTime
+    end_gte?: any | null; // DateTime
+    end_in?: any[] | null; // [DateTime!]
+    end_lt?: any | null; // DateTime
+    end_lte?: any | null; // DateTime
+    end_not?: any | null; // DateTime
+    end_not_in?: any[] | null; // [DateTime!]
     id?: string | null; // ID
     id_contains?: string | null; // ID
     id_ends_with?: string | null; // ID
@@ -236,15 +244,17 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  ActivityOrderByInput: "begin_ASC" | "begin_DESC" | "code_ASC" | "code_DESC" | "description_ASC" | "description_DESC" | "end_ASC" | "end_DESC" | "id_ASC" | "id_DESC" | "title_ASC" | "title_DESC" | "type_ASC" | "type_DESC" | "xp_ASC" | "xp_DESC"
   UserOrderByInput: "email_ASC" | "email_DESC" | "id_ASC" | "id_DESC" | "name_ASC" | "name_DESC" | "outlookId_ASC" | "outlookId_DESC" | "plan_ASC" | "plan_DESC" | "privilege_ASC" | "privilege_DESC" | "year_ASC" | "year_DESC"
   UserPresenceOrderByInput: "code_ASC" | "code_DESC" | "id_ASC" | "id_DESC" | "presence_ASC" | "presence_DESC" | "xp_ASC" | "xp_DESC"
 }
 
 export interface NexusGenRootTypes {
   Activity: { // root type
+    begin?: any | null; // DateTime
     code: string; // String!
-    date?: any | null; // DateTime
     description?: string | null; // String
+    end?: any | null; // DateTime
     id: string; // ID!
     title: string; // String!
     type: string; // String!
@@ -280,15 +290,17 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
   UserPresenceWhereInput: NexusGenInputs['UserPresenceWhereInput'];
   UserWhereInput: NexusGenInputs['UserWhereInput'];
   UserWhereUniqueInput: NexusGenInputs['UserWhereUniqueInput'];
+  ActivityOrderByInput: NexusGenEnums['ActivityOrderByInput'];
   UserOrderByInput: NexusGenEnums['UserOrderByInput'];
   UserPresenceOrderByInput: NexusGenEnums['UserPresenceOrderByInput'];
 }
 
 export interface NexusGenFieldTypes {
   Activity: { // field return type
+    begin: any | null; // DateTime
     code: string; // String!
-    date: any | null; // DateTime
     description: string | null; // String
+    end: any | null; // DateTime
     id: string; // ID!
     registered: NexusGenRootTypes['UserPresence'][] | null; // [UserPresence!]
     title: string; // String!
@@ -299,6 +311,7 @@ export interface NexusGenFieldTypes {
     refresh: boolean; // Boolean!
   }
   Query: { // field return type
+    activities: NexusGenRootTypes['Activity'][]; // [Activity!]!
     getXp: number; // Int!
     login: NexusGenRootTypes['User']; // User!
     loginCookie: NexusGenRootTypes['User']; // User!
@@ -339,6 +352,15 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    activities: { // args
+      after?: string | null; // String
+      before?: string | null; // String
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenEnums['ActivityOrderByInput'] | null; // ActivityOrderByInput
+      skip?: number | null; // Int
+      where?: NexusGenInputs['ActivityWhereInput'] | null; // ActivityWhereInput
+    }
     getXp: { // args
       code?: string | null; // String
     }
@@ -392,7 +414,7 @@ export type NexusGenObjectNames = "Activity" | "Mutation" | "Query" | "User" | "
 
 export type NexusGenInputNames = "ActivityWhereInput" | "UserPresenceWhereInput" | "UserWhereInput" | "UserWhereUniqueInput";
 
-export type NexusGenEnumNames = "UserOrderByInput" | "UserPresenceOrderByInput";
+export type NexusGenEnumNames = "ActivityOrderByInput" | "UserOrderByInput" | "UserPresenceOrderByInput";
 
 export type NexusGenInterfaceNames = never;
 

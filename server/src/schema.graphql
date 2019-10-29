@@ -28,7 +28,8 @@ type Activity {
   xp: Int
   title: String!
   description: String
-  date: DateTime
+  begin: DateTime
+  end: DateTime
   registered: [UserPresence!]!
 }
 

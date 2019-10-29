@@ -208,8 +208,10 @@ export type ActivityOrderByInput =
   | "title_DESC"
   | "description_ASC"
   | "description_DESC"
-  | "date_ASC"
-  | "date_DESC";
+  | "begin_ASC"
+  | "begin_DESC"
+  | "end_ASC"
+  | "end_DESC";
 
 export type UserOrderByInput =
   | "id_ASC"
@@ -414,14 +416,22 @@ export interface ActivityWhereInput {
   description_not_starts_with?: Maybe<String>;
   description_ends_with?: Maybe<String>;
   description_not_ends_with?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
-  date_not?: Maybe<DateTimeInput>;
-  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_lt?: Maybe<DateTimeInput>;
-  date_lte?: Maybe<DateTimeInput>;
-  date_gt?: Maybe<DateTimeInput>;
-  date_gte?: Maybe<DateTimeInput>;
+  begin?: Maybe<DateTimeInput>;
+  begin_not?: Maybe<DateTimeInput>;
+  begin_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  begin_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  begin_lt?: Maybe<DateTimeInput>;
+  begin_lte?: Maybe<DateTimeInput>;
+  begin_gt?: Maybe<DateTimeInput>;
+  begin_gte?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  end_not?: Maybe<DateTimeInput>;
+  end_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  end_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  end_lt?: Maybe<DateTimeInput>;
+  end_lte?: Maybe<DateTimeInput>;
+  end_gt?: Maybe<DateTimeInput>;
+  end_gte?: Maybe<DateTimeInput>;
   registered_some?: Maybe<UserPresenceWhereInput>;
   AND?: Maybe<ActivityWhereInput[] | ActivityWhereInput>;
 }
@@ -478,7 +488,8 @@ export interface ActivityUpdateInput {
   xp?: Maybe<Int>;
   title?: Maybe<String>;
   description?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
+  begin?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
   registered?: Maybe<UserPresenceUpdateManyWithoutActivityInput>;
 }
 
@@ -737,7 +748,8 @@ export interface ActivityCreateWithoutRegisteredInput {
   xp?: Maybe<Int>;
   title: String;
   description?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
+  begin?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
 }
 
 export interface ActivityUpdateWithoutRegisteredDataInput {
@@ -746,7 +758,8 @@ export interface ActivityUpdateWithoutRegisteredDataInput {
   xp?: Maybe<Int>;
   title?: Maybe<String>;
   description?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
+  begin?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
 }
 
 export interface UserPresenceUpdateManyDataInput {
@@ -790,7 +803,8 @@ export interface ActivityUpdateManyMutationInput {
   xp?: Maybe<Int>;
   title?: Maybe<String>;
   description?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
+  begin?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
 }
 
 export interface ActivityCreateInput {
@@ -800,7 +814,8 @@ export interface ActivityCreateInput {
   xp?: Maybe<Int>;
   title: String;
   description?: Maybe<String>;
-  date?: Maybe<DateTimeInput>;
+  begin?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
   registered?: Maybe<UserPresenceCreateManyWithoutActivityInput>;
 }
 
@@ -918,7 +933,8 @@ export interface Activity {
   xp?: Int;
   title: String;
   description?: String;
-  date?: DateTimeOutput;
+  begin?: DateTimeOutput;
+  end?: DateTimeOutput;
 }
 
 export interface ActivityPromise extends Promise<Activity>, Fragmentable {
@@ -928,7 +944,8 @@ export interface ActivityPromise extends Promise<Activity>, Fragmentable {
   xp: () => Promise<Int>;
   title: () => Promise<String>;
   description: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
+  begin: () => Promise<DateTimeOutput>;
+  end: () => Promise<DateTimeOutput>;
   registered: <T = FragmentableArray<UserPresence>>(args?: {
     where?: UserPresenceWhereInput;
     orderBy?: UserPresenceOrderByInput;
@@ -949,7 +966,8 @@ export interface ActivitySubscription
   xp: () => Promise<AsyncIterator<Int>>;
   title: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
-  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  begin: () => Promise<AsyncIterator<DateTimeOutput>>;
+  end: () => Promise<AsyncIterator<DateTimeOutput>>;
   registered: <T = Promise<AsyncIterator<UserPresenceSubscription>>>(args?: {
     where?: UserPresenceWhereInput;
     orderBy?: UserPresenceOrderByInput;
@@ -970,7 +988,8 @@ export interface ActivityNullablePromise
   xp: () => Promise<Int>;
   title: () => Promise<String>;
   description: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
+  begin: () => Promise<DateTimeOutput>;
+  end: () => Promise<DateTimeOutput>;
   registered: <T = FragmentableArray<UserPresence>>(args?: {
     where?: UserPresenceWhereInput;
     orderBy?: UserPresenceOrderByInput;
@@ -1142,7 +1161,8 @@ export interface ActivityPreviousValues {
   xp?: Int;
   title: String;
   description?: String;
-  date?: DateTimeOutput;
+  begin?: DateTimeOutput;
+  end?: DateTimeOutput;
 }
 
 export interface ActivityPreviousValuesPromise
@@ -1154,7 +1174,8 @@ export interface ActivityPreviousValuesPromise
   xp: () => Promise<Int>;
   title: () => Promise<String>;
   description: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
+  begin: () => Promise<DateTimeOutput>;
+  end: () => Promise<DateTimeOutput>;
 }
 
 export interface ActivityPreviousValuesSubscription
@@ -1166,7 +1187,8 @@ export interface ActivityPreviousValuesSubscription
   xp: () => Promise<AsyncIterator<Int>>;
   title: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
-  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  begin: () => Promise<AsyncIterator<DateTimeOutput>>;
+  end: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface ActivitySubscriptionPayload {

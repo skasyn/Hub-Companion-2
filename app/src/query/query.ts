@@ -37,11 +37,25 @@ export const GET_ACTIVITIES: any = gql`
         ) {
             presence
             activity {
+                code
                 title
                 description
-                date
+                begin
+                end
                 type
             }
+        }
+    }
+`;
+
+export const GET_ALL_ACTIVITIES: any = gql`
+    query {
+        activities {
+            code
+            title
+            description
+            begin
+            end
         }
     }
 `;

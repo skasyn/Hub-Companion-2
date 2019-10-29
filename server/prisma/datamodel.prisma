@@ -16,7 +16,8 @@ type Activity {
     xp: Int @default(value: 0)
     title: String!
     description: String
-    date: DateTime
+    begin: DateTime
+    end: DateTime
     registered: [UserPresence!]! @relation(name: "PresenceActivity", link: INLINE)
 }
 

@@ -524,7 +524,8 @@ type ActivityObject =
   | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'title', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
-  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'begin', args?: [] | false, alias?: string  } 
+  | { name: 'end', args?: [] | false, alias?: string  } 
   | { name: 'registered', args?: ActivityRegisteredArgs[] | false, alias?: string  } 
 
 type ActivityFields =
@@ -534,7 +535,8 @@ type ActivityFields =
   | 'xp'
   | 'title'
   | 'description'
-  | 'date'
+  | 'begin'
+  | 'end'
   | 'registered'
 
 
@@ -597,7 +599,15 @@ export interface ActivityFieldDetails {
     nullable: true
     resolve: undefined
   }
-  date: {
+  begin: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  end: {
     type: 'DateTime'
     args: {}
     description: string
@@ -1708,7 +1718,8 @@ type ActivityPreviousValuesObject =
   | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'title', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
-  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'begin', args?: [] | false, alias?: string  } 
+  | { name: 'end', args?: [] | false, alias?: string  } 
 
 type ActivityPreviousValuesFields =
   | 'id'
@@ -1717,7 +1728,8 @@ type ActivityPreviousValuesFields =
   | 'xp'
   | 'title'
   | 'description'
-  | 'date'
+  | 'begin'
+  | 'end'
 
 
 
@@ -1772,7 +1784,15 @@ export interface ActivityPreviousValuesFieldDetails {
     nullable: true
     resolve: undefined
   }
-  date: {
+  begin: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: undefined
+  }
+  end: {
     type: 'DateTime'
     args: {}
     description: string
@@ -2255,14 +2275,22 @@ export interface ActivityWhereInput {
   description_not_starts_with?: string | null
   description_ends_with?: string | null
   description_not_ends_with?: string | null
-  date?: string | null
-  date_not?: string | null
-  date_in?: string[]
-  date_not_in?: string[]
-  date_lt?: string | null
-  date_lte?: string | null
-  date_gt?: string | null
-  date_gte?: string | null
+  begin?: string | null
+  begin_not?: string | null
+  begin_in?: string[]
+  begin_not_in?: string[]
+  begin_lt?: string | null
+  begin_lte?: string | null
+  begin_gt?: string | null
+  begin_gte?: string | null
+  end?: string | null
+  end_not?: string | null
+  end_in?: string[]
+  end_not_in?: string[]
+  end_lt?: string | null
+  end_lte?: string | null
+  end_gt?: string | null
+  end_gte?: string | null
   registered_some?: UserPresenceWhereInput | null
   AND?: ActivityWhereInput[]
 }
@@ -2346,14 +2374,22 @@ export type ActivityWhereInputInputObject =
   | { name: 'description_not_starts_with', alias?: string  } 
   | { name: 'description_ends_with', alias?: string  } 
   | { name: 'description_not_ends_with', alias?: string  } 
-  | { name: 'date', alias?: string  } 
-  | { name: 'date_not', alias?: string  } 
-  | { name: 'date_in', alias?: string  } 
-  | { name: 'date_not_in', alias?: string  } 
-  | { name: 'date_lt', alias?: string  } 
-  | { name: 'date_lte', alias?: string  } 
-  | { name: 'date_gt', alias?: string  } 
-  | { name: 'date_gte', alias?: string  } 
+  | { name: 'begin', alias?: string  } 
+  | { name: 'begin_not', alias?: string  } 
+  | { name: 'begin_in', alias?: string  } 
+  | { name: 'begin_not_in', alias?: string  } 
+  | { name: 'begin_lt', alias?: string  } 
+  | { name: 'begin_lte', alias?: string  } 
+  | { name: 'begin_gt', alias?: string  } 
+  | { name: 'begin_gte', alias?: string  } 
+  | { name: 'end', alias?: string  } 
+  | { name: 'end_not', alias?: string  } 
+  | { name: 'end_in', alias?: string  } 
+  | { name: 'end_not_in', alias?: string  } 
+  | { name: 'end_lt', alias?: string  } 
+  | { name: 'end_lte', alias?: string  } 
+  | { name: 'end_gt', alias?: string  } 
+  | { name: 'end_gte', alias?: string  } 
   | { name: 'registered_some', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
@@ -2436,7 +2472,8 @@ export interface ActivityCreateWithoutRegisteredInput {
   xp?: number | null
   title?: string
   description?: string | null
-  date?: string | null
+  begin?: string | null
+  end?: string | null
 }
 export type ActivityCreateWithoutRegisteredInputInputObject =
   | Extract<keyof ActivityCreateWithoutRegisteredInput, string>
@@ -2446,7 +2483,8 @@ export type ActivityCreateWithoutRegisteredInputInputObject =
   | { name: 'xp', alias?: string  } 
   | { name: 'title', alias?: string  } 
   | { name: 'description', alias?: string  } 
-  | { name: 'date', alias?: string  } 
+  | { name: 'begin', alias?: string  } 
+  | { name: 'end', alias?: string  } 
   
 export interface UserUpdateInput {
   outlookId?: string | null
@@ -2531,7 +2569,8 @@ export interface ActivityUpdateWithoutRegisteredDataInput {
   xp?: number | null
   title?: string | null
   description?: string | null
-  date?: string | null
+  begin?: string | null
+  end?: string | null
 }
 export type ActivityUpdateWithoutRegisteredDataInputInputObject =
   | Extract<keyof ActivityUpdateWithoutRegisteredDataInput, string>
@@ -2540,7 +2579,8 @@ export type ActivityUpdateWithoutRegisteredDataInputInputObject =
   | { name: 'xp', alias?: string  } 
   | { name: 'title', alias?: string  } 
   | { name: 'description', alias?: string  } 
-  | { name: 'date', alias?: string  } 
+  | { name: 'begin', alias?: string  } 
+  | { name: 'end', alias?: string  } 
   
 export interface ActivityUpsertWithoutRegisteredInput {
   update?: ActivityUpdateWithoutRegisteredDataInput
@@ -2693,7 +2733,8 @@ export interface ActivityCreateInput {
   xp?: number | null
   title?: string
   description?: string | null
-  date?: string | null
+  begin?: string | null
+  end?: string | null
   registered?: UserPresenceCreateManyWithoutActivityInput | null
 }
 export type ActivityCreateInputInputObject =
@@ -2704,7 +2745,8 @@ export type ActivityCreateInputInputObject =
   | { name: 'xp', alias?: string  } 
   | { name: 'title', alias?: string  } 
   | { name: 'description', alias?: string  } 
-  | { name: 'date', alias?: string  } 
+  | { name: 'begin', alias?: string  } 
+  | { name: 'end', alias?: string  } 
   | { name: 'registered', alias?: string  } 
   
 export interface UserPresenceCreateManyWithoutActivityInput {
@@ -2765,7 +2807,8 @@ export interface ActivityUpdateInput {
   xp?: number | null
   title?: string | null
   description?: string | null
-  date?: string | null
+  begin?: string | null
+  end?: string | null
   registered?: UserPresenceUpdateManyWithoutActivityInput | null
 }
 export type ActivityUpdateInputInputObject =
@@ -2775,7 +2818,8 @@ export type ActivityUpdateInputInputObject =
   | { name: 'xp', alias?: string  } 
   | { name: 'title', alias?: string  } 
   | { name: 'description', alias?: string  } 
-  | { name: 'date', alias?: string  } 
+  | { name: 'begin', alias?: string  } 
+  | { name: 'end', alias?: string  } 
   | { name: 'registered', alias?: string  } 
   
 export interface UserPresenceUpdateManyWithoutActivityInput {
@@ -2879,7 +2923,8 @@ export interface ActivityUpdateManyMutationInput {
   xp?: number | null
   title?: string | null
   description?: string | null
-  date?: string | null
+  begin?: string | null
+  end?: string | null
 }
 export type ActivityUpdateManyMutationInputInputObject =
   | Extract<keyof ActivityUpdateManyMutationInput, string>
@@ -2888,7 +2933,8 @@ export type ActivityUpdateManyMutationInputInputObject =
   | { name: 'xp', alias?: string  } 
   | { name: 'title', alias?: string  } 
   | { name: 'description', alias?: string  } 
-  | { name: 'date', alias?: string  } 
+  | { name: 'begin', alias?: string  } 
+  | { name: 'end', alias?: string  } 
   
 export interface UserPresenceCreateInput {
   id?: string | null
@@ -3024,8 +3070,10 @@ export type ActivityOrderByInputValues =
   | 'title_DESC'
   | 'description_ASC'
   | 'description_DESC'
-  | 'date_ASC'
-  | 'date_DESC'
+  | 'begin_ASC'
+  | 'begin_DESC'
+  | 'end_ASC'
+  | 'end_DESC'
   
 export type MutationTypeValues =
   | 'CREATED'

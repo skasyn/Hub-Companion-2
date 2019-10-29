@@ -60,15 +60,13 @@ async function getXp(parent, args, context) {
   for (let activityPresence of activities) {
       xp += activityPresence.xp;
   }
-  console.log('Here');
-  console.log(xp);
   return xp;
 }
 
 export const Query = prismaObjectType({
   name: 'Query',
   definition(t) {
-    t.prismaFields(['user', 'users', 'userPresences']);
+    t.prismaFields(['user', 'users', 'userPresences', 'activities']);
     t.field('login', {
       type: 'User',
       args: { code: stringArg() },

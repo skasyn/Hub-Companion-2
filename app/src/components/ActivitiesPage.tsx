@@ -48,12 +48,12 @@ export const ActivitiesPage: React.FC = () => {
           columns={[
             {title: "Title", field: "activity.title"},
             {title: "Date", field: "activity.date", type: "date", defaultSort: "asc", render: (rowData) => {
-              const date = new Date(rowData['activity']['date'].toString());
+              const date = new Date(rowData['activity']['begin'].toString());
                 return <p>{date.toDateString()}</p>;
             }},
             {title: "Type", field: "activity.type"},
             {title: "Presence", field: "presence", render: (rowData) => {
-              const date = new Date(rowData['activity']['date'].toString());
+              const date = new Date(rowData['activity']['begin'].toString());
               const now = new Date(Date.now());
               const diff = (date.getTime() - now.getTime()) / (1000 * 3600 * 24);
               if (rowData.presence) {

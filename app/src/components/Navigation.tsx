@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { HomePage } from "./HomePage";
 import {SettingsPage} from "./SettingsPage";
 import {ActivitiesPage} from "./ActivitiesPage";
+import {CalendarPage} from "./CalendarPage";
 
 import { ThemeProvider } from '@material-ui/styles';
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -28,6 +29,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import TuneIcon from '@material-ui/icons/Tune';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import EventIcon from '@material-ui/icons/Event';
 
 import {
   BrowserRouter as Router,
@@ -103,8 +105,11 @@ const HomeDrawerRoute: React.FC = (props: any) => {
       case '/activities':
         setSelectedIndex(1);
         break;
-      case '/settings':
+      case '/calendar':
         setSelectedIndex(2);
+        break;
+      case '/settings':
+        setSelectedIndex(3);
         break;
     }
   }
@@ -142,7 +147,18 @@ const HomeDrawerRoute: React.FC = (props: any) => {
         <ListItem
           button
           selected={selectedIndex === 2}
-          onClick={event => handleListItemClick(event, 2, "/settings")}
+          onClick={event => handleListItemClick(event, 2, "/calendar")}
+        >
+          <ListItemIcon>
+            <EventIcon/>
+          </ListItemIcon>
+          <ListItemText primary='Calendar'/>
+        </ListItem>
+        <Divider/>
+        <ListItem
+          button
+          selected={selectedIndex === 3}
+          onClick={event => handleListItemClick(event, 3, "/settings")}
         >
           <ListItemIcon>
             <TuneIcon/>
@@ -234,6 +250,9 @@ const Content: React.FC = () => {
         </Route>
         <Route path="/settings">
           <SettingsPage/>
+        </Route>
+        <Route path="/calendar">
+          <CalendarPage/>
         </Route>
     </main>
   )

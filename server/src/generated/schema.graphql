@@ -3,9 +3,10 @@
 
 
 type Activity {
+  begin: DateTime
   code: String!
-  date: DateTime
   description: String
+  end: DateTime
   id: ID!
   registered(after: String, before: String, first: Int, last: Int, orderBy: UserPresenceOrderByInput, skip: Int, where: UserPresenceWhereInput): [UserPresence!]
   title: String!
@@ -13,8 +14,35 @@ type Activity {
   xp: Int
 }
 
+enum ActivityOrderByInput {
+  begin_ASC
+  begin_DESC
+  code_ASC
+  code_DESC
+  description_ASC
+  description_DESC
+  end_ASC
+  end_DESC
+  id_ASC
+  id_DESC
+  title_ASC
+  title_DESC
+  type_ASC
+  type_DESC
+  xp_ASC
+  xp_DESC
+}
+
 input ActivityWhereInput {
   AND: [ActivityWhereInput!]
+  begin: DateTime
+  begin_gt: DateTime
+  begin_gte: DateTime
+  begin_in: [DateTime!]
+  begin_lt: DateTime
+  begin_lte: DateTime
+  begin_not: DateTime
+  begin_not_in: [DateTime!]
   code: String
   code_contains: String
   code_ends_with: String
@@ -29,14 +57,6 @@ input ActivityWhereInput {
   code_not_in: [String!]
   code_not_starts_with: String
   code_starts_with: String
-  date: DateTime
-  date_gt: DateTime
-  date_gte: DateTime
-  date_in: [DateTime!]
-  date_lt: DateTime
-  date_lte: DateTime
-  date_not: DateTime
-  date_not_in: [DateTime!]
   description: String
   description_contains: String
   description_ends_with: String
@@ -51,6 +71,14 @@ input ActivityWhereInput {
   description_not_in: [String!]
   description_not_starts_with: String
   description_starts_with: String
+  end: DateTime
+  end_gt: DateTime
+  end_gte: DateTime
+  end_in: [DateTime!]
+  end_lt: DateTime
+  end_lte: DateTime
+  end_not: DateTime
+  end_not_in: [DateTime!]
   id: ID
   id_contains: ID
   id_ends_with: ID
@@ -111,6 +139,7 @@ type Mutation {
 }
 
 type Query {
+  activities(after: String, before: String, first: Int, last: Int, orderBy: ActivityOrderByInput, skip: Int, where: ActivityWhereInput): [Activity!]!
   getXp(code: String): Int!
   login(code: String): User!
   loginCookie(code: String): User!

@@ -20,8 +20,10 @@ function getDescription(event, activity): String {
 async function activityUpsert(event, activity, studentList, hubModule) {
   let title = activity.title || event.title;
   let description = getDescription(event, activity).toString();
-  let dateString = event.begin || event.end;
-  let date = new Date(dateString);
+  let beginString = event.begin || event.end;
+  let endString = event.end || event.begin;
+  let begin = new Date(beginString);
+  let end = new Date(endString);
   let type = activity.type_title;
   let xp = (() => {
     switch (type) {
@@ -31,7 +33,8 @@ async function activityUpsert(event, activity, studentList, hubModule) {
     }
   })();
 
-  dateString = date.toISOString();
+  beginString = begin.toISOString();
+  endString = end.toISOString();
   let createdActivity = await prisma.upsertActivity({
     where: {
       code: event.code
@@ -42,7 +45,8 @@ async function activityUpsert(event, activity, studentList, hubModule) {
       xp: xp,
       title: title,
       description: description,
-      date: dateString,
+      begin: beginString,
+      end: endString
     },
     update: {
       code: event.code,
@@ -50,7 +54,8 @@ async function activityUpsert(event, activity, studentList, hubModule) {
       xp: xp,
       title: title,
       description: description,
-      date: dateString,
+      begin: beginString,
+      end: endString
     }
   });
   for (let student of studentList) {
