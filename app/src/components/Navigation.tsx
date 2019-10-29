@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
+import { HomePage } from "./HomePage";
+import {SettingsPage} from "./SettingsPage";
+import {ActivitiesPage} from "./ActivitiesPage";
 
 import { ThemeProvider } from '@material-ui/styles';
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import { useGlobalState } from "../reducers/reducers";
-
+import {dispatch, useGlobalState} from "../reducers/reducers";
 import {lightBlue, red } from "@material-ui/core/colors";
 import { createMuiTheme } from '@material-ui/core/styles';
 
@@ -14,7 +16,7 @@ import {
   Drawer,
   IconButton,
   List,
-  ListItem, ListItemIcon, ListItemText,
+  ListItem, ListItemIcon, ListItemText, Menu, MenuItem,
   Theme,
   Toolbar,
   Typography
@@ -25,9 +27,13 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import TuneIcon from '@material-ui/icons/Tune';
-import { HomePage } from "./HomePage";
-import {SettingsPage} from "./SettingsPage";
-import {ActivitiesPage} from "./ActivitiesPage";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
+import {
+  BrowserRouter as Router,
+  Route,
+  withRouter
+} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -75,18 +81,33 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const HomeDrawer: React.FC = () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(0);
+const HomeDrawerRoute: React.FC = (props: any) => {
+  const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const classes = useStyles();
   const [, setPage] = useGlobalState('currentPage');
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
+    path: String
   ) => {
     setSelectedIndex(index);
+    props.history.push(path);
     setPage(index);
   };
+  if (selectedIndex === -1) {
+    switch (props.location.pathname) {
+      case '/':
+        setSelectedIndex(0);
+        break;
+      case '/activities':
+        setSelectedIndex(1);
+        break;
+      case '/settings':
+        setSelectedIndex(2);
+        break;
+    }
+  }
 
   return (
     <Drawer
@@ -99,7 +120,7 @@ const HomeDrawer: React.FC = () => {
         <ListItem
           button
           selected={selectedIndex === 0}
-          onClick={event => handleListItemClick(event, 0)}
+          onClick={event => handleListItemClick(event, 0, "/")}
         >
           <ListItemIcon>
             <HomeIcon/>
@@ -110,7 +131,7 @@ const HomeDrawer: React.FC = () => {
         <ListItem
           button
           selected={selectedIndex === 1}
-          onClick={event => handleListItemClick(event, 1)}
+          onClick={event => handleListItemClick(event, 1, "/activities")}
         >
           <ListItemIcon>
             <EventNoteIcon/>
@@ -121,7 +142,7 @@ const HomeDrawer: React.FC = () => {
         <ListItem
           button
           selected={selectedIndex === 2}
-          onClick={event => handleListItemClick(event, 2)}
+          onClick={event => handleListItemClick(event, 2, "/settings")}
         >
           <ListItemIcon>
             <TuneIcon/>
@@ -133,9 +154,24 @@ const HomeDrawer: React.FC = () => {
   );
 };
 
+const HomeDrawer = withRouter(HomeDrawerRoute);
+
 const NavBar: React.FC = () => {
   const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
   let notificationNb = 2;
+
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleDisconnect = () => {
+    dispatch({type: 'disconnect'});
+    handleClose();
+  };
 
   return (
       <AppBar position="fixed" className={classes.appBar}>
@@ -148,9 +184,37 @@ const NavBar: React.FC = () => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton color="inherit">
+          <IconButton
+            color="inherit"
+            aria-label="account of user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleMenu}
+          >
             <AccountCircleIcon />
           </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={anchorEl}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right'
+            }}
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem  onClick={handleDisconnect}>
+              <ListItemIcon>
+                <ExitToAppIcon/>
+              </ListItemIcon>
+              <ListItemText>Disconnect</ListItemText>
+            </MenuItem>
+          </Menu>
         </Toolbar>
       </AppBar>
   );
@@ -158,37 +222,36 @@ const NavBar: React.FC = () => {
 
 const Content: React.FC = () => {
   const classes = useStyles();
-  const [page] = useGlobalState('currentPage');
-  const currentPage = (() => {
-    switch (page) {
-      case 0:
-        return (<HomePage/>);
-      case 1:
-        return (<ActivitiesPage/>);
-      case 2:
-        return (<SettingsPage/>);
-    }
-  })();
 
   return (
     <main className={classes.content}>
       <div className={classes.toolbar}/>
-      {currentPage}
+        <Route path="/" exact>
+          <HomePage/>
+        </Route>
+        <Route path="/activities">
+          <ActivitiesPage/>
+        </Route>
+        <Route path="/settings">
+          <SettingsPage/>
+        </Route>
     </main>
-  );
+  )
 };
 
 export const Navigation: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <ThemeProvider theme={theme}>
-      <div className={classes.root}>
-        <CssBaseline />
-        <NavBar/>
-        <HomeDrawer/>
-        <Content/>
-      </div>
-    </ThemeProvider>
+    <Router>
+      <ThemeProvider theme={theme}>
+        <div className={classes.root}>
+          <CssBaseline />
+          <NavBar/>
+          <HomeDrawer/>
+          <Content/>
+        </div>
+      </ThemeProvider>
+    </Router>
   );
 };

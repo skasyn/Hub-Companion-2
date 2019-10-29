@@ -1,10 +1,18 @@
 import { User } from '../types/types';
 import { createStore } from 'react-hooks-global-state';
 
+const InitialState = {
+  user: {} as User,
+  error: false,
+  loading: false,
+  currentPage: 0 as Number
+};
+
 export type Action =
   | { type: 'loginUser', user: User }
   | { type: 'loginUserCookie', user: User }
-  | { type: 'changePage', page: Number };
+  | { type: 'changePage', page: Number }
+  | { type: 'disconnect' };
 
 export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
   (state, action: Action) => {
@@ -24,6 +32,10 @@ export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
           ...state,
           user: action.user
         };
+      }
+      case 'disconnect': {
+        document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        return InitialState;
       }
       case 'changePage': {
         return {

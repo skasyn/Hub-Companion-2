@@ -10,7 +10,8 @@ import {
 } from "@material-ui/core";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import AlarmIcon from '@material-ui/icons/Alarm';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const toMultiline = (description: String) => {
   return (
@@ -36,8 +37,8 @@ export const ActivitiesPage: React.FC = () => {
 
   if (data === undefined) {
     return (
-      <Container>
-        Loading...
+      <Container maxWidth={false}>
+        <CircularProgress/>
       </Container>
     );
   } else {
@@ -58,7 +59,7 @@ export const ActivitiesPage: React.FC = () => {
               if (rowData.presence) {
                 return <CheckIcon htmlColor="green"/>
               } else if (diff > - 1) {
-                return <CalendarTodayIcon/>
+                return <AlarmIcon htmlColor="orange"/>
               } else {
                 return <ClearIcon htmlColor="red"/>
               }

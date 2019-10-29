@@ -6,6 +6,7 @@ import {LOGIN, LOGIN_COOKIE} from '../query/query';
 import {LoginCookieData, LoginData, LoginVars} from '../types/types';
 import { dispatch } from "../reducers/reducers";
 import { Card, Grid, CardMedia, CardContent, makeStyles } from "@material-ui/core";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 require('dotenv').config();
 
@@ -32,7 +33,7 @@ export const LoadingConnectionCookie: React.FC<LoadingConnectionProps> = (props)
   }
   return (
     <div>
-      Loading (Cookie)
+      <CircularProgress/>
     </div>
   );
 };
@@ -47,7 +48,7 @@ export const LoadingConnectionOffice: React.FC<LoadingConnectionProps> = (props)
   }
   return (
     <div>
-      Loading
+      <CircularProgress/>
     </div>
   );
 };
