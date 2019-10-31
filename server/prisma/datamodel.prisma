@@ -15,9 +15,9 @@ type Activity {
     type: String!
     xp: Int @default(value: 0)
     title: String!
-    description: String
-    begin: DateTime
-    end: DateTime
+    description: String!
+    begin: DateTime!
+    end: DateTime!
     registered: [UserPresence!]! @relation(name: "PresenceActivity", link: INLINE)
 }
 
@@ -28,4 +28,25 @@ type UserPresence {
     activity: Activity! @relation(name: "PresenceActivity")
     presence: Boolean!
     xp: Int!
+}
+
+type Maker {
+    id: ID! @id
+    title: String!
+    co_workers: [User!]!
+    description: String!
+    functionalities: String!
+    technologies: String!
+    resources: String!
+    informations: String!
+    status: Int!
+}
+
+type Sharing {
+    id: ID! @id
+    title: String!
+    co_workers: [User!]!
+    description: String!
+    date: DateTime!
+    status: Int!
 }

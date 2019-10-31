@@ -30,12 +30,14 @@ import EventNoteIcon from '@material-ui/icons/EventNote';
 import TuneIcon from '@material-ui/icons/Tune';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EventIcon from '@material-ui/icons/Event';
+import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 
 import {
   BrowserRouter as Router,
   Route,
   withRouter
 } from "react-router-dom";
+import {SharingPage} from "./SharingPage";
 
 const drawerWidth = 240;
 
@@ -87,6 +89,13 @@ const HomeDrawerRoute: React.FC = (props: any) => {
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const classes = useStyles();
   const [, setPage] = useGlobalState('currentPage');
+  const pages = [
+    {path: '/', text: 'Home', icon: (<ListItemIcon><HomeIcon/></ListItemIcon>)},
+    {path: '/activities', text: 'Activities', icon: (<ListItemIcon><EventNoteIcon/></ListItemIcon>)},
+    {path: '/calendar', text: 'Calendar', icon: (<ListItemIcon><EventIcon/></ListItemIcon>)},
+    {path: '/sharing', text: 'Sharing', icon: (<ListItemIcon><PeopleAltIcon/></ListItemIcon>)},
+    {path: '/settings', text: 'Settings', icon: (<ListItemIcon><TuneIcon/></ListItemIcon>)},
+  ];
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -97,21 +106,9 @@ const HomeDrawerRoute: React.FC = (props: any) => {
     props.history.push(path);
     setPage(index);
   };
+
   if (selectedIndex === -1) {
-    switch (props.location.pathname) {
-      case '/':
-        setSelectedIndex(0);
-        break;
-      case '/activities':
-        setSelectedIndex(1);
-        break;
-      case '/calendar':
-        setSelectedIndex(2);
-        break;
-      case '/settings':
-        setSelectedIndex(3);
-        break;
-    }
+    setSelectedIndex(pages.findIndex((page) => page['path'] === props.location.pathname));
   }
 
   return (
@@ -122,49 +119,23 @@ const HomeDrawerRoute: React.FC = (props: any) => {
     >
       <div className={classes.toolbar}/>
       <List component="nav" aria-label="main mailbox folders">
-        <ListItem
-          button
-          selected={selectedIndex === 0}
-          onClick={event => handleListItemClick(event, 0, "/")}
-        >
-          <ListItemIcon>
-            <HomeIcon/>
-          </ListItemIcon>
-          <ListItemText primary='Home'/>
-        </ListItem>
-        <Divider/>
-        <ListItem
-          button
-          selected={selectedIndex === 1}
-          onClick={event => handleListItemClick(event, 1, "/activities")}
-        >
-          <ListItemIcon>
-            <EventNoteIcon/>
-          </ListItemIcon>
-          <ListItemText primary='Activities'/>
-        </ListItem>
-        <Divider/>
-        <ListItem
-          button
-          selected={selectedIndex === 2}
-          onClick={event => handleListItemClick(event, 2, "/calendar")}
-        >
-          <ListItemIcon>
-            <EventIcon/>
-          </ListItemIcon>
-          <ListItemText primary='Calendar'/>
-        </ListItem>
-        <Divider/>
-        <ListItem
-          button
-          selected={selectedIndex === 3}
-          onClick={event => handleListItemClick(event, 3, "/settings")}
-        >
-          <ListItemIcon>
-            <TuneIcon/>
-          </ListItemIcon>
-          <ListItemText primary='Settings'/>
-        </ListItem>
+        {
+          pages.map((page, index) => {
+            return (
+              <div key={index}>
+                <ListItem
+                  button
+                  selected={selectedIndex === index}
+                  onClick={event => handleListItemClick(event, index, page['path'])}
+                >
+                  {page.icon}
+                  <ListItemText primary={page['text']}/>
+                </ListItem>
+                <Divider/>
+              </div>
+            );
+          })
+        }
       </List>
     </Drawer>
   );
@@ -253,6 +224,9 @@ const Content: React.FC = () => {
         </Route>
         <Route path="/calendar">
           <CalendarPage/>
+        </Route>
+        <Route path="/sharing">
+          <SharingPage/>
         </Route>
     </main>
   )

@@ -29,7 +29,7 @@ export const CalendarPage: React.FC = () => {
     );
   } else {
     const activities: Activity[] = dataActivities['activities'];
-    let events1 = data['userPresences'].map((event) => {
+    const events1 = data['userPresences'].map((event) => {
       if (event.activity.begin !== event.activity.end) {
         return {
           title: event.activity.title,
@@ -63,8 +63,7 @@ export const CalendarPage: React.FC = () => {
         }
       }
     });
-    const events3 = events1.concat(events2);
-    const events = events3.filter((event, index, self) => {
+    const events = (events1.concat(events2)).filter((event, index, self) => {
       return index === self.findIndex((t) => (
         t.id === event.id
       ))
@@ -76,6 +75,7 @@ export const CalendarPage: React.FC = () => {
         events={events}
         height={750}
         minTime={"08:00:00"}
+        slotEventOverlap={false}
       />
     );
   }
