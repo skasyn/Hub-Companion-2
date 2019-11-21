@@ -1,35 +1,26 @@
-import { Prisma } from './generated/prisma-client'
-import datamodelInfo from './generated/nexus-prisma'
-import * as path from 'path'
-import { makePrismaSchema } from 'nexus-prisma'
 import { GraphQLServer } from 'graphql-yoga'
-import { Query } from './resolvers/Query';
-import {Mutation} from "./resolvers/Mutation";
-
-const schema = makePrismaSchema({
-  types: [Query, Mutation],
-  prisma: {
-    datamodelInfo,
-    client: new Prisma({
-      endpoint: 'http://prisma:4466',
-    }),
-  },
-
-  outputs: {
-    schema: path.join(__dirname, './generated/schema.graphql'),
-    typegen: path.join(__dirname, './generated/nexus.ts'),
-  },
-});
+import { formatError } from 'apollo-errors';
+import {app_address, server_address, server_port} from "./consts";
+import resolvers from './resolvers';
 
 const server = new GraphQLServer({
   typeDefs: './src/schema.graphql',
-  schema,
-  context: req => ({
-    ...req,
-    db: new Prisma({
-      endpoint: 'http://prisma:4466',
-    }),
-  }),
-} as any);
+  resolvers,
+  context: (req, res) => {
+    const { response } = req;
+    return { response };
+  }
+});
 
-server.start(() => console.log('Server is running on http://localhost:4000'));
+const options = {
+  endpoint: '/graphql',
+  port: server_port,
+  playground: '/playground',
+  formatError,
+  cors: {
+    credentials: true,
+    origin: [app_address]
+  }
+};
+
+server.start(options, () => console.log(`Server is running on ${server_address}`));

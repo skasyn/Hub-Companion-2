@@ -1,17 +1,19 @@
 import gql from 'graphql-tag';
 
 export const LOGIN: any = gql`
-  query LOGIN($code: String) {
+  query LOGIN($code: String!) {
     login(code: $code) {
-      id
-      name
-      email
+      user {
+        name
+        email
+      }
+      jwt
     }
   }
 `;
 
 export const LOGIN_COOKIE: any = gql`
-  query LOGIN_COOKIE($code: String) {
+  query LOGIN_COOKIE($code: String!) {
     loginCookie(code: $code) {
       id
       name
@@ -21,20 +23,15 @@ export const LOGIN_COOKIE: any = gql`
 `;
 
 export const GET_XP: any = gql`
-  query GET_XP($code: String) {
+  query GET_XP($code: String!) {
     getXp(code: $code)
   }
 `;
 
 export const GET_ACTIVITIES: any = gql`
-    query GET_ACTIVITIES($mail: String) {
-        userPresences(
-            where: {
-                user: {
-                    email: $mail
-                }
-            }
-        ) {
+    query GET_ACTIVITIES($jwt: String!) {
+        getUserActivities(code: $jwt)
+        {
             presence
             activity {
                 code
@@ -50,7 +47,7 @@ export const GET_ACTIVITIES: any = gql`
 
 export const GET_ALL_ACTIVITIES: any = gql`
     query {
-        activities {
+        getAllActivities {
             code
             title
             description

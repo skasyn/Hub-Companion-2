@@ -1,0 +1,7 @@
+export const server_host = 'http://localhost';
+export const server_port = '4000';
+export const server_address = `${server_host}:${server_port}`;
+
+export const app_host = 'http://localhost';
+export const app_port = '3000';
+export const app_address = `${app_host}:${app_port}`;

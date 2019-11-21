@@ -29,10 +29,10 @@ const toMultiline = (description: String) => {
 };
 
 export const ActivitiesPage: React.FC = () => {
-  const [user] = useGlobalState('user');
+  const [jwt] = useGlobalState('jwt');
   const { data } = useQuery<ActivityData, ActivityVars>(
     GET_ACTIVITIES,
-    { variables: { email: user.email }}
+    { variables: { jwt: jwt }}
   );
 
   if (data === undefined) {
@@ -83,7 +83,7 @@ export const ActivitiesPage: React.FC = () => {
             sorting: true,
             pageSize: 10
           }}
-          data={data['userPresences']}
+          data={data.getUserActivities}
           title=""
         />
       </Container>

@@ -12,10 +12,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import {useGlobalState} from "../reducers/reducers";
 
 export const CalendarPage: React.FC = () => {
-  const [user] = useGlobalState('user');
+  const [jwt] = useGlobalState('jwt');
   const { data } = useQuery<ActivityData, ActivityVars>(
     GET_ACTIVITIES,
-    { variables: { email: user.email }}
+    { variables: { jwt: jwt }}
   );
   const dataActivities = useQuery<AllActivitiesData>(
     GET_ALL_ACTIVITIES
@@ -28,8 +28,8 @@ export const CalendarPage: React.FC = () => {
       </Container>
     );
   } else {
-    const activities: Activity[] = dataActivities['activities'];
-    const events1 = data['userPresences'].map((event) => {
+    const activities: Activity[] = dataActivities.getAllActivities;
+    const events1 = data.getUserActivities.map((event) => {
       if (event.activity.begin !== event.activity.end) {
         return {
           title: event.activity.title,

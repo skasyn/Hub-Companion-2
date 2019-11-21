@@ -1,0 +1,10 @@
+type User {
+    id: ID!
+    outlookId: String!
+    name: String!
+    email: String!
+    year: Int
+    plan: Int
+    privilege: Int
+    activities: [UserPresence!]!
+}

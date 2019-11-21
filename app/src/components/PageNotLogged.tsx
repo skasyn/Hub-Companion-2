@@ -29,7 +29,7 @@ export const LoadingConnectionCookie: React.FC<LoadingConnectionProps> = (props)
     { variables: { code: props.code }}
   );
   if (data !== undefined) {
-    dispatch({type: 'loginUserCookie', user: data.loginCookie});
+    dispatch({type: 'loginUserCookie', user: data.loginCookie, jwt: props.code});
   }
   return (
     <div>
@@ -44,7 +44,7 @@ export const LoadingConnectionOffice: React.FC<LoadingConnectionProps> = (props)
     { variables: { code: props.code}}
   );
   if (data !== undefined) {
-    dispatch({type: 'loginUser', user: data.login});
+    dispatch({type: 'loginUser', user: data.login.user, jwt: data.login.jwt});
   }
   return (
     <div>

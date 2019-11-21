@@ -20,7 +20,10 @@ export interface UserPresence {
 }
 
 export interface LoginData {
-  login: User
+  login: {
+    user: User
+    jwt: String
+  }
 }
 export interface LoginVars {
   code: String
@@ -38,13 +41,13 @@ export interface XpVars {
 }
 
 export interface ActivityData {
-  userPresences: UserPresence[]
+  getUserActivities: UserPresence[]
 }
 
 export interface ActivityVars {
-  email: String
+  jwt: String
 }
 
 export interface AllActivitiesData {
-  activities: Activity[]
+  getAllActivities: Activity[]
 }

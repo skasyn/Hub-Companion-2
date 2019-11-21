@@ -1,0 +1,13 @@
+type UserPresence {
+    id: ID!
+    code: String!
+    user: User!
+    activity: Activity!
+    presence: Boolean!
+    xp: Int!
+}
+
+type GetUserPresences {
+    presence: Boolean!
+    activity: Activity!
+}

@@ -1,6 +1,7 @@
-import { prismaObjectType } from 'nexus-prisma';
-import {idArg, stringArg} from 'nexus';
 import {refresh} from "./Mutation";
+import {generateJwt, handleErrors, handleErrors_login} from "./utils";
+import {prisma} from "../generated/prisma-client";
+import get = Reflect.get;
 const axios = require("axios").default;
 const querystring = require("querystring");
 
@@ -19,40 +20,41 @@ async function login(parent, args, context) {
     "client_secret": process.env.AZURESECRET,
     "code": args.code
   }), {'Content-Type': "application/x-www-form-urlencoded"}
-  ).catch((error) => {console.log(error); });
+  ).catch((error) => {console.error(error); });
   let user_data = await axios.get(
     "https://graph.microsoft.com/v1.0/me",
     {headers: {Authorization: token.data.token_type + " " + token.data.access_token}}
-  ).catch((error) => {console.log(error); });
-  let user_found = await context.db.user({
+  ).catch((error) => {console.error(error); });
+  let user_found = await prisma.user({
     outlookId: user_data.data.id
   });
   if (user_found === null) {
-    user_found = await context.db.createUser({
+    user_found = await prisma.createUser({
       outlookId: user_data.data.id,
       name: user_data.data.displayName,
       email: user_data.data.mail,
     });
-    await refresh(parent, args, context);
+    await refresh(parent, args, context, "");
   }
-  return user_found;
+  const jwt = await generateJwt({id: user_found.id });
+  return {user: user_found, jwt: jwt};
 }
 
-async function loginCookie(parent, args, context) {
-  if (args.code === undefined || args.code === '') {
+async function loginCookie(parent, args, context, userId) {
+  if (userId === undefined || userId === '') {
     throw new Error('Empty code');
   }
-  return context.db.user({
-    id: args.code
+  return prisma.user({
+    id: userId
   });
 }
 
-async function getXp(parent, args, context) {
-  if (args.code === undefined || args.code === '') {
+async function getXp(parent, args, context, userId) {
+  if (userId === undefined || userId === '') {
     throw new Error('Empty code');
   }
-  let activities = await context.db.user({
-    id: args.code
+  let activities = await prisma.user({
+    id: userId
   }).activities();
   if (activities === null) {
    throw new Error('User not found');
@@ -64,24 +66,43 @@ async function getXp(parent, args, context) {
   return xp;
 }
 
-export const Query = prismaObjectType({
-  name: 'Query',
-  definition(t) {
-    t.prismaFields(['user', 'users', 'userPresences', 'activities']);
-    t.field('login', {
-      type: 'User',
-      args: { code: stringArg() },
-      resolve: login,
-    });
-    t.field('loginCookie', {
-      type: 'User',
-      args: { code: stringArg() },
-      resolve: loginCookie,
-    });
-    t.field('getXp', {
-      type: 'Int',
-      args: { code: stringArg() },
-      resolve: getXp,
-    });
-  },
-});
+async function getUserActivities(parent, args, context, userId) {
+  if (userId === undefined || userId === '') {
+    throw new Error('Empty code');
+  }
+  const query = `
+    query {
+      userPresences(
+        where: {
+          user: {
+            id: "${userId}"
+          }
+        }
+      ) {
+        presence
+        activity {
+          code
+          title
+          description
+          begin
+          end
+          type
+        }
+      }
+    }
+  `;
+  let userPresences = await prisma.$graphql(query);
+  return userPresences.userPresences;
+}
+
+async function getAllActivities(parent, args, context) {
+  return prisma.activities({});
+}
+
+export const Query = {
+  login: handleErrors(login),
+  loginCookie: handleErrors_login(loginCookie),
+  getXp: handleErrors_login(getXp),
+  getUserActivities: handleErrors_login(getUserActivities),
+  getAllActivities: handleErrors(getAllActivities),
+};

@@ -1,0 +1,13 @@
+scalar DateTime
+
+type Activity {
+    id: ID!
+    code: String!
+    type: String!
+    xp: Int
+    title: String!
+    description: String
+    begin: DateTime
+    end: DateTime
+    registered: [UserPresence!]!
+}
