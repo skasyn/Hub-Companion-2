@@ -28,6 +28,14 @@ export interface NexusPrismaTypes {
       UserPresenceConnection: UserPresenceConnectionObject
       UserPresenceEdge: UserPresenceEdgeObject
       AggregateUserPresence: AggregateUserPresenceObject
+      Maker: MakerObject
+      MakerConnection: MakerConnectionObject
+      MakerEdge: MakerEdgeObject
+      AggregateMaker: AggregateMakerObject
+      Sharing: SharingObject
+      SharingConnection: SharingConnectionObject
+      SharingEdge: SharingEdgeObject
+      AggregateSharing: AggregateSharingObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
@@ -37,6 +45,10 @@ export interface NexusPrismaTypes {
       ActivityPreviousValues: ActivityPreviousValuesObject
       UserPresenceSubscriptionPayload: UserPresenceSubscriptionPayloadObject
       UserPresencePreviousValues: UserPresencePreviousValuesObject
+      MakerSubscriptionPayload: MakerSubscriptionPayloadObject
+      MakerPreviousValues: MakerPreviousValuesObject
+      SharingSubscriptionPayload: SharingSubscriptionPayloadObject
+      SharingPreviousValues: SharingPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
@@ -53,6 +65,14 @@ export interface NexusPrismaTypes {
       UserPresenceConnection: UserPresenceConnectionFieldDetails
       UserPresenceEdge: UserPresenceEdgeFieldDetails
       AggregateUserPresence: AggregateUserPresenceFieldDetails
+      Maker: MakerFieldDetails
+      MakerConnection: MakerConnectionFieldDetails
+      MakerEdge: MakerEdgeFieldDetails
+      AggregateMaker: AggregateMakerFieldDetails
+      Sharing: SharingFieldDetails
+      SharingConnection: SharingConnectionFieldDetails
+      SharingEdge: SharingEdgeFieldDetails
+      AggregateSharing: AggregateSharingFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
@@ -62,6 +82,10 @@ export interface NexusPrismaTypes {
       ActivityPreviousValues: ActivityPreviousValuesFieldDetails
       UserPresenceSubscriptionPayload: UserPresenceSubscriptionPayloadFieldDetails
       UserPresencePreviousValues: UserPresencePreviousValuesFieldDetails
+      MakerSubscriptionPayload: MakerSubscriptionPayloadFieldDetails
+      MakerPreviousValues: MakerPreviousValuesFieldDetails
+      SharingSubscriptionPayload: SharingSubscriptionPayloadFieldDetails
+      SharingPreviousValues: SharingPreviousValuesFieldDetails
     }
   }
   inputTypes: {
@@ -72,6 +96,10 @@ export interface NexusPrismaTypes {
       ActivityWhereInput: ActivityWhereInputInputObject
       ActivityWhereUniqueInput: ActivityWhereUniqueInputInputObject
       UserPresenceWhereUniqueInput: UserPresenceWhereUniqueInputInputObject
+      MakerWhereUniqueInput: MakerWhereUniqueInputInputObject
+      MakerWhereInput: MakerWhereInputInputObject
+      SharingWhereUniqueInput: SharingWhereUniqueInputInputObject
+      SharingWhereInput: SharingWhereInputInputObject
       UserCreateInput: UserCreateInputInputObject
       UserPresenceCreateManyWithoutUserInput: UserPresenceCreateManyWithoutUserInputInputObject
       UserPresenceCreateWithoutUserInput: UserPresenceCreateWithoutUserInputInputObject
@@ -106,15 +134,33 @@ export interface NexusPrismaTypes {
       UserPresenceCreateInput: UserPresenceCreateInputInputObject
       UserPresenceUpdateInput: UserPresenceUpdateInputInputObject
       UserPresenceUpdateManyMutationInput: UserPresenceUpdateManyMutationInputInputObject
+      MakerCreateInput: MakerCreateInputInputObject
+      UserCreateManyInput: UserCreateManyInputInputObject
+      MakerUpdateInput: MakerUpdateInputInputObject
+      UserUpdateManyInput: UserUpdateManyInputInputObject
+      UserUpdateWithWhereUniqueNestedInput: UserUpdateWithWhereUniqueNestedInputInputObject
+      UserUpdateDataInput: UserUpdateDataInputInputObject
+      UserUpsertWithWhereUniqueNestedInput: UserUpsertWithWhereUniqueNestedInputInputObject
+      UserScalarWhereInput: UserScalarWhereInputInputObject
+      UserUpdateManyWithWhereNestedInput: UserUpdateManyWithWhereNestedInputInputObject
+      UserUpdateManyDataInput: UserUpdateManyDataInputInputObject
+      MakerUpdateManyMutationInput: MakerUpdateManyMutationInputInputObject
+      SharingCreateInput: SharingCreateInputInputObject
+      SharingUpdateInput: SharingUpdateInputInputObject
+      SharingUpdateManyMutationInput: SharingUpdateManyMutationInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       ActivitySubscriptionWhereInput: ActivitySubscriptionWhereInputInputObject
       UserPresenceSubscriptionWhereInput: UserPresenceSubscriptionWhereInputInputObject
+      MakerSubscriptionWhereInput: MakerSubscriptionWhereInputInputObject
+      SharingSubscriptionWhereInput: SharingSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
     UserPresenceOrderByInput: UserPresenceOrderByInputValues,
     UserOrderByInput: UserOrderByInputValues,
     ActivityOrderByInput: ActivityOrderByInputValues,
+    MakerOrderByInput: MakerOrderByInputValues,
+    SharingOrderByInput: SharingOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -132,6 +178,12 @@ type QueryObject =
   | { name: 'userPresence', args?: QueryUserPresenceArgs[] | false, alias?: string  } 
   | { name: 'userPresences', args?: QueryUserPresencesArgs[] | false, alias?: string  } 
   | { name: 'userPresencesConnection', args?: QueryUserPresencesConnectionArgs[] | false, alias?: string  } 
+  | { name: 'maker', args?: QueryMakerArgs[] | false, alias?: string  } 
+  | { name: 'makers', args?: QueryMakersArgs[] | false, alias?: string  } 
+  | { name: 'makersConnection', args?: QueryMakersConnectionArgs[] | false, alias?: string  } 
+  | { name: 'sharing', args?: QuerySharingArgs[] | false, alias?: string  } 
+  | { name: 'sharings', args?: QuerySharingsArgs[] | false, alias?: string  } 
+  | { name: 'sharingsConnection', args?: QuerySharingsConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'user'
@@ -143,6 +195,12 @@ type QueryFields =
   | 'userPresence'
   | 'userPresences'
   | 'userPresencesConnection'
+  | 'maker'
+  | 'makers'
+  | 'makersConnection'
+  | 'sharing'
+  | 'sharings'
+  | 'sharingsConnection'
 
 
 type QueryUserArgs =
@@ -192,6 +250,42 @@ type QueryUserPresencesArgs =
   | 'first'
   | 'last'
 type QueryUserPresencesConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryMakerArgs =
+  | 'where'
+type QueryMakersArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryMakersConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QuerySharingArgs =
+  | 'where'
+type QuerySharingsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QuerySharingsConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -318,6 +412,84 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserPresenceConnection> | prisma.UserPresenceConnection
+  }
+  maker: {
+    type: 'Maker'
+    args: Record<QueryMakerArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: MakerWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Maker | null> | prisma.Maker | null
+  }
+  makers: {
+    type: 'Maker'
+    args: Record<QueryMakersArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: MakerWhereInput | null, orderBy?: prisma.MakerOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Maker[]> | prisma.Maker[]
+  }
+  makersConnection: {
+    type: 'MakerConnection'
+    args: Record<QueryMakersConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: MakerWhereInput | null, orderBy?: prisma.MakerOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MakerConnection> | prisma.MakerConnection
+  }
+  sharing: {
+    type: 'Sharing'
+    args: Record<QuerySharingArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: SharingWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Sharing | null> | prisma.Sharing | null
+  }
+  sharings: {
+    type: 'Sharing'
+    args: Record<QuerySharingsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: SharingWhereInput | null, orderBy?: prisma.SharingOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Sharing[]> | prisma.Sharing[]
+  }
+  sharingsConnection: {
+    type: 'SharingConnection'
+    args: Record<QuerySharingsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: SharingWhereInput | null, orderBy?: prisma.SharingOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.SharingConnection> | prisma.SharingConnection
   }
 }
   
@@ -596,7 +768,7 @@ export interface ActivityFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
     resolve: undefined
   }
   begin: {
@@ -604,7 +776,7 @@ export interface ActivityFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
     resolve: undefined
   }
   end: {
@@ -612,7 +784,7 @@ export interface ActivityFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
     resolve: undefined
   }
   registered: {
@@ -1061,6 +1233,460 @@ export interface AggregateUserPresenceFieldDetails {
 }
   
 
+// Types for Maker
+
+type MakerObject =
+  | MakerFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'title', args?: [] | false, alias?: string  } 
+  | { name: 'co_workers', args?: MakerCo_workersArgs[] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
+  | { name: 'functionalities', args?: [] | false, alias?: string  } 
+  | { name: 'technologies', args?: [] | false, alias?: string  } 
+  | { name: 'resources', args?: [] | false, alias?: string  } 
+  | { name: 'informations', args?: [] | false, alias?: string  } 
+  | { name: 'status', args?: [] | false, alias?: string  } 
+
+type MakerFields =
+  | 'id'
+  | 'title'
+  | 'co_workers'
+  | 'description'
+  | 'functionalities'
+  | 'technologies'
+  | 'resources'
+  | 'informations'
+  | 'status'
+
+
+type MakerCo_workersArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface MakerFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  title: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  co_workers: {
+    type: 'User'
+    args: Record<MakerCo_workersArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Maker">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  description: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  functionalities: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  technologies: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  resources: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  informations: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  status: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for MakerConnection
+
+type MakerConnectionObject =
+  | MakerConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type MakerConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface MakerConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MakerConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'MakerEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MakerConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MakerEdge[]> | prisma.MakerEdge[]
+  }
+  aggregate: {
+    type: 'AggregateMaker'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MakerConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateMaker> | prisma.AggregateMaker
+  }
+}
+  
+
+// Types for MakerEdge
+
+type MakerEdgeObject =
+  | MakerEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type MakerEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface MakerEdgeFieldDetails {
+  node: {
+    type: 'Maker'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MakerEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Maker> | prisma.Maker
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateMaker
+
+type AggregateMakerObject =
+  | AggregateMakerFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateMakerFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateMakerFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for Sharing
+
+type SharingObject =
+  | SharingFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'title', args?: [] | false, alias?: string  } 
+  | { name: 'co_workers', args?: SharingCo_workersArgs[] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'status', args?: [] | false, alias?: string  } 
+
+type SharingFields =
+  | 'id'
+  | 'title'
+  | 'co_workers'
+  | 'description'
+  | 'date'
+  | 'status'
+
+
+type SharingCo_workersArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+  
+
+export interface SharingFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  title: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  co_workers: {
+    type: 'User'
+    args: Record<SharingCo_workersArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Sharing">,
+      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.User[]> | prisma.User[]
+  }
+  description: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  status: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for SharingConnection
+
+type SharingConnectionObject =
+  | SharingConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type SharingConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface SharingConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"SharingConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'SharingEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"SharingConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.SharingEdge[]> | prisma.SharingEdge[]
+  }
+  aggregate: {
+    type: 'AggregateSharing'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"SharingConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateSharing> | prisma.AggregateSharing
+  }
+}
+  
+
+// Types for SharingEdge
+
+type SharingEdgeObject =
+  | SharingEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type SharingEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface SharingEdgeFieldDetails {
+  node: {
+    type: 'Sharing'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"SharingEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Sharing> | prisma.Sharing
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateSharing
+
+type AggregateSharingObject =
+  | AggregateSharingFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateSharingFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateSharingFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -1083,6 +1709,18 @@ type MutationObject =
   | { name: 'upsertUserPresence', args?: MutationUpsertUserPresenceArgs[] | false, alias?: string  } 
   | { name: 'deleteUserPresence', args?: MutationDeleteUserPresenceArgs[] | false, alias?: string  } 
   | { name: 'deleteManyUserPresences', args?: MutationDeleteManyUserPresencesArgs[] | false, alias?: string  } 
+  | { name: 'createMaker', args?: MutationCreateMakerArgs[] | false, alias?: string  } 
+  | { name: 'updateMaker', args?: MutationUpdateMakerArgs[] | false, alias?: string  } 
+  | { name: 'updateManyMakers', args?: MutationUpdateManyMakersArgs[] | false, alias?: string  } 
+  | { name: 'upsertMaker', args?: MutationUpsertMakerArgs[] | false, alias?: string  } 
+  | { name: 'deleteMaker', args?: MutationDeleteMakerArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyMakers', args?: MutationDeleteManyMakersArgs[] | false, alias?: string  } 
+  | { name: 'createSharing', args?: MutationCreateSharingArgs[] | false, alias?: string  } 
+  | { name: 'updateSharing', args?: MutationUpdateSharingArgs[] | false, alias?: string  } 
+  | { name: 'updateManySharings', args?: MutationUpdateManySharingsArgs[] | false, alias?: string  } 
+  | { name: 'upsertSharing', args?: MutationUpsertSharingArgs[] | false, alias?: string  } 
+  | { name: 'deleteSharing', args?: MutationDeleteSharingArgs[] | false, alias?: string  } 
+  | { name: 'deleteManySharings', args?: MutationDeleteManySharingsArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createUser'
@@ -1103,6 +1741,18 @@ type MutationFields =
   | 'upsertUserPresence'
   | 'deleteUserPresence'
   | 'deleteManyUserPresences'
+  | 'createMaker'
+  | 'updateMaker'
+  | 'updateManyMakers'
+  | 'upsertMaker'
+  | 'deleteMaker'
+  | 'deleteManyMakers'
+  | 'createSharing'
+  | 'updateSharing'
+  | 'updateManySharings'
+  | 'upsertSharing'
+  | 'deleteSharing'
+  | 'deleteManySharings'
 
 
 type MutationCreateUserArgs =
@@ -1152,6 +1802,38 @@ type MutationUpsertUserPresenceArgs =
 type MutationDeleteUserPresenceArgs =
   | 'where'
 type MutationDeleteManyUserPresencesArgs =
+  | 'where'
+type MutationCreateMakerArgs =
+  | 'data'
+type MutationUpdateMakerArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyMakersArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertMakerArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteMakerArgs =
+  | 'where'
+type MutationDeleteManyMakersArgs =
+  | 'where'
+type MutationCreateSharingArgs =
+  | 'data'
+type MutationUpdateSharingArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManySharingsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertSharingArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteSharingArgs =
+  | 'where'
+type MutationDeleteManySharingsArgs =
   | 'where'
   
 
@@ -1390,6 +2072,162 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createMaker: {
+    type: 'Maker'
+    args: Record<MutationCreateMakerArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: MakerCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Maker> | prisma.Maker
+  }
+  updateMaker: {
+    type: 'Maker'
+    args: Record<MutationUpdateMakerArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: MakerUpdateInput, where: MakerWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Maker | null> | prisma.Maker | null
+  }
+  updateManyMakers: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyMakersArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: MakerUpdateManyMutationInput, where?: MakerWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertMaker: {
+    type: 'Maker'
+    args: Record<MutationUpsertMakerArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: MakerWhereUniqueInput, create: MakerCreateInput, update: MakerUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Maker> | prisma.Maker
+  }
+  deleteMaker: {
+    type: 'Maker'
+    args: Record<MutationDeleteMakerArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: MakerWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Maker | null> | prisma.Maker | null
+  }
+  deleteManyMakers: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyMakersArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: MakerWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createSharing: {
+    type: 'Sharing'
+    args: Record<MutationCreateSharingArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: SharingCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Sharing> | prisma.Sharing
+  }
+  updateSharing: {
+    type: 'Sharing'
+    args: Record<MutationUpdateSharingArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: SharingUpdateInput, where: SharingWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Sharing | null> | prisma.Sharing | null
+  }
+  updateManySharings: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManySharingsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: SharingUpdateManyMutationInput, where?: SharingWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertSharing: {
+    type: 'Sharing'
+    args: Record<MutationUpsertSharingArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: SharingWhereUniqueInput, create: SharingCreateInput, update: SharingUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Sharing> | prisma.Sharing
+  }
+  deleteSharing: {
+    type: 'Sharing'
+    args: Record<MutationDeleteSharingArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: SharingWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Sharing | null> | prisma.Sharing | null
+  }
+  deleteManySharings: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManySharingsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: SharingWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -1425,11 +2263,15 @@ type SubscriptionObject =
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
   | { name: 'activity', args?: SubscriptionActivityArgs[] | false, alias?: string  } 
   | { name: 'userPresence', args?: SubscriptionUserPresenceArgs[] | false, alias?: string  } 
+  | { name: 'maker', args?: SubscriptionMakerArgs[] | false, alias?: string  } 
+  | { name: 'sharing', args?: SubscriptionSharingArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'user'
   | 'activity'
   | 'userPresence'
+  | 'maker'
+  | 'sharing'
 
 
 type SubscriptionUserArgs =
@@ -1437,6 +2279,10 @@ type SubscriptionUserArgs =
 type SubscriptionActivityArgs =
   | 'where'
 type SubscriptionUserPresenceArgs =
+  | 'where'
+type SubscriptionMakerArgs =
+  | 'where'
+type SubscriptionSharingArgs =
   | 'where'
   
 
@@ -1479,6 +2325,32 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserPresenceSubscriptionPayload | null> | prisma.UserPresenceSubscriptionPayload | null
+  }
+  maker: {
+    type: 'MakerSubscriptionPayload'
+    args: Record<SubscriptionMakerArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: MakerSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MakerSubscriptionPayload | null> | prisma.MakerSubscriptionPayload | null
+  }
+  sharing: {
+    type: 'SharingSubscriptionPayload'
+    args: Record<SubscriptionSharingArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: SharingSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.SharingSubscriptionPayload | null> | prisma.SharingSubscriptionPayload | null
   }
 }
   
@@ -1781,7 +2653,7 @@ export interface ActivityPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
     resolve: undefined
   }
   begin: {
@@ -1789,7 +2661,7 @@ export interface ActivityPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
     resolve: undefined
   }
   end: {
@@ -1797,7 +2669,7 @@ export interface ActivityPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
-    nullable: true
+    nullable: false
     resolve: undefined
   }
 }
@@ -1918,6 +2790,306 @@ export interface UserPresencePreviousValuesFieldDetails {
     resolve: undefined
   }
   xp: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for MakerSubscriptionPayload
+
+type MakerSubscriptionPayloadObject =
+  | MakerSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type MakerSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface MakerSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"MakerSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Maker'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"MakerSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Maker | null> | prisma.Maker | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'MakerPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"MakerSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MakerPreviousValues | null> | prisma.MakerPreviousValues | null
+  }
+}
+  
+
+// Types for MakerPreviousValues
+
+type MakerPreviousValuesObject =
+  | MakerPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'title', args?: [] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
+  | { name: 'functionalities', args?: [] | false, alias?: string  } 
+  | { name: 'technologies', args?: [] | false, alias?: string  } 
+  | { name: 'resources', args?: [] | false, alias?: string  } 
+  | { name: 'informations', args?: [] | false, alias?: string  } 
+  | { name: 'status', args?: [] | false, alias?: string  } 
+
+type MakerPreviousValuesFields =
+  | 'id'
+  | 'title'
+  | 'description'
+  | 'functionalities'
+  | 'technologies'
+  | 'resources'
+  | 'informations'
+  | 'status'
+
+
+
+  
+
+export interface MakerPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  title: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  description: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  functionalities: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  technologies: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  resources: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  informations: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  status: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for SharingSubscriptionPayload
+
+type SharingSubscriptionPayloadObject =
+  | SharingSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type SharingSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface SharingSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"SharingSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'Sharing'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"SharingSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.Sharing | null> | prisma.Sharing | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'SharingPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"SharingSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.SharingPreviousValues | null> | prisma.SharingPreviousValues | null
+  }
+}
+  
+
+// Types for SharingPreviousValues
+
+type SharingPreviousValuesObject =
+  | SharingPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'title', args?: [] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'status', args?: [] | false, alias?: string  } 
+
+type SharingPreviousValuesFields =
+  | 'id'
+  | 'title'
+  | 'description'
+  | 'date'
+  | 'status'
+
+
+
+  
+
+export interface SharingPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  title: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  description: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  status: {
     type: 'Int'
     args: {}
     description: string
@@ -2411,6 +3583,366 @@ export type UserPresenceWhereUniqueInputInputObject =
   | { name: 'id', alias?: string  } 
   | { name: 'code', alias?: string  } 
   
+export interface MakerWhereUniqueInput {
+  id?: string | null
+}
+export type MakerWhereUniqueInputInputObject =
+  | Extract<keyof MakerWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface MakerWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  title?: string | null
+  title_not?: string | null
+  title_in?: string[]
+  title_not_in?: string[]
+  title_lt?: string | null
+  title_lte?: string | null
+  title_gt?: string | null
+  title_gte?: string | null
+  title_contains?: string | null
+  title_not_contains?: string | null
+  title_starts_with?: string | null
+  title_not_starts_with?: string | null
+  title_ends_with?: string | null
+  title_not_ends_with?: string | null
+  co_workers_some?: UserWhereInput | null
+  description?: string | null
+  description_not?: string | null
+  description_in?: string[]
+  description_not_in?: string[]
+  description_lt?: string | null
+  description_lte?: string | null
+  description_gt?: string | null
+  description_gte?: string | null
+  description_contains?: string | null
+  description_not_contains?: string | null
+  description_starts_with?: string | null
+  description_not_starts_with?: string | null
+  description_ends_with?: string | null
+  description_not_ends_with?: string | null
+  functionalities?: string | null
+  functionalities_not?: string | null
+  functionalities_in?: string[]
+  functionalities_not_in?: string[]
+  functionalities_lt?: string | null
+  functionalities_lte?: string | null
+  functionalities_gt?: string | null
+  functionalities_gte?: string | null
+  functionalities_contains?: string | null
+  functionalities_not_contains?: string | null
+  functionalities_starts_with?: string | null
+  functionalities_not_starts_with?: string | null
+  functionalities_ends_with?: string | null
+  functionalities_not_ends_with?: string | null
+  technologies?: string | null
+  technologies_not?: string | null
+  technologies_in?: string[]
+  technologies_not_in?: string[]
+  technologies_lt?: string | null
+  technologies_lte?: string | null
+  technologies_gt?: string | null
+  technologies_gte?: string | null
+  technologies_contains?: string | null
+  technologies_not_contains?: string | null
+  technologies_starts_with?: string | null
+  technologies_not_starts_with?: string | null
+  technologies_ends_with?: string | null
+  technologies_not_ends_with?: string | null
+  resources?: string | null
+  resources_not?: string | null
+  resources_in?: string[]
+  resources_not_in?: string[]
+  resources_lt?: string | null
+  resources_lte?: string | null
+  resources_gt?: string | null
+  resources_gte?: string | null
+  resources_contains?: string | null
+  resources_not_contains?: string | null
+  resources_starts_with?: string | null
+  resources_not_starts_with?: string | null
+  resources_ends_with?: string | null
+  resources_not_ends_with?: string | null
+  informations?: string | null
+  informations_not?: string | null
+  informations_in?: string[]
+  informations_not_in?: string[]
+  informations_lt?: string | null
+  informations_lte?: string | null
+  informations_gt?: string | null
+  informations_gte?: string | null
+  informations_contains?: string | null
+  informations_not_contains?: string | null
+  informations_starts_with?: string | null
+  informations_not_starts_with?: string | null
+  informations_ends_with?: string | null
+  informations_not_ends_with?: string | null
+  status?: number | null
+  status_not?: number | null
+  status_in?: number[]
+  status_not_in?: number[]
+  status_lt?: number | null
+  status_lte?: number | null
+  status_gt?: number | null
+  status_gte?: number | null
+  AND?: MakerWhereInput[]
+}
+export type MakerWhereInputInputObject =
+  | Extract<keyof MakerWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'title', alias?: string  } 
+  | { name: 'title_not', alias?: string  } 
+  | { name: 'title_in', alias?: string  } 
+  | { name: 'title_not_in', alias?: string  } 
+  | { name: 'title_lt', alias?: string  } 
+  | { name: 'title_lte', alias?: string  } 
+  | { name: 'title_gt', alias?: string  } 
+  | { name: 'title_gte', alias?: string  } 
+  | { name: 'title_contains', alias?: string  } 
+  | { name: 'title_not_contains', alias?: string  } 
+  | { name: 'title_starts_with', alias?: string  } 
+  | { name: 'title_not_starts_with', alias?: string  } 
+  | { name: 'title_ends_with', alias?: string  } 
+  | { name: 'title_not_ends_with', alias?: string  } 
+  | { name: 'co_workers_some', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'description_not', alias?: string  } 
+  | { name: 'description_in', alias?: string  } 
+  | { name: 'description_not_in', alias?: string  } 
+  | { name: 'description_lt', alias?: string  } 
+  | { name: 'description_lte', alias?: string  } 
+  | { name: 'description_gt', alias?: string  } 
+  | { name: 'description_gte', alias?: string  } 
+  | { name: 'description_contains', alias?: string  } 
+  | { name: 'description_not_contains', alias?: string  } 
+  | { name: 'description_starts_with', alias?: string  } 
+  | { name: 'description_not_starts_with', alias?: string  } 
+  | { name: 'description_ends_with', alias?: string  } 
+  | { name: 'description_not_ends_with', alias?: string  } 
+  | { name: 'functionalities', alias?: string  } 
+  | { name: 'functionalities_not', alias?: string  } 
+  | { name: 'functionalities_in', alias?: string  } 
+  | { name: 'functionalities_not_in', alias?: string  } 
+  | { name: 'functionalities_lt', alias?: string  } 
+  | { name: 'functionalities_lte', alias?: string  } 
+  | { name: 'functionalities_gt', alias?: string  } 
+  | { name: 'functionalities_gte', alias?: string  } 
+  | { name: 'functionalities_contains', alias?: string  } 
+  | { name: 'functionalities_not_contains', alias?: string  } 
+  | { name: 'functionalities_starts_with', alias?: string  } 
+  | { name: 'functionalities_not_starts_with', alias?: string  } 
+  | { name: 'functionalities_ends_with', alias?: string  } 
+  | { name: 'functionalities_not_ends_with', alias?: string  } 
+  | { name: 'technologies', alias?: string  } 
+  | { name: 'technologies_not', alias?: string  } 
+  | { name: 'technologies_in', alias?: string  } 
+  | { name: 'technologies_not_in', alias?: string  } 
+  | { name: 'technologies_lt', alias?: string  } 
+  | { name: 'technologies_lte', alias?: string  } 
+  | { name: 'technologies_gt', alias?: string  } 
+  | { name: 'technologies_gte', alias?: string  } 
+  | { name: 'technologies_contains', alias?: string  } 
+  | { name: 'technologies_not_contains', alias?: string  } 
+  | { name: 'technologies_starts_with', alias?: string  } 
+  | { name: 'technologies_not_starts_with', alias?: string  } 
+  | { name: 'technologies_ends_with', alias?: string  } 
+  | { name: 'technologies_not_ends_with', alias?: string  } 
+  | { name: 'resources', alias?: string  } 
+  | { name: 'resources_not', alias?: string  } 
+  | { name: 'resources_in', alias?: string  } 
+  | { name: 'resources_not_in', alias?: string  } 
+  | { name: 'resources_lt', alias?: string  } 
+  | { name: 'resources_lte', alias?: string  } 
+  | { name: 'resources_gt', alias?: string  } 
+  | { name: 'resources_gte', alias?: string  } 
+  | { name: 'resources_contains', alias?: string  } 
+  | { name: 'resources_not_contains', alias?: string  } 
+  | { name: 'resources_starts_with', alias?: string  } 
+  | { name: 'resources_not_starts_with', alias?: string  } 
+  | { name: 'resources_ends_with', alias?: string  } 
+  | { name: 'resources_not_ends_with', alias?: string  } 
+  | { name: 'informations', alias?: string  } 
+  | { name: 'informations_not', alias?: string  } 
+  | { name: 'informations_in', alias?: string  } 
+  | { name: 'informations_not_in', alias?: string  } 
+  | { name: 'informations_lt', alias?: string  } 
+  | { name: 'informations_lte', alias?: string  } 
+  | { name: 'informations_gt', alias?: string  } 
+  | { name: 'informations_gte', alias?: string  } 
+  | { name: 'informations_contains', alias?: string  } 
+  | { name: 'informations_not_contains', alias?: string  } 
+  | { name: 'informations_starts_with', alias?: string  } 
+  | { name: 'informations_not_starts_with', alias?: string  } 
+  | { name: 'informations_ends_with', alias?: string  } 
+  | { name: 'informations_not_ends_with', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'status_not', alias?: string  } 
+  | { name: 'status_in', alias?: string  } 
+  | { name: 'status_not_in', alias?: string  } 
+  | { name: 'status_lt', alias?: string  } 
+  | { name: 'status_lte', alias?: string  } 
+  | { name: 'status_gt', alias?: string  } 
+  | { name: 'status_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface SharingWhereUniqueInput {
+  id?: string | null
+}
+export type SharingWhereUniqueInputInputObject =
+  | Extract<keyof SharingWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface SharingWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  title?: string | null
+  title_not?: string | null
+  title_in?: string[]
+  title_not_in?: string[]
+  title_lt?: string | null
+  title_lte?: string | null
+  title_gt?: string | null
+  title_gte?: string | null
+  title_contains?: string | null
+  title_not_contains?: string | null
+  title_starts_with?: string | null
+  title_not_starts_with?: string | null
+  title_ends_with?: string | null
+  title_not_ends_with?: string | null
+  co_workers_some?: UserWhereInput | null
+  description?: string | null
+  description_not?: string | null
+  description_in?: string[]
+  description_not_in?: string[]
+  description_lt?: string | null
+  description_lte?: string | null
+  description_gt?: string | null
+  description_gte?: string | null
+  description_contains?: string | null
+  description_not_contains?: string | null
+  description_starts_with?: string | null
+  description_not_starts_with?: string | null
+  description_ends_with?: string | null
+  description_not_ends_with?: string | null
+  date?: string | null
+  date_not?: string | null
+  date_in?: string[]
+  date_not_in?: string[]
+  date_lt?: string | null
+  date_lte?: string | null
+  date_gt?: string | null
+  date_gte?: string | null
+  status?: number | null
+  status_not?: number | null
+  status_in?: number[]
+  status_not_in?: number[]
+  status_lt?: number | null
+  status_lte?: number | null
+  status_gt?: number | null
+  status_gte?: number | null
+  AND?: SharingWhereInput[]
+}
+export type SharingWhereInputInputObject =
+  | Extract<keyof SharingWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'title', alias?: string  } 
+  | { name: 'title_not', alias?: string  } 
+  | { name: 'title_in', alias?: string  } 
+  | { name: 'title_not_in', alias?: string  } 
+  | { name: 'title_lt', alias?: string  } 
+  | { name: 'title_lte', alias?: string  } 
+  | { name: 'title_gt', alias?: string  } 
+  | { name: 'title_gte', alias?: string  } 
+  | { name: 'title_contains', alias?: string  } 
+  | { name: 'title_not_contains', alias?: string  } 
+  | { name: 'title_starts_with', alias?: string  } 
+  | { name: 'title_not_starts_with', alias?: string  } 
+  | { name: 'title_ends_with', alias?: string  } 
+  | { name: 'title_not_ends_with', alias?: string  } 
+  | { name: 'co_workers_some', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'description_not', alias?: string  } 
+  | { name: 'description_in', alias?: string  } 
+  | { name: 'description_not_in', alias?: string  } 
+  | { name: 'description_lt', alias?: string  } 
+  | { name: 'description_lte', alias?: string  } 
+  | { name: 'description_gt', alias?: string  } 
+  | { name: 'description_gte', alias?: string  } 
+  | { name: 'description_contains', alias?: string  } 
+  | { name: 'description_not_contains', alias?: string  } 
+  | { name: 'description_starts_with', alias?: string  } 
+  | { name: 'description_not_starts_with', alias?: string  } 
+  | { name: 'description_ends_with', alias?: string  } 
+  | { name: 'description_not_ends_with', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'date_not', alias?: string  } 
+  | { name: 'date_in', alias?: string  } 
+  | { name: 'date_not_in', alias?: string  } 
+  | { name: 'date_lt', alias?: string  } 
+  | { name: 'date_lte', alias?: string  } 
+  | { name: 'date_gt', alias?: string  } 
+  | { name: 'date_gte', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'status_not', alias?: string  } 
+  | { name: 'status_in', alias?: string  } 
+  | { name: 'status_not_in', alias?: string  } 
+  | { name: 'status_lt', alias?: string  } 
+  | { name: 'status_lte', alias?: string  } 
+  | { name: 'status_gt', alias?: string  } 
+  | { name: 'status_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 export interface UserCreateInput {
   id?: string | null
   outlookId?: string
@@ -2471,9 +4003,9 @@ export interface ActivityCreateWithoutRegisteredInput {
   type?: string
   xp?: number | null
   title?: string
-  description?: string | null
-  begin?: string | null
-  end?: string | null
+  description?: string
+  begin?: string
+  end?: string
 }
 export type ActivityCreateWithoutRegisteredInputInputObject =
   | Extract<keyof ActivityCreateWithoutRegisteredInput, string>
@@ -2732,9 +4264,9 @@ export interface ActivityCreateInput {
   type?: string
   xp?: number | null
   title?: string
-  description?: string | null
-  begin?: string | null
-  end?: string | null
+  description?: string
+  begin?: string
+  end?: string
   registered?: UserPresenceCreateManyWithoutActivityInput | null
 }
 export type ActivityCreateInputInputObject =
@@ -2979,6 +4511,382 @@ export type UserPresenceUpdateManyMutationInputInputObject =
   | { name: 'presence', alias?: string  } 
   | { name: 'xp', alias?: string  } 
   
+export interface MakerCreateInput {
+  id?: string | null
+  title?: string
+  co_workers?: UserCreateManyInput | null
+  description?: string
+  functionalities?: string
+  technologies?: string
+  resources?: string
+  informations?: string
+  status?: number
+}
+export type MakerCreateInputInputObject =
+  | Extract<keyof MakerCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'title', alias?: string  } 
+  | { name: 'co_workers', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'functionalities', alias?: string  } 
+  | { name: 'technologies', alias?: string  } 
+  | { name: 'resources', alias?: string  } 
+  | { name: 'informations', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  
+export interface UserCreateManyInput {
+  create?: UserCreateInput[]
+  connect?: UserWhereUniqueInput[]
+}
+export type UserCreateManyInputInputObject =
+  | Extract<keyof UserCreateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface MakerUpdateInput {
+  title?: string | null
+  co_workers?: UserUpdateManyInput | null
+  description?: string | null
+  functionalities?: string | null
+  technologies?: string | null
+  resources?: string | null
+  informations?: string | null
+  status?: number | null
+}
+export type MakerUpdateInputInputObject =
+  | Extract<keyof MakerUpdateInput, string>
+  | { name: 'title', alias?: string  } 
+  | { name: 'co_workers', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'functionalities', alias?: string  } 
+  | { name: 'technologies', alias?: string  } 
+  | { name: 'resources', alias?: string  } 
+  | { name: 'informations', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  
+export interface UserUpdateManyInput {
+  create?: UserCreateInput[]
+  update?: UserUpdateWithWhereUniqueNestedInput[]
+  upsert?: UserUpsertWithWhereUniqueNestedInput[]
+  delete?: UserWhereUniqueInput[]
+  connect?: UserWhereUniqueInput[]
+  set?: UserWhereUniqueInput[]
+  disconnect?: UserWhereUniqueInput[]
+  deleteMany?: UserScalarWhereInput[]
+  updateMany?: UserUpdateManyWithWhereNestedInput[]
+}
+export type UserUpdateManyInputInputObject =
+  | Extract<keyof UserUpdateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserUpdateWithWhereUniqueNestedInput {
+  where?: UserWhereUniqueInput
+  data?: UserUpdateDataInput
+}
+export type UserUpdateWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof UserUpdateWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateDataInput {
+  outlookId?: string | null
+  name?: string | null
+  email?: string | null
+  year?: number | null
+  plan?: number | null
+  privilege?: number | null
+  activities?: UserPresenceUpdateManyWithoutUserInput | null
+}
+export type UserUpdateDataInputInputObject =
+  | Extract<keyof UserUpdateDataInput, string>
+  | { name: 'outlookId', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'year', alias?: string  } 
+  | { name: 'plan', alias?: string  } 
+  | { name: 'privilege', alias?: string  } 
+  | { name: 'activities', alias?: string  } 
+  
+export interface UserUpsertWithWhereUniqueNestedInput {
+  where?: UserWhereUniqueInput
+  update?: UserUpdateDataInput
+  create?: UserCreateInput
+}
+export type UserUpsertWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof UserUpsertWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  outlookId?: string | null
+  outlookId_not?: string | null
+  outlookId_in?: string[]
+  outlookId_not_in?: string[]
+  outlookId_lt?: string | null
+  outlookId_lte?: string | null
+  outlookId_gt?: string | null
+  outlookId_gte?: string | null
+  outlookId_contains?: string | null
+  outlookId_not_contains?: string | null
+  outlookId_starts_with?: string | null
+  outlookId_not_starts_with?: string | null
+  outlookId_ends_with?: string | null
+  outlookId_not_ends_with?: string | null
+  name?: string | null
+  name_not?: string | null
+  name_in?: string[]
+  name_not_in?: string[]
+  name_lt?: string | null
+  name_lte?: string | null
+  name_gt?: string | null
+  name_gte?: string | null
+  name_contains?: string | null
+  name_not_contains?: string | null
+  name_starts_with?: string | null
+  name_not_starts_with?: string | null
+  name_ends_with?: string | null
+  name_not_ends_with?: string | null
+  email?: string | null
+  email_not?: string | null
+  email_in?: string[]
+  email_not_in?: string[]
+  email_lt?: string | null
+  email_lte?: string | null
+  email_gt?: string | null
+  email_gte?: string | null
+  email_contains?: string | null
+  email_not_contains?: string | null
+  email_starts_with?: string | null
+  email_not_starts_with?: string | null
+  email_ends_with?: string | null
+  email_not_ends_with?: string | null
+  year?: number | null
+  year_not?: number | null
+  year_in?: number[]
+  year_not_in?: number[]
+  year_lt?: number | null
+  year_lte?: number | null
+  year_gt?: number | null
+  year_gte?: number | null
+  plan?: number | null
+  plan_not?: number | null
+  plan_in?: number[]
+  plan_not_in?: number[]
+  plan_lt?: number | null
+  plan_lte?: number | null
+  plan_gt?: number | null
+  plan_gte?: number | null
+  privilege?: number | null
+  privilege_not?: number | null
+  privilege_in?: number[]
+  privilege_not_in?: number[]
+  privilege_lt?: number | null
+  privilege_lte?: number | null
+  privilege_gt?: number | null
+  privilege_gte?: number | null
+  AND?: UserScalarWhereInput[]
+  OR?: UserScalarWhereInput[]
+  NOT?: UserScalarWhereInput[]
+}
+export type UserScalarWhereInputInputObject =
+  | Extract<keyof UserScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'outlookId', alias?: string  } 
+  | { name: 'outlookId_not', alias?: string  } 
+  | { name: 'outlookId_in', alias?: string  } 
+  | { name: 'outlookId_not_in', alias?: string  } 
+  | { name: 'outlookId_lt', alias?: string  } 
+  | { name: 'outlookId_lte', alias?: string  } 
+  | { name: 'outlookId_gt', alias?: string  } 
+  | { name: 'outlookId_gte', alias?: string  } 
+  | { name: 'outlookId_contains', alias?: string  } 
+  | { name: 'outlookId_not_contains', alias?: string  } 
+  | { name: 'outlookId_starts_with', alias?: string  } 
+  | { name: 'outlookId_not_starts_with', alias?: string  } 
+  | { name: 'outlookId_ends_with', alias?: string  } 
+  | { name: 'outlookId_not_ends_with', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'name_not', alias?: string  } 
+  | { name: 'name_in', alias?: string  } 
+  | { name: 'name_not_in', alias?: string  } 
+  | { name: 'name_lt', alias?: string  } 
+  | { name: 'name_lte', alias?: string  } 
+  | { name: 'name_gt', alias?: string  } 
+  | { name: 'name_gte', alias?: string  } 
+  | { name: 'name_contains', alias?: string  } 
+  | { name: 'name_not_contains', alias?: string  } 
+  | { name: 'name_starts_with', alias?: string  } 
+  | { name: 'name_not_starts_with', alias?: string  } 
+  | { name: 'name_ends_with', alias?: string  } 
+  | { name: 'name_not_ends_with', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'email_not', alias?: string  } 
+  | { name: 'email_in', alias?: string  } 
+  | { name: 'email_not_in', alias?: string  } 
+  | { name: 'email_lt', alias?: string  } 
+  | { name: 'email_lte', alias?: string  } 
+  | { name: 'email_gt', alias?: string  } 
+  | { name: 'email_gte', alias?: string  } 
+  | { name: 'email_contains', alias?: string  } 
+  | { name: 'email_not_contains', alias?: string  } 
+  | { name: 'email_starts_with', alias?: string  } 
+  | { name: 'email_not_starts_with', alias?: string  } 
+  | { name: 'email_ends_with', alias?: string  } 
+  | { name: 'email_not_ends_with', alias?: string  } 
+  | { name: 'year', alias?: string  } 
+  | { name: 'year_not', alias?: string  } 
+  | { name: 'year_in', alias?: string  } 
+  | { name: 'year_not_in', alias?: string  } 
+  | { name: 'year_lt', alias?: string  } 
+  | { name: 'year_lte', alias?: string  } 
+  | { name: 'year_gt', alias?: string  } 
+  | { name: 'year_gte', alias?: string  } 
+  | { name: 'plan', alias?: string  } 
+  | { name: 'plan_not', alias?: string  } 
+  | { name: 'plan_in', alias?: string  } 
+  | { name: 'plan_not_in', alias?: string  } 
+  | { name: 'plan_lt', alias?: string  } 
+  | { name: 'plan_lte', alias?: string  } 
+  | { name: 'plan_gt', alias?: string  } 
+  | { name: 'plan_gte', alias?: string  } 
+  | { name: 'privilege', alias?: string  } 
+  | { name: 'privilege_not', alias?: string  } 
+  | { name: 'privilege_in', alias?: string  } 
+  | { name: 'privilege_not_in', alias?: string  } 
+  | { name: 'privilege_lt', alias?: string  } 
+  | { name: 'privilege_lte', alias?: string  } 
+  | { name: 'privilege_gt', alias?: string  } 
+  | { name: 'privilege_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface UserUpdateManyWithWhereNestedInput {
+  where?: UserScalarWhereInput
+  data?: UserUpdateManyDataInput
+}
+export type UserUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof UserUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserUpdateManyDataInput {
+  outlookId?: string | null
+  name?: string | null
+  email?: string | null
+  year?: number | null
+  plan?: number | null
+  privilege?: number | null
+}
+export type UserUpdateManyDataInputInputObject =
+  | Extract<keyof UserUpdateManyDataInput, string>
+  | { name: 'outlookId', alias?: string  } 
+  | { name: 'name', alias?: string  } 
+  | { name: 'email', alias?: string  } 
+  | { name: 'year', alias?: string  } 
+  | { name: 'plan', alias?: string  } 
+  | { name: 'privilege', alias?: string  } 
+  
+export interface MakerUpdateManyMutationInput {
+  title?: string | null
+  description?: string | null
+  functionalities?: string | null
+  technologies?: string | null
+  resources?: string | null
+  informations?: string | null
+  status?: number | null
+}
+export type MakerUpdateManyMutationInputInputObject =
+  | Extract<keyof MakerUpdateManyMutationInput, string>
+  | { name: 'title', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'functionalities', alias?: string  } 
+  | { name: 'technologies', alias?: string  } 
+  | { name: 'resources', alias?: string  } 
+  | { name: 'informations', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  
+export interface SharingCreateInput {
+  id?: string | null
+  title?: string
+  co_workers?: UserCreateManyInput | null
+  description?: string
+  date?: string
+  status?: number
+}
+export type SharingCreateInputInputObject =
+  | Extract<keyof SharingCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'title', alias?: string  } 
+  | { name: 'co_workers', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  
+export interface SharingUpdateInput {
+  title?: string | null
+  co_workers?: UserUpdateManyInput | null
+  description?: string | null
+  date?: string | null
+  status?: number | null
+}
+export type SharingUpdateInputInputObject =
+  | Extract<keyof SharingUpdateInput, string>
+  | { name: 'title', alias?: string  } 
+  | { name: 'co_workers', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  
+export interface SharingUpdateManyMutationInput {
+  title?: string | null
+  description?: string | null
+  date?: string | null
+  status?: number | null
+}
+export type SharingUpdateManyMutationInputInputObject =
+  | Extract<keyof SharingUpdateManyMutationInput, string>
+  | { name: 'title', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -3030,6 +4938,40 @@ export type UserPresenceSubscriptionWhereInputInputObject =
   | { name: 'node', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface MakerSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: MakerWhereInput | null
+  AND?: MakerSubscriptionWhereInput[]
+}
+export type MakerSubscriptionWhereInputInputObject =
+  | Extract<keyof MakerSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface SharingSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: SharingWhereInput | null
+  AND?: SharingSubscriptionWhereInput[]
+}
+export type SharingSubscriptionWhereInputInputObject =
+  | Extract<keyof SharingSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 
 export type UserPresenceOrderByInputValues =
   | 'id_ASC'
@@ -3074,6 +5016,36 @@ export type ActivityOrderByInputValues =
   | 'begin_DESC'
   | 'end_ASC'
   | 'end_DESC'
+  
+export type MakerOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'functionalities_ASC'
+  | 'functionalities_DESC'
+  | 'technologies_ASC'
+  | 'technologies_DESC'
+  | 'resources_ASC'
+  | 'resources_DESC'
+  | 'informations_ASC'
+  | 'informations_DESC'
+  | 'status_ASC'
+  | 'status_DESC'
+  
+export type SharingOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'date_ASC'
+  | 'date_DESC'
+  | 'status_ASC'
+  | 'status_DESC'
   
 export type MutationTypeValues =
   | 'CREATED'

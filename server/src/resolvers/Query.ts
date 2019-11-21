@@ -1,5 +1,6 @@
 import { prismaObjectType } from 'nexus-prisma';
 import {idArg, stringArg} from 'nexus';
+import {refresh} from "./Mutation";
 const axios = require("axios").default;
 const querystring = require("querystring");
 
@@ -32,7 +33,7 @@ async function login(parent, args, context) {
       name: user_data.data.displayName,
       email: user_data.data.mail,
     });
-    //TODO Refresh database on new user??
+    await refresh(parent, args, context);
   }
   return user_found;
 }

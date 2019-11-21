@@ -3,10 +3,10 @@
 
 
 type Activity {
-  begin: DateTime
+  begin: DateTime!
   code: String!
-  description: String
-  end: DateTime
+  description: String!
+  end: DateTime!
   id: ID!
   registered(after: String, before: String, first: Int, last: Int, orderBy: UserPresenceOrderByInput, skip: Int, where: UserPresenceWhereInput): [UserPresence!]
   title: String!

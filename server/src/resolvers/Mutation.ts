@@ -90,30 +90,38 @@ async function activityUpsert(event, activity, studentList, hubModule) {
 }
 
 async function getEvents(year, hubModule, city, event, activity) {
-  const responseEvent = await axios.get(`${process.env.URLAUTO}module/${year}/${hubModule}/${city}-0-1/${activity.codeacti}/${event.code}/registered?format=json`).catch((e) => {console.log(e);});
-  if (responseEvent.data !== undefined && responseEvent.data !== null && !isEmpty(responseEvent.data)) {
-    let studentList = [];
-    for (let student of responseEvent.data) {
-      studentList.push({email: student.login, present: student.present});
+  try {
+    const responseEvent = await axios.get(`${process.env.URLAUTO}module/${year}/${hubModule}/${city}-0-1/${activity.codeacti}/${event.code}/registered?format=json`).catch((e) => {console.log(e);});
+    if (responseEvent.data !== undefined && responseEvent.data !== null && !isEmpty(responseEvent.data)) {
+      let studentList = [];
+      for (let student of responseEvent.data) {
+        studentList.push({email: student.login, present: student.present});
+      }
+      await activityUpsert(event, activity, studentList, hubModule);
     }
-    await activityUpsert(event, activity, studentList, hubModule);
+  } catch (error) {
+    console.error(error);
   }
 }
 
 async function getActivities(year, hubModule, city) {
-  const responseActivities = await axios.get(`${process.env.URLAUTO}module/${year}/${hubModule}/${city}-0-1?format=json`).catch((e) => {console.log(e);});
-  if (responseActivities === undefined)
-    return;
-  for (let activity of responseActivities.data.activites) {
-    if (activity.events !== undefined && activity.events.length !== 0) {
-      for (let event of activity.events) {
-        getEvents(year, hubModule, city, event, activity);
+  try {
+    const responseActivities = await axios.get(`${process.env.URLAUTO}module/${year}/${hubModule}/${city}-0-1?format=json`);
+    if (responseActivities === undefined)
+      return;
+    for (let activity of responseActivities.data.activites) {
+      if (activity.events !== undefined && activity.events.length !== 0) {
+        for (let event of activity.events) {
+          getEvents(year, hubModule, city, event, activity);
+        }
       }
     }
+  } catch(error) {
+    console.error(error);
   }
 }
 
-async function refresh(parent, args, context) {
+export async function refresh(parent, args, context) {
   // TODO: Change into custom fields
   const year = "2019";
   const hubModule = "B-INN-000";

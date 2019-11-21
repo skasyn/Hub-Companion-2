@@ -251,10 +251,10 @@ export interface NexusGenEnums {
 
 export interface NexusGenRootTypes {
   Activity: { // root type
-    begin?: any | null; // DateTime
+    begin: any; // DateTime!
     code: string; // String!
-    description?: string | null; // String
-    end?: any | null; // DateTime
+    description: string; // String!
+    end: any; // DateTime!
     id: string; // ID!
     title: string; // String!
     type: string; // String!
@@ -297,10 +297,10 @@ export interface NexusGenAllTypes extends NexusGenRootTypes {
 
 export interface NexusGenFieldTypes {
   Activity: { // field return type
-    begin: any | null; // DateTime
+    begin: any; // DateTime!
     code: string; // String!
-    description: string | null; // String
-    end: any | null; // DateTime
+    description: string; // String!
+    end: any; // DateTime!
     id: string; // ID!
     registered: NexusGenRootTypes['UserPresence'][] | null; // [UserPresence!]
     title: string; // String!
