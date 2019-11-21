@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/App.css';
 import { PageNotLogged } from './PageNotLogged';
 import { Navigation } from './Navigation';
 import { GlobalStateProvider, useGlobalState } from "../reducers/reducers";
