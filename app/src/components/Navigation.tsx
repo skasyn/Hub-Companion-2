@@ -9,10 +9,11 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import {dispatch, useGlobalState} from "../reducers/reducers";
 import {lightBlue, red } from "@material-ui/core/colors";
 import { createMuiTheme } from '@material-ui/core/styles';
+import HubLogoSvg from '../assets/hubcompanionlogo.svg';
 
 import {
   AppBar,
-  Badge,
+  Badge, Card, CardMedia,
   createStyles, CssBaseline, Divider,
   Drawer,
   IconButton,
@@ -160,11 +161,20 @@ const NavBar: React.FC = () => {
     handleClose();
   };
 
+
+
   return (
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" className={classes.title}>
-            Home
+          <Card style={{borderRadius: '15px'}}>
+            <CardMedia
+              style={{width: '50px', height: '50px', padding: '5px'}}
+              src={HubLogoSvg}
+              component="img"
+              />
+          </Card>
+          <Typography variant="h6" className={classes.title} style={{marginLeft: '10px'}}>
+            Hub Companion
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={notificationNb} color="secondary">
