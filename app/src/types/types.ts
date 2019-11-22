@@ -51,3 +51,12 @@ export interface ActivityVars {
 export interface AllActivitiesData {
   getAllActivities: Activity[]
 }
+
+export interface SubmitSharingVars {
+  jwt: String,
+  data: String
+}
+
+export interface SubmitSharingData {
+  submitSharing: Boolean
+}

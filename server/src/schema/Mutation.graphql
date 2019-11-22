@@ -1,3 +1,5 @@
 type Mutation {
     refresh(code: String!): Boolean!
+    submitMaker(code: String!, data: String!): Boolean!
+    submitSharing(code: String!, data: String!): Boolean!
 }

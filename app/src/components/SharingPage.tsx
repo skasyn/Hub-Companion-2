@@ -13,6 +13,10 @@ import {
 
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import { useMutation } from "@apollo/react-hooks";
+import {SubmitSharingData, SubmitSharingVars} from "../types/types";
+import {SUBMIT_SHARING} from "../query/mutation";
+import {useGlobalState} from "../reducers/reducers";
 
 interface ButtonProps {
   activeStep: number,
@@ -54,11 +58,15 @@ const toMultiline = (description: String) => {
 };
 
 export const SharingPage: React.FC = () => {
+  const [jwt] = useGlobalState('jwt');
+  const [user] = useGlobalState('user');
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [emails, setEmail] = useState([{email: '', error: false}]);
+  const [emails, setEmail] = useState([{email: user.email.toString(), error: false}]);
+  const [submitSharing] = useMutation<SubmitSharingData, SubmitSharingVars>(SUBMIT_SHARING);
+  const [result, setResult] = useState(0);
 
   const updateTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -87,8 +95,20 @@ export const SharingPage: React.FC = () => {
     newEmail.pop();
     setEmail(newEmail);
   };
-  const finish = () => {
+  const finish = async () => {
     setActiveStep(activeStep.valueOf() + 1);
+    if (activeStep.valueOf() === 2) {
+      const dataSend = {
+        title: title,
+        description: description,
+        co_workers: emails.map((elem) => elem.email),
+      };
+      const response = await submitSharing({variables: {jwt: jwt, data: JSON.stringify(dataSend)}});
+      if (response !== undefined && response.data !== undefined && response.data.submitSharing === true)
+        setResult(1);
+      else
+        setResult(2);
+    }
   };
   const canNext = (step: number) => {
     let titleDescription = title.length !== 0 && description.length !== 0;
@@ -101,6 +121,11 @@ export const SharingPage: React.FC = () => {
       }
     });
     return (title.length !== 0 && description.length !== 0 && emailsValid);
+  };
+  const resultRender = () => {
+    if (result === 0) return (<div>Processing ...</div>);
+    if (result === 1) return (<div>Submitted !</div>);
+    if (result === 2) return (<div>Error while submitting</div>);
   };
 
   return (
@@ -158,6 +183,7 @@ export const SharingPage: React.FC = () => {
                     defaultValue={value.email}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => updateEmail(event, index)}
                     error={value.error}
+                    disabled={(index === 0) ? true : false}
                   />
                 );
               })
@@ -237,7 +263,13 @@ export const SharingPage: React.FC = () => {
           { activeStep !== 2 ? 'Next' : 'Finish' }
           </Button>
           </div>
-          ) : (<div></div>)
+          ) : (
+            <div>
+              {
+                resultRender()
+              }
+            </div>
+          )
         }
       </div>
     </div>

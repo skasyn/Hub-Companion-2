@@ -368,7 +368,7 @@ scalar Long
 type Maker {
   id: ID!
   title: String!
-  co_workers(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  co_workers: [String!]!
   description: String!
   functionalities: String!
   technologies: String!
@@ -383,10 +383,14 @@ type MakerConnection {
   aggregate: AggregateMaker!
 }
 
+input MakerCreateco_workersInput {
+  set: [String!]
+}
+
 input MakerCreateInput {
   id: ID
   title: String!
-  co_workers: UserCreateManyInput
+  co_workers: MakerCreateco_workersInput
   description: String!
   functionalities: String!
   technologies: String!
@@ -422,6 +426,7 @@ enum MakerOrderByInput {
 type MakerPreviousValues {
   id: ID!
   title: String!
+  co_workers: [String!]!
   description: String!
   functionalities: String!
   technologies: String!
@@ -446,9 +451,13 @@ input MakerSubscriptionWhereInput {
   AND: [MakerSubscriptionWhereInput!]
 }
 
+input MakerUpdateco_workersInput {
+  set: [String!]
+}
+
 input MakerUpdateInput {
   title: String
-  co_workers: UserUpdateManyInput
+  co_workers: MakerUpdateco_workersInput
   description: String
   functionalities: String
   technologies: String
@@ -459,6 +468,7 @@ input MakerUpdateInput {
 
 input MakerUpdateManyMutationInput {
   title: String
+  co_workers: MakerUpdateco_workersInput
   description: String
   functionalities: String
   technologies: String
@@ -496,7 +506,6 @@ input MakerWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
-  co_workers_some: UserWhereInput
   description: String
   description_not: String
   description_in: [String!]
@@ -663,7 +672,7 @@ type Query {
 type Sharing {
   id: ID!
   title: String!
-  co_workers(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  co_workers: [String!]!
   description: String!
   date: DateTime!
   status: Int!
@@ -675,10 +684,14 @@ type SharingConnection {
   aggregate: AggregateSharing!
 }
 
+input SharingCreateco_workersInput {
+  set: [String!]
+}
+
 input SharingCreateInput {
   id: ID
   title: String!
-  co_workers: UserCreateManyInput
+  co_workers: SharingCreateco_workersInput
   description: String!
   date: DateTime!
   status: Int!
@@ -705,6 +718,7 @@ enum SharingOrderByInput {
 type SharingPreviousValues {
   id: ID!
   title: String!
+  co_workers: [String!]!
   description: String!
   date: DateTime!
   status: Int!
@@ -726,9 +740,13 @@ input SharingSubscriptionWhereInput {
   AND: [SharingSubscriptionWhereInput!]
 }
 
+input SharingUpdateco_workersInput {
+  set: [String!]
+}
+
 input SharingUpdateInput {
   title: String
-  co_workers: UserUpdateManyInput
+  co_workers: SharingUpdateco_workersInput
   description: String
   date: DateTime
   status: Int
@@ -736,6 +754,7 @@ input SharingUpdateInput {
 
 input SharingUpdateManyMutationInput {
   title: String
+  co_workers: SharingUpdateco_workersInput
   description: String
   date: DateTime
   status: Int
@@ -770,7 +789,6 @@ input SharingWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
-  co_workers_some: UserWhereInput
   description: String
   description_not: String
   description_in: [String!]
@@ -806,6 +824,7 @@ input SharingWhereInput {
 
 input SharingWhereUniqueInput {
   id: ID
+  title: String
 }
 
 type Subscription {
@@ -843,11 +862,6 @@ input UserCreateInput {
   plan: Int
   privilege: Int
   activities: UserPresenceCreateManyWithoutUserInput
-}
-
-input UserCreateManyInput {
-  create: [UserCreateInput!]
-  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateOneWithoutActivitiesInput {
@@ -1164,92 +1178,6 @@ type UserPreviousValues {
   privilege: Int
 }
 
-input UserScalarWhereInput {
-  id: ID
-  id_not: ID
-  id_in: [ID!]
-  id_not_in: [ID!]
-  id_lt: ID
-  id_lte: ID
-  id_gt: ID
-  id_gte: ID
-  id_contains: ID
-  id_not_contains: ID
-  id_starts_with: ID
-  id_not_starts_with: ID
-  id_ends_with: ID
-  id_not_ends_with: ID
-  outlookId: String
-  outlookId_not: String
-  outlookId_in: [String!]
-  outlookId_not_in: [String!]
-  outlookId_lt: String
-  outlookId_lte: String
-  outlookId_gt: String
-  outlookId_gte: String
-  outlookId_contains: String
-  outlookId_not_contains: String
-  outlookId_starts_with: String
-  outlookId_not_starts_with: String
-  outlookId_ends_with: String
-  outlookId_not_ends_with: String
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
-  email: String
-  email_not: String
-  email_in: [String!]
-  email_not_in: [String!]
-  email_lt: String
-  email_lte: String
-  email_gt: String
-  email_gte: String
-  email_contains: String
-  email_not_contains: String
-  email_starts_with: String
-  email_not_starts_with: String
-  email_ends_with: String
-  email_not_ends_with: String
-  year: Int
-  year_not: Int
-  year_in: [Int!]
-  year_not_in: [Int!]
-  year_lt: Int
-  year_lte: Int
-  year_gt: Int
-  year_gte: Int
-  plan: Int
-  plan_not: Int
-  plan_in: [Int!]
-  plan_not_in: [Int!]
-  plan_lt: Int
-  plan_lte: Int
-  plan_gt: Int
-  plan_gte: Int
-  privilege: Int
-  privilege_not: Int
-  privilege_in: [Int!]
-  privilege_not_in: [Int!]
-  privilege_lt: Int
-  privilege_lte: Int
-  privilege_gt: Int
-  privilege_gte: Int
-  AND: [UserScalarWhereInput!]
-  OR: [UserScalarWhereInput!]
-  NOT: [UserScalarWhereInput!]
-}
-
 type UserSubscriptionPayload {
   mutation: MutationType!
   node: User
@@ -1266,16 +1194,6 @@ input UserSubscriptionWhereInput {
   AND: [UserSubscriptionWhereInput!]
 }
 
-input UserUpdateDataInput {
-  outlookId: String
-  name: String
-  email: String
-  year: Int
-  plan: Int
-  privilege: Int
-  activities: UserPresenceUpdateManyWithoutUserInput
-}
-
 input UserUpdateInput {
   outlookId: String
   name: String
@@ -1286,27 +1204,6 @@ input UserUpdateInput {
   activities: UserPresenceUpdateManyWithoutUserInput
 }
 
-input UserUpdateManyDataInput {
-  outlookId: String
-  name: String
-  email: String
-  year: Int
-  plan: Int
-  privilege: Int
-}
-
-input UserUpdateManyInput {
-  create: [UserCreateInput!]
-  update: [UserUpdateWithWhereUniqueNestedInput!]
-  upsert: [UserUpsertWithWhereUniqueNestedInput!]
-  delete: [UserWhereUniqueInput!]
-  connect: [UserWhereUniqueInput!]
-  set: [UserWhereUniqueInput!]
-  disconnect: [UserWhereUniqueInput!]
-  deleteMany: [UserScalarWhereInput!]
-  updateMany: [UserUpdateManyWithWhereNestedInput!]
-}
-
 input UserUpdateManyMutationInput {
   outlookId: String
   name: String
@@ -1314,11 +1211,6 @@ input UserUpdateManyMutationInput {
   year: Int
   plan: Int
   privilege: Int
-}
-
-input UserUpdateManyWithWhereNestedInput {
-  where: UserScalarWhereInput!
-  data: UserUpdateManyDataInput!
 }
 
 input UserUpdateOneRequiredWithoutActivitiesInput {
@@ -1337,20 +1229,9 @@ input UserUpdateWithoutActivitiesDataInput {
   privilege: Int
 }
 
-input UserUpdateWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput!
-  data: UserUpdateDataInput!
-}
-
 input UserUpsertWithoutActivitiesInput {
   update: UserUpdateWithoutActivitiesDataInput!
   create: UserCreateWithoutActivitiesInput!
-}
-
-input UserUpsertWithWhereUniqueNestedInput {
-  where: UserWhereUniqueInput!
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
 }
 
 input UserWhereInput {

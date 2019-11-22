@@ -1,5 +1,6 @@
 import {handleErrors_login} from "./utils";
 import {getActivities} from "./refresh";
+import {prisma} from "../generated/prisma-client";
 
 require('dotenv').config();
 
@@ -13,7 +14,37 @@ export async function refresh(parent, args, context, userId) {
   return true;
 }
 
+export async function submitMaker(parent, args, context, userId) {
+  if (userId === undefined || userId === '' || args.data === undefined || args.data === '') {
+    throw new Error('Empty code');
+  }
+  const data = JSON.parse(args.data);
+}
+
+export async function submitSharing(parent, args, context, userId) {
+  if (userId === undefined || userId === '' || args.data === undefined || args.data === '') {
+    throw new Error('Empty code');
+  }
+  const data = JSON.parse(args.data);
+  const zeroDate = new Date(0);
+  try {
+    await prisma.createSharing(
+      {
+        title: data.title,
+        description: data.description,
+        co_workers: { set: data.co_workers },
+        date: zeroDate.toISOString(),
+        status: 0
+      }
+    );
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
 
 export const Mutation = {
   refresh: handleErrors_login(refresh),
+  submitMaker: handleErrors_login(submitMaker),
+  submitSharing: handleErrors_login(submitSharing),
 };

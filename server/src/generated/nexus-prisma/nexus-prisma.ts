@@ -149,18 +149,14 @@ export interface NexusPrismaTypes {
       UserPresenceUpdateInput: UserPresenceUpdateInputInputObject
       UserPresenceUpdateManyMutationInput: UserPresenceUpdateManyMutationInputInputObject
       MakerCreateInput: MakerCreateInputInputObject
-      UserCreateManyInput: UserCreateManyInputInputObject
+      MakerCreateco_workersInput: MakerCreateco_workersInputInputObject
       MakerUpdateInput: MakerUpdateInputInputObject
-      UserUpdateManyInput: UserUpdateManyInputInputObject
-      UserUpdateWithWhereUniqueNestedInput: UserUpdateWithWhereUniqueNestedInputInputObject
-      UserUpdateDataInput: UserUpdateDataInputInputObject
-      UserUpsertWithWhereUniqueNestedInput: UserUpsertWithWhereUniqueNestedInputInputObject
-      UserScalarWhereInput: UserScalarWhereInputInputObject
-      UserUpdateManyWithWhereNestedInput: UserUpdateManyWithWhereNestedInputInputObject
-      UserUpdateManyDataInput: UserUpdateManyDataInputInputObject
+      MakerUpdateco_workersInput: MakerUpdateco_workersInputInputObject
       MakerUpdateManyMutationInput: MakerUpdateManyMutationInputInputObject
       SharingCreateInput: SharingCreateInputInputObject
+      SharingCreateco_workersInput: SharingCreateco_workersInputInputObject
       SharingUpdateInput: SharingUpdateInputInputObject
+      SharingUpdateco_workersInput: SharingUpdateco_workersInputInputObject
       SharingUpdateManyMutationInput: SharingUpdateManyMutationInputInputObject
       DatabaseRefreshCreateInput: DatabaseRefreshCreateInputInputObject
       DatabaseRefreshUpdateInput: DatabaseRefreshUpdateInputInputObject
@@ -1321,7 +1317,7 @@ type MakerObject =
   | MakerFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'title', args?: [] | false, alias?: string  } 
-  | { name: 'co_workers', args?: MakerCo_workersArgs[] | false, alias?: string  } 
+  | { name: 'co_workers', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'functionalities', args?: [] | false, alias?: string  } 
   | { name: 'technologies', args?: [] | false, alias?: string  } 
@@ -1341,14 +1337,7 @@ type MakerFields =
   | 'status'
 
 
-type MakerCo_workersArgs =
-  | 'where'
-  | 'orderBy'
-  | 'skip'
-  | 'after'
-  | 'before'
-  | 'first'
-  | 'last'
+
   
 
 export interface MakerFieldDetails {
@@ -1369,17 +1358,12 @@ export interface MakerFieldDetails {
     resolve: undefined
   }
   co_workers: {
-    type: 'User'
-    args: Record<MakerCo_workersArgs, core.NexusArgDef<string>>
+    type: 'String'
+    args: {}
     description: string
     list: true
     nullable: false
-    resolve: (
-      root: core.RootValue<"Maker">,
-      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.User[]> | prisma.User[]
+    resolve: undefined
   }
   description: {
     type: 'String'
@@ -1563,7 +1547,7 @@ type SharingObject =
   | SharingFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'title', args?: [] | false, alias?: string  } 
-  | { name: 'co_workers', args?: SharingCo_workersArgs[] | false, alias?: string  } 
+  | { name: 'co_workers', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'date', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
@@ -1577,14 +1561,7 @@ type SharingFields =
   | 'status'
 
 
-type SharingCo_workersArgs =
-  | 'where'
-  | 'orderBy'
-  | 'skip'
-  | 'after'
-  | 'before'
-  | 'first'
-  | 'last'
+
   
 
 export interface SharingFieldDetails {
@@ -1605,17 +1582,12 @@ export interface SharingFieldDetails {
     resolve: undefined
   }
   co_workers: {
-    type: 'User'
-    args: Record<SharingCo_workersArgs, core.NexusArgDef<string>>
+    type: 'String'
+    args: {}
     description: string
     list: true
     nullable: false
-    resolve: (
-      root: core.RootValue<"Sharing">,
-      args: { where?: UserWhereInput | null, orderBy?: prisma.UserOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
-      context: core.GetGen<"context">,
-      info?: GraphQLResolveInfo
-    ) => Promise<prisma.User[]> | prisma.User[]
+    resolve: undefined
   }
   description: {
     type: 'String'
@@ -3241,6 +3213,7 @@ type MakerPreviousValuesObject =
   | MakerPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'title', args?: [] | false, alias?: string  } 
+  | { name: 'co_workers', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'functionalities', args?: [] | false, alias?: string  } 
   | { name: 'technologies', args?: [] | false, alias?: string  } 
@@ -3251,6 +3224,7 @@ type MakerPreviousValuesObject =
 type MakerPreviousValuesFields =
   | 'id'
   | 'title'
+  | 'co_workers'
   | 'description'
   | 'functionalities'
   | 'technologies'
@@ -3276,6 +3250,14 @@ export interface MakerPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  co_workers: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
     nullable: false
     resolve: undefined
   }
@@ -3406,6 +3388,7 @@ type SharingPreviousValuesObject =
   | SharingPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
   | { name: 'title', args?: [] | false, alias?: string  } 
+  | { name: 'co_workers', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'date', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
@@ -3413,6 +3396,7 @@ type SharingPreviousValuesObject =
 type SharingPreviousValuesFields =
   | 'id'
   | 'title'
+  | 'co_workers'
   | 'description'
   | 'date'
   | 'status'
@@ -3435,6 +3419,14 @@ export interface SharingPreviousValuesFieldDetails {
     args: {}
     description: string
     list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  co_workers: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
     nullable: false
     resolve: undefined
   }
@@ -4089,7 +4081,6 @@ export interface MakerWhereInput {
   title_not_starts_with?: string | null
   title_ends_with?: string | null
   title_not_ends_with?: string | null
-  co_workers_some?: UserWhereInput | null
   description?: string | null
   description_not?: string | null
   description_in?: string[]
@@ -4200,7 +4191,6 @@ export type MakerWhereInputInputObject =
   | { name: 'title_not_starts_with', alias?: string  } 
   | { name: 'title_ends_with', alias?: string  } 
   | { name: 'title_not_ends_with', alias?: string  } 
-  | { name: 'co_workers_some', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'description_not', alias?: string  } 
   | { name: 'description_in', alias?: string  } 
@@ -4283,10 +4273,12 @@ export type MakerWhereInputInputObject =
   
 export interface SharingWhereUniqueInput {
   id?: string | null
+  title?: string | null
 }
 export type SharingWhereUniqueInputInputObject =
   | Extract<keyof SharingWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'title', alias?: string  } 
   
 export interface SharingWhereInput {
   id?: string | null
@@ -4317,7 +4309,6 @@ export interface SharingWhereInput {
   title_not_starts_with?: string | null
   title_ends_with?: string | null
   title_not_ends_with?: string | null
-  co_workers_some?: UserWhereInput | null
   description?: string | null
   description_not?: string | null
   description_in?: string[]
@@ -4380,7 +4371,6 @@ export type SharingWhereInputInputObject =
   | { name: 'title_not_starts_with', alias?: string  } 
   | { name: 'title_ends_with', alias?: string  } 
   | { name: 'title_not_ends_with', alias?: string  } 
-  | { name: 'co_workers_some', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'description_not', alias?: string  } 
   | { name: 'description_in', alias?: string  } 
@@ -5042,7 +5032,7 @@ export type UserPresenceUpdateManyMutationInputInputObject =
 export interface MakerCreateInput {
   id?: string | null
   title?: string
-  co_workers?: UserCreateManyInput | null
+  co_workers?: MakerCreateco_workersInput | null
   description?: string
   functionalities?: string
   technologies?: string
@@ -5062,18 +5052,16 @@ export type MakerCreateInputInputObject =
   | { name: 'informations', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
-export interface UserCreateManyInput {
-  create?: UserCreateInput[]
-  connect?: UserWhereUniqueInput[]
+export interface MakerCreateco_workersInput {
+  set?: string[]
 }
-export type UserCreateManyInputInputObject =
-  | Extract<keyof UserCreateManyInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
+export type MakerCreateco_workersInputInputObject =
+  | Extract<keyof MakerCreateco_workersInput, string>
+  | { name: 'set', alias?: string  } 
   
 export interface MakerUpdateInput {
   title?: string | null
-  co_workers?: UserUpdateManyInput | null
+  co_workers?: MakerUpdateco_workersInput | null
   description?: string | null
   functionalities?: string | null
   technologies?: string | null
@@ -5092,267 +5080,16 @@ export type MakerUpdateInputInputObject =
   | { name: 'informations', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
-export interface UserUpdateManyInput {
-  create?: UserCreateInput[]
-  update?: UserUpdateWithWhereUniqueNestedInput[]
-  upsert?: UserUpsertWithWhereUniqueNestedInput[]
-  delete?: UserWhereUniqueInput[]
-  connect?: UserWhereUniqueInput[]
-  set?: UserWhereUniqueInput[]
-  disconnect?: UserWhereUniqueInput[]
-  deleteMany?: UserScalarWhereInput[]
-  updateMany?: UserUpdateManyWithWhereNestedInput[]
+export interface MakerUpdateco_workersInput {
+  set?: string[]
 }
-export type UserUpdateManyInputInputObject =
-  | Extract<keyof UserUpdateManyInput, string>
-  | { name: 'create', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'upsert', alias?: string  } 
-  | { name: 'delete', alias?: string  } 
-  | { name: 'connect', alias?: string  } 
+export type MakerUpdateco_workersInputInputObject =
+  | Extract<keyof MakerUpdateco_workersInput, string>
   | { name: 'set', alias?: string  } 
-  | { name: 'disconnect', alias?: string  } 
-  | { name: 'deleteMany', alias?: string  } 
-  | { name: 'updateMany', alias?: string  } 
-  
-export interface UserUpdateWithWhereUniqueNestedInput {
-  where?: UserWhereUniqueInput
-  data?: UserUpdateDataInput
-}
-export type UserUpdateWithWhereUniqueNestedInputInputObject =
-  | Extract<keyof UserUpdateWithWhereUniqueNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface UserUpdateDataInput {
-  outlookId?: string | null
-  name?: string | null
-  email?: string | null
-  year?: number | null
-  plan?: number | null
-  privilege?: number | null
-  activities?: UserPresenceUpdateManyWithoutUserInput | null
-}
-export type UserUpdateDataInputInputObject =
-  | Extract<keyof UserUpdateDataInput, string>
-  | { name: 'outlookId', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'year', alias?: string  } 
-  | { name: 'plan', alias?: string  } 
-  | { name: 'privilege', alias?: string  } 
-  | { name: 'activities', alias?: string  } 
-  
-export interface UserUpsertWithWhereUniqueNestedInput {
-  where?: UserWhereUniqueInput
-  update?: UserUpdateDataInput
-  create?: UserCreateInput
-}
-export type UserUpsertWithWhereUniqueNestedInputInputObject =
-  | Extract<keyof UserUpsertWithWhereUniqueNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'update', alias?: string  } 
-  | { name: 'create', alias?: string  } 
-  
-export interface UserScalarWhereInput {
-  id?: string | null
-  id_not?: string | null
-  id_in?: string[]
-  id_not_in?: string[]
-  id_lt?: string | null
-  id_lte?: string | null
-  id_gt?: string | null
-  id_gte?: string | null
-  id_contains?: string | null
-  id_not_contains?: string | null
-  id_starts_with?: string | null
-  id_not_starts_with?: string | null
-  id_ends_with?: string | null
-  id_not_ends_with?: string | null
-  outlookId?: string | null
-  outlookId_not?: string | null
-  outlookId_in?: string[]
-  outlookId_not_in?: string[]
-  outlookId_lt?: string | null
-  outlookId_lte?: string | null
-  outlookId_gt?: string | null
-  outlookId_gte?: string | null
-  outlookId_contains?: string | null
-  outlookId_not_contains?: string | null
-  outlookId_starts_with?: string | null
-  outlookId_not_starts_with?: string | null
-  outlookId_ends_with?: string | null
-  outlookId_not_ends_with?: string | null
-  name?: string | null
-  name_not?: string | null
-  name_in?: string[]
-  name_not_in?: string[]
-  name_lt?: string | null
-  name_lte?: string | null
-  name_gt?: string | null
-  name_gte?: string | null
-  name_contains?: string | null
-  name_not_contains?: string | null
-  name_starts_with?: string | null
-  name_not_starts_with?: string | null
-  name_ends_with?: string | null
-  name_not_ends_with?: string | null
-  email?: string | null
-  email_not?: string | null
-  email_in?: string[]
-  email_not_in?: string[]
-  email_lt?: string | null
-  email_lte?: string | null
-  email_gt?: string | null
-  email_gte?: string | null
-  email_contains?: string | null
-  email_not_contains?: string | null
-  email_starts_with?: string | null
-  email_not_starts_with?: string | null
-  email_ends_with?: string | null
-  email_not_ends_with?: string | null
-  year?: number | null
-  year_not?: number | null
-  year_in?: number[]
-  year_not_in?: number[]
-  year_lt?: number | null
-  year_lte?: number | null
-  year_gt?: number | null
-  year_gte?: number | null
-  plan?: number | null
-  plan_not?: number | null
-  plan_in?: number[]
-  plan_not_in?: number[]
-  plan_lt?: number | null
-  plan_lte?: number | null
-  plan_gt?: number | null
-  plan_gte?: number | null
-  privilege?: number | null
-  privilege_not?: number | null
-  privilege_in?: number[]
-  privilege_not_in?: number[]
-  privilege_lt?: number | null
-  privilege_lte?: number | null
-  privilege_gt?: number | null
-  privilege_gte?: number | null
-  AND?: UserScalarWhereInput[]
-  OR?: UserScalarWhereInput[]
-  NOT?: UserScalarWhereInput[]
-}
-export type UserScalarWhereInputInputObject =
-  | Extract<keyof UserScalarWhereInput, string>
-  | { name: 'id', alias?: string  } 
-  | { name: 'id_not', alias?: string  } 
-  | { name: 'id_in', alias?: string  } 
-  | { name: 'id_not_in', alias?: string  } 
-  | { name: 'id_lt', alias?: string  } 
-  | { name: 'id_lte', alias?: string  } 
-  | { name: 'id_gt', alias?: string  } 
-  | { name: 'id_gte', alias?: string  } 
-  | { name: 'id_contains', alias?: string  } 
-  | { name: 'id_not_contains', alias?: string  } 
-  | { name: 'id_starts_with', alias?: string  } 
-  | { name: 'id_not_starts_with', alias?: string  } 
-  | { name: 'id_ends_with', alias?: string  } 
-  | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'outlookId', alias?: string  } 
-  | { name: 'outlookId_not', alias?: string  } 
-  | { name: 'outlookId_in', alias?: string  } 
-  | { name: 'outlookId_not_in', alias?: string  } 
-  | { name: 'outlookId_lt', alias?: string  } 
-  | { name: 'outlookId_lte', alias?: string  } 
-  | { name: 'outlookId_gt', alias?: string  } 
-  | { name: 'outlookId_gte', alias?: string  } 
-  | { name: 'outlookId_contains', alias?: string  } 
-  | { name: 'outlookId_not_contains', alias?: string  } 
-  | { name: 'outlookId_starts_with', alias?: string  } 
-  | { name: 'outlookId_not_starts_with', alias?: string  } 
-  | { name: 'outlookId_ends_with', alias?: string  } 
-  | { name: 'outlookId_not_ends_with', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'name_not', alias?: string  } 
-  | { name: 'name_in', alias?: string  } 
-  | { name: 'name_not_in', alias?: string  } 
-  | { name: 'name_lt', alias?: string  } 
-  | { name: 'name_lte', alias?: string  } 
-  | { name: 'name_gt', alias?: string  } 
-  | { name: 'name_gte', alias?: string  } 
-  | { name: 'name_contains', alias?: string  } 
-  | { name: 'name_not_contains', alias?: string  } 
-  | { name: 'name_starts_with', alias?: string  } 
-  | { name: 'name_not_starts_with', alias?: string  } 
-  | { name: 'name_ends_with', alias?: string  } 
-  | { name: 'name_not_ends_with', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'email_not', alias?: string  } 
-  | { name: 'email_in', alias?: string  } 
-  | { name: 'email_not_in', alias?: string  } 
-  | { name: 'email_lt', alias?: string  } 
-  | { name: 'email_lte', alias?: string  } 
-  | { name: 'email_gt', alias?: string  } 
-  | { name: 'email_gte', alias?: string  } 
-  | { name: 'email_contains', alias?: string  } 
-  | { name: 'email_not_contains', alias?: string  } 
-  | { name: 'email_starts_with', alias?: string  } 
-  | { name: 'email_not_starts_with', alias?: string  } 
-  | { name: 'email_ends_with', alias?: string  } 
-  | { name: 'email_not_ends_with', alias?: string  } 
-  | { name: 'year', alias?: string  } 
-  | { name: 'year_not', alias?: string  } 
-  | { name: 'year_in', alias?: string  } 
-  | { name: 'year_not_in', alias?: string  } 
-  | { name: 'year_lt', alias?: string  } 
-  | { name: 'year_lte', alias?: string  } 
-  | { name: 'year_gt', alias?: string  } 
-  | { name: 'year_gte', alias?: string  } 
-  | { name: 'plan', alias?: string  } 
-  | { name: 'plan_not', alias?: string  } 
-  | { name: 'plan_in', alias?: string  } 
-  | { name: 'plan_not_in', alias?: string  } 
-  | { name: 'plan_lt', alias?: string  } 
-  | { name: 'plan_lte', alias?: string  } 
-  | { name: 'plan_gt', alias?: string  } 
-  | { name: 'plan_gte', alias?: string  } 
-  | { name: 'privilege', alias?: string  } 
-  | { name: 'privilege_not', alias?: string  } 
-  | { name: 'privilege_in', alias?: string  } 
-  | { name: 'privilege_not_in', alias?: string  } 
-  | { name: 'privilege_lt', alias?: string  } 
-  | { name: 'privilege_lte', alias?: string  } 
-  | { name: 'privilege_gt', alias?: string  } 
-  | { name: 'privilege_gte', alias?: string  } 
-  | { name: 'AND', alias?: string  } 
-  | { name: 'OR', alias?: string  } 
-  | { name: 'NOT', alias?: string  } 
-  
-export interface UserUpdateManyWithWhereNestedInput {
-  where?: UserScalarWhereInput
-  data?: UserUpdateManyDataInput
-}
-export type UserUpdateManyWithWhereNestedInputInputObject =
-  | Extract<keyof UserUpdateManyWithWhereNestedInput, string>
-  | { name: 'where', alias?: string  } 
-  | { name: 'data', alias?: string  } 
-  
-export interface UserUpdateManyDataInput {
-  outlookId?: string | null
-  name?: string | null
-  email?: string | null
-  year?: number | null
-  plan?: number | null
-  privilege?: number | null
-}
-export type UserUpdateManyDataInputInputObject =
-  | Extract<keyof UserUpdateManyDataInput, string>
-  | { name: 'outlookId', alias?: string  } 
-  | { name: 'name', alias?: string  } 
-  | { name: 'email', alias?: string  } 
-  | { name: 'year', alias?: string  } 
-  | { name: 'plan', alias?: string  } 
-  | { name: 'privilege', alias?: string  } 
   
 export interface MakerUpdateManyMutationInput {
   title?: string | null
+  co_workers?: MakerUpdateco_workersInput | null
   description?: string | null
   functionalities?: string | null
   technologies?: string | null
@@ -5363,6 +5100,7 @@ export interface MakerUpdateManyMutationInput {
 export type MakerUpdateManyMutationInputInputObject =
   | Extract<keyof MakerUpdateManyMutationInput, string>
   | { name: 'title', alias?: string  } 
+  | { name: 'co_workers', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'functionalities', alias?: string  } 
   | { name: 'technologies', alias?: string  } 
@@ -5373,7 +5111,7 @@ export type MakerUpdateManyMutationInputInputObject =
 export interface SharingCreateInput {
   id?: string | null
   title?: string
-  co_workers?: UserCreateManyInput | null
+  co_workers?: SharingCreateco_workersInput | null
   description?: string
   date?: string
   status?: number
@@ -5387,9 +5125,16 @@ export type SharingCreateInputInputObject =
   | { name: 'date', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
+export interface SharingCreateco_workersInput {
+  set?: string[]
+}
+export type SharingCreateco_workersInputInputObject =
+  | Extract<keyof SharingCreateco_workersInput, string>
+  | { name: 'set', alias?: string  } 
+  
 export interface SharingUpdateInput {
   title?: string | null
-  co_workers?: UserUpdateManyInput | null
+  co_workers?: SharingUpdateco_workersInput | null
   description?: string | null
   date?: string | null
   status?: number | null
@@ -5402,8 +5147,16 @@ export type SharingUpdateInputInputObject =
   | { name: 'date', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
+export interface SharingUpdateco_workersInput {
+  set?: string[]
+}
+export type SharingUpdateco_workersInputInputObject =
+  | Extract<keyof SharingUpdateco_workersInput, string>
+  | { name: 'set', alias?: string  } 
+  
 export interface SharingUpdateManyMutationInput {
   title?: string | null
+  co_workers?: SharingUpdateco_workersInput | null
   description?: string | null
   date?: string | null
   status?: number | null
@@ -5411,6 +5164,7 @@ export interface SharingUpdateManyMutationInput {
 export type SharingUpdateManyMutationInputInputObject =
   | Extract<keyof SharingUpdateManyMutationInput, string>
   | { name: 'title', alias?: string  } 
+  | { name: 'co_workers', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'date', alias?: string  } 
   | { name: 'status', alias?: string  } 

@@ -33,7 +33,7 @@ type UserPresence {
 type Maker {
     id: ID! @id
     title: String!
-    co_workers: [User!]! @relation(name: "MakerUser", link: INLINE)
+    co_workers: [String!]!
     description: String!
     functionalities: String!
     technologies: String!
@@ -44,8 +44,8 @@ type Maker {
 
 type Sharing {
     id: ID! @id
-    title: String!
-    co_workers: [User!]! @relation(name: "SharingUser", link: INLINE)
+    title: String! @unique
+    co_workers: [String!]!
     description: String!
     date: DateTime!
     status: Int!
