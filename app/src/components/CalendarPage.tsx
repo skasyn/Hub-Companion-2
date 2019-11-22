@@ -33,14 +33,14 @@ export const CalendarPage: React.FC = () => {
       if (event.activity.begin !== event.activity.end) {
         return {
           title: event.activity.title,
-          start: new Date(event.activity.begin.toString()),
-          end: new Date(event.activity.end.toString()),
+          start: new Date(Date.parse(event.activity.begin.toString())),
+          end: new Date(Date.parse(event.activity.end.toString())),
           id: event.activity.code
         }
       } else {
         return {
           title: event.activity.title,
-          start: new Date(event.activity.begin.toString()),
+          start: new Date(Date.parse(event.activity.begin.toString())),
           id: event.activity.code
         }
       }
@@ -49,15 +49,15 @@ export const CalendarPage: React.FC = () => {
       if (event.begin !== event.end) {
         return {
           title: event.title,
-          start: new Date(event.begin.toString()),
-          end: new Date(event.end.toString()),
+          start: new Date(Date.parse(event.begin.toString())),
+          end: new Date(Date.parse(event.end.toString())),
           color: "grey",
           id: event.code
         }
       } else {
         return {
           title: event.title,
-          start: new Date(event.begin.toString()),
+          start: new Date(Date.parse(event.begin.toString())),
           color: "grey",
           id: event.code
         }
@@ -70,6 +70,7 @@ export const CalendarPage: React.FC = () => {
     });
     return (
       <FullCalendar
+        timeZone="UTC"
         defaultView="timeGridWeek"
         plugins={[timeGridPlugin]}
         events={events}
