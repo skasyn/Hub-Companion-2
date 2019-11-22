@@ -9,4 +9,5 @@ type Query {
     getXp(code: String!): Int!
     getUserActivities(code: String!): [GetUserPresences!]!
     getAllActivities: [Activity!]!
+    getUserSharing(code: String!): [Sharing!]!
 }

@@ -1,0 +1,20 @@
+type Sharing {
+    id: ID!
+    title: String!
+    co_workers: [String!]!
+    description: String!
+    date: DateTime!
+    status: Int!
+}
+
+type Maker {
+    id: ID!
+    title: String!
+    co_workers: [String!]!
+    description: String!
+    functionalities: String!
+    technologies: String!
+    resources: String!
+    informations: String!
+    status: Int!
+}

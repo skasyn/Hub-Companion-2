@@ -129,10 +129,27 @@ async function getAllActivities(parent, args, context) {
   return prisma.activities({});
 }
 
+async function getUserSharing(parent, args, context, userId) {
+  if (userId === undefined || userId === '') {
+    throw new Error('Empty code');
+  }
+  const user = await prisma.user({id: userId});
+  if (user === undefined || user === null) {
+    throw new Error('Invalid user');
+  }
+  const allSharings = await prisma.sharings({});
+  const userSharings = allSharings.map((elem) => {
+    if (elem.co_workers.find(e => e === user.email) !== undefined)
+      return elem;
+  });
+  return userSharings;
+}
+
 export const Query = {
   login: handleErrors(login),
   loginCookie: handleErrors_login(loginCookie),
   getXp: handleErrors_login(getXp),
   getUserActivities: handleErrors_login(getUserActivities),
   getAllActivities: handleErrors(getAllActivities),
+  getUserSharing: handleErrors_login(getUserSharing),
 };

@@ -1,6 +1,7 @@
 # import User from "./schema/User.graphql"
 # import UserPresence from "./schema/UserPresence.graphql"
 # import Activity from "./schema/Activity.graphql"
+# import SharingMaker from "./schema/SharingMaker.graphql"
 
 # import Mutation from "./schema/Mutation.graphql"
 # import Query from "./schema/Query.graphql"
