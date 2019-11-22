@@ -36,6 +36,10 @@ export interface NexusPrismaTypes {
       SharingConnection: SharingConnectionObject
       SharingEdge: SharingEdgeObject
       AggregateSharing: AggregateSharingObject
+      DatabaseRefresh: DatabaseRefreshObject
+      DatabaseRefreshConnection: DatabaseRefreshConnectionObject
+      DatabaseRefreshEdge: DatabaseRefreshEdgeObject
+      AggregateDatabaseRefresh: AggregateDatabaseRefreshObject
       Mutation: MutationObject
       BatchPayload: BatchPayloadObject
       Subscription: SubscriptionObject
@@ -49,6 +53,8 @@ export interface NexusPrismaTypes {
       MakerPreviousValues: MakerPreviousValuesObject
       SharingSubscriptionPayload: SharingSubscriptionPayloadObject
       SharingPreviousValues: SharingPreviousValuesObject
+      DatabaseRefreshSubscriptionPayload: DatabaseRefreshSubscriptionPayloadObject
+      DatabaseRefreshPreviousValues: DatabaseRefreshPreviousValuesObject
     }
     fieldsDetails: {
       Query: QueryFieldDetails
@@ -73,6 +79,10 @@ export interface NexusPrismaTypes {
       SharingConnection: SharingConnectionFieldDetails
       SharingEdge: SharingEdgeFieldDetails
       AggregateSharing: AggregateSharingFieldDetails
+      DatabaseRefresh: DatabaseRefreshFieldDetails
+      DatabaseRefreshConnection: DatabaseRefreshConnectionFieldDetails
+      DatabaseRefreshEdge: DatabaseRefreshEdgeFieldDetails
+      AggregateDatabaseRefresh: AggregateDatabaseRefreshFieldDetails
       Mutation: MutationFieldDetails
       BatchPayload: BatchPayloadFieldDetails
       Subscription: SubscriptionFieldDetails
@@ -86,6 +96,8 @@ export interface NexusPrismaTypes {
       MakerPreviousValues: MakerPreviousValuesFieldDetails
       SharingSubscriptionPayload: SharingSubscriptionPayloadFieldDetails
       SharingPreviousValues: SharingPreviousValuesFieldDetails
+      DatabaseRefreshSubscriptionPayload: DatabaseRefreshSubscriptionPayloadFieldDetails
+      DatabaseRefreshPreviousValues: DatabaseRefreshPreviousValuesFieldDetails
     }
   }
   inputTypes: {
@@ -100,6 +112,8 @@ export interface NexusPrismaTypes {
       MakerWhereInput: MakerWhereInputInputObject
       SharingWhereUniqueInput: SharingWhereUniqueInputInputObject
       SharingWhereInput: SharingWhereInputInputObject
+      DatabaseRefreshWhereUniqueInput: DatabaseRefreshWhereUniqueInputInputObject
+      DatabaseRefreshWhereInput: DatabaseRefreshWhereInputInputObject
       UserCreateInput: UserCreateInputInputObject
       UserPresenceCreateManyWithoutUserInput: UserPresenceCreateManyWithoutUserInputInputObject
       UserPresenceCreateWithoutUserInput: UserPresenceCreateWithoutUserInputInputObject
@@ -148,11 +162,15 @@ export interface NexusPrismaTypes {
       SharingCreateInput: SharingCreateInputInputObject
       SharingUpdateInput: SharingUpdateInputInputObject
       SharingUpdateManyMutationInput: SharingUpdateManyMutationInputInputObject
+      DatabaseRefreshCreateInput: DatabaseRefreshCreateInputInputObject
+      DatabaseRefreshUpdateInput: DatabaseRefreshUpdateInputInputObject
+      DatabaseRefreshUpdateManyMutationInput: DatabaseRefreshUpdateManyMutationInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       ActivitySubscriptionWhereInput: ActivitySubscriptionWhereInputInputObject
       UserPresenceSubscriptionWhereInput: UserPresenceSubscriptionWhereInputInputObject
       MakerSubscriptionWhereInput: MakerSubscriptionWhereInputInputObject
       SharingSubscriptionWhereInput: SharingSubscriptionWhereInputInputObject
+      DatabaseRefreshSubscriptionWhereInput: DatabaseRefreshSubscriptionWhereInputInputObject
     }
   }
   enumTypes: {
@@ -161,6 +179,7 @@ export interface NexusPrismaTypes {
     ActivityOrderByInput: ActivityOrderByInputValues,
     MakerOrderByInput: MakerOrderByInputValues,
     SharingOrderByInput: SharingOrderByInputValues,
+    DatabaseRefreshOrderByInput: DatabaseRefreshOrderByInputValues,
     MutationType: MutationTypeValues,
   }
 }
@@ -184,6 +203,9 @@ type QueryObject =
   | { name: 'sharing', args?: QuerySharingArgs[] | false, alias?: string  } 
   | { name: 'sharings', args?: QuerySharingsArgs[] | false, alias?: string  } 
   | { name: 'sharingsConnection', args?: QuerySharingsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'databaseRefresh', args?: QueryDatabaseRefreshArgs[] | false, alias?: string  } 
+  | { name: 'databaseRefreshes', args?: QueryDatabaseRefreshesArgs[] | false, alias?: string  } 
+  | { name: 'databaseRefreshesConnection', args?: QueryDatabaseRefreshesConnectionArgs[] | false, alias?: string  } 
 
 type QueryFields =
   | 'user'
@@ -201,6 +223,9 @@ type QueryFields =
   | 'sharing'
   | 'sharings'
   | 'sharingsConnection'
+  | 'databaseRefresh'
+  | 'databaseRefreshes'
+  | 'databaseRefreshesConnection'
 
 
 type QueryUserArgs =
@@ -286,6 +311,24 @@ type QuerySharingsArgs =
   | 'first'
   | 'last'
 type QuerySharingsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryDatabaseRefreshArgs =
+  | 'where'
+type QueryDatabaseRefreshesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryDatabaseRefreshesConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -490,6 +533,45 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.SharingConnection> | prisma.SharingConnection
+  }
+  databaseRefresh: {
+    type: 'DatabaseRefresh'
+    args: Record<QueryDatabaseRefreshArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: DatabaseRefreshWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefresh | null> | prisma.DatabaseRefresh | null
+  }
+  databaseRefreshes: {
+    type: 'DatabaseRefresh'
+    args: Record<QueryDatabaseRefreshesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: DatabaseRefreshWhereInput | null, orderBy?: prisma.DatabaseRefreshOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefresh[]> | prisma.DatabaseRefresh[]
+  }
+  databaseRefreshesConnection: {
+    type: 'DatabaseRefreshConnection'
+    args: Record<QueryDatabaseRefreshesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: DatabaseRefreshWhereInput | null, orderBy?: prisma.DatabaseRefreshOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefreshConnection> | prisma.DatabaseRefreshConnection
   }
 }
   
@@ -1687,6 +1769,166 @@ export interface AggregateSharingFieldDetails {
 }
   
 
+// Types for DatabaseRefresh
+
+type DatabaseRefreshObject =
+  | DatabaseRefreshFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+
+type DatabaseRefreshFields =
+  | 'id'
+  | 'date'
+
+
+
+  
+
+export interface DatabaseRefreshFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for DatabaseRefreshConnection
+
+type DatabaseRefreshConnectionObject =
+  | DatabaseRefreshConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type DatabaseRefreshConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface DatabaseRefreshConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DatabaseRefreshConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'DatabaseRefreshEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DatabaseRefreshConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefreshEdge[]> | prisma.DatabaseRefreshEdge[]
+  }
+  aggregate: {
+    type: 'AggregateDatabaseRefresh'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DatabaseRefreshConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateDatabaseRefresh> | prisma.AggregateDatabaseRefresh
+  }
+}
+  
+
+// Types for DatabaseRefreshEdge
+
+type DatabaseRefreshEdgeObject =
+  | DatabaseRefreshEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type DatabaseRefreshEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface DatabaseRefreshEdgeFieldDetails {
+  node: {
+    type: 'DatabaseRefresh'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DatabaseRefreshEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefresh> | prisma.DatabaseRefresh
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateDatabaseRefresh
+
+type AggregateDatabaseRefreshObject =
+  | AggregateDatabaseRefreshFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateDatabaseRefreshFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateDatabaseRefreshFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Mutation
 
 type MutationObject =
@@ -1721,6 +1963,12 @@ type MutationObject =
   | { name: 'upsertSharing', args?: MutationUpsertSharingArgs[] | false, alias?: string  } 
   | { name: 'deleteSharing', args?: MutationDeleteSharingArgs[] | false, alias?: string  } 
   | { name: 'deleteManySharings', args?: MutationDeleteManySharingsArgs[] | false, alias?: string  } 
+  | { name: 'createDatabaseRefresh', args?: MutationCreateDatabaseRefreshArgs[] | false, alias?: string  } 
+  | { name: 'updateDatabaseRefresh', args?: MutationUpdateDatabaseRefreshArgs[] | false, alias?: string  } 
+  | { name: 'updateManyDatabaseRefreshes', args?: MutationUpdateManyDatabaseRefreshesArgs[] | false, alias?: string  } 
+  | { name: 'upsertDatabaseRefresh', args?: MutationUpsertDatabaseRefreshArgs[] | false, alias?: string  } 
+  | { name: 'deleteDatabaseRefresh', args?: MutationDeleteDatabaseRefreshArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyDatabaseRefreshes', args?: MutationDeleteManyDatabaseRefreshesArgs[] | false, alias?: string  } 
 
 type MutationFields =
   | 'createUser'
@@ -1753,6 +2001,12 @@ type MutationFields =
   | 'upsertSharing'
   | 'deleteSharing'
   | 'deleteManySharings'
+  | 'createDatabaseRefresh'
+  | 'updateDatabaseRefresh'
+  | 'updateManyDatabaseRefreshes'
+  | 'upsertDatabaseRefresh'
+  | 'deleteDatabaseRefresh'
+  | 'deleteManyDatabaseRefreshes'
 
 
 type MutationCreateUserArgs =
@@ -1834,6 +2088,22 @@ type MutationUpsertSharingArgs =
 type MutationDeleteSharingArgs =
   | 'where'
 type MutationDeleteManySharingsArgs =
+  | 'where'
+type MutationCreateDatabaseRefreshArgs =
+  | 'data'
+type MutationUpdateDatabaseRefreshArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyDatabaseRefreshesArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertDatabaseRefreshArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteDatabaseRefreshArgs =
+  | 'where'
+type MutationDeleteManyDatabaseRefreshesArgs =
   | 'where'
   
 
@@ -2228,6 +2498,84 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createDatabaseRefresh: {
+    type: 'DatabaseRefresh'
+    args: Record<MutationCreateDatabaseRefreshArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: DatabaseRefreshCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefresh> | prisma.DatabaseRefresh
+  }
+  updateDatabaseRefresh: {
+    type: 'DatabaseRefresh'
+    args: Record<MutationUpdateDatabaseRefreshArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: DatabaseRefreshUpdateInput, where: DatabaseRefreshWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefresh | null> | prisma.DatabaseRefresh | null
+  }
+  updateManyDatabaseRefreshes: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyDatabaseRefreshesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: DatabaseRefreshUpdateManyMutationInput, where?: DatabaseRefreshWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertDatabaseRefresh: {
+    type: 'DatabaseRefresh'
+    args: Record<MutationUpsertDatabaseRefreshArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: DatabaseRefreshWhereUniqueInput, create: DatabaseRefreshCreateInput, update: DatabaseRefreshUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefresh> | prisma.DatabaseRefresh
+  }
+  deleteDatabaseRefresh: {
+    type: 'DatabaseRefresh'
+    args: Record<MutationDeleteDatabaseRefreshArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: DatabaseRefreshWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefresh | null> | prisma.DatabaseRefresh | null
+  }
+  deleteManyDatabaseRefreshes: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyDatabaseRefreshesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: DatabaseRefreshWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
 }
   
 
@@ -2265,6 +2613,7 @@ type SubscriptionObject =
   | { name: 'userPresence', args?: SubscriptionUserPresenceArgs[] | false, alias?: string  } 
   | { name: 'maker', args?: SubscriptionMakerArgs[] | false, alias?: string  } 
   | { name: 'sharing', args?: SubscriptionSharingArgs[] | false, alias?: string  } 
+  | { name: 'databaseRefresh', args?: SubscriptionDatabaseRefreshArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
   | 'user'
@@ -2272,6 +2621,7 @@ type SubscriptionFields =
   | 'userPresence'
   | 'maker'
   | 'sharing'
+  | 'databaseRefresh'
 
 
 type SubscriptionUserArgs =
@@ -2283,6 +2633,8 @@ type SubscriptionUserPresenceArgs =
 type SubscriptionMakerArgs =
   | 'where'
 type SubscriptionSharingArgs =
+  | 'where'
+type SubscriptionDatabaseRefreshArgs =
   | 'where'
   
 
@@ -2351,6 +2703,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.SharingSubscriptionPayload | null> | prisma.SharingSubscriptionPayload | null
+  }
+  databaseRefresh: {
+    type: 'DatabaseRefreshSubscriptionPayload'
+    args: Record<SubscriptionDatabaseRefreshArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: DatabaseRefreshSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefreshSubscriptionPayload | null> | prisma.DatabaseRefreshSubscriptionPayload | null
   }
 }
   
@@ -3091,6 +3456,111 @@ export interface SharingPreviousValuesFieldDetails {
   }
   status: {
     type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for DatabaseRefreshSubscriptionPayload
+
+type DatabaseRefreshSubscriptionPayloadObject =
+  | DatabaseRefreshSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type DatabaseRefreshSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface DatabaseRefreshSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"DatabaseRefreshSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'DatabaseRefresh'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"DatabaseRefreshSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefresh | null> | prisma.DatabaseRefresh | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'DatabaseRefreshPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"DatabaseRefreshSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.DatabaseRefreshPreviousValues | null> | prisma.DatabaseRefreshPreviousValues | null
+  }
+}
+  
+
+// Types for DatabaseRefreshPreviousValues
+
+type DatabaseRefreshPreviousValuesObject =
+  | DatabaseRefreshPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+
+type DatabaseRefreshPreviousValuesFields =
+  | 'id'
+  | 'date'
+
+
+
+  
+
+export interface DatabaseRefreshPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
     args: {}
     description: string
     list: undefined
@@ -3941,6 +4411,64 @@ export type SharingWhereInputInputObject =
   | { name: 'status_lte', alias?: string  } 
   | { name: 'status_gt', alias?: string  } 
   | { name: 'status_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface DatabaseRefreshWhereUniqueInput {
+  id?: string | null
+}
+export type DatabaseRefreshWhereUniqueInputInputObject =
+  | Extract<keyof DatabaseRefreshWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface DatabaseRefreshWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  date?: string | null
+  date_not?: string | null
+  date_in?: string[]
+  date_not_in?: string[]
+  date_lt?: string | null
+  date_lte?: string | null
+  date_gt?: string | null
+  date_gte?: string | null
+  AND?: DatabaseRefreshWhereInput[]
+}
+export type DatabaseRefreshWhereInputInputObject =
+  | Extract<keyof DatabaseRefreshWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'date_not', alias?: string  } 
+  | { name: 'date_in', alias?: string  } 
+  | { name: 'date_not_in', alias?: string  } 
+  | { name: 'date_lt', alias?: string  } 
+  | { name: 'date_lte', alias?: string  } 
+  | { name: 'date_gt', alias?: string  } 
+  | { name: 'date_gte', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface UserCreateInput {
@@ -4887,6 +5415,29 @@ export type SharingUpdateManyMutationInputInputObject =
   | { name: 'date', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
+export interface DatabaseRefreshCreateInput {
+  id?: string | null
+  date?: string
+}
+export type DatabaseRefreshCreateInputInputObject =
+  | Extract<keyof DatabaseRefreshCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  
+export interface DatabaseRefreshUpdateInput {
+  date?: string | null
+}
+export type DatabaseRefreshUpdateInputInputObject =
+  | Extract<keyof DatabaseRefreshUpdateInput, string>
+  | { name: 'date', alias?: string  } 
+  
+export interface DatabaseRefreshUpdateManyMutationInput {
+  date?: string | null
+}
+export type DatabaseRefreshUpdateManyMutationInputInputObject =
+  | Extract<keyof DatabaseRefreshUpdateManyMutationInput, string>
+  | { name: 'date', alias?: string  } 
+  
 export interface UserSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -4972,6 +5523,23 @@ export type SharingSubscriptionWhereInputInputObject =
   | { name: 'node', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface DatabaseRefreshSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: DatabaseRefreshWhereInput | null
+  AND?: DatabaseRefreshSubscriptionWhereInput[]
+}
+export type DatabaseRefreshSubscriptionWhereInputInputObject =
+  | Extract<keyof DatabaseRefreshSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 
 export type UserPresenceOrderByInputValues =
   | 'id_ASC'
@@ -5046,6 +5614,12 @@ export type SharingOrderByInputValues =
   | 'date_DESC'
   | 'status_ASC'
   | 'status_DESC'
+  
+export type DatabaseRefreshOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'date_ASC'
+  | 'date_DESC'
   
 export type MutationTypeValues =
   | 'CREATED'

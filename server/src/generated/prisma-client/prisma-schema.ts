@@ -250,6 +250,10 @@ type AggregateActivity {
   count: Int!
 }
 
+type AggregateDatabaseRefresh {
+  count: Int!
+}
+
 type AggregateMaker {
   count: Int!
 }
@@ -268,6 +272,93 @@ type AggregateUserPresence {
 
 type BatchPayload {
   count: Long!
+}
+
+type DatabaseRefresh {
+  id: ID!
+  date: DateTime!
+}
+
+type DatabaseRefreshConnection {
+  pageInfo: PageInfo!
+  edges: [DatabaseRefreshEdge]!
+  aggregate: AggregateDatabaseRefresh!
+}
+
+input DatabaseRefreshCreateInput {
+  id: ID
+  date: DateTime!
+}
+
+type DatabaseRefreshEdge {
+  node: DatabaseRefresh!
+  cursor: String!
+}
+
+enum DatabaseRefreshOrderByInput {
+  id_ASC
+  id_DESC
+  date_ASC
+  date_DESC
+}
+
+type DatabaseRefreshPreviousValues {
+  id: ID!
+  date: DateTime!
+}
+
+type DatabaseRefreshSubscriptionPayload {
+  mutation: MutationType!
+  node: DatabaseRefresh
+  updatedFields: [String!]
+  previousValues: DatabaseRefreshPreviousValues
+}
+
+input DatabaseRefreshSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: DatabaseRefreshWhereInput
+  AND: [DatabaseRefreshSubscriptionWhereInput!]
+}
+
+input DatabaseRefreshUpdateInput {
+  date: DateTime
+}
+
+input DatabaseRefreshUpdateManyMutationInput {
+  date: DateTime
+}
+
+input DatabaseRefreshWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  AND: [DatabaseRefreshWhereInput!]
+}
+
+input DatabaseRefreshWhereUniqueInput {
+  id: ID
 }
 
 scalar DateTime
@@ -498,6 +589,12 @@ type Mutation {
   upsertActivity(where: ActivityWhereUniqueInput!, create: ActivityCreateInput!, update: ActivityUpdateInput!): Activity!
   deleteActivity(where: ActivityWhereUniqueInput!): Activity
   deleteManyActivities(where: ActivityWhereInput): BatchPayload!
+  createDatabaseRefresh(data: DatabaseRefreshCreateInput!): DatabaseRefresh!
+  updateDatabaseRefresh(data: DatabaseRefreshUpdateInput!, where: DatabaseRefreshWhereUniqueInput!): DatabaseRefresh
+  updateManyDatabaseRefreshes(data: DatabaseRefreshUpdateManyMutationInput!, where: DatabaseRefreshWhereInput): BatchPayload!
+  upsertDatabaseRefresh(where: DatabaseRefreshWhereUniqueInput!, create: DatabaseRefreshCreateInput!, update: DatabaseRefreshUpdateInput!): DatabaseRefresh!
+  deleteDatabaseRefresh(where: DatabaseRefreshWhereUniqueInput!): DatabaseRefresh
+  deleteManyDatabaseRefreshes(where: DatabaseRefreshWhereInput): BatchPayload!
   createMaker(data: MakerCreateInput!): Maker!
   updateMaker(data: MakerUpdateInput!, where: MakerWhereUniqueInput!): Maker
   updateManyMakers(data: MakerUpdateManyMutationInput!, where: MakerWhereInput): BatchPayload!
@@ -545,6 +642,9 @@ type Query {
   activity(where: ActivityWhereUniqueInput!): Activity
   activities(where: ActivityWhereInput, orderBy: ActivityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Activity]!
   activitiesConnection(where: ActivityWhereInput, orderBy: ActivityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ActivityConnection!
+  databaseRefresh(where: DatabaseRefreshWhereUniqueInput!): DatabaseRefresh
+  databaseRefreshes(where: DatabaseRefreshWhereInput, orderBy: DatabaseRefreshOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DatabaseRefresh]!
+  databaseRefreshesConnection(where: DatabaseRefreshWhereInput, orderBy: DatabaseRefreshOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DatabaseRefreshConnection!
   maker(where: MakerWhereUniqueInput!): Maker
   makers(where: MakerWhereInput, orderBy: MakerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Maker]!
   makersConnection(where: MakerWhereInput, orderBy: MakerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MakerConnection!
@@ -710,6 +810,7 @@ input SharingWhereUniqueInput {
 
 type Subscription {
   activity(where: ActivitySubscriptionWhereInput): ActivitySubscriptionPayload
+  databaseRefresh(where: DatabaseRefreshSubscriptionWhereInput): DatabaseRefreshSubscriptionPayload
   maker(where: MakerSubscriptionWhereInput): MakerSubscriptionPayload
   sharing(where: SharingSubscriptionWhereInput): SharingSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload

@@ -1,11 +1,38 @@
 import {refresh} from "./Mutation";
 import {generateJwt, handleErrors, handleErrors_login} from "./utils";
 import {prisma} from "../generated/prisma-client";
-import get = Reflect.get;
 const axios = require("axios").default;
 const querystring = require("querystring");
 
 require('dotenv').config();
+
+async function checkShouldRefresh(parent, args, context) {
+  let lastRefresh = await prisma.databaseRefreshes();
+  const now: Date = new Date(Date.now());
+
+  if (lastRefresh.length === 0) {
+    await prisma.createDatabaseRefresh(
+      {
+        date: now.toISOString()
+      }
+    );
+    await refresh(parent, args, context, "");
+  } else {
+    const then: Date = new Date(Date.parse(lastRefresh[0].date));
+    const diff: number = now.getTime() - then.getTime();
+    if (diff > 1 * 60 * 60 * 1000) {
+      await refresh(parent, args, context, "");
+      await prisma.updateDatabaseRefresh({
+        where: {
+          id: lastRefresh[0].id
+        },
+        data: {
+          date: now.toISOString()
+        }
+      })
+    }
+  }
+}
 
 async function login(parent, args, context) {
   if (args.code === undefined || args.code === '') {
@@ -35,6 +62,8 @@ async function login(parent, args, context) {
       email: user_data.data.mail,
     });
     await refresh(parent, args, context, "");
+  } else {
+    await checkShouldRefresh(parent, args, context);
   }
   const jwt = await generateJwt({id: user_found.id });
   return {user: user_found, jwt: jwt};
@@ -44,6 +73,7 @@ async function loginCookie(parent, args, context, userId) {
   if (userId === undefined || userId === '') {
     throw new Error('Empty code');
   }
+  await checkShouldRefresh(parent, args, context);
   return prisma.user({
     id: userId
   });
