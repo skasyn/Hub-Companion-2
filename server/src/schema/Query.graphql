@@ -4,8 +4,8 @@ type LoginResponse {
 }
 
 type Query {
-    login(code: String!): LoginResponse!
-    loginCookie(code: String!): User!
+    login(code: String!): LoginResponse
+    loginCookie(code: String!): User
     getXp(code: String!): Int!
     getUserActivities(code: String!): [GetUserPresences!]!
     getAllActivities: [Activity!]!

@@ -48,10 +48,14 @@ async function login(parent, args, context) {
     "code": args.code
   }), {'Content-Type': "application/x-www-form-urlencoded"}
   ).catch((error) => {console.error(error); });
+  if (token === undefined || token.data === undefined)
+    return null;
   let user_data = await axios.get(
     "https://graph.microsoft.com/v1.0/me",
     {headers: {Authorization: token.data.token_type + " " + token.data.access_token}}
   ).catch((error) => {console.error(error); });
+  if (user_data === undefined || user_data.data === undefined)
+    return null;
   let user_found = await prisma.user({
     outlookId: user_data.data.id
   });

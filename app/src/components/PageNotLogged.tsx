@@ -5,7 +5,7 @@ import LockOpenIcon from '@material-ui/icons/LockOpen';
 import {LOGIN, LOGIN_COOKIE} from '../query/query';
 import {LoginCookieData, LoginData, LoginVars} from '../types/types';
 import { dispatch } from "../reducers/reducers";
-import { Card, Grid, CardMedia, CardContent, makeStyles } from "@material-ui/core";
+import {Card, Grid, CardMedia, CardContent, makeStyles, Typography} from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 require('dotenv').config();
@@ -44,7 +44,16 @@ export const LoadingConnectionOffice: React.FC<LoadingConnectionProps> = (props)
     { variables: { code: props.code}}
   );
   if (data !== undefined) {
-    dispatch({type: 'loginUser', user: data.login.user, jwt: data.login.jwt});
+    if (data.login !== null )
+      dispatch({type: 'loginUser', user: data.login.user, jwt: data.login.jwt});
+    else
+      return (
+        <div>
+          <Typography variant="h5">
+            Error while login
+          </Typography>
+        </div>
+      )
   }
   return (
     <div>
