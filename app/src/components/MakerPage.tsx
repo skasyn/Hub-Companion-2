@@ -28,7 +28,7 @@ import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import {ReviewContainer, useSharingMakerStyles, isEmailValid} from "./SharingMakerUtils";
 
 const MakerForm: React.FC = () => {
-  const steps = 5;
+  const steps = 6;
   const [jwt] = useGlobalState('jwt');
   const [user] = useGlobalState('user');
   const classes = useSharingMakerStyles();
@@ -41,6 +41,8 @@ const MakerForm: React.FC = () => {
     description: '',
     functionalities: '',
     technologies: '',
+    delivery: '',
+    organisation: '',
     resources: '',
     informations: '',
     co_workers: [{email: user.email.toString(), error: false}]
@@ -55,6 +57,8 @@ const MakerForm: React.FC = () => {
         co_workers: data.co_workers.map((elem) => elem.email),
         functionalities: data.functionalities,
         technologies: data.technologies,
+        delivery: data.delivery,
+        organisation: data.organisation,
         resources: data.resources,
         informations: data.informations
       };
@@ -71,8 +75,10 @@ const MakerForm: React.FC = () => {
     if (step === 1)
       return data.functionalities.length !== 0 && data.technologies.length !== 0;
     if (step === 2)
+      return data.delivery.length !== 0 && data.organisation.length !== 0;
+    if (step === 3)
       return data.resources.length !== 0 && data.informations.length !== 0;
-    if (step === 3) {
+    if (step === 4) {
       let emailValid = true;
       data.co_workers.forEach((value) => {
         if (emailValid)
@@ -80,7 +86,7 @@ const MakerForm: React.FC = () => {
       });
       return emailValid;
     }
-    if (step === 4)
+    if (step === 5)
       return true;
   };
   const updateEmail = (event: React.ChangeEvent<HTMLInputElement>, index: number) =>{
@@ -119,6 +125,7 @@ const MakerForm: React.FC = () => {
               fullWidth
               id="title"
               label="Title"
+              helperText="Name of the project."
               name="title"
               autoFocus
               defaultValue={data.title}
@@ -131,6 +138,7 @@ const MakerForm: React.FC = () => {
               fullWidth
               id="description"
               label="Description"
+              helperText="Context and goal of the project. Detail the origin of the project, its motivating elements and a description of its use."
               name="description"
               multiline
               defaultValue={data.description}
@@ -150,6 +158,7 @@ const MakerForm: React.FC = () => {
               fullWidth
               id="functionalities"
               label="Functionalities"
+              helperText="List major functionalities of each part of the project. This list is commitment on your part and will serve to evaluate your project."
               name="functionalities"
               autoFocus
               multiline
@@ -163,10 +172,45 @@ const MakerForm: React.FC = () => {
               fullWidth
               id="technologies"
               label="Technologies"
+              helperText="Describe the technical and technological context (material, language, execution environment, resources, etc) in which the project fits."
               name="technologies"
               multiline
               defaultValue={data.technologies}
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, technologies: event.target.value})}
+            />
+          </StepContent>
+        </Step>
+        <Step>
+          <StepLabel>
+            Organisation
+          </StepLabel>
+          <StepContent>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="delivery"
+              label="Delivery"
+              helperText="Detail each element (program, libraries, assets, etc) of the delivery and their integration (documentation, deployment, etc)."
+              name="delivery"
+              autoFocus
+              multiline
+              defaultValue={data.delivery}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, delivery: event.target.value})}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="organisation"
+              label="Organisation"
+              helperText="Describe the planning of the project: parts, dependencies, division of work."
+              name="organisation"
+              multiline
+              defaultValue={data.organisation}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, organisation: event.target.value})}
             />
           </StepContent>
         </Step>
@@ -182,6 +226,7 @@ const MakerForm: React.FC = () => {
               fullWidth
               id="resources"
               label="Resources"
+              helperText="For example with an hardware project."
               name="resources"
               autoFocus
               multiline
@@ -194,7 +239,7 @@ const MakerForm: React.FC = () => {
               required
               fullWidth
               id="informations"
-              label="Informations"
+              label="Complementary Informations"
               name="informations"
               multiline
               defaultValue={data.informations}
@@ -251,6 +296,8 @@ const MakerForm: React.FC = () => {
             <ReviewContainer title="Description" data={data.description}/>
             <ReviewContainer title="Functionalities" data={data.functionalities}/>
             <ReviewContainer title="Technologies" data={data.technologies}/>
+            <ReviewContainer title="Delivery" data={data.delivery}/>
+            <ReviewContainer title="Organisation" data={data.organisation}/>
             <ReviewContainer title="Resources" data={data.resources}/>
             <ReviewContainer title="Informations" data={data.informations}/>
             <div className={classes.reviewContainer}>
@@ -364,6 +411,8 @@ const MakerList: React.FC = () => {
                 <ReviewContainer title="Description" data={rowData['description']}/>
                 <ReviewContainer title="Functionalities" data={rowData['functionalities']}/>
                 <ReviewContainer title="Technologies" data={rowData['technologies']}/>
+                <ReviewContainer title="Delivery" data={rowData['delivery']}/>
+                <ReviewContainer title="Organisation" data={rowData['organisation']}/>
                 <ReviewContainer title="Resources" data={rowData['resources']}/>
                 <ReviewContainer title="Informations" data={rowData['informations']}/>
               </div>

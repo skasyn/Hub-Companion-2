@@ -77,6 +77,8 @@ export const GET_USER_MAKER: any = gql`
           co_workers
           functionalities
           technologies
+          delivery
+          organisation
           resources
           informations
           status

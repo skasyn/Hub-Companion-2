@@ -33,6 +33,8 @@ export interface Maker {
   co_workers: String[],
   functionalities: String,
   technologies: String,
+  delivery: String,
+  organisation: String,
   resources: String,
   informations: String
   status: Number
