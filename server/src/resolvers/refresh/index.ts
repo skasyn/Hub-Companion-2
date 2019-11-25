@@ -19,6 +19,7 @@ async function activityUpsert(event, activity, studentList, hubModule) {
   let description = getDescription(event, activity).toString();
   let beginString = event.begin || event.end;
   let endString = event.end || event.begin;
+  const now = new Date(Date.now());
   let begin = new Date(beginString);
   let end = new Date(endString);
   let type = activity.type_title;
@@ -60,6 +61,8 @@ async function activityUpsert(event, activity, studentList, hubModule) {
       email: student.email
     });
     let isPresent = (student.present === 'present' || student.present == 'N/A');
+    if (!isPresent && end > now)
+      xp = 0;
 
     if (user_found !== null) {
       await prisma.upsertUserPresence({
