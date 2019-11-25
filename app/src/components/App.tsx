@@ -1,12 +1,15 @@
 import React from 'react';
 import { PageNotLogged } from './PageNotLogged';
 import { Navigation } from './Navigation';
-import { GlobalStateProvider, useGlobalState } from "../reducers/reducers";
+import {dispatch, GlobalStateProvider, useGlobalState} from "../reducers/reducers";
 
 const LoginDispatch: React.FC = () => {
   const [user] = useGlobalState('user');
 
-  if (Object.keys(user).length === 0) {
+  if (user === undefined || user === null || Object.keys(user).length === 0) {
+    if (user === undefined || user === null) {
+      dispatch({type: 'disconnect'});
+    }
     return (
         <PageNotLogged/>
     );
