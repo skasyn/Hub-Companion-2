@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import {
   Button, Chip, Container,
-  createStyles, Fab, Grid, List, ListItem, ListItemText,
-  makeStyles,
+  Fab, Grid, List, ListItem, ListItemText,
   Step,
   StepContent,
   StepLabel,
   Stepper,
   TextField,
-  Theme, Typography
+  Typography
 } from "@material-ui/core";
 
 import AddIcon from '@material-ui/icons/Add';
@@ -28,25 +27,7 @@ import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import {ReviewContainer} from "./SharingMakerUtils";
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: {
-      marginTop: theme.spacing(2),
-      marginRight: theme.spacing(1),
-    },
-    actionsContainer: {
-      marginBottom: theme.spacing(2),
-    },
-    resetContainer: {
-      padding: theme.spacing(3),
-    },
-    reviewContainer: {
-      padding: theme.spacing(3)
-    }
-  }),
-);
+import {ReviewContainer, useSharingMakerStyles, isEmailValid} from "./SharingMakerUtils";
 
 const toMultiline = (description: String) => {
   return (
@@ -67,7 +48,7 @@ const SharingForm: React.FC = () => {
   const steps = 3;
   const [jwt] = useGlobalState('jwt');
   const [user] = useGlobalState('user');
-  const classes = useStyles();
+  const classes = useSharingMakerStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [result, setResult] = useState(0);
   const [submitSharing] = useMutation<SubmitSharingData, SubmitSharingVars>(SUBMIT_SHARING);
@@ -100,18 +81,15 @@ const SharingForm: React.FC = () => {
       let emailValid = true;
       data.co_workers.forEach((value) => {
         if (emailValid)
-          emailValid = emailIsValid(value.email);
+          emailValid = isEmailValid(value.email);
       });
       return emailValid;
     }
     if (step === 2)
       return true;
   };
-  const emailIsValid = (email: string) => {
-    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
-  };
   const updateEmail = (event: React.ChangeEvent<HTMLInputElement>, index: number) =>{
-    const isError = !emailIsValid(event.target.value);
+    const isError = !isEmailValid(event.target.value);
     let newEmail = [...data.co_workers];
     newEmail[index].email = event.target.value;
     newEmail[index].error = isError;

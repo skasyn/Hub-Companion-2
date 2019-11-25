@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import {
   Button, Chip, Container,
-  createStyles, Fab, Grid, List, ListItem, ListItemText,
-  makeStyles,
+  Fab, Grid, List, ListItem, ListItemText,
   Step,
   StepContent,
   StepLabel,
   Stepper,
   TextField,
-  Theme, Typography
+  Typography
 } from "@material-ui/core";
 
 import AddIcon from '@material-ui/icons/Add';
@@ -26,7 +25,7 @@ import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import {ReviewContainer, useSharingMakerStyles} from "./SharingMakerUtils";
+import {ReviewContainer, useSharingMakerStyles, isEmailValid} from "./SharingMakerUtils";
 
 const MakerForm: React.FC = () => {
   const steps = 5;
@@ -77,18 +76,15 @@ const MakerForm: React.FC = () => {
       let emailValid = true;
       data.co_workers.forEach((value) => {
         if (emailValid)
-          emailValid = emailIsValid(value.email);
+          emailValid = isEmailValid(value.email);
       });
       return emailValid;
     }
     if (step === 4)
       return true;
   };
-  const emailIsValid = (email: string) => {
-    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
-  };
   const updateEmail = (event: React.ChangeEvent<HTMLInputElement>, index: number) =>{
-    const isError = !emailIsValid(event.target.value);
+    const isError = !isEmailValid(event.target.value);
     let newEmail = [...data.co_workers];
     newEmail[index].email = event.target.value;
     newEmail[index].error = isError;

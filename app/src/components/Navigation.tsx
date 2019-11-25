@@ -97,8 +97,8 @@ const HomeDrawerRoute: React.FC = (props: any) => {
     {path: '/activities', text: 'Activities', icon: (<ListItemIcon><EventNoteIcon/></ListItemIcon>)},
     {path: '/calendar', text: 'Calendar', icon: (<ListItemIcon><EventIcon/></ListItemIcon>)},
     {path: '/sharing', text: 'Sharing', icon: (<ListItemIcon><PeopleAltIcon/></ListItemIcon>)},
-    {path: '/settings', text: 'Settings', icon: (<ListItemIcon><TuneIcon/></ListItemIcon>)},
-    {path: '/maker', text: 'Maker', icon: (<ListItemIcon><UnarchiveIcon/></ListItemIcon>)}
+    {path: '/maker', text: 'Maker', icon: (<ListItemIcon><UnarchiveIcon/></ListItemIcon>)},
+    {path: '/settings', text: 'Settings', icon: (<ListItemIcon><TuneIcon/></ListItemIcon>)}
   ];
 
   const handleListItemClick = (
