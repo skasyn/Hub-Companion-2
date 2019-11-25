@@ -133,6 +133,22 @@ async function getAllActivities(parent, args, context) {
   return prisma.activities({});
 }
 
+async function getUserMaker(parent, args, context, userId) {
+  if (userId === undefined || userId === '') {
+    throw new Error('Empty code');
+  }
+  const user = await prisma.user({id: userId});
+  if (user === undefined || user === null) {
+    throw new Error('Invalid user');
+  }
+  const allMakers = await prisma.makers({});
+  const userMakers = allMakers.map((elem) => {
+    if (elem.co_workers.find(e => e === user.email) !== undefined)
+      return elem;
+  });
+  return userMakers;
+}
+
 async function getUserSharing(parent, args, context, userId) {
   if (userId === undefined || userId === '') {
     throw new Error('Empty code');
@@ -155,5 +171,6 @@ export const Query = {
   getXp: handleErrors_login(getXp),
   getUserActivities: handleErrors_login(getUserActivities),
   getAllActivities: handleErrors(getAllActivities),
+  getUserMaker: handleErrors_login(getUserMaker),
   getUserSharing: handleErrors_login(getUserSharing),
 };
