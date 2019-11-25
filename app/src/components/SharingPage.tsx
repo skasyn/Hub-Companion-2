@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  Button,
+  Button, Chip, Container,
   createStyles, Fab, Grid, List, ListItem, ListItemText,
   makeStyles,
   Step,
@@ -13,16 +13,21 @@ import {
 
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
-import { useMutation } from "@apollo/react-hooks";
-import {SubmitSharingData, SubmitSharingVars} from "../types/types";
+import {useMutation, useQuery} from "@apollo/react-hooks";
+import {
+  SubmitSharingData,
+  SubmitSharingVars,
+  UserSharingData,
+  UserSharingVars
+} from "../types/types";
 import {SUBMIT_SHARING} from "../query/mutation";
 import {useGlobalState} from "../reducers/reducers";
-
-interface ButtonProps {
-  activeStep: number,
-  setActiveStep: (index: number) => void,
-  canNext: boolean
-}
+import {GET_USER_SHARING} from "../query/query";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import MaterialTable from "material-table";
+import CheckIcon from '@material-ui/icons/Check';
+import ClearIcon from '@material-ui/icons/Clear';
+import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -57,7 +62,7 @@ const toMultiline = (description: String) => {
   )
 };
 
-export const SharingPage: React.FC = () => {
+const SharingForm: React.FC = () => {
   const [jwt] = useGlobalState('jwt');
   const [user] = useGlobalState('user');
   const classes = useStyles();
@@ -104,7 +109,7 @@ export const SharingPage: React.FC = () => {
         co_workers: emails.map((elem) => elem.email),
       };
       const response = await submitSharing({variables: {jwt: jwt, data: JSON.stringify(dataSend)}});
-      if (response !== undefined && response.data !== undefined && response.data.submitSharing === true)
+      if (response !== undefined && response.data !== undefined && response.data.submitSharing)
         setResult(1);
       else
         setResult(2);
@@ -123,9 +128,9 @@ export const SharingPage: React.FC = () => {
     return (title.length !== 0 && description.length !== 0 && emailsValid);
   };
   const resultRender = () => {
-    if (result === 0) return (<div>Processing ...</div>);
-    if (result === 1) return (<div>Submitted !</div>);
-    if (result === 2) return (<div>Error while submitting</div>);
+    if (result === 0) return (<StepLabel>Processing ...</StepLabel>);
+    if (result === 1) return (<StepLabel completed={true}>Submitted !</StepLabel>);
+    if (result === 2) return (<StepLabel error={true}>Error while submitting</StepLabel>);
   };
 
   return (
@@ -183,7 +188,7 @@ export const SharingPage: React.FC = () => {
                     defaultValue={value.email}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => updateEmail(event, index)}
                     error={value.error}
-                    disabled={(index === 0) ? true : false}
+                    disabled={(index === 0)}
                   />
                 );
               })
@@ -241,6 +246,11 @@ export const SharingPage: React.FC = () => {
             </div>
           </StepContent>
         </Step>
+        <Step>
+          {
+            resultRender()
+          }
+        </Step>
       </Stepper>
       <div className={classes.actionsContainer}>
         {
@@ -265,13 +275,102 @@ export const SharingPage: React.FC = () => {
           </div>
           ) : (
             <div>
-              {
-                resultRender()
-              }
             </div>
           )
         }
       </div>
+    </div>
+  );
+};
+
+const SharingList: React.FC = () => {
+  const [jwt] = useGlobalState('jwt');
+  const { data } = useQuery<UserSharingData, UserSharingVars>(
+    GET_USER_SHARING,
+    { variables: { jwt: jwt }}
+  );
+
+  if (data === undefined) {
+    return (
+      <Container maxWidth={false}>
+        <CircularProgress/>
+      </Container>
+    );
+  } else {
+    return (
+      <Container>
+        <MaterialTable
+          columns={[
+            {title: "Title", field: "title"},
+            {title: "Co-Workers", field: "co_workers", render: (rowData) => {
+              return (<p>{rowData['co_workers'].join(' - ')}</p>)
+            }},
+            {title: "Date", field: "date", type: "date", defaultSort: "asc", render: (rowData) => {
+              const date = new Date(rowData['date'].toString());
+              if (date.getTime() === 0)
+                return (<p>N/A</p>);
+              else
+                return (<p>{date.toDateString()}</p>);
+            }},
+            {title: "Status", field: "status", render: (rowData) => {
+              const status = rowData['status'];
+              if (status === 0) {
+                return (
+                  <Chip
+                    icon={<HourglassEmptyIcon/>}
+                    label="To be reviewed"
+                  />
+                );
+              } else if (status === 1) {
+                return (
+                  <Chip
+                    icon={<CheckIcon/>}
+                    label="Accepted"
+                    color="primary"
+                  />
+                );
+              } else {
+                return (
+                  <Chip
+                    icon={<ClearIcon/>}
+                    label="Refused"
+                    color="secondary"
+                  />
+                );
+              }
+            }}
+          ]}
+          detailPanel={rowData => {
+            return (
+              <div style={{padding: "20px"}}>
+                {toMultiline(rowData['description'])}
+              </div>
+            );
+          }}
+          onRowClick={
+            (event, rowData, togglePanel) => {
+              if (togglePanel !== undefined) {
+                togglePanel()
+              }
+            }
+          }
+          options={{
+            sorting: true,
+            pageSize: 10
+          }}
+          data={data.getUserSharing}
+          title=""
+        />
+      </Container>
+    );
+  }
+};
+
+export const SharingPage: React.FC = () => {
+  return (
+    <div>
+      <SharingForm/>
+      <SharingList/>
     </div>
   );
 };

@@ -23,8 +23,8 @@ export const LOGIN_COOKIE: any = gql`
 `;
 
 export const GET_XP: any = gql`
-  query GET_XP($code: String!) {
-    getXp(code: $code)
+  query GET_XP($jwt: String!) {
+    getXp(code: $jwt)
   }
 `;
 
@@ -56,3 +56,15 @@ export const GET_ALL_ACTIVITIES: any = gql`
         }
     }
 `;
+
+export const GET_USER_SHARING: any = gql`
+  query GET_USER_SHARING($jwt: String!){
+      getUserSharing(code: $jwt) {
+          title
+          co_workers
+          description
+          date
+          status
+      }
+  }
+`

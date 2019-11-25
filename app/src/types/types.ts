@@ -19,6 +19,16 @@ export interface UserPresence {
   activity: Activity
 }
 
+export interface Sharing {
+  title: String
+  co_workers: String[]
+  description: String
+  date: String
+  status: Number
+}
+
+
+
 export interface LoginData {
   login: {
     user: User
@@ -59,4 +69,12 @@ export interface SubmitSharingVars {
 
 export interface SubmitSharingData {
   submitSharing: Boolean
+}
+
+export interface UserSharingData {
+  getUserSharing: Sharing[]
+}
+
+export interface UserSharingVars {
+  jwt: String
 }
