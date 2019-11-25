@@ -47,9 +47,13 @@ export const ActivitiesPage: React.FC = () => {
         <MaterialTable
           columns={[
             {title: "Title", field: "activity.title"},
-            {title: "Date", field: "activity.date", type: "date", defaultSort: "asc", render: (rowData) => {
+            {title: "Date", field: "activity.date", type: "date", defaultSort: "desc", render: (rowData) => {
               const date = new Date(rowData['activity']['begin'].toString());
-                return <p>{date.toDateString()}</p>;
+              return <p>{date.toDateString()}</p>;
+            }, customSort: (data1, data2) => {
+              const date1 = new Date(data1['activity']['begin'].toString());
+              const date2 = new Date(data2['activity']['begin'].toString());
+              return date1.getTime() - date2.getTime();
             }},
             {title: "Type", field: "activity.type"},
             {title: "Presence", field: "presence", render: (rowData) => {
