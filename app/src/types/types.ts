@@ -27,6 +27,16 @@ export interface Sharing {
   status: Number
 }
 
+export interface Maker {
+  title: String,
+  description: String,
+  co_workers: String[],
+  functionalities: String,
+  technologies: String,
+  resources: String,
+  informations: String
+  status: Number
+}
 
 
 export interface LoginData {
@@ -71,10 +81,35 @@ export interface SubmitSharingData {
   submitSharing: Boolean
 }
 
+export interface SubmitMakerVars {
+  jwt: String,
+  data: String
+}
+
+export interface SubmitMakerData {
+  submitMaker: Boolean
+}
+
 export interface UserSharingData {
   getUserSharing: Sharing[]
 }
 
 export interface UserSharingVars {
+  jwt: String
+}
+
+export interface UserSharingData {
+  getUserSharing: Sharing[]
+}
+
+export interface UserSharingVars {
+  jwt: String
+}
+
+export interface UserMakerData {
+  getUserMaker: Maker[]
+}
+
+export interface UserMakerVars {
   jwt: String
 }

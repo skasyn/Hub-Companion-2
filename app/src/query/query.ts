@@ -68,3 +68,18 @@ export const GET_USER_SHARING: any = gql`
       }
   }
 `
+
+export const GET_USER_MAKER: any = gql`
+  query GET_USER_MAKER($jwt: String!) {
+      getUserMaker(code: $jwt) {
+          title
+          description
+          co_workers
+          functionalities
+          technologies
+          resources
+          informations
+          status
+      }
+  }
+`

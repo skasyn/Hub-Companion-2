@@ -32,6 +32,7 @@ import TuneIcon from '@material-ui/icons/Tune';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EventIcon from '@material-ui/icons/Event';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
+import UnarchiveIcon from '@material-ui/icons/Unarchive';
 
 import {
   BrowserRouter as Router,
@@ -39,6 +40,7 @@ import {
   withRouter
 } from "react-router-dom";
 import {SharingPage} from "./SharingPage";
+import {MakerPage} from "./MakerPage";
 
 const drawerWidth = 240;
 
@@ -96,6 +98,7 @@ const HomeDrawerRoute: React.FC = (props: any) => {
     {path: '/calendar', text: 'Calendar', icon: (<ListItemIcon><EventIcon/></ListItemIcon>)},
     {path: '/sharing', text: 'Sharing', icon: (<ListItemIcon><PeopleAltIcon/></ListItemIcon>)},
     {path: '/settings', text: 'Settings', icon: (<ListItemIcon><TuneIcon/></ListItemIcon>)},
+    {path: '/maker', text: 'Maker', icon: (<ListItemIcon><UnarchiveIcon/></ListItemIcon>)}
   ];
 
   const handleListItemClick = (
@@ -237,6 +240,9 @@ const Content: React.FC = () => {
         </Route>
         <Route path="/sharing">
           <SharingPage/>
+        </Route>
+        <Route path="/maker">
+          <MakerPage/>
         </Route>
     </main>
   )
