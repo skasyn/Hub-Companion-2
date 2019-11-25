@@ -145,7 +145,7 @@ async function getUserMaker(parent, args, context, userId) {
   const userMakers = allMakers.map((elem) => {
     if (elem.co_workers.find(e => e === user.email) !== undefined)
       return elem;
-  });
+  }).filter((elem) => elem !== undefined);
   return userMakers;
 }
 
@@ -161,7 +161,7 @@ async function getUserSharing(parent, args, context, userId) {
   const userSharings = allSharings.map((elem) => {
     if (elem.co_workers.find(e => e === user.email) !== undefined)
       return elem;
-  });
+  }).filter((elem) => elem !== undefined);
   return userSharings;
 }
 
