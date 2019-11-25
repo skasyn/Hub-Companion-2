@@ -372,6 +372,8 @@ type Maker {
   description: String!
   functionalities: String!
   technologies: String!
+  delivery: String!
+  organisation: String!
   resources: String!
   informations: String!
   status: Int!
@@ -394,6 +396,8 @@ input MakerCreateInput {
   description: String!
   functionalities: String!
   technologies: String!
+  delivery: String!
+  organisation: String!
   resources: String!
   informations: String!
   status: Int!
@@ -415,6 +419,10 @@ enum MakerOrderByInput {
   functionalities_DESC
   technologies_ASC
   technologies_DESC
+  delivery_ASC
+  delivery_DESC
+  organisation_ASC
+  organisation_DESC
   resources_ASC
   resources_DESC
   informations_ASC
@@ -430,6 +438,8 @@ type MakerPreviousValues {
   description: String!
   functionalities: String!
   technologies: String!
+  delivery: String!
+  organisation: String!
   resources: String!
   informations: String!
   status: Int!
@@ -461,6 +471,8 @@ input MakerUpdateInput {
   description: String
   functionalities: String
   technologies: String
+  delivery: String
+  organisation: String
   resources: String
   informations: String
   status: Int
@@ -472,6 +484,8 @@ input MakerUpdateManyMutationInput {
   description: String
   functionalities: String
   technologies: String
+  delivery: String
+  organisation: String
   resources: String
   informations: String
   status: Int
@@ -548,6 +562,34 @@ input MakerWhereInput {
   technologies_not_starts_with: String
   technologies_ends_with: String
   technologies_not_ends_with: String
+  delivery: String
+  delivery_not: String
+  delivery_in: [String!]
+  delivery_not_in: [String!]
+  delivery_lt: String
+  delivery_lte: String
+  delivery_gt: String
+  delivery_gte: String
+  delivery_contains: String
+  delivery_not_contains: String
+  delivery_starts_with: String
+  delivery_not_starts_with: String
+  delivery_ends_with: String
+  delivery_not_ends_with: String
+  organisation: String
+  organisation_not: String
+  organisation_in: [String!]
+  organisation_not_in: [String!]
+  organisation_lt: String
+  organisation_lte: String
+  organisation_gt: String
+  organisation_gte: String
+  organisation_contains: String
+  organisation_not_contains: String
+  organisation_starts_with: String
+  organisation_not_starts_with: String
+  organisation_ends_with: String
+  organisation_not_ends_with: String
   resources: String
   resources_not: String
   resources_in: [String!]

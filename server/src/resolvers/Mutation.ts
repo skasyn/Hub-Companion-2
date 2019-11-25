@@ -27,6 +27,8 @@ async function submitMaker(parent, args, context, userId) {
         co_workers: { set: data.co_workers },
         functionalities: data.functionalities,
         technologies: data.technologies,
+        delivery: data.delivery,
+        organisation: data.organisation,
         resources: data.resources,
         informations: data.informations,
         status: 0

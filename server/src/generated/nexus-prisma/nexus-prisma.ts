@@ -1321,6 +1321,8 @@ type MakerObject =
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'functionalities', args?: [] | false, alias?: string  } 
   | { name: 'technologies', args?: [] | false, alias?: string  } 
+  | { name: 'delivery', args?: [] | false, alias?: string  } 
+  | { name: 'organisation', args?: [] | false, alias?: string  } 
   | { name: 'resources', args?: [] | false, alias?: string  } 
   | { name: 'informations', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
@@ -1332,6 +1334,8 @@ type MakerFields =
   | 'description'
   | 'functionalities'
   | 'technologies'
+  | 'delivery'
+  | 'organisation'
   | 'resources'
   | 'informations'
   | 'status'
@@ -1382,6 +1386,22 @@ export interface MakerFieldDetails {
     resolve: undefined
   }
   technologies: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  delivery: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  organisation: {
     type: 'String'
     args: {}
     description: string
@@ -3217,6 +3237,8 @@ type MakerPreviousValuesObject =
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'functionalities', args?: [] | false, alias?: string  } 
   | { name: 'technologies', args?: [] | false, alias?: string  } 
+  | { name: 'delivery', args?: [] | false, alias?: string  } 
+  | { name: 'organisation', args?: [] | false, alias?: string  } 
   | { name: 'resources', args?: [] | false, alias?: string  } 
   | { name: 'informations', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
@@ -3228,6 +3250,8 @@ type MakerPreviousValuesFields =
   | 'description'
   | 'functionalities'
   | 'technologies'
+  | 'delivery'
+  | 'organisation'
   | 'resources'
   | 'informations'
   | 'status'
@@ -3278,6 +3302,22 @@ export interface MakerPreviousValuesFieldDetails {
     resolve: undefined
   }
   technologies: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  delivery: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  organisation: {
     type: 'String'
     args: {}
     description: string
@@ -4123,6 +4163,34 @@ export interface MakerWhereInput {
   technologies_not_starts_with?: string | null
   technologies_ends_with?: string | null
   technologies_not_ends_with?: string | null
+  delivery?: string | null
+  delivery_not?: string | null
+  delivery_in?: string[]
+  delivery_not_in?: string[]
+  delivery_lt?: string | null
+  delivery_lte?: string | null
+  delivery_gt?: string | null
+  delivery_gte?: string | null
+  delivery_contains?: string | null
+  delivery_not_contains?: string | null
+  delivery_starts_with?: string | null
+  delivery_not_starts_with?: string | null
+  delivery_ends_with?: string | null
+  delivery_not_ends_with?: string | null
+  organisation?: string | null
+  organisation_not?: string | null
+  organisation_in?: string[]
+  organisation_not_in?: string[]
+  organisation_lt?: string | null
+  organisation_lte?: string | null
+  organisation_gt?: string | null
+  organisation_gte?: string | null
+  organisation_contains?: string | null
+  organisation_not_contains?: string | null
+  organisation_starts_with?: string | null
+  organisation_not_starts_with?: string | null
+  organisation_ends_with?: string | null
+  organisation_not_ends_with?: string | null
   resources?: string | null
   resources_not?: string | null
   resources_in?: string[]
@@ -4233,6 +4301,34 @@ export type MakerWhereInputInputObject =
   | { name: 'technologies_not_starts_with', alias?: string  } 
   | { name: 'technologies_ends_with', alias?: string  } 
   | { name: 'technologies_not_ends_with', alias?: string  } 
+  | { name: 'delivery', alias?: string  } 
+  | { name: 'delivery_not', alias?: string  } 
+  | { name: 'delivery_in', alias?: string  } 
+  | { name: 'delivery_not_in', alias?: string  } 
+  | { name: 'delivery_lt', alias?: string  } 
+  | { name: 'delivery_lte', alias?: string  } 
+  | { name: 'delivery_gt', alias?: string  } 
+  | { name: 'delivery_gte', alias?: string  } 
+  | { name: 'delivery_contains', alias?: string  } 
+  | { name: 'delivery_not_contains', alias?: string  } 
+  | { name: 'delivery_starts_with', alias?: string  } 
+  | { name: 'delivery_not_starts_with', alias?: string  } 
+  | { name: 'delivery_ends_with', alias?: string  } 
+  | { name: 'delivery_not_ends_with', alias?: string  } 
+  | { name: 'organisation', alias?: string  } 
+  | { name: 'organisation_not', alias?: string  } 
+  | { name: 'organisation_in', alias?: string  } 
+  | { name: 'organisation_not_in', alias?: string  } 
+  | { name: 'organisation_lt', alias?: string  } 
+  | { name: 'organisation_lte', alias?: string  } 
+  | { name: 'organisation_gt', alias?: string  } 
+  | { name: 'organisation_gte', alias?: string  } 
+  | { name: 'organisation_contains', alias?: string  } 
+  | { name: 'organisation_not_contains', alias?: string  } 
+  | { name: 'organisation_starts_with', alias?: string  } 
+  | { name: 'organisation_not_starts_with', alias?: string  } 
+  | { name: 'organisation_ends_with', alias?: string  } 
+  | { name: 'organisation_not_ends_with', alias?: string  } 
   | { name: 'resources', alias?: string  } 
   | { name: 'resources_not', alias?: string  } 
   | { name: 'resources_in', alias?: string  } 
@@ -5036,6 +5132,8 @@ export interface MakerCreateInput {
   description?: string
   functionalities?: string
   technologies?: string
+  delivery?: string
+  organisation?: string
   resources?: string
   informations?: string
   status?: number
@@ -5048,6 +5146,8 @@ export type MakerCreateInputInputObject =
   | { name: 'description', alias?: string  } 
   | { name: 'functionalities', alias?: string  } 
   | { name: 'technologies', alias?: string  } 
+  | { name: 'delivery', alias?: string  } 
+  | { name: 'organisation', alias?: string  } 
   | { name: 'resources', alias?: string  } 
   | { name: 'informations', alias?: string  } 
   | { name: 'status', alias?: string  } 
@@ -5065,6 +5165,8 @@ export interface MakerUpdateInput {
   description?: string | null
   functionalities?: string | null
   technologies?: string | null
+  delivery?: string | null
+  organisation?: string | null
   resources?: string | null
   informations?: string | null
   status?: number | null
@@ -5076,6 +5178,8 @@ export type MakerUpdateInputInputObject =
   | { name: 'description', alias?: string  } 
   | { name: 'functionalities', alias?: string  } 
   | { name: 'technologies', alias?: string  } 
+  | { name: 'delivery', alias?: string  } 
+  | { name: 'organisation', alias?: string  } 
   | { name: 'resources', alias?: string  } 
   | { name: 'informations', alias?: string  } 
   | { name: 'status', alias?: string  } 
@@ -5093,6 +5197,8 @@ export interface MakerUpdateManyMutationInput {
   description?: string | null
   functionalities?: string | null
   technologies?: string | null
+  delivery?: string | null
+  organisation?: string | null
   resources?: string | null
   informations?: string | null
   status?: number | null
@@ -5104,6 +5210,8 @@ export type MakerUpdateManyMutationInputInputObject =
   | { name: 'description', alias?: string  } 
   | { name: 'functionalities', alias?: string  } 
   | { name: 'technologies', alias?: string  } 
+  | { name: 'delivery', alias?: string  } 
+  | { name: 'organisation', alias?: string  } 
   | { name: 'resources', alias?: string  } 
   | { name: 'informations', alias?: string  } 
   | { name: 'status', alias?: string  } 
@@ -5350,6 +5458,10 @@ export type MakerOrderByInputValues =
   | 'functionalities_DESC'
   | 'technologies_ASC'
   | 'technologies_DESC'
+  | 'delivery_ASC'
+  | 'delivery_DESC'
+  | 'organisation_ASC'
+  | 'organisation_DESC'
   | 'resources_ASC'
   | 'resources_DESC'
   | 'informations_ASC'

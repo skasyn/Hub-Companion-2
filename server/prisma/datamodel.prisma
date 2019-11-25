@@ -37,6 +37,8 @@ type Maker {
     description: String!
     functionalities: String!
     technologies: String!
+    delivery: String!
+    organisation: String!
     resources: String!
     informations: String!
     status: Int!

@@ -355,6 +355,10 @@ export type MakerOrderByInput =
   | "functionalities_DESC"
   | "technologies_ASC"
   | "technologies_DESC"
+  | "delivery_ASC"
+  | "delivery_DESC"
+  | "organisation_ASC"
+  | "organisation_DESC"
   | "resources_ASC"
   | "resources_DESC"
   | "informations_ASC"
@@ -421,6 +425,8 @@ export interface MakerUpdateInput {
   description?: Maybe<String>;
   functionalities?: Maybe<String>;
   technologies?: Maybe<String>;
+  delivery?: Maybe<String>;
+  organisation?: Maybe<String>;
   resources?: Maybe<String>;
   informations?: Maybe<String>;
   status?: Maybe<Int>;
@@ -922,6 +928,34 @@ export interface MakerWhereInput {
   technologies_not_starts_with?: Maybe<String>;
   technologies_ends_with?: Maybe<String>;
   technologies_not_ends_with?: Maybe<String>;
+  delivery?: Maybe<String>;
+  delivery_not?: Maybe<String>;
+  delivery_in?: Maybe<String[] | String>;
+  delivery_not_in?: Maybe<String[] | String>;
+  delivery_lt?: Maybe<String>;
+  delivery_lte?: Maybe<String>;
+  delivery_gt?: Maybe<String>;
+  delivery_gte?: Maybe<String>;
+  delivery_contains?: Maybe<String>;
+  delivery_not_contains?: Maybe<String>;
+  delivery_starts_with?: Maybe<String>;
+  delivery_not_starts_with?: Maybe<String>;
+  delivery_ends_with?: Maybe<String>;
+  delivery_not_ends_with?: Maybe<String>;
+  organisation?: Maybe<String>;
+  organisation_not?: Maybe<String>;
+  organisation_in?: Maybe<String[] | String>;
+  organisation_not_in?: Maybe<String[] | String>;
+  organisation_lt?: Maybe<String>;
+  organisation_lte?: Maybe<String>;
+  organisation_gt?: Maybe<String>;
+  organisation_gte?: Maybe<String>;
+  organisation_contains?: Maybe<String>;
+  organisation_not_contains?: Maybe<String>;
+  organisation_starts_with?: Maybe<String>;
+  organisation_not_starts_with?: Maybe<String>;
+  organisation_ends_with?: Maybe<String>;
+  organisation_not_ends_with?: Maybe<String>;
   resources?: Maybe<String>;
   resources_not?: Maybe<String>;
   resources_in?: Maybe<String[] | String>;
@@ -1124,6 +1158,8 @@ export interface MakerUpdateManyMutationInput {
   description?: Maybe<String>;
   functionalities?: Maybe<String>;
   technologies?: Maybe<String>;
+  delivery?: Maybe<String>;
+  organisation?: Maybe<String>;
   resources?: Maybe<String>;
   informations?: Maybe<String>;
   status?: Maybe<Int>;
@@ -1288,6 +1324,8 @@ export interface MakerCreateInput {
   description: String;
   functionalities: String;
   technologies: String;
+  delivery: String;
+  organisation: String;
   resources: String;
   informations: String;
   status: Int;
@@ -1377,6 +1415,8 @@ export interface Maker {
   description: String;
   functionalities: String;
   technologies: String;
+  delivery: String;
+  organisation: String;
   resources: String;
   informations: String;
   status: Int;
@@ -1389,6 +1429,8 @@ export interface MakerPromise extends Promise<Maker>, Fragmentable {
   description: () => Promise<String>;
   functionalities: () => Promise<String>;
   technologies: () => Promise<String>;
+  delivery: () => Promise<String>;
+  organisation: () => Promise<String>;
   resources: () => Promise<String>;
   informations: () => Promise<String>;
   status: () => Promise<Int>;
@@ -1403,6 +1445,8 @@ export interface MakerSubscription
   description: () => Promise<AsyncIterator<String>>;
   functionalities: () => Promise<AsyncIterator<String>>;
   technologies: () => Promise<AsyncIterator<String>>;
+  delivery: () => Promise<AsyncIterator<String>>;
+  organisation: () => Promise<AsyncIterator<String>>;
   resources: () => Promise<AsyncIterator<String>>;
   informations: () => Promise<AsyncIterator<String>>;
   status: () => Promise<AsyncIterator<Int>>;
@@ -1417,6 +1461,8 @@ export interface MakerNullablePromise
   description: () => Promise<String>;
   functionalities: () => Promise<String>;
   technologies: () => Promise<String>;
+  delivery: () => Promise<String>;
+  organisation: () => Promise<String>;
   resources: () => Promise<String>;
   informations: () => Promise<String>;
   status: () => Promise<Int>;
@@ -2243,6 +2289,8 @@ export interface MakerPreviousValues {
   description: String;
   functionalities: String;
   technologies: String;
+  delivery: String;
+  organisation: String;
   resources: String;
   informations: String;
   status: Int;
@@ -2257,6 +2305,8 @@ export interface MakerPreviousValuesPromise
   description: () => Promise<String>;
   functionalities: () => Promise<String>;
   technologies: () => Promise<String>;
+  delivery: () => Promise<String>;
+  organisation: () => Promise<String>;
   resources: () => Promise<String>;
   informations: () => Promise<String>;
   status: () => Promise<Int>;
@@ -2271,6 +2321,8 @@ export interface MakerPreviousValuesSubscription
   description: () => Promise<AsyncIterator<String>>;
   functionalities: () => Promise<AsyncIterator<String>>;
   technologies: () => Promise<AsyncIterator<String>>;
+  delivery: () => Promise<AsyncIterator<String>>;
+  organisation: () => Promise<AsyncIterator<String>>;
   resources: () => Promise<AsyncIterator<String>>;
   informations: () => Promise<AsyncIterator<String>>;
   status: () => Promise<AsyncIterator<Int>>;
