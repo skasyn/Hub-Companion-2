@@ -26,65 +26,13 @@ import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    button: {
-      marginTop: theme.spacing(2),
-      marginRight: theme.spacing(1),
-    },
-    actionsContainer: {
-      marginBottom: theme.spacing(2),
-    },
-    resetContainer: {
-      padding: theme.spacing(3),
-    },
-    reviewContainer: {
-      padding: theme.spacing(3)
-    },
-  }),
-);
-
-const toMultiline = (description: String) => {
-  return (
-    <span className="bold-text">
-        {description.split("\n").map(function(item, key) {
-          return (
-            <span key={key}>
-              {item}
-              <br />
-            </span>
-          )
-        })}
-      </span>
-  )
-};
-
-interface ReviewContainerProps {
-  title: String,
-  data: String,
-}
-
-const ReviewContainer: React.FC<ReviewContainerProps> = (props) => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.reviewContainer}>
-      <Typography variant="h6">
-        {props.title}
-      </Typography>
-      <Typography variant="body2">
-        {toMultiline(props.data)}
-      </Typography>
-    </div>
-  );
-};
+import {ReviewContainer, useSharingMakerStyles} from "./SharingMakerUtils";
 
 const MakerForm: React.FC = () => {
   const steps = 5;
   const [jwt] = useGlobalState('jwt');
   const [user] = useGlobalState('user');
-  const classes = useStyles();
+  const classes = useSharingMakerStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [result, setResult] = useState(0);
   const [submitMaker] = useMutation<SubmitMakerData, SubmitMakerVars>(SUBMIT_MAKER);
@@ -96,7 +44,8 @@ const MakerForm: React.FC = () => {
     technologies: '',
     resources: '',
     informations: '',
-    co_workers: [{email: user.email.toString(), error: false}]});
+    co_workers: [{email: user.email.toString(), error: false}]
+  });
 
   const next = async () => {
     setActiveStep(activeStep.valueOf() + 1);

@@ -28,6 +28,7 @@ import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
+import {ReviewContainer} from "./SharingMakerUtils";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -63,50 +64,27 @@ const toMultiline = (description: String) => {
 };
 
 const SharingForm: React.FC = () => {
+  const steps = 3;
   const [jwt] = useGlobalState('jwt');
   const [user] = useGlobalState('user');
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [emails, setEmail] = useState([{email: user.email.toString(), error: false}]);
-  const [submitSharing] = useMutation<SubmitSharingData, SubmitSharingVars>(SUBMIT_SHARING);
   const [result, setResult] = useState(0);
+  const [submitSharing] = useMutation<SubmitSharingData, SubmitSharingVars>(SUBMIT_SHARING);
 
-  const updateTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
-  };
-  const updateDescription = (event: React.ChangeEvent<HTMLInputElement>) =>{
-    setDescription(event.target.value);
-  };
-  const emailIsValid = (email: string) => {
-    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
-  };
-  const updateEmail = (event: React.ChangeEvent<HTMLInputElement>, index: number) =>{
-    const isError = !emailIsValid(event.target.value);
-    let newEmail = [...emails];
-    newEmail[index].email = event.target.value;
-    newEmail[index].error = isError;
-    setEmail(newEmail);
-    setActiveStep(activeStep);
-  };
-  const addEmail = () => {
-    setEmail(oldEmail => [...oldEmail, {email: '', error: false}]);
-  };
-  const removeEmail = () => {
-    if (emails.length === 1)
-      return;
-    let newEmail = [...emails];
-    newEmail.pop();
-    setEmail(newEmail);
-  };
-  const finish = async () => {
+  const [data, setData] = useState({
+    title: '',
+    description: '',
+    co_workers: [{email: user.email.toString(), error: false}]
+  });
+
+  const next = async () => {
     setActiveStep(activeStep.valueOf() + 1);
-    if (activeStep.valueOf() === 2) {
+    if (activeStep.valueOf() === steps - 1) {
       const dataSend = {
-        title: title,
-        description: description,
-        co_workers: emails.map((elem) => elem.email),
+        title: data.title,
+        description: data.description,
+        co_workers: data.co_workers.map((elem) => elem.email),
       };
       const response = await submitSharing({variables: {jwt: jwt, data: JSON.stringify(dataSend)}});
       if (response !== undefined && response.data !== undefined && response.data.submitSharing)
@@ -116,16 +94,36 @@ const SharingForm: React.FC = () => {
     }
   };
   const canNext = (step: number) => {
-    let titleDescription = title.length !== 0 && description.length !== 0;
     if (step === 0)
-      return titleDescription;
-    let emailsValid = true;
-    emails.forEach((value) => {
-      if (emailsValid) {
-        emailsValid = emailIsValid(value.email);
-      }
-    });
-    return (title.length !== 0 && description.length !== 0 && emailsValid);
+      return data.title.length !== 0 && data.description.length !== 0;
+    if (step === 1) {
+      let emailValid = true;
+      data.co_workers.forEach((value) => {
+        if (emailValid)
+          emailValid = emailIsValid(value.email);
+      });
+      return emailValid;
+    }
+    if (step === 2)
+      return true;
+  };
+  const emailIsValid = (email: string) => {
+    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+  };
+  const updateEmail = (event: React.ChangeEvent<HTMLInputElement>, index: number) =>{
+    const isError = !emailIsValid(event.target.value);
+    let newEmail = [...data.co_workers];
+    newEmail[index].email = event.target.value;
+    newEmail[index].error = isError;
+    setData({...data, co_workers: newEmail});
+    setActiveStep(activeStep);
+  };
+  const removeEmail = () => {
+    if (data.co_workers.length === 1)
+      return;
+    let newEmail = [...data.co_workers];
+    newEmail.pop();
+    setData({...data, co_workers: newEmail});
   };
   const resultRender = () => {
     if (result === 0) return (<StepLabel>Processing ...</StepLabel>);
@@ -150,8 +148,8 @@ const SharingForm: React.FC = () => {
               label="Title"
               name="title"
               autoFocus
-              defaultValue={title}
-              onChange={updateTitle}
+              defaultValue={data.title}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, title: event.target.value})}
             />
             <TextField
               variant="outlined"
@@ -162,8 +160,8 @@ const SharingForm: React.FC = () => {
               label="Description"
               name="description"
               multiline={true}
-              defaultValue={description}
-              onChange={updateDescription}
+              defaultValue={data.description}
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, description: event.target.value})}
             />
           </StepContent>
         </Step>
@@ -173,7 +171,7 @@ const SharingForm: React.FC = () => {
           </StepLabel>
           <StepContent>
             {
-              emails.map((value, index) => {
+              data.co_workers.map((value, index) => {
                 return (
                   <TextField
                     key={index}
@@ -195,7 +193,7 @@ const SharingForm: React.FC = () => {
             }
             <Grid container spacing={2} justify="flex-end">
               <Grid item>
-              <Fab color="primary" aria-label="add" onClick={addEmail}>
+              <Fab color="primary" aria-label="add" onClick={() => setData({...data, co_workers: [...data.co_workers, {email: '', error: false}]})}>
                 <AddIcon />
               </Fab>
               </Grid>
@@ -212,29 +210,15 @@ const SharingForm: React.FC = () => {
             Review your Request
           </StepLabel>
           <StepContent>
-            <div className={classes.reviewContainer}>
-              <Typography variant="h6">
-                Title
-              </Typography>
-              <Typography variant="body2">
-                {title}
-              </Typography>
-            </div>
-            <div className={classes.reviewContainer}>
-              <Typography variant="h6">
-                Description
-              </Typography>
-              <Typography variant="body2">
-                {toMultiline(description)}
-              </Typography>
-            </div>
+            <ReviewContainer title="Title" data={data.title}/>
+            <ReviewContainer title="Description" data={data.description}/>
             <div className={classes.reviewContainer}>
               <Typography variant="h6">
                 Co-Workers
               </Typography>
               <List>
                 {
-                  emails.map((value, index) => {
+                  data.co_workers.map((value, index) => {
                     return (
                       <ListItem key={index}>
                         <ListItemText primary={(index === 0) ? "Group Leader" : `Co-Worker ${index}`} secondary={value.email}/>
@@ -266,7 +250,7 @@ const SharingForm: React.FC = () => {
           <Button
           variant="contained"
           color="primary"
-          onClick={finish}
+          onClick={next}
           disabled={!canNext(activeStep)}
           className={classes.button}
           >
