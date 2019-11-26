@@ -267,7 +267,7 @@ const SharingList: React.FC = () => {
             {title: "Co-Workers", field: "co_workers", render: (rowData) => {
               return (<p>{rowData['co_workers'].join(' - ')}</p>)
             }},
-            {title: "Date", field: "date", type: "date", defaultSort: "desc", render: (rowData) => {
+            {title: "Date", field: "date", type: "date", render: (rowData) => {
               const date = new Date(rowData['date'].toString());
               if (date.getTime() === 0)
                 return (<p>N/A</p>);
@@ -277,6 +277,13 @@ const SharingList: React.FC = () => {
               const date1 = new Date(data1['date'].toString());
               const date2 = new Date(data2['date'].toString());
               return date1.getTime() - date2.getTime();
+            }},
+            {title: "XP", field: "xp", render: (rowData) => {
+                if (rowData['xp'] !== 0) {
+                  return (<p>{rowData['xp']}</p>);
+                } else {
+                  return (<p>N/A</p>);
+                }
             }},
             {title: "Status", field: "status", render: (rowData) => {
               const status = rowData['status'];

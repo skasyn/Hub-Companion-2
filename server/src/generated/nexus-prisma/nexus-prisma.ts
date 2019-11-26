@@ -1325,6 +1325,7 @@ type MakerObject =
   | { name: 'organisation', args?: [] | false, alias?: string  } 
   | { name: 'resources', args?: [] | false, alias?: string  } 
   | { name: 'informations', args?: [] | false, alias?: string  } 
+  | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
 
 type MakerFields =
@@ -1338,6 +1339,7 @@ type MakerFields =
   | 'organisation'
   | 'resources'
   | 'informations'
+  | 'xp'
   | 'status'
 
 
@@ -1419,6 +1421,14 @@ export interface MakerFieldDetails {
   }
   informations: {
     type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  xp: {
+    type: 'Int'
     args: {}
     description: string
     list: undefined
@@ -1570,6 +1580,7 @@ type SharingObject =
   | { name: 'co_workers', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
 
 type SharingFields =
@@ -1578,6 +1589,7 @@ type SharingFields =
   | 'co_workers'
   | 'description'
   | 'date'
+  | 'xp'
   | 'status'
 
 
@@ -1619,6 +1631,14 @@ export interface SharingFieldDetails {
   }
   date: {
     type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  xp: {
+    type: 'Int'
     args: {}
     description: string
     list: undefined
@@ -3241,6 +3261,7 @@ type MakerPreviousValuesObject =
   | { name: 'organisation', args?: [] | false, alias?: string  } 
   | { name: 'resources', args?: [] | false, alias?: string  } 
   | { name: 'informations', args?: [] | false, alias?: string  } 
+  | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
 
 type MakerPreviousValuesFields =
@@ -3254,6 +3275,7 @@ type MakerPreviousValuesFields =
   | 'organisation'
   | 'resources'
   | 'informations'
+  | 'xp'
   | 'status'
 
 
@@ -3335,6 +3357,14 @@ export interface MakerPreviousValuesFieldDetails {
   }
   informations: {
     type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  xp: {
+    type: 'Int'
     args: {}
     description: string
     list: undefined
@@ -3431,6 +3461,7 @@ type SharingPreviousValuesObject =
   | { name: 'co_workers', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
 
 type SharingPreviousValuesFields =
@@ -3439,6 +3470,7 @@ type SharingPreviousValuesFields =
   | 'co_workers'
   | 'description'
   | 'date'
+  | 'xp'
   | 'status'
 
 
@@ -3480,6 +3512,14 @@ export interface SharingPreviousValuesFieldDetails {
   }
   date: {
     type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  xp: {
+    type: 'Int'
     args: {}
     description: string
     list: undefined
@@ -4219,6 +4259,14 @@ export interface MakerWhereInput {
   informations_not_starts_with?: string | null
   informations_ends_with?: string | null
   informations_not_ends_with?: string | null
+  xp?: number | null
+  xp_not?: number | null
+  xp_in?: number[]
+  xp_not_in?: number[]
+  xp_lt?: number | null
+  xp_lte?: number | null
+  xp_gt?: number | null
+  xp_gte?: number | null
   status?: number | null
   status_not?: number | null
   status_in?: number[]
@@ -4357,6 +4405,14 @@ export type MakerWhereInputInputObject =
   | { name: 'informations_not_starts_with', alias?: string  } 
   | { name: 'informations_ends_with', alias?: string  } 
   | { name: 'informations_not_ends_with', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
+  | { name: 'xp_not', alias?: string  } 
+  | { name: 'xp_in', alias?: string  } 
+  | { name: 'xp_not_in', alias?: string  } 
+  | { name: 'xp_lt', alias?: string  } 
+  | { name: 'xp_lte', alias?: string  } 
+  | { name: 'xp_gt', alias?: string  } 
+  | { name: 'xp_gte', alias?: string  } 
   | { name: 'status', alias?: string  } 
   | { name: 'status_not', alias?: string  } 
   | { name: 'status_in', alias?: string  } 
@@ -4427,6 +4483,14 @@ export interface SharingWhereInput {
   date_lte?: string | null
   date_gt?: string | null
   date_gte?: string | null
+  xp?: number | null
+  xp_not?: number | null
+  xp_in?: number[]
+  xp_not_in?: number[]
+  xp_lt?: number | null
+  xp_lte?: number | null
+  xp_gt?: number | null
+  xp_gte?: number | null
   status?: number | null
   status_not?: number | null
   status_in?: number[]
@@ -4489,6 +4553,14 @@ export type SharingWhereInputInputObject =
   | { name: 'date_lte', alias?: string  } 
   | { name: 'date_gt', alias?: string  } 
   | { name: 'date_gte', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
+  | { name: 'xp_not', alias?: string  } 
+  | { name: 'xp_in', alias?: string  } 
+  | { name: 'xp_not_in', alias?: string  } 
+  | { name: 'xp_lt', alias?: string  } 
+  | { name: 'xp_lte', alias?: string  } 
+  | { name: 'xp_gt', alias?: string  } 
+  | { name: 'xp_gte', alias?: string  } 
   | { name: 'status', alias?: string  } 
   | { name: 'status_not', alias?: string  } 
   | { name: 'status_in', alias?: string  } 
@@ -5136,6 +5208,7 @@ export interface MakerCreateInput {
   organisation?: string
   resources?: string
   informations?: string
+  xp?: number | null
   status?: number
 }
 export type MakerCreateInputInputObject =
@@ -5150,6 +5223,7 @@ export type MakerCreateInputInputObject =
   | { name: 'organisation', alias?: string  } 
   | { name: 'resources', alias?: string  } 
   | { name: 'informations', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
 export interface MakerCreateco_workersInput {
@@ -5169,6 +5243,7 @@ export interface MakerUpdateInput {
   organisation?: string | null
   resources?: string | null
   informations?: string | null
+  xp?: number | null
   status?: number | null
 }
 export type MakerUpdateInputInputObject =
@@ -5182,6 +5257,7 @@ export type MakerUpdateInputInputObject =
   | { name: 'organisation', alias?: string  } 
   | { name: 'resources', alias?: string  } 
   | { name: 'informations', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
 export interface MakerUpdateco_workersInput {
@@ -5201,6 +5277,7 @@ export interface MakerUpdateManyMutationInput {
   organisation?: string | null
   resources?: string | null
   informations?: string | null
+  xp?: number | null
   status?: number | null
 }
 export type MakerUpdateManyMutationInputInputObject =
@@ -5214,6 +5291,7 @@ export type MakerUpdateManyMutationInputInputObject =
   | { name: 'organisation', alias?: string  } 
   | { name: 'resources', alias?: string  } 
   | { name: 'informations', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
 export interface SharingCreateInput {
@@ -5222,6 +5300,7 @@ export interface SharingCreateInput {
   co_workers?: SharingCreateco_workersInput | null
   description?: string
   date?: string
+  xp?: number | null
   status?: number
 }
 export type SharingCreateInputInputObject =
@@ -5231,6 +5310,7 @@ export type SharingCreateInputInputObject =
   | { name: 'co_workers', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'date', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
 export interface SharingCreateco_workersInput {
@@ -5245,6 +5325,7 @@ export interface SharingUpdateInput {
   co_workers?: SharingUpdateco_workersInput | null
   description?: string | null
   date?: string | null
+  xp?: number | null
   status?: number | null
 }
 export type SharingUpdateInputInputObject =
@@ -5253,6 +5334,7 @@ export type SharingUpdateInputInputObject =
   | { name: 'co_workers', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'date', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
 export interface SharingUpdateco_workersInput {
@@ -5267,6 +5349,7 @@ export interface SharingUpdateManyMutationInput {
   co_workers?: SharingUpdateco_workersInput | null
   description?: string | null
   date?: string | null
+  xp?: number | null
   status?: number | null
 }
 export type SharingUpdateManyMutationInputInputObject =
@@ -5275,6 +5358,7 @@ export type SharingUpdateManyMutationInputInputObject =
   | { name: 'co_workers', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'date', alias?: string  } 
+  | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
 export interface DatabaseRefreshCreateInput {
@@ -5466,6 +5550,8 @@ export type MakerOrderByInputValues =
   | 'resources_DESC'
   | 'informations_ASC'
   | 'informations_DESC'
+  | 'xp_ASC'
+  | 'xp_DESC'
   | 'status_ASC'
   | 'status_DESC'
   
@@ -5478,6 +5564,8 @@ export type SharingOrderByInputValues =
   | 'description_DESC'
   | 'date_ASC'
   | 'date_DESC'
+  | 'xp_ASC'
+  | 'xp_DESC'
   | 'status_ASC'
   | 'status_DESC'
   

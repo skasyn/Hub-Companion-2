@@ -64,6 +64,7 @@ export const GET_USER_SHARING: any = gql`
           co_workers
           description
           date
+          xp
           status
       }
   }
@@ -81,6 +82,7 @@ export const GET_USER_MAKER: any = gql`
           organisation
           resources
           informations
+          xp
           status
       }
   }

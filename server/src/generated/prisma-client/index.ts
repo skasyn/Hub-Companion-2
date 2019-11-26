@@ -363,6 +363,8 @@ export type MakerOrderByInput =
   | "resources_DESC"
   | "informations_ASC"
   | "informations_DESC"
+  | "xp_ASC"
+  | "xp_DESC"
   | "status_ASC"
   | "status_DESC";
 
@@ -375,6 +377,8 @@ export type SharingOrderByInput =
   | "description_DESC"
   | "date_ASC"
   | "date_DESC"
+  | "xp_ASC"
+  | "xp_DESC"
   | "status_ASC"
   | "status_DESC";
 
@@ -429,6 +433,7 @@ export interface MakerUpdateInput {
   organisation?: Maybe<String>;
   resources?: Maybe<String>;
   informations?: Maybe<String>;
+  xp?: Maybe<Int>;
   status?: Maybe<Int>;
 }
 
@@ -437,6 +442,7 @@ export interface SharingUpdateManyMutationInput {
   co_workers?: Maybe<SharingUpdateco_workersInput>;
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
+  xp?: Maybe<Int>;
   status?: Maybe<Int>;
 }
 
@@ -477,6 +483,7 @@ export interface SharingUpdateInput {
   co_workers?: Maybe<SharingUpdateco_workersInput>;
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
+  xp?: Maybe<Int>;
   status?: Maybe<Int>;
 }
 
@@ -673,6 +680,14 @@ export interface SharingWhereInput {
   date_lte?: Maybe<DateTimeInput>;
   date_gt?: Maybe<DateTimeInput>;
   date_gte?: Maybe<DateTimeInput>;
+  xp?: Maybe<Int>;
+  xp_not?: Maybe<Int>;
+  xp_in?: Maybe<Int[] | Int>;
+  xp_not_in?: Maybe<Int[] | Int>;
+  xp_lt?: Maybe<Int>;
+  xp_lte?: Maybe<Int>;
+  xp_gt?: Maybe<Int>;
+  xp_gte?: Maybe<Int>;
   status?: Maybe<Int>;
   status_not?: Maybe<Int>;
   status_in?: Maybe<Int[] | Int>;
@@ -755,6 +770,7 @@ export interface SharingCreateInput {
   co_workers?: Maybe<SharingCreateco_workersInput>;
   description: String;
   date: DateTimeInput;
+  xp?: Maybe<Int>;
   status: Int;
 }
 
@@ -984,6 +1000,14 @@ export interface MakerWhereInput {
   informations_not_starts_with?: Maybe<String>;
   informations_ends_with?: Maybe<String>;
   informations_not_ends_with?: Maybe<String>;
+  xp?: Maybe<Int>;
+  xp_not?: Maybe<Int>;
+  xp_in?: Maybe<Int[] | Int>;
+  xp_not_in?: Maybe<Int[] | Int>;
+  xp_lt?: Maybe<Int>;
+  xp_lte?: Maybe<Int>;
+  xp_gt?: Maybe<Int>;
+  xp_gte?: Maybe<Int>;
   status?: Maybe<Int>;
   status_not?: Maybe<Int>;
   status_in?: Maybe<Int[] | Int>;
@@ -1162,6 +1186,7 @@ export interface MakerUpdateManyMutationInput {
   organisation?: Maybe<String>;
   resources?: Maybe<String>;
   informations?: Maybe<String>;
+  xp?: Maybe<Int>;
   status?: Maybe<Int>;
 }
 
@@ -1328,6 +1353,7 @@ export interface MakerCreateInput {
   organisation: String;
   resources: String;
   informations: String;
+  xp?: Maybe<Int>;
   status: Int;
 }
 
@@ -1419,6 +1445,7 @@ export interface Maker {
   organisation: String;
   resources: String;
   informations: String;
+  xp: Int;
   status: Int;
 }
 
@@ -1433,6 +1460,7 @@ export interface MakerPromise extends Promise<Maker>, Fragmentable {
   organisation: () => Promise<String>;
   resources: () => Promise<String>;
   informations: () => Promise<String>;
+  xp: () => Promise<Int>;
   status: () => Promise<Int>;
 }
 
@@ -1449,6 +1477,7 @@ export interface MakerSubscription
   organisation: () => Promise<AsyncIterator<String>>;
   resources: () => Promise<AsyncIterator<String>>;
   informations: () => Promise<AsyncIterator<String>>;
+  xp: () => Promise<AsyncIterator<Int>>;
   status: () => Promise<AsyncIterator<Int>>;
 }
 
@@ -1465,6 +1494,7 @@ export interface MakerNullablePromise
   organisation: () => Promise<String>;
   resources: () => Promise<String>;
   informations: () => Promise<String>;
+  xp: () => Promise<Int>;
   status: () => Promise<Int>;
 }
 
@@ -2137,6 +2167,7 @@ export interface Sharing {
   co_workers: String[];
   description: String;
   date: DateTimeOutput;
+  xp: Int;
   status: Int;
 }
 
@@ -2146,6 +2177,7 @@ export interface SharingPromise extends Promise<Sharing>, Fragmentable {
   co_workers: () => Promise<String[]>;
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
+  xp: () => Promise<Int>;
   status: () => Promise<Int>;
 }
 
@@ -2157,6 +2189,7 @@ export interface SharingSubscription
   co_workers: () => Promise<AsyncIterator<String[]>>;
   description: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  xp: () => Promise<AsyncIterator<Int>>;
   status: () => Promise<AsyncIterator<Int>>;
 }
 
@@ -2168,6 +2201,7 @@ export interface SharingNullablePromise
   co_workers: () => Promise<String[]>;
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
+  xp: () => Promise<Int>;
   status: () => Promise<Int>;
 }
 
@@ -2211,6 +2245,7 @@ export interface SharingPreviousValues {
   co_workers: String[];
   description: String;
   date: DateTimeOutput;
+  xp: Int;
   status: Int;
 }
 
@@ -2222,6 +2257,7 @@ export interface SharingPreviousValuesPromise
   co_workers: () => Promise<String[]>;
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
+  xp: () => Promise<Int>;
   status: () => Promise<Int>;
 }
 
@@ -2233,6 +2269,7 @@ export interface SharingPreviousValuesSubscription
   co_workers: () => Promise<AsyncIterator<String[]>>;
   description: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  xp: () => Promise<AsyncIterator<Int>>;
   status: () => Promise<AsyncIterator<Int>>;
 }
 
@@ -2293,6 +2330,7 @@ export interface MakerPreviousValues {
   organisation: String;
   resources: String;
   informations: String;
+  xp: Int;
   status: Int;
 }
 
@@ -2309,6 +2347,7 @@ export interface MakerPreviousValuesPromise
   organisation: () => Promise<String>;
   resources: () => Promise<String>;
   informations: () => Promise<String>;
+  xp: () => Promise<Int>;
   status: () => Promise<Int>;
 }
 
@@ -2325,6 +2364,7 @@ export interface MakerPreviousValuesSubscription
   organisation: () => Promise<AsyncIterator<String>>;
   resources: () => Promise<AsyncIterator<String>>;
   informations: () => Promise<AsyncIterator<String>>;
+  xp: () => Promise<AsyncIterator<Int>>;
   status: () => Promise<AsyncIterator<Int>>;
 }
 

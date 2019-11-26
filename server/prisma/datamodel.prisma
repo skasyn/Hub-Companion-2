@@ -41,6 +41,7 @@ type Maker {
     organisation: String!
     resources: String!
     informations: String!
+    xp: Int! @default(value: 0)
     status: Int!
 }
 
@@ -50,6 +51,7 @@ type Sharing {
     co_workers: [String!]!
     description: String!
     date: DateTime!
+    xp: Int! @default(value: 0)
     status: Int!
 }
 

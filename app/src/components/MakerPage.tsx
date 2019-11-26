@@ -377,6 +377,13 @@ const MakerList: React.FC = () => {
             {title: "Co-Workers", field: "co_workers", render: (rowData) => {
               return (<p>{rowData['co_workers'].join(' - ')}</p>)
             }},
+            {title: "XP", field: "xp", render: (rowData) => {
+                if (rowData['xp'] !== 0) {
+                  return (<p>{rowData['xp']}</p>);
+                } else {
+                  return (<p>N/A</p>);
+                }
+            }},
             {title: "Status", field: "status", render: (rowData) => {
               const status = rowData['status'];
               if (status === 0) {

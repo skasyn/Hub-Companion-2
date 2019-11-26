@@ -4,6 +4,7 @@ type Sharing {
     co_workers: [String!]!
     description: String!
     date: DateTime!
+    xp: Int!
     status: Int!
 }
 
@@ -18,5 +19,6 @@ type Maker {
     organisation: String!
     resources: String!
     informations: String!
+    xp: Int!
     status: Int!
 }

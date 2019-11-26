@@ -376,6 +376,7 @@ type Maker {
   organisation: String!
   resources: String!
   informations: String!
+  xp: Int!
   status: Int!
 }
 
@@ -400,6 +401,7 @@ input MakerCreateInput {
   organisation: String!
   resources: String!
   informations: String!
+  xp: Int
   status: Int!
 }
 
@@ -427,6 +429,8 @@ enum MakerOrderByInput {
   resources_DESC
   informations_ASC
   informations_DESC
+  xp_ASC
+  xp_DESC
   status_ASC
   status_DESC
 }
@@ -442,6 +446,7 @@ type MakerPreviousValues {
   organisation: String!
   resources: String!
   informations: String!
+  xp: Int!
   status: Int!
 }
 
@@ -475,6 +480,7 @@ input MakerUpdateInput {
   organisation: String
   resources: String
   informations: String
+  xp: Int
   status: Int
 }
 
@@ -488,6 +494,7 @@ input MakerUpdateManyMutationInput {
   organisation: String
   resources: String
   informations: String
+  xp: Int
   status: Int
 }
 
@@ -618,6 +625,14 @@ input MakerWhereInput {
   informations_not_starts_with: String
   informations_ends_with: String
   informations_not_ends_with: String
+  xp: Int
+  xp_not: Int
+  xp_in: [Int!]
+  xp_not_in: [Int!]
+  xp_lt: Int
+  xp_lte: Int
+  xp_gt: Int
+  xp_gte: Int
   status: Int
   status_not: Int
   status_in: [Int!]
@@ -717,6 +732,7 @@ type Sharing {
   co_workers: [String!]!
   description: String!
   date: DateTime!
+  xp: Int!
   status: Int!
 }
 
@@ -736,6 +752,7 @@ input SharingCreateInput {
   co_workers: SharingCreateco_workersInput
   description: String!
   date: DateTime!
+  xp: Int
   status: Int!
 }
 
@@ -753,6 +770,8 @@ enum SharingOrderByInput {
   description_DESC
   date_ASC
   date_DESC
+  xp_ASC
+  xp_DESC
   status_ASC
   status_DESC
 }
@@ -763,6 +782,7 @@ type SharingPreviousValues {
   co_workers: [String!]!
   description: String!
   date: DateTime!
+  xp: Int!
   status: Int!
 }
 
@@ -791,6 +811,7 @@ input SharingUpdateInput {
   co_workers: SharingUpdateco_workersInput
   description: String
   date: DateTime
+  xp: Int
   status: Int
 }
 
@@ -799,6 +820,7 @@ input SharingUpdateManyMutationInput {
   co_workers: SharingUpdateco_workersInput
   description: String
   date: DateTime
+  xp: Int
   status: Int
 }
 
@@ -853,6 +875,14 @@ input SharingWhereInput {
   date_lte: DateTime
   date_gt: DateTime
   date_gte: DateTime
+  xp: Int
+  xp_not: Int
+  xp_in: [Int!]
+  xp_not_in: [Int!]
+  xp_lt: Int
+  xp_lte: Int
+  xp_gt: Int
+  xp_gte: Int
   status: Int
   status_not: Int
   status_in: [Int!]

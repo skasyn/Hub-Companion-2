@@ -20,10 +20,11 @@ export interface UserPresence {
 }
 
 export interface Sharing {
-  title: String
-  co_workers: String[]
-  description: String
-  date: String
+  title: String,
+  co_workers: String[],
+  description: String,
+  date: String,
+  xp: Number,
   status: Number
 }
 
@@ -36,7 +37,8 @@ export interface Maker {
   delivery: String,
   organisation: String,
   resources: String,
-  informations: String
+  informations: String,
+  xp: Number,
   status: Number
 }
 
