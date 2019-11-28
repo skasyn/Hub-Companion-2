@@ -62,8 +62,48 @@ async function submitSharing(parent, args, context, userId) {
   return true;
 }
 
+async function setYear(parent, args, context, userId) {
+  if (userId === undefined || userId === '' || args.year === undefined) {
+    throw new Error('Empty code');
+  }
+  try {
+    await prisma.updateUser({
+      where: {
+        id: userId
+      },
+      data: {
+        year: args.year
+      }
+    });
+  } catch(e) {
+    return false;
+  }
+  return true;
+}
+
+async function setPlan(parent, args, context, userId) {
+  if (userId === undefined || userId === '' || args.plan === undefined) {
+    throw new Error('Empty code');
+  }
+  try {
+    await prisma.updateUser({
+      where: {
+        id: userId
+      },
+      data: {
+        plan: args.plan
+      }
+    });
+  } catch(e) {
+    return false;
+  }
+  return true;
+}
+
 export const Mutation = {
   refresh: handleErrors_login(refresh),
   submitMaker: handleErrors_login(submitMaker),
   submitSharing: handleErrors_login(submitSharing),
+  setYear: handleErrors_login(setYear),
+  setPlan: handleErrors_login(setPlan),
 };
