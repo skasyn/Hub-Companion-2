@@ -119,3 +119,21 @@ export interface UserMakerData {
 export interface UserMakerVars {
   jwt: String
 }
+
+export interface ChangeYearVars {
+  jwt: String,
+  year: Number,
+}
+
+export interface ChangeYearData {
+  setYear: Boolean
+}
+
+export interface ChangePlanVars {
+  jwt: String,
+  plan: Number,
+}
+
+export interface ChangePlanData {
+  setPlan: Boolean
+}

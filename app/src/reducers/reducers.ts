@@ -13,7 +13,8 @@ export type Action =
   | { type: 'loginUser', user: User, jwt: String }
   | { type: 'loginUserCookie', user: User, jwt: String }
   | { type: 'changePage', page: Number }
-  | { type: 'disconnect' };
+  | { type: 'disconnect' }
+  | { type: 'updateUser', user: User};
 
 export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
   (state, action: Action) => {
@@ -44,6 +45,12 @@ export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
         return {
           ...state,
           currentPage: action.page
+        };
+      }
+      case 'updateUser': {
+        return {
+          ...state,
+          user: action.user
         };
       }
       default: return state;

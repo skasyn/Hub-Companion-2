@@ -8,7 +8,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {dispatch, useGlobalState} from "../reducers/reducers";
 import {lightBlue, red } from "@material-ui/core/colors";
-import { createMuiTheme } from '@material-ui/core/styles';
+import {createMuiTheme, withStyles} from '@material-ui/core/styles';
 import HubLogoSvg from '../assets/hubcompanionlogo.svg';
 
 import {
@@ -88,17 +88,24 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
+const StyledBadge = withStyles({
+  badge: {
+    padding: '5px'
+  }
+})(Badge);
+
 const HomeDrawerRoute: React.FC = (props: any) => {
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const classes = useStyles();
   const [, setPage] = useGlobalState('currentPage');
+  const [user] = useGlobalState('user');
   const pages = [
     {path: '/', text: 'Home', icon: (<ListItemIcon><HomeIcon/></ListItemIcon>)},
     {path: '/activities', text: 'Activities', icon: (<ListItemIcon><EventNoteIcon/></ListItemIcon>)},
     {path: '/calendar', text: 'Calendar', icon: (<ListItemIcon><EventIcon/></ListItemIcon>)},
     {path: '/sharing', text: 'Sharing', icon: (<ListItemIcon><PeopleAltIcon/></ListItemIcon>)},
     {path: '/maker', text: 'Maker', icon: (<ListItemIcon><UnarchiveIcon/></ListItemIcon>)},
-    {path: '/settings', text: 'Settings', icon: (<ListItemIcon><TuneIcon/></ListItemIcon>)}
+    {path: '/settings', text: 'Settings', icon: (<ListItemIcon><StyledBadge badgeContent={(user.year !== 0 && user.plan !== -1) ? 0 : ""} color="secondary" variant="dot"><TuneIcon/></StyledBadge></ListItemIcon>)}
   ];
 
   const handleListItemClick = (
@@ -163,8 +170,6 @@ const NavBar: React.FC = () => {
     dispatch({type: 'disconnect'});
     handleClose();
   };
-
-
 
   return (
       <AppBar position="fixed" className={classes.appBar}>

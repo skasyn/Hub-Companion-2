@@ -17,3 +17,15 @@ export const SUBMIT_MAKER: any = gql`
       submitMaker(code: $jwt, data: $data)
   }
 `;
+
+export const CHANGE_YEAR: any = gql`
+  mutation CHANGE_YEAR($jwt: String!, $year: Int!) {
+      setYear(code: $jwt, year: $year)
+  }
+`;
+
+export const CHANGE_PLAN: any = gql`    
+  mutation CHANGE_PLAN($jwt: String!, $plan: Int!) {
+      setPlan(code: $jwt, plan: $plan)
+  }
+`;
