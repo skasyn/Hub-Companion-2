@@ -1,8 +1,10 @@
 export interface User {
-  id: String,
   name: String,
   xp: Number,
   email: String,
+  year: Number,
+  plan: Number,
+  privilege: Number,
   activities: Array<{title: String}>
 }
 

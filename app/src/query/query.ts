@@ -6,6 +6,9 @@ export const LOGIN: any = gql`
       user {
         name
         email
+        year
+        plan
+        privilege
       }
       jwt
     }
@@ -15,9 +18,11 @@ export const LOGIN: any = gql`
 export const LOGIN_COOKIE: any = gql`
   query LOGIN_COOKIE($code: String!) {
     loginCookie(code: $code) {
-      id
       name
       email
+      year
+      plan
+      privilege
     }
   }
 `;
