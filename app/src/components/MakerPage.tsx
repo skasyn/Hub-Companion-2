@@ -32,7 +32,7 @@ const MakerForm: React.FC = () => {
   const [jwt] = useGlobalState('jwt');
   const [user] = useGlobalState('user');
   const classes = useSharingMakerStyles();
-  const [activeStep, setActiveStep] = useState(5);
+  const [activeStep, setActiveStep] = useState(0);
   const [result, setResult] = useState(0);
   const [submitMaker] = useMutation<SubmitMakerData, SubmitMakerVars>(SUBMIT_MAKER);
 
