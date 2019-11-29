@@ -32,7 +32,7 @@ const MakerForm: React.FC = () => {
   const [jwt] = useGlobalState('jwt');
   const [user] = useGlobalState('user');
   const classes = useSharingMakerStyles();
-  const [activeStep, setActiveStep] = useState(0);
+  const [activeStep, setActiveStep] = useState(5);
   const [result, setResult] = useState(0);
   const [submitMaker] = useMutation<SubmitMakerData, SubmitMakerVars>(SUBMIT_MAKER);
 
@@ -47,6 +47,96 @@ const MakerForm: React.FC = () => {
     informations: '',
     co_workers: [{email: user.email.toString(), error: false}]
   });
+  const formData = [
+    {
+      title: "Title and Description",
+      canNext: () => { return data.title.length !== 0 && data.description.length !== 0},
+      items: [
+        {
+          name: "title",
+          label: "Title",
+          text: "Name of the project.",
+          value: data.title,
+          multiline: false,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, title: event.target.value})
+        },
+        {
+          name: "description",
+          label: "Description",
+          text: "Context and goal of the project. Detail the origin of the project, its motivating elements and a description of its use.",
+          value: data.description,
+          multiline: true,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, description: event.target.value})
+        }
+      ]
+    },
+    {
+      title: "Technical description",
+      canNext: () => { return data.functionalities.length !== 0 && data.technologies.length !== 0},
+      items: [
+        {
+          name: "functionalities",
+          label: "Functionalities",
+          text: "List major functionalities of each part of the project. This list is commitment on your part and will serve to evaluate your project.",
+          value: data.functionalities,
+          multiline: true,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, functionalities: event.target.value})
+        },
+        {
+          name: "technologies",
+          label: "Technologies",
+          text: "Describe the technical and technological context (material, language, execution environment, resources, etc) in which the project fits.",
+          value: data.technologies,
+          multiline: true,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, technologies: event.target.value})
+        }
+      ]
+    },
+    {
+      title: "Organisation",
+      canNext: () => { return data.delivery.length !== 0 && data.organisation.length !== 0},
+      items: [
+        {
+          name: "delivery",
+          label: "Delivery",
+          text: "Detail each element (program, libraries, assets, etc) of the delivery and their integration (documentation, deployment, etc).",
+          value: data.delivery,
+          multiline: true,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, delivery: event.target.value})
+        },
+        {
+          name: "organisation",
+          label: "Organisation",
+          text: "Describe the planning of the project: parts, dependencies, division of work.",
+          value: data.organisation,
+          multiline: true,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, organisation: event.target.value})
+        }
+      ]
+    },
+    {
+      title: "Additional informations",
+      canNext: () => { return data.resources.length !== 0 && data.informations.length !== 0},
+      items: [
+        {
+          name: "resources",
+          label: "Resources",
+          text: "For example with an hardware project.",
+          value: data.resources,
+          multiline: true,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, resources: event.target.value})
+        },
+        {
+          name: "informations",
+          label: "Complementary Informations",
+          text: "",
+          value: data.informations,
+          multiline: true,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, informations: event.target.value})
+        }
+      ]
+    }
+  ];
 
   const next = async () => {
     setActiveStep(activeStep.valueOf() + 1);
@@ -70,15 +160,10 @@ const MakerForm: React.FC = () => {
     }
   };
   const canNext = (step: number) => {
-    if (step === 0)
-      return data.title.length !== 0 && data.description.length !== 0;
-    if (step === 1)
-      return data.functionalities.length !== 0 && data.technologies.length !== 0;
-    if (step === 2)
-      return data.delivery.length !== 0 && data.organisation.length !== 0;
-    if (step === 3)
-      return data.resources.length !== 0 && data.informations.length !== 0;
-    if (step === 4) {
+    if (step < formData.length) {
+      return formData[step].canNext();
+    }
+    if (step === formData.length) {
       let emailValid = true;
       data.co_workers.forEach((value) => {
         if (emailValid)
@@ -86,10 +171,10 @@ const MakerForm: React.FC = () => {
       });
       return emailValid;
     }
-    if (step === 5)
+    if (step === formData.length + 1)
       return true;
   };
-  const updateEmail = (event: React.ChangeEvent<HTMLInputElement>, index: number) =>{
+  const updateEmail = (event: React.ChangeEvent<HTMLInputElement>, index: number) => {
     const isError = !isEmailValid(event.target.value);
     let newEmail = [...data.co_workers];
     newEmail[index].email = event.target.value;
@@ -113,140 +198,40 @@ const MakerForm: React.FC = () => {
   return (
     <div>
       <Stepper activeStep={activeStep} orientation="vertical">
-        <Step>
-          <StepLabel>
-            Title and Description
-          </StepLabel>
-          <StepContent>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="title"
-              label="Title"
-              helperText="Name of the project."
-              name="title"
-              autoFocus
-              defaultValue={data.title}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, title: event.target.value})}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="description"
-              label="Description"
-              helperText="Context and goal of the project. Detail the origin of the project, its motivating elements and a description of its use."
-              name="description"
-              multiline
-              defaultValue={data.description}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, description: event.target.value})}
-            />
-          </StepContent>
-        </Step>
-        <Step>
-          <StepLabel>
-            Technical description
-          </StepLabel>
-          <StepContent>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="functionalities"
-              label="Functionalities"
-              helperText="List major functionalities of each part of the project. This list is commitment on your part and will serve to evaluate your project."
-              name="functionalities"
-              autoFocus
-              multiline
-              defaultValue={data.functionalities}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, functionalities: event.target.value})}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="technologies"
-              label="Technologies"
-              helperText="Describe the technical and technological context (material, language, execution environment, resources, etc) in which the project fits."
-              name="technologies"
-              multiline
-              defaultValue={data.technologies}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, technologies: event.target.value})}
-            />
-          </StepContent>
-        </Step>
-        <Step>
-          <StepLabel>
-            Organisation
-          </StepLabel>
-          <StepContent>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="delivery"
-              label="Delivery"
-              helperText="Detail each element (program, libraries, assets, etc) of the delivery and their integration (documentation, deployment, etc)."
-              name="delivery"
-              autoFocus
-              multiline
-              defaultValue={data.delivery}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, delivery: event.target.value})}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="organisation"
-              label="Organisation"
-              helperText="Describe the planning of the project: parts, dependencies, division of work."
-              name="organisation"
-              multiline
-              defaultValue={data.organisation}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, organisation: event.target.value})}
-            />
-          </StepContent>
-        </Step>
-        <Step>
-          <StepLabel>
-            Additional informations
-          </StepLabel>
-          <StepContent>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="resources"
-              label="Resources"
-              helperText="For example with an hardware project."
-              name="resources"
-              autoFocus
-              multiline
-              defaultValue={data.resources}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, resources: event.target.value})}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="informations"
-              label="Complementary Informations"
-              name="informations"
-              multiline
-              defaultValue={data.informations}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, informations: event.target.value})}
-            />
-          </StepContent>
-        </Step>
+        {
+          formData.map((elem, elemId) => {
+            return (
+              <Step key={elemId.toString()}>
+                <StepLabel>
+                  {elem.title}
+                </StepLabel>
+                <StepContent>
+                  {
+                    elem.items.map((item, itemId) => {
+                      return (
+                        <TextField
+                          key={itemId.toString()}
+                          variant="outlined"
+                          margin="normal"
+                          required
+                          fullWidth
+                          id={item.name}
+                          label={item.label}
+                          helperText={item.text}
+                          name={item.name}
+                          autoFocus={itemId === 0}
+                          defaultValue={item.value}
+                          multiline={item.multiline}
+                          onChange={item.onChange}
+                        />
+                      );
+                    })
+                  }
+                </StepContent>
+              </Step>
+            )
+          })
+        }
         <Step>
           <StepLabel>
             Co-Workers
@@ -292,14 +277,21 @@ const MakerForm: React.FC = () => {
             Review your Request
           </StepLabel>
           <StepContent>
-            <ReviewContainer title="Title" data={data.title}/>
-            <ReviewContainer title="Description" data={data.description}/>
-            <ReviewContainer title="Functionalities" data={data.functionalities}/>
-            <ReviewContainer title="Technologies" data={data.technologies}/>
-            <ReviewContainer title="Delivery" data={data.delivery}/>
-            <ReviewContainer title="Organisation" data={data.organisation}/>
-            <ReviewContainer title="Resources" data={data.resources}/>
-            <ReviewContainer title="Informations" data={data.informations}/>
+            {
+              formData.map((elem, elemId) => {
+                return (
+                  <div key={elemId.toString()}>
+                    {
+                      elem.items.map((item, itemId) => {
+                        return (
+                          <ReviewContainer key={itemId.toString()} title={item.label} data={item.value}/>
+                        );
+                      })
+                    }
+                  </div>
+                );
+              })
+            }
             <div className={classes.reviewContainer}>
               <Typography variant="h6">
                 Co-Workers

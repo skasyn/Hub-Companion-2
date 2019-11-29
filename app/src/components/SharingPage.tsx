@@ -58,6 +58,30 @@ const SharingForm: React.FC = () => {
     description: '',
     co_workers: [{email: user.email.toString(), error: false}]
   });
+  const formData = [
+    {
+      title: "Title and Description",
+      canNext: () => { return data.title.length !== 0 && data.description.length !== 0},
+      items: [
+        {
+          name: "title",
+          label: "Title",
+          text: "Name of the talk/workshop",
+          value: data.title,
+          multiline: false,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, title: event.target.value})
+        },
+        {
+          name: "description",
+          label: "Description",
+          text: "",
+          multiline: true,
+          value: data.description,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, description: event.target.value})
+        }
+      ]
+    }
+  ];
 
   const next = async () => {
     setActiveStep(activeStep.valueOf() + 1);
@@ -75,9 +99,10 @@ const SharingForm: React.FC = () => {
     }
   };
   const canNext = (step: number) => {
-    if (step === 0)
-      return data.title.length !== 0 && data.description.length !== 0;
-    if (step === 1) {
+    if (step < formData.length) {
+      return formData[step].canNext();
+    }
+    if (step === formData.length) {
       let emailValid = true;
       data.co_workers.forEach((value) => {
         if (emailValid)
@@ -85,7 +110,7 @@ const SharingForm: React.FC = () => {
       });
       return emailValid;
     }
-    if (step === 2)
+    if (step === formData.length + 1)
       return true;
   };
   const updateEmail = (event: React.ChangeEvent<HTMLInputElement>, index: number) =>{
@@ -112,37 +137,40 @@ const SharingForm: React.FC = () => {
   return (
     <div>
       <Stepper activeStep={activeStep} orientation="vertical">
-        <Step>
-          <StepLabel>
-            Title and Description
-          </StepLabel>
-          <StepContent>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="title"
-              label="Title"
-              name="title"
-              autoFocus
-              defaultValue={data.title}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, title: event.target.value})}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="description"
-              label="Description"
-              name="description"
-              multiline={true}
-              defaultValue={data.description}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => setData({...data, description: event.target.value})}
-            />
-          </StepContent>
-        </Step>
+        {
+          formData.map((elem, elemId) => {
+            return (
+              <Step key={elemId.toString()}>
+                <StepLabel>
+                  {elem.title}
+                </StepLabel>
+                <StepContent>
+                  {
+                    elem.items.map((item, itemId) => {
+                      return (
+                        <TextField
+                          key={itemId.toString()}
+                          variant="outlined"
+                          margin="normal"
+                          required
+                          fullWidth
+                          id={item.name}
+                          label={item.label}
+                          helperText={item.text}
+                          name={item.name}
+                          autoFocus={itemId === 0}
+                          defaultValue={item.value}
+                          multiline={item.multiline}
+                          onChange={item.onChange}
+                        />
+                      );
+                    })
+                  }
+                </StepContent>
+              </Step>
+            )
+          })
+        }
         <Step>
           <StepLabel>
             Co-Workers
@@ -188,8 +216,21 @@ const SharingForm: React.FC = () => {
             Review your Request
           </StepLabel>
           <StepContent>
-            <ReviewContainer title="Title" data={data.title}/>
-            <ReviewContainer title="Description" data={data.description}/>
+            {
+              formData.map((elem, elemId) => {
+                return (
+                  <div key={elemId.toString()}>
+                    {
+                      elem.items.map((item, itemId) => {
+                        return (
+                          <ReviewContainer key={itemId.toString()} title={item.label} data={item.value}/>
+                        );
+                      })
+                    }
+                  </div>
+                );
+              })
+            }
             <div className={classes.reviewContainer}>
               <Typography variant="h6">
                 Co-Workers
