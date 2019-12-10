@@ -71,6 +71,7 @@ async function submitExperienceProject(parent, args, context, userId) {
     await prisma.createExperienceProject(
       {
         user: data.user,
+        title: data.title,
         description: data.description,
         competencies: data.competencies,
         informations: data.informations,

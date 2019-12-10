@@ -25,7 +25,9 @@ type Maker {
 
 type ExperienceProject {
     id: ID!
+    title: String!
     description: String!
     competencies: String!
     informations: String!
+    status: Int!
 }

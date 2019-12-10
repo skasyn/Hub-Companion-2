@@ -369,6 +369,7 @@ scalar DateTime
 
 type ExperienceProject {
   id: ID!
+  title: String!
   user: String!
   description: String!
   competencies: String!
@@ -384,6 +385,7 @@ type ExperienceProjectConnection {
 
 input ExperienceProjectCreateInput {
   id: ID
+  title: String!
   user: String!
   description: String!
   competencies: String!
@@ -399,6 +401,8 @@ type ExperienceProjectEdge {
 enum ExperienceProjectOrderByInput {
   id_ASC
   id_DESC
+  title_ASC
+  title_DESC
   user_ASC
   user_DESC
   description_ASC
@@ -413,6 +417,7 @@ enum ExperienceProjectOrderByInput {
 
 type ExperienceProjectPreviousValues {
   id: ID!
+  title: String!
   user: String!
   description: String!
   competencies: String!
@@ -437,6 +442,7 @@ input ExperienceProjectSubscriptionWhereInput {
 }
 
 input ExperienceProjectUpdateInput {
+  title: String
   user: String
   description: String
   competencies: String
@@ -445,6 +451,7 @@ input ExperienceProjectUpdateInput {
 }
 
 input ExperienceProjectUpdateManyMutationInput {
+  title: String
   user: String
   description: String
   competencies: String
@@ -467,6 +474,20 @@ input ExperienceProjectWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
   user: String
   user_not: String
   user_in: [String!]

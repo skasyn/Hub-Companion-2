@@ -394,6 +394,8 @@ export type DatabaseRefreshOrderByInput =
 export type ExperienceProjectOrderByInput =
   | "id_ASC"
   | "id_DESC"
+  | "title_ASC"
+  | "title_DESC"
   | "user_ASC"
   | "user_DESC"
   | "description_ASC"
@@ -480,6 +482,7 @@ export type UserWhereUniqueInput = AtLeastOne<{
 }>;
 
 export interface ExperienceProjectUpdateManyMutationInput {
+  title?: Maybe<String>;
   user?: Maybe<String>;
   description?: Maybe<String>;
   competencies?: Maybe<String>;
@@ -800,6 +803,20 @@ export interface ExperienceProjectWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
   user?: Maybe<String>;
   user_not?: Maybe<String>;
   user_in?: Maybe<String[] | String>;
@@ -1526,6 +1543,7 @@ export interface UserPresenceUpdateWithoutUserDataInput {
 }
 
 export interface ExperienceProjectUpdateInput {
+  title?: Maybe<String>;
   user?: Maybe<String>;
   description?: Maybe<String>;
   competencies?: Maybe<String>;
@@ -1535,6 +1553,7 @@ export interface ExperienceProjectUpdateInput {
 
 export interface ExperienceProjectCreateInput {
   id?: Maybe<ID_Input>;
+  title: String;
   user: String;
   description: String;
   competencies: String;
@@ -1681,6 +1700,7 @@ export interface ExperienceProjectConnectionSubscription
 
 export interface ExperienceProject {
   id: ID_Output;
+  title: String;
   user: String;
   description: String;
   competencies: String;
@@ -1692,6 +1712,7 @@ export interface ExperienceProjectPromise
   extends Promise<ExperienceProject>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
   user: () => Promise<String>;
   description: () => Promise<String>;
   competencies: () => Promise<String>;
@@ -1703,6 +1724,7 @@ export interface ExperienceProjectSubscription
   extends Promise<AsyncIterator<ExperienceProject>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
   user: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   competencies: () => Promise<AsyncIterator<String>>;
@@ -1714,6 +1736,7 @@ export interface ExperienceProjectNullablePromise
   extends Promise<ExperienceProject | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
   user: () => Promise<String>;
   description: () => Promise<String>;
   competencies: () => Promise<String>;
@@ -2255,6 +2278,7 @@ export interface UserEdgeSubscription
 
 export interface ExperienceProjectPreviousValues {
   id: ID_Output;
+  title: String;
   user: String;
   description: String;
   competencies: String;
@@ -2266,6 +2290,7 @@ export interface ExperienceProjectPreviousValuesPromise
   extends Promise<ExperienceProjectPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
   user: () => Promise<String>;
   description: () => Promise<String>;
   competencies: () => Promise<String>;
@@ -2277,6 +2302,7 @@ export interface ExperienceProjectPreviousValuesSubscription
   extends Promise<AsyncIterator<ExperienceProjectPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
   user: () => Promise<AsyncIterator<String>>;
   description: () => Promise<AsyncIterator<String>>;
   competencies: () => Promise<AsyncIterator<String>>;

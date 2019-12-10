@@ -1398,6 +1398,7 @@ export interface AggregateUserPresenceFieldDetails {
 type ExperienceProjectObject =
   | ExperienceProjectFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'title', args?: [] | false, alias?: string  } 
   | { name: 'user', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'competencies', args?: [] | false, alias?: string  } 
@@ -1406,6 +1407,7 @@ type ExperienceProjectObject =
 
 type ExperienceProjectFields =
   | 'id'
+  | 'title'
   | 'user'
   | 'description'
   | 'competencies'
@@ -1419,6 +1421,14 @@ type ExperienceProjectFields =
 export interface ExperienceProjectFieldDetails {
   id: {
     type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  title: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -3657,6 +3667,7 @@ export interface ExperienceProjectSubscriptionPayloadFieldDetails {
 type ExperienceProjectPreviousValuesObject =
   | ExperienceProjectPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'title', args?: [] | false, alias?: string  } 
   | { name: 'user', args?: [] | false, alias?: string  } 
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'competencies', args?: [] | false, alias?: string  } 
@@ -3665,6 +3676,7 @@ type ExperienceProjectPreviousValuesObject =
 
 type ExperienceProjectPreviousValuesFields =
   | 'id'
+  | 'title'
   | 'user'
   | 'description'
   | 'competencies'
@@ -3678,6 +3690,14 @@ type ExperienceProjectPreviousValuesFields =
 export interface ExperienceProjectPreviousValuesFieldDetails {
   id: {
     type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  title: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -4697,6 +4717,20 @@ export interface ExperienceProjectWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
+  title?: string | null
+  title_not?: string | null
+  title_in?: string[]
+  title_not_in?: string[]
+  title_lt?: string | null
+  title_lte?: string | null
+  title_gt?: string | null
+  title_gte?: string | null
+  title_contains?: string | null
+  title_not_contains?: string | null
+  title_starts_with?: string | null
+  title_not_starts_with?: string | null
+  title_ends_with?: string | null
+  title_not_ends_with?: string | null
   user?: string | null
   user_not?: string | null
   user_in?: string[]
@@ -4779,6 +4813,20 @@ export type ExperienceProjectWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'title', alias?: string  } 
+  | { name: 'title_not', alias?: string  } 
+  | { name: 'title_in', alias?: string  } 
+  | { name: 'title_not_in', alias?: string  } 
+  | { name: 'title_lt', alias?: string  } 
+  | { name: 'title_lte', alias?: string  } 
+  | { name: 'title_gt', alias?: string  } 
+  | { name: 'title_gte', alias?: string  } 
+  | { name: 'title_contains', alias?: string  } 
+  | { name: 'title_not_contains', alias?: string  } 
+  | { name: 'title_starts_with', alias?: string  } 
+  | { name: 'title_not_starts_with', alias?: string  } 
+  | { name: 'title_ends_with', alias?: string  } 
+  | { name: 'title_not_ends_with', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'user_not', alias?: string  } 
   | { name: 'user_in', alias?: string  } 
@@ -5919,6 +5967,7 @@ export type UserPresenceUpdateManyMutationInputInputObject =
   
 export interface ExperienceProjectCreateInput {
   id?: string | null
+  title?: string
   user?: string
   description?: string
   competencies?: string
@@ -5928,6 +5977,7 @@ export interface ExperienceProjectCreateInput {
 export type ExperienceProjectCreateInputInputObject =
   | Extract<keyof ExperienceProjectCreateInput, string>
   | { name: 'id', alias?: string  } 
+  | { name: 'title', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'competencies', alias?: string  } 
@@ -5935,6 +5985,7 @@ export type ExperienceProjectCreateInputInputObject =
   | { name: 'status', alias?: string  } 
   
 export interface ExperienceProjectUpdateInput {
+  title?: string | null
   user?: string | null
   description?: string | null
   competencies?: string | null
@@ -5943,6 +5994,7 @@ export interface ExperienceProjectUpdateInput {
 }
 export type ExperienceProjectUpdateInputInputObject =
   | Extract<keyof ExperienceProjectUpdateInput, string>
+  | { name: 'title', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'competencies', alias?: string  } 
@@ -5950,6 +6002,7 @@ export type ExperienceProjectUpdateInputInputObject =
   | { name: 'status', alias?: string  } 
   
 export interface ExperienceProjectUpdateManyMutationInput {
+  title?: string | null
   user?: string | null
   description?: string | null
   competencies?: string | null
@@ -5958,6 +6011,7 @@ export interface ExperienceProjectUpdateManyMutationInput {
 }
 export type ExperienceProjectUpdateManyMutationInputInputObject =
   | Extract<keyof ExperienceProjectUpdateManyMutationInput, string>
+  | { name: 'title', alias?: string  } 
   | { name: 'user', alias?: string  } 
   | { name: 'description', alias?: string  } 
   | { name: 'competencies', alias?: string  } 
@@ -6318,6 +6372,8 @@ export type ActivityOrderByInputValues =
 export type ExperienceProjectOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
+  | 'title_ASC'
+  | 'title_DESC'
   | 'user_ASC'
   | 'user_DESC'
   | 'description_ASC'

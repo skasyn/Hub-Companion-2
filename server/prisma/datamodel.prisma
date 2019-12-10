@@ -32,6 +32,7 @@ type UserPresence {
 
 type ExperienceProject {
     id: ID! @id
+    title: String!
     user: String!
     description: String!
     competencies: String!
