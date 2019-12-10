@@ -11,4 +11,5 @@ type Query {
     getAllActivities: [Activity!]!
     getUserMaker(code: String!): [Maker!]!
     getUserSharing(code: String!): [Sharing!]!
+    getUserExperienceProjects(code: String!): [ExperienceProject!]!
 }

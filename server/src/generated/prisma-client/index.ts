@@ -18,6 +18,7 @@ export type Maybe<T> = T | undefined | null;
 export interface Exists {
   activity: (where?: ActivityWhereInput) => Promise<boolean>;
   databaseRefresh: (where?: DatabaseRefreshWhereInput) => Promise<boolean>;
+  experienceProject: (where?: ExperienceProjectWhereInput) => Promise<boolean>;
   maker: (where?: MakerWhereInput) => Promise<boolean>;
   sharing: (where?: SharingWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
@@ -83,6 +84,27 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => DatabaseRefreshConnectionPromise;
+  experienceProject: (
+    where: ExperienceProjectWhereUniqueInput
+  ) => ExperienceProjectNullablePromise;
+  experienceProjects: (args?: {
+    where?: ExperienceProjectWhereInput;
+    orderBy?: ExperienceProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<ExperienceProject>;
+  experienceProjectsConnection: (args?: {
+    where?: ExperienceProjectWhereInput;
+    orderBy?: ExperienceProjectOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => ExperienceProjectConnectionPromise;
   maker: (where: MakerWhereUniqueInput) => MakerNullablePromise;
   makers: (args?: {
     where?: MakerWhereInput;
@@ -205,6 +227,28 @@ export interface Prisma {
   deleteManyDatabaseRefreshes: (
     where?: DatabaseRefreshWhereInput
   ) => BatchPayloadPromise;
+  createExperienceProject: (
+    data: ExperienceProjectCreateInput
+  ) => ExperienceProjectPromise;
+  updateExperienceProject: (args: {
+    data: ExperienceProjectUpdateInput;
+    where: ExperienceProjectWhereUniqueInput;
+  }) => ExperienceProjectPromise;
+  updateManyExperienceProjects: (args: {
+    data: ExperienceProjectUpdateManyMutationInput;
+    where?: ExperienceProjectWhereInput;
+  }) => BatchPayloadPromise;
+  upsertExperienceProject: (args: {
+    where: ExperienceProjectWhereUniqueInput;
+    create: ExperienceProjectCreateInput;
+    update: ExperienceProjectUpdateInput;
+  }) => ExperienceProjectPromise;
+  deleteExperienceProject: (
+    where: ExperienceProjectWhereUniqueInput
+  ) => ExperienceProjectPromise;
+  deleteManyExperienceProjects: (
+    where?: ExperienceProjectWhereInput
+  ) => BatchPayloadPromise;
   createMaker: (data: MakerCreateInput) => MakerPromise;
   updateMaker: (args: {
     data: MakerUpdateInput;
@@ -288,6 +332,9 @@ export interface Subscription {
   databaseRefresh: (
     where?: DatabaseRefreshSubscriptionWhereInput
   ) => DatabaseRefreshSubscriptionPayloadSubscription;
+  experienceProject: (
+    where?: ExperienceProjectSubscriptionWhereInput
+  ) => ExperienceProjectSubscriptionPayloadSubscription;
   maker: (
     where?: MakerSubscriptionWhereInput
   ) => MakerSubscriptionPayloadSubscription;
@@ -343,6 +390,20 @@ export type DatabaseRefreshOrderByInput =
   | "id_DESC"
   | "date_ASC"
   | "date_DESC";
+
+export type ExperienceProjectOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "user_ASC"
+  | "user_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "competencies_ASC"
+  | "competencies_DESC"
+  | "informations_ASC"
+  | "informations_DESC"
+  | "status_ASC"
+  | "status_DESC";
 
 export type MakerOrderByInput =
   | "id_ASC"
@@ -412,6 +473,20 @@ export type ActivityWhereUniqueInput = AtLeastOne<{
   code?: Maybe<String>;
 }>;
 
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  outlookId?: Maybe<String>;
+  email?: Maybe<String>;
+}>;
+
+export interface ExperienceProjectUpdateManyMutationInput {
+  user?: Maybe<String>;
+  description?: Maybe<String>;
+  competencies?: Maybe<String>;
+  informations?: Maybe<String>;
+  status?: Maybe<Int>;
+}
+
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   outlookId: String;
@@ -423,18 +498,9 @@ export interface UserCreateInput {
   activities?: Maybe<UserPresenceCreateManyWithoutUserInput>;
 }
 
-export interface MakerUpdateInput {
-  title?: Maybe<String>;
-  co_workers?: Maybe<MakerUpdateco_workersInput>;
-  description?: Maybe<String>;
-  functionalities?: Maybe<String>;
-  technologies?: Maybe<String>;
-  delivery?: Maybe<String>;
-  organisation?: Maybe<String>;
-  resources?: Maybe<String>;
-  informations?: Maybe<String>;
-  xp?: Maybe<Int>;
-  status?: Maybe<Int>;
+export interface UserPresenceUpdateManyWithWhereNestedInput {
+  where: UserPresenceScalarWhereInput;
+  data: UserPresenceUpdateManyDataInput;
 }
 
 export interface SharingUpdateManyMutationInput {
@@ -446,23 +512,103 @@ export interface SharingUpdateManyMutationInput {
   status?: Maybe<Int>;
 }
 
-export interface UserPresenceUpdateManyWithWhereNestedInput {
-  where: UserPresenceScalarWhereInput;
-  data: UserPresenceUpdateManyDataInput;
-}
-
-export type UserPresenceWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
+export interface ActivityWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
   code?: Maybe<String>;
-}>;
-
-export interface UserSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserWhereInput>;
-  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
+  code_not?: Maybe<String>;
+  code_in?: Maybe<String[] | String>;
+  code_not_in?: Maybe<String[] | String>;
+  code_lt?: Maybe<String>;
+  code_lte?: Maybe<String>;
+  code_gt?: Maybe<String>;
+  code_gte?: Maybe<String>;
+  code_contains?: Maybe<String>;
+  code_not_contains?: Maybe<String>;
+  code_starts_with?: Maybe<String>;
+  code_not_starts_with?: Maybe<String>;
+  code_ends_with?: Maybe<String>;
+  code_not_ends_with?: Maybe<String>;
+  type?: Maybe<String>;
+  type_not?: Maybe<String>;
+  type_in?: Maybe<String[] | String>;
+  type_not_in?: Maybe<String[] | String>;
+  type_lt?: Maybe<String>;
+  type_lte?: Maybe<String>;
+  type_gt?: Maybe<String>;
+  type_gte?: Maybe<String>;
+  type_contains?: Maybe<String>;
+  type_not_contains?: Maybe<String>;
+  type_starts_with?: Maybe<String>;
+  type_not_starts_with?: Maybe<String>;
+  type_ends_with?: Maybe<String>;
+  type_not_ends_with?: Maybe<String>;
+  xp?: Maybe<Int>;
+  xp_not?: Maybe<Int>;
+  xp_in?: Maybe<Int[] | Int>;
+  xp_not_in?: Maybe<Int[] | Int>;
+  xp_lt?: Maybe<Int>;
+  xp_lte?: Maybe<Int>;
+  xp_gt?: Maybe<Int>;
+  xp_gte?: Maybe<Int>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  begin?: Maybe<DateTimeInput>;
+  begin_not?: Maybe<DateTimeInput>;
+  begin_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  begin_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  begin_lt?: Maybe<DateTimeInput>;
+  begin_lte?: Maybe<DateTimeInput>;
+  begin_gt?: Maybe<DateTimeInput>;
+  begin_gte?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
+  end_not?: Maybe<DateTimeInput>;
+  end_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  end_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  end_lt?: Maybe<DateTimeInput>;
+  end_lte?: Maybe<DateTimeInput>;
+  end_gt?: Maybe<DateTimeInput>;
+  end_gte?: Maybe<DateTimeInput>;
+  registered_some?: Maybe<UserPresenceWhereInput>;
+  AND?: Maybe<ActivityWhereInput[] | ActivityWhereInput>;
 }
 
 export interface SharingUpdateco_workersInput {
@@ -487,6 +633,23 @@ export interface SharingUpdateInput {
   status?: Maybe<Int>;
 }
 
+export interface ExperienceProjectSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<ExperienceProjectWhereInput>;
+  AND?: Maybe<
+    | ExperienceProjectSubscriptionWhereInput[]
+    | ExperienceProjectSubscriptionWhereInput
+  >;
+}
+
+export type UserPresenceWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  code?: Maybe<String>;
+}>;
+
 export interface DatabaseRefreshSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
@@ -503,11 +666,7 @@ export interface SharingCreateco_workersInput {
   set?: Maybe<String[] | String>;
 }
 
-export type DatabaseRefreshWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-}>;
-
-export interface DatabaseRefreshWhereInput {
+export interface UserWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -522,23 +681,199 @@ export interface DatabaseRefreshWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  date?: Maybe<DateTimeInput>;
-  date_not?: Maybe<DateTimeInput>;
-  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  date_lt?: Maybe<DateTimeInput>;
-  date_lte?: Maybe<DateTimeInput>;
-  date_gt?: Maybe<DateTimeInput>;
-  date_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<DatabaseRefreshWhereInput[] | DatabaseRefreshWhereInput>;
+  outlookId?: Maybe<String>;
+  outlookId_not?: Maybe<String>;
+  outlookId_in?: Maybe<String[] | String>;
+  outlookId_not_in?: Maybe<String[] | String>;
+  outlookId_lt?: Maybe<String>;
+  outlookId_lte?: Maybe<String>;
+  outlookId_gt?: Maybe<String>;
+  outlookId_gte?: Maybe<String>;
+  outlookId_contains?: Maybe<String>;
+  outlookId_not_contains?: Maybe<String>;
+  outlookId_starts_with?: Maybe<String>;
+  outlookId_not_starts_with?: Maybe<String>;
+  outlookId_ends_with?: Maybe<String>;
+  outlookId_not_ends_with?: Maybe<String>;
+  name?: Maybe<String>;
+  name_not?: Maybe<String>;
+  name_in?: Maybe<String[] | String>;
+  name_not_in?: Maybe<String[] | String>;
+  name_lt?: Maybe<String>;
+  name_lte?: Maybe<String>;
+  name_gt?: Maybe<String>;
+  name_gte?: Maybe<String>;
+  name_contains?: Maybe<String>;
+  name_not_contains?: Maybe<String>;
+  name_starts_with?: Maybe<String>;
+  name_not_starts_with?: Maybe<String>;
+  name_ends_with?: Maybe<String>;
+  name_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
+  year?: Maybe<Int>;
+  year_not?: Maybe<Int>;
+  year_in?: Maybe<Int[] | Int>;
+  year_not_in?: Maybe<Int[] | Int>;
+  year_lt?: Maybe<Int>;
+  year_lte?: Maybe<Int>;
+  year_gt?: Maybe<Int>;
+  year_gte?: Maybe<Int>;
+  plan?: Maybe<Int>;
+  plan_not?: Maybe<Int>;
+  plan_in?: Maybe<Int[] | Int>;
+  plan_not_in?: Maybe<Int[] | Int>;
+  plan_lt?: Maybe<Int>;
+  plan_lte?: Maybe<Int>;
+  plan_gt?: Maybe<Int>;
+  plan_gte?: Maybe<Int>;
+  privilege?: Maybe<Int>;
+  privilege_not?: Maybe<Int>;
+  privilege_in?: Maybe<Int[] | Int>;
+  privilege_not_in?: Maybe<Int[] | Int>;
+  privilege_lt?: Maybe<Int>;
+  privilege_lte?: Maybe<Int>;
+  privilege_gt?: Maybe<Int>;
+  privilege_gte?: Maybe<Int>;
+  activities_some?: Maybe<UserPresenceWhereInput>;
+  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export interface UserPresenceUpdateInput {
+export interface SharingCreateInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  co_workers?: Maybe<SharingCreateco_workersInput>;
+  description: String;
+  date: DateTimeInput;
+  xp?: Maybe<Int>;
+  status: Int;
+}
+
+export interface UserPresenceUpdateManyMutationInput {
   code?: Maybe<String>;
-  user?: Maybe<UserUpdateOneRequiredWithoutActivitiesInput>;
-  activity?: Maybe<ActivityUpdateOneRequiredWithoutRegisteredInput>;
   presence?: Maybe<Boolean>;
   xp?: Maybe<Int>;
+}
+
+export interface MakerUpdateManyMutationInput {
+  title?: Maybe<String>;
+  co_workers?: Maybe<MakerUpdateco_workersInput>;
+  description?: Maybe<String>;
+  functionalities?: Maybe<String>;
+  technologies?: Maybe<String>;
+  delivery?: Maybe<String>;
+  organisation?: Maybe<String>;
+  resources?: Maybe<String>;
+  informations?: Maybe<String>;
+  xp?: Maybe<Int>;
+  status?: Maybe<Int>;
+}
+
+export type ExperienceProjectWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface ExperienceProjectWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  user?: Maybe<String>;
+  user_not?: Maybe<String>;
+  user_in?: Maybe<String[] | String>;
+  user_not_in?: Maybe<String[] | String>;
+  user_lt?: Maybe<String>;
+  user_lte?: Maybe<String>;
+  user_gt?: Maybe<String>;
+  user_gte?: Maybe<String>;
+  user_contains?: Maybe<String>;
+  user_not_contains?: Maybe<String>;
+  user_starts_with?: Maybe<String>;
+  user_not_starts_with?: Maybe<String>;
+  user_ends_with?: Maybe<String>;
+  user_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  competencies?: Maybe<String>;
+  competencies_not?: Maybe<String>;
+  competencies_in?: Maybe<String[] | String>;
+  competencies_not_in?: Maybe<String[] | String>;
+  competencies_lt?: Maybe<String>;
+  competencies_lte?: Maybe<String>;
+  competencies_gt?: Maybe<String>;
+  competencies_gte?: Maybe<String>;
+  competencies_contains?: Maybe<String>;
+  competencies_not_contains?: Maybe<String>;
+  competencies_starts_with?: Maybe<String>;
+  competencies_not_starts_with?: Maybe<String>;
+  competencies_ends_with?: Maybe<String>;
+  competencies_not_ends_with?: Maybe<String>;
+  informations?: Maybe<String>;
+  informations_not?: Maybe<String>;
+  informations_in?: Maybe<String[] | String>;
+  informations_not_in?: Maybe<String[] | String>;
+  informations_lt?: Maybe<String>;
+  informations_lte?: Maybe<String>;
+  informations_gt?: Maybe<String>;
+  informations_gte?: Maybe<String>;
+  informations_contains?: Maybe<String>;
+  informations_not_contains?: Maybe<String>;
+  informations_starts_with?: Maybe<String>;
+  informations_not_starts_with?: Maybe<String>;
+  informations_ends_with?: Maybe<String>;
+  informations_not_ends_with?: Maybe<String>;
+  status?: Maybe<Int>;
+  status_not?: Maybe<Int>;
+  status_in?: Maybe<Int[] | Int>;
+  status_not_in?: Maybe<Int[] | Int>;
+  status_lt?: Maybe<Int>;
+  status_lte?: Maybe<Int>;
+  status_gt?: Maybe<Int>;
+  status_gte?: Maybe<Int>;
+  AND?: Maybe<ExperienceProjectWhereInput[] | ExperienceProjectWhereInput>;
+}
+
+export interface UserUpdateManyMutationInput {
+  outlookId?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  year?: Maybe<Int>;
+  plan?: Maybe<Int>;
+  privilege?: Maybe<Int>;
 }
 
 export interface ActivityCreateInput {
@@ -553,13 +888,9 @@ export interface ActivityCreateInput {
   registered?: Maybe<UserPresenceCreateManyWithoutActivityInput>;
 }
 
-export interface UserUpdateManyMutationInput {
-  outlookId?: Maybe<String>;
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  year?: Maybe<Int>;
-  plan?: Maybe<Int>;
-  privilege?: Maybe<Int>;
+export interface ActivityUpsertWithoutRegisteredInput {
+  update: ActivityUpdateWithoutRegisteredDataInput;
+  create: ActivityCreateWithoutRegisteredInput;
 }
 
 export interface UserPresenceCreateManyWithoutActivityInput {
@@ -572,10 +903,14 @@ export interface UserPresenceCreateManyWithoutActivityInput {
   >;
 }
 
-export interface UserPresenceUpsertWithWhereUniqueWithoutUserInput {
-  where: UserPresenceWhereUniqueInput;
-  update: UserPresenceUpdateWithoutUserDataInput;
-  create: UserPresenceCreateWithoutUserInput;
+export interface ActivityUpdateWithoutRegisteredDataInput {
+  code?: Maybe<String>;
+  type?: Maybe<String>;
+  xp?: Maybe<Int>;
+  title?: Maybe<String>;
+  description?: Maybe<String>;
+  begin?: Maybe<DateTimeInput>;
+  end?: Maybe<DateTimeInput>;
 }
 
 export interface UserPresenceCreateWithoutActivityInput {
@@ -586,9 +921,11 @@ export interface UserPresenceCreateWithoutActivityInput {
   xp: Int;
 }
 
-export interface ActivityUpsertWithoutRegisteredInput {
-  update: ActivityUpdateWithoutRegisteredDataInput;
-  create: ActivityCreateWithoutRegisteredInput;
+export interface ActivityUpdateOneRequiredWithoutRegisteredInput {
+  create?: Maybe<ActivityCreateWithoutRegisteredInput>;
+  update?: Maybe<ActivityUpdateWithoutRegisteredDataInput>;
+  upsert?: Maybe<ActivityUpsertWithoutRegisteredInput>;
+  connect?: Maybe<ActivityWhereUniqueInput>;
 }
 
 export interface UserCreateOneWithoutActivitiesInput {
@@ -596,11 +933,9 @@ export interface UserCreateOneWithoutActivitiesInput {
   connect?: Maybe<UserWhereUniqueInput>;
 }
 
-export interface ActivityUpdateOneRequiredWithoutRegisteredInput {
-  create?: Maybe<ActivityCreateWithoutRegisteredInput>;
-  update?: Maybe<ActivityUpdateWithoutRegisteredDataInput>;
-  upsert?: Maybe<ActivityUpsertWithoutRegisteredInput>;
-  connect?: Maybe<ActivityWhereUniqueInput>;
+export interface UserPresenceUpdateWithWhereUniqueWithoutUserInput {
+  where: UserPresenceWhereUniqueInput;
+  data: UserPresenceUpdateWithoutUserDataInput;
 }
 
 export interface UserCreateWithoutActivitiesInput {
@@ -729,14 +1064,9 @@ export interface UserPresenceUpdateManyWithoutActivityInput {
   >;
 }
 
-export interface UserUpdateInput {
-  outlookId?: Maybe<String>;
-  name?: Maybe<String>;
-  email?: Maybe<String>;
-  year?: Maybe<Int>;
-  plan?: Maybe<Int>;
-  privilege?: Maybe<Int>;
-  activities?: Maybe<UserPresenceUpdateManyWithoutUserInput>;
+export interface ActivityCreateOneWithoutRegisteredInput {
+  create?: Maybe<ActivityCreateWithoutRegisteredInput>;
+  connect?: Maybe<ActivityWhereUniqueInput>;
 }
 
 export interface UserPresenceUpdateWithWhereUniqueWithoutActivityInput {
@@ -744,9 +1074,13 @@ export interface UserPresenceUpdateWithWhereUniqueWithoutActivityInput {
   data: UserPresenceUpdateWithoutActivityDataInput;
 }
 
-export interface ActivityCreateOneWithoutRegisteredInput {
-  create?: Maybe<ActivityCreateWithoutRegisteredInput>;
-  connect?: Maybe<ActivityWhereUniqueInput>;
+export interface UserPresenceCreateManyWithoutUserInput {
+  create?: Maybe<
+    UserPresenceCreateWithoutUserInput[] | UserPresenceCreateWithoutUserInput
+  >;
+  connect?: Maybe<
+    UserPresenceWhereUniqueInput[] | UserPresenceWhereUniqueInput
+  >;
 }
 
 export interface UserPresenceUpdateWithoutActivityDataInput {
@@ -756,34 +1090,22 @@ export interface UserPresenceUpdateWithoutActivityDataInput {
   xp?: Maybe<Int>;
 }
 
-export interface UserPresenceCreateWithoutUserInput {
-  id?: Maybe<ID_Input>;
-  code: String;
-  activity: ActivityCreateOneWithoutRegisteredInput;
-  presence: Boolean;
-  xp: Int;
-}
-
-export interface SharingCreateInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  co_workers?: Maybe<SharingCreateco_workersInput>;
-  description: String;
-  date: DateTimeInput;
-  xp?: Maybe<Int>;
-  status: Int;
-}
-
-export interface UserPresenceSubscriptionWhereInput {
+export interface UserSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<UserPresenceWhereInput>;
-  AND?: Maybe<
-    UserPresenceSubscriptionWhereInput[] | UserPresenceSubscriptionWhereInput
-  >;
+  node?: Maybe<UserWhereInput>;
+  AND?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
+
+export interface MakerUpdateco_workersInput {
+  set?: Maybe<String[] | String>;
+}
+
+export type DatabaseRefreshWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
 
 export interface UserUpdateWithoutActivitiesDataInput {
   outlookId?: Maybe<String>;
@@ -794,30 +1116,20 @@ export interface UserUpdateWithoutActivitiesDataInput {
   privilege?: Maybe<Int>;
 }
 
-export interface MakerSubscriptionWhereInput {
+export interface ActivitySubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<MakerWhereInput>;
-  AND?: Maybe<MakerSubscriptionWhereInput[] | MakerSubscriptionWhereInput>;
+  node?: Maybe<ActivityWhereInput>;
+  AND?: Maybe<
+    ActivitySubscriptionWhereInput[] | ActivitySubscriptionWhereInput
+  >;
 }
 
 export interface UserUpsertWithoutActivitiesInput {
   update: UserUpdateWithoutActivitiesDataInput;
   create: UserCreateWithoutActivitiesInput;
-}
-
-export interface UserPresenceUpdateManyMutationInput {
-  code?: Maybe<String>;
-  presence?: Maybe<Boolean>;
-  xp?: Maybe<Int>;
-}
-
-export interface UserPresenceUpsertWithWhereUniqueWithoutActivityInput {
-  where: UserPresenceWhereUniqueInput;
-  update: UserPresenceUpdateWithoutActivityDataInput;
-  create: UserPresenceCreateWithoutActivityInput;
 }
 
 export interface UserPresenceCreateInput {
@@ -827,6 +1139,18 @@ export interface UserPresenceCreateInput {
   activity: ActivityCreateOneWithoutRegisteredInput;
   presence: Boolean;
   xp: Int;
+}
+
+export interface UserPresenceUpsertWithWhereUniqueWithoutActivityInput {
+  where: UserPresenceWhereUniqueInput;
+  update: UserPresenceUpdateWithoutActivityDataInput;
+  create: UserPresenceCreateWithoutActivityInput;
+}
+
+export interface UserPresenceUpsertWithWhereUniqueWithoutUserInput {
+  where: UserPresenceWhereUniqueInput;
+  update: UserPresenceUpdateWithoutUserDataInput;
+  create: UserPresenceCreateWithoutUserInput;
 }
 
 export interface UserPresenceScalarWhereInput {
@@ -1019,116 +1343,18 @@ export interface MakerWhereInput {
   AND?: Maybe<MakerWhereInput[] | MakerWhereInput>;
 }
 
-export interface ActivityWhereInput {
-  id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  code?: Maybe<String>;
-  code_not?: Maybe<String>;
-  code_in?: Maybe<String[] | String>;
-  code_not_in?: Maybe<String[] | String>;
-  code_lt?: Maybe<String>;
-  code_lte?: Maybe<String>;
-  code_gt?: Maybe<String>;
-  code_gte?: Maybe<String>;
-  code_contains?: Maybe<String>;
-  code_not_contains?: Maybe<String>;
-  code_starts_with?: Maybe<String>;
-  code_not_starts_with?: Maybe<String>;
-  code_ends_with?: Maybe<String>;
-  code_not_ends_with?: Maybe<String>;
-  type?: Maybe<String>;
-  type_not?: Maybe<String>;
-  type_in?: Maybe<String[] | String>;
-  type_not_in?: Maybe<String[] | String>;
-  type_lt?: Maybe<String>;
-  type_lte?: Maybe<String>;
-  type_gt?: Maybe<String>;
-  type_gte?: Maybe<String>;
-  type_contains?: Maybe<String>;
-  type_not_contains?: Maybe<String>;
-  type_starts_with?: Maybe<String>;
-  type_not_starts_with?: Maybe<String>;
-  type_ends_with?: Maybe<String>;
-  type_not_ends_with?: Maybe<String>;
-  xp?: Maybe<Int>;
-  xp_not?: Maybe<Int>;
-  xp_in?: Maybe<Int[] | Int>;
-  xp_not_in?: Maybe<Int[] | Int>;
-  xp_lt?: Maybe<Int>;
-  xp_lte?: Maybe<Int>;
-  xp_gt?: Maybe<Int>;
-  xp_gte?: Maybe<Int>;
+export interface MakerUpdateInput {
   title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
+  co_workers?: Maybe<MakerUpdateco_workersInput>;
   description?: Maybe<String>;
-  description_not?: Maybe<String>;
-  description_in?: Maybe<String[] | String>;
-  description_not_in?: Maybe<String[] | String>;
-  description_lt?: Maybe<String>;
-  description_lte?: Maybe<String>;
-  description_gt?: Maybe<String>;
-  description_gte?: Maybe<String>;
-  description_contains?: Maybe<String>;
-  description_not_contains?: Maybe<String>;
-  description_starts_with?: Maybe<String>;
-  description_not_starts_with?: Maybe<String>;
-  description_ends_with?: Maybe<String>;
-  description_not_ends_with?: Maybe<String>;
-  begin?: Maybe<DateTimeInput>;
-  begin_not?: Maybe<DateTimeInput>;
-  begin_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  begin_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  begin_lt?: Maybe<DateTimeInput>;
-  begin_lte?: Maybe<DateTimeInput>;
-  begin_gt?: Maybe<DateTimeInput>;
-  begin_gte?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
-  end_not?: Maybe<DateTimeInput>;
-  end_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  end_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  end_lt?: Maybe<DateTimeInput>;
-  end_lte?: Maybe<DateTimeInput>;
-  end_gt?: Maybe<DateTimeInput>;
-  end_gte?: Maybe<DateTimeInput>;
-  registered_some?: Maybe<UserPresenceWhereInput>;
-  AND?: Maybe<ActivityWhereInput[] | ActivityWhereInput>;
-}
-
-export interface UserPresenceUpdateWithoutUserDataInput {
-  code?: Maybe<String>;
-  activity?: Maybe<ActivityUpdateOneRequiredWithoutRegisteredInput>;
-  presence?: Maybe<Boolean>;
+  functionalities?: Maybe<String>;
+  technologies?: Maybe<String>;
+  delivery?: Maybe<String>;
+  organisation?: Maybe<String>;
+  resources?: Maybe<String>;
+  informations?: Maybe<String>;
   xp?: Maybe<Int>;
-}
-
-export interface UserPresenceUpdateManyDataInput {
-  code?: Maybe<String>;
-  presence?: Maybe<Boolean>;
-  xp?: Maybe<Int>;
+  status?: Maybe<Int>;
 }
 
 export interface UserPresenceUpdateManyWithoutUserInput {
@@ -1160,6 +1386,23 @@ export interface UserPresenceUpdateManyWithoutUserInput {
   >;
 }
 
+export interface UserPresenceUpdateManyDataInput {
+  code?: Maybe<String>;
+  presence?: Maybe<Boolean>;
+  xp?: Maybe<Int>;
+}
+
+export interface ActivityCreateWithoutRegisteredInput {
+  id?: Maybe<ID_Input>;
+  code: String;
+  type: String;
+  xp?: Maybe<Int>;
+  title: String;
+  description: String;
+  begin: DateTimeInput;
+  end: DateTimeInput;
+}
+
 export interface ActivityUpdateManyMutationInput {
   code?: Maybe<String>;
   type?: Maybe<String>;
@@ -1170,27 +1413,22 @@ export interface ActivityUpdateManyMutationInput {
   end?: Maybe<DateTimeInput>;
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  outlookId?: Maybe<String>;
-  email?: Maybe<String>;
-}>;
-
-export interface MakerUpdateManyMutationInput {
-  title?: Maybe<String>;
-  co_workers?: Maybe<MakerUpdateco_workersInput>;
-  description?: Maybe<String>;
-  functionalities?: Maybe<String>;
-  technologies?: Maybe<String>;
-  delivery?: Maybe<String>;
-  organisation?: Maybe<String>;
-  resources?: Maybe<String>;
-  informations?: Maybe<String>;
-  xp?: Maybe<Int>;
-  status?: Maybe<Int>;
+export interface UserPresenceSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<UserPresenceWhereInput>;
+  AND?: Maybe<
+    UserPresenceSubscriptionWhereInput[] | UserPresenceSubscriptionWhereInput
+  >;
 }
 
-export interface UserWhereInput {
+export interface MakerCreateco_workersInput {
+  set?: Maybe<String[] | String>;
+}
+
+export interface DatabaseRefreshWhereInput {
   id?: Maybe<ID_Input>;
   id_not?: Maybe<ID_Input>;
   id_in?: Maybe<ID_Input[] | ID_Input>;
@@ -1205,78 +1443,30 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  outlookId?: Maybe<String>;
-  outlookId_not?: Maybe<String>;
-  outlookId_in?: Maybe<String[] | String>;
-  outlookId_not_in?: Maybe<String[] | String>;
-  outlookId_lt?: Maybe<String>;
-  outlookId_lte?: Maybe<String>;
-  outlookId_gt?: Maybe<String>;
-  outlookId_gte?: Maybe<String>;
-  outlookId_contains?: Maybe<String>;
-  outlookId_not_contains?: Maybe<String>;
-  outlookId_starts_with?: Maybe<String>;
-  outlookId_not_starts_with?: Maybe<String>;
-  outlookId_ends_with?: Maybe<String>;
-  outlookId_not_ends_with?: Maybe<String>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
-  email?: Maybe<String>;
-  email_not?: Maybe<String>;
-  email_in?: Maybe<String[] | String>;
-  email_not_in?: Maybe<String[] | String>;
-  email_lt?: Maybe<String>;
-  email_lte?: Maybe<String>;
-  email_gt?: Maybe<String>;
-  email_gte?: Maybe<String>;
-  email_contains?: Maybe<String>;
-  email_not_contains?: Maybe<String>;
-  email_starts_with?: Maybe<String>;
-  email_not_starts_with?: Maybe<String>;
-  email_ends_with?: Maybe<String>;
-  email_not_ends_with?: Maybe<String>;
-  year?: Maybe<Int>;
-  year_not?: Maybe<Int>;
-  year_in?: Maybe<Int[] | Int>;
-  year_not_in?: Maybe<Int[] | Int>;
-  year_lt?: Maybe<Int>;
-  year_lte?: Maybe<Int>;
-  year_gt?: Maybe<Int>;
-  year_gte?: Maybe<Int>;
-  plan?: Maybe<Int>;
-  plan_not?: Maybe<Int>;
-  plan_in?: Maybe<Int[] | Int>;
-  plan_not_in?: Maybe<Int[] | Int>;
-  plan_lt?: Maybe<Int>;
-  plan_lte?: Maybe<Int>;
-  plan_gt?: Maybe<Int>;
-  plan_gte?: Maybe<Int>;
-  privilege?: Maybe<Int>;
-  privilege_not?: Maybe<Int>;
-  privilege_in?: Maybe<Int[] | Int>;
-  privilege_not_in?: Maybe<Int[] | Int>;
-  privilege_lt?: Maybe<Int>;
-  privilege_lte?: Maybe<Int>;
-  privilege_gt?: Maybe<Int>;
-  privilege_gte?: Maybe<Int>;
-  activities_some?: Maybe<UserPresenceWhereInput>;
-  AND?: Maybe<UserWhereInput[] | UserWhereInput>;
+  date?: Maybe<DateTimeInput>;
+  date_not?: Maybe<DateTimeInput>;
+  date_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  date_lt?: Maybe<DateTimeInput>;
+  date_lte?: Maybe<DateTimeInput>;
+  date_gt?: Maybe<DateTimeInput>;
+  date_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<DatabaseRefreshWhereInput[] | DatabaseRefreshWhereInput>;
 }
 
-export interface MakerUpdateco_workersInput {
-  set?: Maybe<String[] | String>;
+export interface MakerCreateInput {
+  id?: Maybe<ID_Input>;
+  title: String;
+  co_workers?: Maybe<MakerCreateco_workersInput>;
+  description: String;
+  functionalities: String;
+  technologies: String;
+  delivery: String;
+  organisation: String;
+  resources: String;
+  informations: String;
+  xp?: Maybe<Int>;
+  status: Int;
 }
 
 export interface UserPresenceWhereInput {
@@ -1328,32 +1518,27 @@ export interface DatabaseRefreshCreateInput {
   date: DateTimeInput;
 }
 
-export interface ActivityUpdateWithoutRegisteredDataInput {
+export interface UserPresenceUpdateWithoutUserDataInput {
   code?: Maybe<String>;
-  type?: Maybe<String>;
+  activity?: Maybe<ActivityUpdateOneRequiredWithoutRegisteredInput>;
+  presence?: Maybe<Boolean>;
   xp?: Maybe<Int>;
-  title?: Maybe<String>;
+}
+
+export interface ExperienceProjectUpdateInput {
+  user?: Maybe<String>;
   description?: Maybe<String>;
-  begin?: Maybe<DateTimeInput>;
-  end?: Maybe<DateTimeInput>;
+  competencies?: Maybe<String>;
+  informations?: Maybe<String>;
+  status?: Maybe<Int>;
 }
 
-export interface MakerCreateco_workersInput {
-  set?: Maybe<String[] | String>;
-}
-
-export interface MakerCreateInput {
+export interface ExperienceProjectCreateInput {
   id?: Maybe<ID_Input>;
-  title: String;
-  co_workers?: Maybe<MakerCreateco_workersInput>;
+  user: String;
   description: String;
-  functionalities: String;
-  technologies: String;
-  delivery: String;
-  organisation: String;
-  resources: String;
+  competencies: String;
   informations: String;
-  xp?: Maybe<Int>;
   status: Int;
 }
 
@@ -1365,44 +1550,43 @@ export interface DatabaseRefreshUpdateInput {
   date?: Maybe<DateTimeInput>;
 }
 
-export interface UserPresenceUpdateWithWhereUniqueWithoutUserInput {
-  where: UserPresenceWhereUniqueInput;
-  data: UserPresenceUpdateWithoutUserDataInput;
+export interface UserUpdateInput {
+  outlookId?: Maybe<String>;
+  name?: Maybe<String>;
+  email?: Maybe<String>;
+  year?: Maybe<Int>;
+  plan?: Maybe<Int>;
+  privilege?: Maybe<Int>;
+  activities?: Maybe<UserPresenceUpdateManyWithoutUserInput>;
 }
 
 export type MakerWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface ActivitySubscriptionWhereInput {
+export interface UserPresenceUpdateInput {
+  code?: Maybe<String>;
+  user?: Maybe<UserUpdateOneRequiredWithoutActivitiesInput>;
+  activity?: Maybe<ActivityUpdateOneRequiredWithoutRegisteredInput>;
+  presence?: Maybe<Boolean>;
+  xp?: Maybe<Int>;
+}
+
+export interface MakerSubscriptionWhereInput {
   mutation_in?: Maybe<MutationType[] | MutationType>;
   updatedFields_contains?: Maybe<String>;
   updatedFields_contains_every?: Maybe<String[] | String>;
   updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<ActivityWhereInput>;
-  AND?: Maybe<
-    ActivitySubscriptionWhereInput[] | ActivitySubscriptionWhereInput
-  >;
+  node?: Maybe<MakerWhereInput>;
+  AND?: Maybe<MakerSubscriptionWhereInput[] | MakerSubscriptionWhereInput>;
 }
 
-export interface UserPresenceCreateManyWithoutUserInput {
-  create?: Maybe<
-    UserPresenceCreateWithoutUserInput[] | UserPresenceCreateWithoutUserInput
-  >;
-  connect?: Maybe<
-    UserPresenceWhereUniqueInput[] | UserPresenceWhereUniqueInput
-  >;
-}
-
-export interface ActivityCreateWithoutRegisteredInput {
+export interface UserPresenceCreateWithoutUserInput {
   id?: Maybe<ID_Input>;
   code: String;
-  type: String;
-  xp?: Maybe<Int>;
-  title: String;
-  description: String;
-  begin: DateTimeInput;
-  end: DateTimeInput;
+  activity: ActivityCreateOneWithoutRegisteredInput;
+  presence: Boolean;
+  xp: Int;
 }
 
 export interface NodeNode {
@@ -1432,6 +1616,749 @@ export interface UserPresencePreviousValuesSubscription
   code: () => Promise<AsyncIterator<String>>;
   presence: () => Promise<AsyncIterator<Boolean>>;
   xp: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ExperienceProjectEdge {
+  node: ExperienceProject;
+  cursor: String;
+}
+
+export interface ExperienceProjectEdgePromise
+  extends Promise<ExperienceProjectEdge>,
+    Fragmentable {
+  node: <T = ExperienceProjectPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ExperienceProjectEdgeSubscription
+  extends Promise<AsyncIterator<ExperienceProjectEdge>>,
+    Fragmentable {
+  node: <T = ExperienceProjectSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ActivityConnection {
+  pageInfo: PageInfo;
+  edges: ActivityEdge[];
+}
+
+export interface ActivityConnectionPromise
+  extends Promise<ActivityConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ActivityEdge>>() => T;
+  aggregate: <T = AggregateActivityPromise>() => T;
+}
+
+export interface ActivityConnectionSubscription
+  extends Promise<AsyncIterator<ActivityConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ActivityEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateActivitySubscription>() => T;
+}
+
+export interface ExperienceProjectConnection {
+  pageInfo: PageInfo;
+  edges: ExperienceProjectEdge[];
+}
+
+export interface ExperienceProjectConnectionPromise
+  extends Promise<ExperienceProjectConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<ExperienceProjectEdge>>() => T;
+  aggregate: <T = AggregateExperienceProjectPromise>() => T;
+}
+
+export interface ExperienceProjectConnectionSubscription
+  extends Promise<AsyncIterator<ExperienceProjectConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ExperienceProjectEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateExperienceProjectSubscription>() => T;
+}
+
+export interface ExperienceProject {
+  id: ID_Output;
+  user: String;
+  description: String;
+  competencies: String;
+  informations: String;
+  status: Int;
+}
+
+export interface ExperienceProjectPromise
+  extends Promise<ExperienceProject>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  user: () => Promise<String>;
+  description: () => Promise<String>;
+  competencies: () => Promise<String>;
+  informations: () => Promise<String>;
+  status: () => Promise<Int>;
+}
+
+export interface ExperienceProjectSubscription
+  extends Promise<AsyncIterator<ExperienceProject>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  user: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  competencies: () => Promise<AsyncIterator<String>>;
+  informations: () => Promise<AsyncIterator<String>>;
+  status: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ExperienceProjectNullablePromise
+  extends Promise<ExperienceProject | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  user: () => Promise<String>;
+  description: () => Promise<String>;
+  competencies: () => Promise<String>;
+  informations: () => Promise<String>;
+  status: () => Promise<Int>;
+}
+
+export interface BatchPayload {
+  count: Long;
+}
+
+export interface BatchPayloadPromise
+  extends Promise<BatchPayload>,
+    Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayload>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface UserPresenceSubscriptionPayload {
+  mutation: MutationType;
+  node: UserPresence;
+  updatedFields: String[];
+  previousValues: UserPresencePreviousValues;
+}
+
+export interface UserPresenceSubscriptionPayloadPromise
+  extends Promise<UserPresenceSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPresencePromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPresencePreviousValuesPromise>() => T;
+}
+
+export interface UserPresenceSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserPresenceSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserPresenceSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPresencePreviousValuesSubscription>() => T;
+}
+
+export interface AggregateDatabaseRefresh {
+  count: Int;
+}
+
+export interface AggregateDatabaseRefreshPromise
+  extends Promise<AggregateDatabaseRefresh>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateDatabaseRefreshSubscription
+  extends Promise<AsyncIterator<AggregateDatabaseRefresh>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserPresenceEdge {
+  node: UserPresence;
+  cursor: String;
+}
+
+export interface UserPresenceEdgePromise
+  extends Promise<UserPresenceEdge>,
+    Fragmentable {
+  node: <T = UserPresencePromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserPresenceEdgeSubscription
+  extends Promise<AsyncIterator<UserPresenceEdge>>,
+    Fragmentable {
+  node: <T = UserPresenceSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DatabaseRefreshEdge {
+  node: DatabaseRefresh;
+  cursor: String;
+}
+
+export interface DatabaseRefreshEdgePromise
+  extends Promise<DatabaseRefreshEdge>,
+    Fragmentable {
+  node: <T = DatabaseRefreshPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface DatabaseRefreshEdgeSubscription
+  extends Promise<AsyncIterator<DatabaseRefreshEdge>>,
+    Fragmentable {
+  node: <T = DatabaseRefreshSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface DatabaseRefreshConnection {
+  pageInfo: PageInfo;
+  edges: DatabaseRefreshEdge[];
+}
+
+export interface DatabaseRefreshConnectionPromise
+  extends Promise<DatabaseRefreshConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<DatabaseRefreshEdge>>() => T;
+  aggregate: <T = AggregateDatabaseRefreshPromise>() => T;
+}
+
+export interface DatabaseRefreshConnectionSubscription
+  extends Promise<AsyncIterator<DatabaseRefreshConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<DatabaseRefreshEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateDatabaseRefreshSubscription>() => T;
+}
+
+export interface UserConnection {
+  pageInfo: PageInfo;
+  edges: UserEdge[];
+}
+
+export interface UserConnectionPromise
+  extends Promise<UserConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<UserEdge>>() => T;
+  aggregate: <T = AggregateUserPromise>() => T;
+}
+
+export interface UserConnectionSubscription
+  extends Promise<AsyncIterator<UserConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateUserSubscription>() => T;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
+export interface AggregateSharing {
+  count: Int;
+}
+
+export interface AggregateSharingPromise
+  extends Promise<AggregateSharing>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateSharingSubscription
+  extends Promise<AsyncIterator<AggregateSharing>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ActivitySubscriptionPayload {
+  mutation: MutationType;
+  node: Activity;
+  updatedFields: String[];
+  previousValues: ActivityPreviousValues;
+}
+
+export interface ActivitySubscriptionPayloadPromise
+  extends Promise<ActivitySubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ActivityPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ActivityPreviousValuesPromise>() => T;
+}
+
+export interface ActivitySubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ActivitySubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ActivitySubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ActivityPreviousValuesSubscription>() => T;
+}
+
+export interface SharingConnection {
+  pageInfo: PageInfo;
+  edges: SharingEdge[];
+}
+
+export interface SharingConnectionPromise
+  extends Promise<SharingConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<SharingEdge>>() => T;
+  aggregate: <T = AggregateSharingPromise>() => T;
+}
+
+export interface SharingConnectionSubscription
+  extends Promise<AsyncIterator<SharingConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<SharingEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateSharingSubscription>() => T;
+}
+
+export interface ActivityPreviousValues {
+  id: ID_Output;
+  code: String;
+  type: String;
+  xp?: Int;
+  title: String;
+  description: String;
+  begin: DateTimeOutput;
+  end: DateTimeOutput;
+}
+
+export interface ActivityPreviousValuesPromise
+  extends Promise<ActivityPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  code: () => Promise<String>;
+  type: () => Promise<String>;
+  xp: () => Promise<Int>;
+  title: () => Promise<String>;
+  description: () => Promise<String>;
+  begin: () => Promise<DateTimeOutput>;
+  end: () => Promise<DateTimeOutput>;
+}
+
+export interface ActivityPreviousValuesSubscription
+  extends Promise<AsyncIterator<ActivityPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  code: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<String>>;
+  xp: () => Promise<AsyncIterator<Int>>;
+  title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  begin: () => Promise<AsyncIterator<DateTimeOutput>>;
+  end: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface Sharing {
+  id: ID_Output;
+  title: String;
+  co_workers: String[];
+  description: String;
+  date: DateTimeOutput;
+  xp: Int;
+  status: Int;
+}
+
+export interface SharingPromise extends Promise<Sharing>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  co_workers: () => Promise<String[]>;
+  description: () => Promise<String>;
+  date: () => Promise<DateTimeOutput>;
+  xp: () => Promise<Int>;
+  status: () => Promise<Int>;
+}
+
+export interface SharingSubscription
+  extends Promise<AsyncIterator<Sharing>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  co_workers: () => Promise<AsyncIterator<String[]>>;
+  description: () => Promise<AsyncIterator<String>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  xp: () => Promise<AsyncIterator<Int>>;
+  status: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface SharingNullablePromise
+  extends Promise<Sharing | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  co_workers: () => Promise<String[]>;
+  description: () => Promise<String>;
+  date: () => Promise<DateTimeOutput>;
+  xp: () => Promise<Int>;
+  status: () => Promise<Int>;
+}
+
+export interface DatabaseRefresh {
+  id: ID_Output;
+  date: DateTimeOutput;
+}
+
+export interface DatabaseRefreshPromise
+  extends Promise<DatabaseRefresh>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  date: () => Promise<DateTimeOutput>;
+}
+
+export interface DatabaseRefreshSubscription
+  extends Promise<AsyncIterator<DatabaseRefresh>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface DatabaseRefreshNullablePromise
+  extends Promise<DatabaseRefresh | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  date: () => Promise<DateTimeOutput>;
+}
+
+export interface MakerEdge {
+  node: Maker;
+  cursor: String;
+}
+
+export interface MakerEdgePromise extends Promise<MakerEdge>, Fragmentable {
+  node: <T = MakerPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MakerEdgeSubscription
+  extends Promise<AsyncIterator<MakerEdge>>,
+    Fragmentable {
+  node: <T = MakerSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface DatabaseRefreshSubscriptionPayload {
+  mutation: MutationType;
+  node: DatabaseRefresh;
+  updatedFields: String[];
+  previousValues: DatabaseRefreshPreviousValues;
+}
+
+export interface DatabaseRefreshSubscriptionPayloadPromise
+  extends Promise<DatabaseRefreshSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = DatabaseRefreshPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = DatabaseRefreshPreviousValuesPromise>() => T;
+}
+
+export interface DatabaseRefreshSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<DatabaseRefreshSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = DatabaseRefreshSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = DatabaseRefreshPreviousValuesSubscription>() => T;
+}
+
+export interface UserPreviousValues {
+  id: ID_Output;
+  outlookId: String;
+  name: String;
+  email: String;
+  year?: Int;
+  plan?: Int;
+  privilege?: Int;
+}
+
+export interface UserPreviousValuesPromise
+  extends Promise<UserPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  outlookId: () => Promise<String>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  year: () => Promise<Int>;
+  plan: () => Promise<Int>;
+  privilege: () => Promise<Int>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  outlookId: () => Promise<AsyncIterator<String>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  year: () => Promise<AsyncIterator<Int>>;
+  plan: () => Promise<AsyncIterator<Int>>;
+  privilege: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface DatabaseRefreshPreviousValues {
+  id: ID_Output;
+  date: DateTimeOutput;
+}
+
+export interface DatabaseRefreshPreviousValuesPromise
+  extends Promise<DatabaseRefreshPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  date: () => Promise<DateTimeOutput>;
+}
+
+export interface DatabaseRefreshPreviousValuesSubscription
+  extends Promise<AsyncIterator<DatabaseRefreshPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  date: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface AggregateExperienceProject {
+  count: Int;
+}
+
+export interface AggregateExperienceProjectPromise
+  extends Promise<AggregateExperienceProject>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateExperienceProjectSubscription
+  extends Promise<AsyncIterator<AggregateExperienceProject>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateActivity {
+  count: Int;
+}
+
+export interface AggregateActivityPromise
+  extends Promise<AggregateActivity>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateActivitySubscription
+  extends Promise<AsyncIterator<AggregateActivity>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateUserPresence {
+  count: Int;
+}
+
+export interface AggregateUserPresencePromise
+  extends Promise<AggregateUserPresence>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserPresenceSubscription
+  extends Promise<AsyncIterator<AggregateUserPresence>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ExperienceProjectSubscriptionPayload {
+  mutation: MutationType;
+  node: ExperienceProject;
+  updatedFields: String[];
+  previousValues: ExperienceProjectPreviousValues;
+}
+
+export interface ExperienceProjectSubscriptionPayloadPromise
+  extends Promise<ExperienceProjectSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = ExperienceProjectPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ExperienceProjectPreviousValuesPromise>() => T;
+}
+
+export interface ExperienceProjectSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ExperienceProjectSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ExperienceProjectSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ExperienceProjectPreviousValuesSubscription>() => T;
+}
+
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
+
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ExperienceProjectPreviousValues {
+  id: ID_Output;
+  user: String;
+  description: String;
+  competencies: String;
+  informations: String;
+  status: Int;
+}
+
+export interface ExperienceProjectPreviousValuesPromise
+  extends Promise<ExperienceProjectPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  user: () => Promise<String>;
+  description: () => Promise<String>;
+  competencies: () => Promise<String>;
+  informations: () => Promise<String>;
+  status: () => Promise<Int>;
+}
+
+export interface ExperienceProjectPreviousValuesSubscription
+  extends Promise<AsyncIterator<ExperienceProjectPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  user: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  competencies: () => Promise<AsyncIterator<String>>;
+  informations: () => Promise<AsyncIterator<String>>;
+  status: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface SharingEdge {
+  node: Sharing;
+  cursor: String;
+}
+
+export interface SharingEdgePromise extends Promise<SharingEdge>, Fragmentable {
+  node: <T = SharingPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface SharingEdgeSubscription
+  extends Promise<AsyncIterator<SharingEdge>>,
+    Fragmentable {
+  node: <T = SharingSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ActivityEdge {
+  node: Activity;
+  cursor: String;
+}
+
+export interface ActivityEdgePromise
+  extends Promise<ActivityEdge>,
+    Fragmentable {
+  node: <T = ActivityPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ActivityEdgeSubscription
+  extends Promise<AsyncIterator<ActivityEdge>>,
+    Fragmentable {
+  node: <T = ActivitySubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateMaker {
+  count: Int;
+}
+
+export interface AggregateMakerPromise
+  extends Promise<AggregateMaker>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMakerSubscription
+  extends Promise<AsyncIterator<AggregateMaker>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface MakerSubscriptionPayload {
+  mutation: MutationType;
+  node: Maker;
+  updatedFields: String[];
+  previousValues: MakerPreviousValues;
+}
+
+export interface MakerSubscriptionPayloadPromise
+  extends Promise<MakerSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MakerPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MakerPreviousValuesPromise>() => T;
+}
+
+export interface MakerSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MakerSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MakerSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MakerPreviousValuesSubscription>() => T;
 }
 
 export interface Maker {
@@ -1498,165 +2425,6 @@ export interface MakerNullablePromise
   status: () => Promise<Int>;
 }
 
-export interface User {
-  id: ID_Output;
-  outlookId: String;
-  name: String;
-  email: String;
-  year?: Int;
-  plan?: Int;
-  privilege?: Int;
-}
-
-export interface UserPromise extends Promise<User>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  outlookId: () => Promise<String>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  year: () => Promise<Int>;
-  plan: () => Promise<Int>;
-  privilege: () => Promise<Int>;
-  activities: <T = FragmentableArray<UserPresence>>(args?: {
-    where?: UserPresenceWhereInput;
-    orderBy?: UserPresenceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<User>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  outlookId: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-  year: () => Promise<AsyncIterator<Int>>;
-  plan: () => Promise<AsyncIterator<Int>>;
-  privilege: () => Promise<AsyncIterator<Int>>;
-  activities: <T = Promise<AsyncIterator<UserPresenceSubscription>>>(args?: {
-    where?: UserPresenceWhereInput;
-    orderBy?: UserPresenceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface UserNullablePromise
-  extends Promise<User | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  outlookId: () => Promise<String>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-  year: () => Promise<Int>;
-  plan: () => Promise<Int>;
-  privilege: () => Promise<Int>;
-  activities: <T = FragmentableArray<UserPresence>>(args?: {
-    where?: UserPresenceWhereInput;
-    orderBy?: UserPresenceOrderByInput;
-    skip?: Int;
-    after?: String;
-    before?: String;
-    first?: Int;
-    last?: Int;
-  }) => T;
-}
-
-export interface AggregateDatabaseRefresh {
-  count: Int;
-}
-
-export interface AggregateDatabaseRefreshPromise
-  extends Promise<AggregateDatabaseRefresh>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateDatabaseRefreshSubscription
-  extends Promise<AsyncIterator<AggregateDatabaseRefresh>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface DatabaseRefreshEdge {
-  node: DatabaseRefresh;
-  cursor: String;
-}
-
-export interface DatabaseRefreshEdgePromise
-  extends Promise<DatabaseRefreshEdge>,
-    Fragmentable {
-  node: <T = DatabaseRefreshPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface DatabaseRefreshEdgeSubscription
-  extends Promise<AsyncIterator<DatabaseRefreshEdge>>,
-    Fragmentable {
-  node: <T = DatabaseRefreshSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BatchPayload {
-  count: Long;
-}
-
-export interface BatchPayloadPromise
-  extends Promise<BatchPayload>,
-    Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayload>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface AggregateUserPresence {
-  count: Int;
-}
-
-export interface AggregateUserPresencePromise
-  extends Promise<AggregateUserPresence>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserPresenceSubscription
-  extends Promise<AsyncIterator<AggregateUserPresence>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface DatabaseRefreshConnection {
-  pageInfo: PageInfo;
-  edges: DatabaseRefreshEdge[];
-}
-
-export interface DatabaseRefreshConnectionPromise
-  extends Promise<DatabaseRefreshConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<DatabaseRefreshEdge>>() => T;
-  aggregate: <T = AggregateDatabaseRefreshPromise>() => T;
-}
-
-export interface DatabaseRefreshConnectionSubscription
-  extends Promise<AsyncIterator<DatabaseRefreshConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<DatabaseRefreshEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateDatabaseRefreshSubscription>() => T;
-}
-
 export interface UserPresenceConnection {
   pageInfo: PageInfo;
   edges: UserPresenceEdge[];
@@ -1678,63 +2446,135 @@ export interface UserPresenceConnectionSubscription
   aggregate: <T = AggregateUserPresenceSubscription>() => T;
 }
 
-export interface DatabaseRefresh {
+export interface SharingPreviousValues {
   id: ID_Output;
+  title: String;
+  co_workers: String[];
+  description: String;
   date: DateTimeOutput;
+  xp: Int;
+  status: Int;
 }
 
-export interface DatabaseRefreshPromise
-  extends Promise<DatabaseRefresh>,
+export interface SharingPreviousValuesPromise
+  extends Promise<SharingPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  co_workers: () => Promise<String[]>;
+  description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
+  xp: () => Promise<Int>;
+  status: () => Promise<Int>;
 }
 
-export interface DatabaseRefreshSubscription
-  extends Promise<AsyncIterator<DatabaseRefresh>>,
+export interface SharingPreviousValuesSubscription
+  extends Promise<AsyncIterator<SharingPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  co_workers: () => Promise<AsyncIterator<String[]>>;
+  description: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
+  xp: () => Promise<AsyncIterator<Int>>;
+  status: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface DatabaseRefreshNullablePromise
-  extends Promise<DatabaseRefresh | null>,
+export interface SharingSubscriptionPayload {
+  mutation: MutationType;
+  node: Sharing;
+  updatedFields: String[];
+  previousValues: SharingPreviousValues;
+}
+
+export interface SharingSubscriptionPayloadPromise
+  extends Promise<SharingSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = SharingPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = SharingPreviousValuesPromise>() => T;
+}
+
+export interface SharingSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<SharingSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = SharingSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = SharingPreviousValuesSubscription>() => T;
+}
+
+export interface PageInfo {
+  hasNextPage: Boolean;
+  hasPreviousPage: Boolean;
+  startCursor?: String;
+  endCursor?: String;
+}
+
+export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
+  hasNextPage: () => Promise<Boolean>;
+  hasPreviousPage: () => Promise<Boolean>;
+  startCursor: () => Promise<String>;
+  endCursor: () => Promise<String>;
+}
+
+export interface PageInfoSubscription
+  extends Promise<AsyncIterator<PageInfo>>,
+    Fragmentable {
+  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
+  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
+  startCursor: () => Promise<AsyncIterator<String>>;
+  endCursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MakerPreviousValues {
+  id: ID_Output;
+  title: String;
+  co_workers: String[];
+  description: String;
+  functionalities: String;
+  technologies: String;
+  delivery: String;
+  organisation: String;
+  resources: String;
+  informations: String;
+  xp: Int;
+  status: Int;
+}
+
+export interface MakerPreviousValuesPromise
+  extends Promise<MakerPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  date: () => Promise<DateTimeOutput>;
+  title: () => Promise<String>;
+  co_workers: () => Promise<String[]>;
+  description: () => Promise<String>;
+  functionalities: () => Promise<String>;
+  technologies: () => Promise<String>;
+  delivery: () => Promise<String>;
+  organisation: () => Promise<String>;
+  resources: () => Promise<String>;
+  informations: () => Promise<String>;
+  xp: () => Promise<Int>;
+  status: () => Promise<Int>;
 }
 
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
+export interface MakerPreviousValuesSubscription
+  extends Promise<AsyncIterator<MakerPreviousValues>>,
     Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateActivity {
-  count: Int;
-}
-
-export interface AggregateActivityPromise
-  extends Promise<AggregateActivity>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateActivitySubscription
-  extends Promise<AsyncIterator<AggregateActivity>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  co_workers: () => Promise<AsyncIterator<String[]>>;
+  description: () => Promise<AsyncIterator<String>>;
+  functionalities: () => Promise<AsyncIterator<String>>;
+  technologies: () => Promise<AsyncIterator<String>>;
+  delivery: () => Promise<AsyncIterator<String>>;
+  organisation: () => Promise<AsyncIterator<String>>;
+  resources: () => Promise<AsyncIterator<String>>;
+  informations: () => Promise<AsyncIterator<String>>;
+  xp: () => Promise<AsyncIterator<Int>>;
+  status: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface Activity {
@@ -1812,73 +2652,6 @@ export interface ActivityNullablePromise
   }) => T;
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
-}
-
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
-}
-
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
-}
-
-export interface SharingEdge {
-  node: Sharing;
-  cursor: String;
-}
-
-export interface SharingEdgePromise extends Promise<SharingEdge>, Fragmentable {
-  node: <T = SharingPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface SharingEdgeSubscription
-  extends Promise<AsyncIterator<SharingEdge>>,
-    Fragmentable {
-  node: <T = SharingSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface ActivitySubscriptionPayload {
-  mutation: MutationType;
-  node: Activity;
-  updatedFields: String[];
-  previousValues: ActivityPreviousValues;
-}
-
-export interface ActivitySubscriptionPayloadPromise
-  extends Promise<ActivitySubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = ActivityPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = ActivityPreviousValuesPromise>() => T;
-}
-
-export interface ActivitySubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<ActivitySubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = ActivitySubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = ActivityPreviousValuesSubscription>() => T;
-}
-
 export interface UserPresence {
   id: ID_Output;
   code: String;
@@ -1919,78 +2692,6 @@ export interface UserPresenceNullablePromise
   xp: () => Promise<Int>;
 }
 
-export interface ActivityPreviousValues {
-  id: ID_Output;
-  code: String;
-  type: String;
-  xp?: Int;
-  title: String;
-  description: String;
-  begin: DateTimeOutput;
-  end: DateTimeOutput;
-}
-
-export interface ActivityPreviousValuesPromise
-  extends Promise<ActivityPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  code: () => Promise<String>;
-  type: () => Promise<String>;
-  xp: () => Promise<Int>;
-  title: () => Promise<String>;
-  description: () => Promise<String>;
-  begin: () => Promise<DateTimeOutput>;
-  end: () => Promise<DateTimeOutput>;
-}
-
-export interface ActivityPreviousValuesSubscription
-  extends Promise<AsyncIterator<ActivityPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  code: () => Promise<AsyncIterator<String>>;
-  type: () => Promise<AsyncIterator<String>>;
-  xp: () => Promise<AsyncIterator<Int>>;
-  title: () => Promise<AsyncIterator<String>>;
-  description: () => Promise<AsyncIterator<String>>;
-  begin: () => Promise<AsyncIterator<DateTimeOutput>>;
-  end: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface AggregateMaker {
-  count: Int;
-}
-
-export interface AggregateMakerPromise
-  extends Promise<AggregateMaker>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateMakerSubscription
-  extends Promise<AsyncIterator<AggregateMaker>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface ActivityEdge {
-  node: Activity;
-  cursor: String;
-}
-
-export interface ActivityEdgePromise
-  extends Promise<ActivityEdge>,
-    Fragmentable {
-  node: <T = ActivityPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface ActivityEdgeSubscription
-  extends Promise<AsyncIterator<ActivityEdge>>,
-    Fragmentable {
-  node: <T = ActivitySubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
 export interface MakerConnection {
   pageInfo: PageInfo;
   edges: MakerEdge[];
@@ -2012,200 +2713,7 @@ export interface MakerConnectionSubscription
   aggregate: <T = AggregateMakerSubscription>() => T;
 }
 
-export interface DatabaseRefreshSubscriptionPayload {
-  mutation: MutationType;
-  node: DatabaseRefresh;
-  updatedFields: String[];
-  previousValues: DatabaseRefreshPreviousValues;
-}
-
-export interface DatabaseRefreshSubscriptionPayloadPromise
-  extends Promise<DatabaseRefreshSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = DatabaseRefreshPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = DatabaseRefreshPreviousValuesPromise>() => T;
-}
-
-export interface DatabaseRefreshSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<DatabaseRefreshSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = DatabaseRefreshSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = DatabaseRefreshPreviousValuesSubscription>() => T;
-}
-
-export interface UserPresenceSubscriptionPayload {
-  mutation: MutationType;
-  node: UserPresence;
-  updatedFields: String[];
-  previousValues: UserPresencePreviousValues;
-}
-
-export interface UserPresenceSubscriptionPayloadPromise
-  extends Promise<UserPresenceSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPresencePromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPresencePreviousValuesPromise>() => T;
-}
-
-export interface UserPresenceSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserPresenceSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserPresenceSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPresencePreviousValuesSubscription>() => T;
-}
-
-export interface DatabaseRefreshPreviousValues {
-  id: ID_Output;
-  date: DateTimeOutput;
-}
-
-export interface DatabaseRefreshPreviousValuesPromise
-  extends Promise<DatabaseRefreshPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  date: () => Promise<DateTimeOutput>;
-}
-
-export interface DatabaseRefreshPreviousValuesSubscription
-  extends Promise<AsyncIterator<DatabaseRefreshPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  date: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface AggregateUser {
-  count: Int;
-}
-
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface PageInfo {
-  hasNextPage: Boolean;
-  hasPreviousPage: Boolean;
-  startCursor?: String;
-  endCursor?: String;
-}
-
-export interface PageInfoPromise extends Promise<PageInfo>, Fragmentable {
-  hasNextPage: () => Promise<Boolean>;
-  hasPreviousPage: () => Promise<Boolean>;
-  startCursor: () => Promise<String>;
-  endCursor: () => Promise<String>;
-}
-
-export interface PageInfoSubscription
-  extends Promise<AsyncIterator<PageInfo>>,
-    Fragmentable {
-  hasNextPage: () => Promise<AsyncIterator<Boolean>>;
-  hasPreviousPage: () => Promise<AsyncIterator<Boolean>>;
-  startCursor: () => Promise<AsyncIterator<String>>;
-  endCursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface AggregateSharing {
-  count: Int;
-}
-
-export interface AggregateSharingPromise
-  extends Promise<AggregateSharing>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateSharingSubscription
-  extends Promise<AsyncIterator<AggregateSharing>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface MakerSubscriptionPayload {
-  mutation: MutationType;
-  node: Maker;
-  updatedFields: String[];
-  previousValues: MakerPreviousValues;
-}
-
-export interface MakerSubscriptionPayloadPromise
-  extends Promise<MakerSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = MakerPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = MakerPreviousValuesPromise>() => T;
-}
-
-export interface MakerSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<MakerSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = MakerSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = MakerPreviousValuesSubscription>() => T;
-}
-
-export interface Sharing {
-  id: ID_Output;
-  title: String;
-  co_workers: String[];
-  description: String;
-  date: DateTimeOutput;
-  xp: Int;
-  status: Int;
-}
-
-export interface SharingPromise extends Promise<Sharing>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  co_workers: () => Promise<String[]>;
-  description: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
-  xp: () => Promise<Int>;
-  status: () => Promise<Int>;
-}
-
-export interface SharingSubscription
-  extends Promise<AsyncIterator<Sharing>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  co_workers: () => Promise<AsyncIterator<String[]>>;
-  description: () => Promise<AsyncIterator<String>>;
-  date: () => Promise<AsyncIterator<DateTimeOutput>>;
-  xp: () => Promise<AsyncIterator<Int>>;
-  status: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface SharingNullablePromise
-  extends Promise<Sharing | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  co_workers: () => Promise<String[]>;
-  description: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
-  xp: () => Promise<Int>;
-  status: () => Promise<Int>;
-}
-
-export interface UserPreviousValues {
+export interface User {
   id: ID_Output;
   outlookId: String;
   name: String;
@@ -2215,9 +2723,7 @@ export interface UserPreviousValues {
   privilege?: Int;
 }
 
-export interface UserPreviousValuesPromise
-  extends Promise<UserPreviousValues>,
-    Fragmentable {
+export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   outlookId: () => Promise<String>;
   name: () => Promise<String>;
@@ -2225,10 +2731,19 @@ export interface UserPreviousValuesPromise
   year: () => Promise<Int>;
   plan: () => Promise<Int>;
   privilege: () => Promise<Int>;
+  activities: <T = FragmentableArray<UserPresence>>(args?: {
+    where?: UserPresenceWhereInput;
+    orderBy?: UserPresenceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValues>>,
+export interface UserSubscription
+  extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   outlookId: () => Promise<AsyncIterator<String>>;
@@ -2237,213 +2752,36 @@ export interface UserPreviousValuesSubscription
   year: () => Promise<AsyncIterator<Int>>;
   plan: () => Promise<AsyncIterator<Int>>;
   privilege: () => Promise<AsyncIterator<Int>>;
+  activities: <T = Promise<AsyncIterator<UserPresenceSubscription>>>(args?: {
+    where?: UserPresenceWhereInput;
+    orderBy?: UserPresenceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
-export interface SharingPreviousValues {
-  id: ID_Output;
-  title: String;
-  co_workers: String[];
-  description: String;
-  date: DateTimeOutput;
-  xp: Int;
-  status: Int;
-}
-
-export interface SharingPreviousValuesPromise
-  extends Promise<SharingPreviousValues>,
+export interface UserNullablePromise
+  extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  co_workers: () => Promise<String[]>;
-  description: () => Promise<String>;
-  date: () => Promise<DateTimeOutput>;
-  xp: () => Promise<Int>;
-  status: () => Promise<Int>;
-}
-
-export interface SharingPreviousValuesSubscription
-  extends Promise<AsyncIterator<SharingPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  co_workers: () => Promise<AsyncIterator<String[]>>;
-  description: () => Promise<AsyncIterator<String>>;
-  date: () => Promise<AsyncIterator<DateTimeOutput>>;
-  xp: () => Promise<AsyncIterator<Int>>;
-  status: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface SharingSubscriptionPayload {
-  mutation: MutationType;
-  node: Sharing;
-  updatedFields: String[];
-  previousValues: SharingPreviousValues;
-}
-
-export interface SharingSubscriptionPayloadPromise
-  extends Promise<SharingSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = SharingPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = SharingPreviousValuesPromise>() => T;
-}
-
-export interface SharingSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<SharingSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = SharingSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = SharingPreviousValuesSubscription>() => T;
-}
-
-export interface ActivityConnection {
-  pageInfo: PageInfo;
-  edges: ActivityEdge[];
-}
-
-export interface ActivityConnectionPromise
-  extends Promise<ActivityConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<ActivityEdge>>() => T;
-  aggregate: <T = AggregateActivityPromise>() => T;
-}
-
-export interface ActivityConnectionSubscription
-  extends Promise<AsyncIterator<ActivityConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<ActivityEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateActivitySubscription>() => T;
-}
-
-export interface MakerPreviousValues {
-  id: ID_Output;
-  title: String;
-  co_workers: String[];
-  description: String;
-  functionalities: String;
-  technologies: String;
-  delivery: String;
-  organisation: String;
-  resources: String;
-  informations: String;
-  xp: Int;
-  status: Int;
-}
-
-export interface MakerPreviousValuesPromise
-  extends Promise<MakerPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  co_workers: () => Promise<String[]>;
-  description: () => Promise<String>;
-  functionalities: () => Promise<String>;
-  technologies: () => Promise<String>;
-  delivery: () => Promise<String>;
-  organisation: () => Promise<String>;
-  resources: () => Promise<String>;
-  informations: () => Promise<String>;
-  xp: () => Promise<Int>;
-  status: () => Promise<Int>;
-}
-
-export interface MakerPreviousValuesSubscription
-  extends Promise<AsyncIterator<MakerPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  co_workers: () => Promise<AsyncIterator<String[]>>;
-  description: () => Promise<AsyncIterator<String>>;
-  functionalities: () => Promise<AsyncIterator<String>>;
-  technologies: () => Promise<AsyncIterator<String>>;
-  delivery: () => Promise<AsyncIterator<String>>;
-  organisation: () => Promise<AsyncIterator<String>>;
-  resources: () => Promise<AsyncIterator<String>>;
-  informations: () => Promise<AsyncIterator<String>>;
-  xp: () => Promise<AsyncIterator<Int>>;
-  status: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface UserPresenceEdge {
-  node: UserPresence;
-  cursor: String;
-}
-
-export interface UserPresenceEdgePromise
-  extends Promise<UserPresenceEdge>,
-    Fragmentable {
-  node: <T = UserPresencePromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserPresenceEdgeSubscription
-  extends Promise<AsyncIterator<UserPresenceEdge>>,
-    Fragmentable {
-  node: <T = UserPresenceSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface MakerEdge {
-  node: Maker;
-  cursor: String;
-}
-
-export interface MakerEdgePromise extends Promise<MakerEdge>, Fragmentable {
-  node: <T = MakerPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface MakerEdgeSubscription
-  extends Promise<AsyncIterator<MakerEdge>>,
-    Fragmentable {
-  node: <T = MakerSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface SharingConnection {
-  pageInfo: PageInfo;
-  edges: SharingEdge[];
-}
-
-export interface SharingConnectionPromise
-  extends Promise<SharingConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<SharingEdge>>() => T;
-  aggregate: <T = AggregateSharingPromise>() => T;
-}
-
-export interface SharingConnectionSubscription
-  extends Promise<AsyncIterator<SharingConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<SharingEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateSharingSubscription>() => T;
-}
-
-export interface UserConnection {
-  pageInfo: PageInfo;
-  edges: UserEdge[];
-}
-
-export interface UserConnectionPromise
-  extends Promise<UserConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<UserEdge>>() => T;
-  aggregate: <T = AggregateUserPromise>() => T;
-}
-
-export interface UserConnectionSubscription
-  extends Promise<AsyncIterator<UserConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<UserEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateUserSubscription>() => T;
+  outlookId: () => Promise<String>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  year: () => Promise<Int>;
+  plan: () => Promise<Int>;
+  privilege: () => Promise<Int>;
+  activities: <T = FragmentableArray<UserPresence>>(args?: {
+    where?: UserPresenceWhereInput;
+    orderBy?: UserPresenceOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => T;
 }
 
 /*
@@ -2494,6 +2832,10 @@ export const models: Model[] = [
   },
   {
     name: "UserPresence",
+    embedded: false
+  },
+  {
+    name: "ExperienceProject",
     embedded: false
   },
   {

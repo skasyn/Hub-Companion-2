@@ -30,6 +30,15 @@ type UserPresence {
     xp: Int!
 }
 
+type ExperienceProject {
+    id: ID! @id
+    user: String!
+    description: String!
+    competencies: String!
+    informations: String!
+    status: Int!
+}
+
 type Maker {
     id: ID! @id
     title: String!

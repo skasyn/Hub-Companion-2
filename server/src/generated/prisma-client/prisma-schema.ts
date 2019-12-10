@@ -254,6 +254,10 @@ type AggregateDatabaseRefresh {
   count: Int!
 }
 
+type AggregateExperienceProject {
+  count: Int!
+}
+
 type AggregateMaker {
   count: Int!
 }
@@ -362,6 +366,177 @@ input DatabaseRefreshWhereUniqueInput {
 }
 
 scalar DateTime
+
+type ExperienceProject {
+  id: ID!
+  user: String!
+  description: String!
+  competencies: String!
+  informations: String!
+  status: Int!
+}
+
+type ExperienceProjectConnection {
+  pageInfo: PageInfo!
+  edges: [ExperienceProjectEdge]!
+  aggregate: AggregateExperienceProject!
+}
+
+input ExperienceProjectCreateInput {
+  id: ID
+  user: String!
+  description: String!
+  competencies: String!
+  informations: String!
+  status: Int!
+}
+
+type ExperienceProjectEdge {
+  node: ExperienceProject!
+  cursor: String!
+}
+
+enum ExperienceProjectOrderByInput {
+  id_ASC
+  id_DESC
+  user_ASC
+  user_DESC
+  description_ASC
+  description_DESC
+  competencies_ASC
+  competencies_DESC
+  informations_ASC
+  informations_DESC
+  status_ASC
+  status_DESC
+}
+
+type ExperienceProjectPreviousValues {
+  id: ID!
+  user: String!
+  description: String!
+  competencies: String!
+  informations: String!
+  status: Int!
+}
+
+type ExperienceProjectSubscriptionPayload {
+  mutation: MutationType!
+  node: ExperienceProject
+  updatedFields: [String!]
+  previousValues: ExperienceProjectPreviousValues
+}
+
+input ExperienceProjectSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ExperienceProjectWhereInput
+  AND: [ExperienceProjectSubscriptionWhereInput!]
+}
+
+input ExperienceProjectUpdateInput {
+  user: String
+  description: String
+  competencies: String
+  informations: String
+  status: Int
+}
+
+input ExperienceProjectUpdateManyMutationInput {
+  user: String
+  description: String
+  competencies: String
+  informations: String
+  status: Int
+}
+
+input ExperienceProjectWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  user: String
+  user_not: String
+  user_in: [String!]
+  user_not_in: [String!]
+  user_lt: String
+  user_lte: String
+  user_gt: String
+  user_gte: String
+  user_contains: String
+  user_not_contains: String
+  user_starts_with: String
+  user_not_starts_with: String
+  user_ends_with: String
+  user_not_ends_with: String
+  description: String
+  description_not: String
+  description_in: [String!]
+  description_not_in: [String!]
+  description_lt: String
+  description_lte: String
+  description_gt: String
+  description_gte: String
+  description_contains: String
+  description_not_contains: String
+  description_starts_with: String
+  description_not_starts_with: String
+  description_ends_with: String
+  description_not_ends_with: String
+  competencies: String
+  competencies_not: String
+  competencies_in: [String!]
+  competencies_not_in: [String!]
+  competencies_lt: String
+  competencies_lte: String
+  competencies_gt: String
+  competencies_gte: String
+  competencies_contains: String
+  competencies_not_contains: String
+  competencies_starts_with: String
+  competencies_not_starts_with: String
+  competencies_ends_with: String
+  competencies_not_ends_with: String
+  informations: String
+  informations_not: String
+  informations_in: [String!]
+  informations_not_in: [String!]
+  informations_lt: String
+  informations_lte: String
+  informations_gt: String
+  informations_gte: String
+  informations_contains: String
+  informations_not_contains: String
+  informations_starts_with: String
+  informations_not_starts_with: String
+  informations_ends_with: String
+  informations_not_ends_with: String
+  status: Int
+  status_not: Int
+  status_in: [Int!]
+  status_not_in: [Int!]
+  status_lt: Int
+  status_lte: Int
+  status_gt: Int
+  status_gte: Int
+  AND: [ExperienceProjectWhereInput!]
+}
+
+input ExperienceProjectWhereUniqueInput {
+  id: ID
+}
 
 scalar Long
 
@@ -661,6 +836,12 @@ type Mutation {
   upsertDatabaseRefresh(where: DatabaseRefreshWhereUniqueInput!, create: DatabaseRefreshCreateInput!, update: DatabaseRefreshUpdateInput!): DatabaseRefresh!
   deleteDatabaseRefresh(where: DatabaseRefreshWhereUniqueInput!): DatabaseRefresh
   deleteManyDatabaseRefreshes(where: DatabaseRefreshWhereInput): BatchPayload!
+  createExperienceProject(data: ExperienceProjectCreateInput!): ExperienceProject!
+  updateExperienceProject(data: ExperienceProjectUpdateInput!, where: ExperienceProjectWhereUniqueInput!): ExperienceProject
+  updateManyExperienceProjects(data: ExperienceProjectUpdateManyMutationInput!, where: ExperienceProjectWhereInput): BatchPayload!
+  upsertExperienceProject(where: ExperienceProjectWhereUniqueInput!, create: ExperienceProjectCreateInput!, update: ExperienceProjectUpdateInput!): ExperienceProject!
+  deleteExperienceProject(where: ExperienceProjectWhereUniqueInput!): ExperienceProject
+  deleteManyExperienceProjects(where: ExperienceProjectWhereInput): BatchPayload!
   createMaker(data: MakerCreateInput!): Maker!
   updateMaker(data: MakerUpdateInput!, where: MakerWhereUniqueInput!): Maker
   updateManyMakers(data: MakerUpdateManyMutationInput!, where: MakerWhereInput): BatchPayload!
@@ -711,6 +892,9 @@ type Query {
   databaseRefresh(where: DatabaseRefreshWhereUniqueInput!): DatabaseRefresh
   databaseRefreshes(where: DatabaseRefreshWhereInput, orderBy: DatabaseRefreshOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [DatabaseRefresh]!
   databaseRefreshesConnection(where: DatabaseRefreshWhereInput, orderBy: DatabaseRefreshOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): DatabaseRefreshConnection!
+  experienceProject(where: ExperienceProjectWhereUniqueInput!): ExperienceProject
+  experienceProjects(where: ExperienceProjectWhereInput, orderBy: ExperienceProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ExperienceProject]!
+  experienceProjectsConnection(where: ExperienceProjectWhereInput, orderBy: ExperienceProjectOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ExperienceProjectConnection!
   maker(where: MakerWhereUniqueInput!): Maker
   makers(where: MakerWhereInput, orderBy: MakerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Maker]!
   makersConnection(where: MakerWhereInput, orderBy: MakerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MakerConnection!
@@ -902,6 +1086,7 @@ input SharingWhereUniqueInput {
 type Subscription {
   activity(where: ActivitySubscriptionWhereInput): ActivitySubscriptionPayload
   databaseRefresh(where: DatabaseRefreshSubscriptionWhereInput): DatabaseRefreshSubscriptionPayload
+  experienceProject(where: ExperienceProjectSubscriptionWhereInput): ExperienceProjectSubscriptionPayload
   maker(where: MakerSubscriptionWhereInput): MakerSubscriptionPayload
   sharing(where: SharingSubscriptionWhereInput): SharingSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload

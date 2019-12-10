@@ -2,6 +2,7 @@ type Mutation {
     refresh(code: String!): Boolean!
     submitMaker(code: String!, data: String!): Boolean!
     submitSharing(code: String!, data: String!): Boolean!
+    submitExperienceProject(code: String!, data: String!): Boolean!
     setYear(code: String!, year: Int!): Boolean!
     setPlan(code: String!, plan: Int!): Boolean!
 }

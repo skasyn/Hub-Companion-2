@@ -22,3 +22,10 @@ type Maker {
     xp: Int!
     status: Int!
 }
+
+type ExperienceProject {
+    id: ID!
+    description: String!
+    competencies: String!
+    informations: String!
+}

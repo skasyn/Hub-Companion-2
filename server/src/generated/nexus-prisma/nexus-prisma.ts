@@ -28,6 +28,10 @@ export interface NexusPrismaTypes {
       UserPresenceConnection: UserPresenceConnectionObject
       UserPresenceEdge: UserPresenceEdgeObject
       AggregateUserPresence: AggregateUserPresenceObject
+      ExperienceProject: ExperienceProjectObject
+      ExperienceProjectConnection: ExperienceProjectConnectionObject
+      ExperienceProjectEdge: ExperienceProjectEdgeObject
+      AggregateExperienceProject: AggregateExperienceProjectObject
       Maker: MakerObject
       MakerConnection: MakerConnectionObject
       MakerEdge: MakerEdgeObject
@@ -49,6 +53,8 @@ export interface NexusPrismaTypes {
       ActivityPreviousValues: ActivityPreviousValuesObject
       UserPresenceSubscriptionPayload: UserPresenceSubscriptionPayloadObject
       UserPresencePreviousValues: UserPresencePreviousValuesObject
+      ExperienceProjectSubscriptionPayload: ExperienceProjectSubscriptionPayloadObject
+      ExperienceProjectPreviousValues: ExperienceProjectPreviousValuesObject
       MakerSubscriptionPayload: MakerSubscriptionPayloadObject
       MakerPreviousValues: MakerPreviousValuesObject
       SharingSubscriptionPayload: SharingSubscriptionPayloadObject
@@ -71,6 +77,10 @@ export interface NexusPrismaTypes {
       UserPresenceConnection: UserPresenceConnectionFieldDetails
       UserPresenceEdge: UserPresenceEdgeFieldDetails
       AggregateUserPresence: AggregateUserPresenceFieldDetails
+      ExperienceProject: ExperienceProjectFieldDetails
+      ExperienceProjectConnection: ExperienceProjectConnectionFieldDetails
+      ExperienceProjectEdge: ExperienceProjectEdgeFieldDetails
+      AggregateExperienceProject: AggregateExperienceProjectFieldDetails
       Maker: MakerFieldDetails
       MakerConnection: MakerConnectionFieldDetails
       MakerEdge: MakerEdgeFieldDetails
@@ -92,6 +102,8 @@ export interface NexusPrismaTypes {
       ActivityPreviousValues: ActivityPreviousValuesFieldDetails
       UserPresenceSubscriptionPayload: UserPresenceSubscriptionPayloadFieldDetails
       UserPresencePreviousValues: UserPresencePreviousValuesFieldDetails
+      ExperienceProjectSubscriptionPayload: ExperienceProjectSubscriptionPayloadFieldDetails
+      ExperienceProjectPreviousValues: ExperienceProjectPreviousValuesFieldDetails
       MakerSubscriptionPayload: MakerSubscriptionPayloadFieldDetails
       MakerPreviousValues: MakerPreviousValuesFieldDetails
       SharingSubscriptionPayload: SharingSubscriptionPayloadFieldDetails
@@ -108,6 +120,8 @@ export interface NexusPrismaTypes {
       ActivityWhereInput: ActivityWhereInputInputObject
       ActivityWhereUniqueInput: ActivityWhereUniqueInputInputObject
       UserPresenceWhereUniqueInput: UserPresenceWhereUniqueInputInputObject
+      ExperienceProjectWhereUniqueInput: ExperienceProjectWhereUniqueInputInputObject
+      ExperienceProjectWhereInput: ExperienceProjectWhereInputInputObject
       MakerWhereUniqueInput: MakerWhereUniqueInputInputObject
       MakerWhereInput: MakerWhereInputInputObject
       SharingWhereUniqueInput: SharingWhereUniqueInputInputObject
@@ -148,6 +162,9 @@ export interface NexusPrismaTypes {
       UserPresenceCreateInput: UserPresenceCreateInputInputObject
       UserPresenceUpdateInput: UserPresenceUpdateInputInputObject
       UserPresenceUpdateManyMutationInput: UserPresenceUpdateManyMutationInputInputObject
+      ExperienceProjectCreateInput: ExperienceProjectCreateInputInputObject
+      ExperienceProjectUpdateInput: ExperienceProjectUpdateInputInputObject
+      ExperienceProjectUpdateManyMutationInput: ExperienceProjectUpdateManyMutationInputInputObject
       MakerCreateInput: MakerCreateInputInputObject
       MakerCreateco_workersInput: MakerCreateco_workersInputInputObject
       MakerUpdateInput: MakerUpdateInputInputObject
@@ -164,6 +181,7 @@ export interface NexusPrismaTypes {
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
       ActivitySubscriptionWhereInput: ActivitySubscriptionWhereInputInputObject
       UserPresenceSubscriptionWhereInput: UserPresenceSubscriptionWhereInputInputObject
+      ExperienceProjectSubscriptionWhereInput: ExperienceProjectSubscriptionWhereInputInputObject
       MakerSubscriptionWhereInput: MakerSubscriptionWhereInputInputObject
       SharingSubscriptionWhereInput: SharingSubscriptionWhereInputInputObject
       DatabaseRefreshSubscriptionWhereInput: DatabaseRefreshSubscriptionWhereInputInputObject
@@ -173,6 +191,7 @@ export interface NexusPrismaTypes {
     UserPresenceOrderByInput: UserPresenceOrderByInputValues,
     UserOrderByInput: UserOrderByInputValues,
     ActivityOrderByInput: ActivityOrderByInputValues,
+    ExperienceProjectOrderByInput: ExperienceProjectOrderByInputValues,
     MakerOrderByInput: MakerOrderByInputValues,
     SharingOrderByInput: SharingOrderByInputValues,
     DatabaseRefreshOrderByInput: DatabaseRefreshOrderByInputValues,
@@ -193,6 +212,9 @@ type QueryObject =
   | { name: 'userPresence', args?: QueryUserPresenceArgs[] | false, alias?: string  } 
   | { name: 'userPresences', args?: QueryUserPresencesArgs[] | false, alias?: string  } 
   | { name: 'userPresencesConnection', args?: QueryUserPresencesConnectionArgs[] | false, alias?: string  } 
+  | { name: 'experienceProject', args?: QueryExperienceProjectArgs[] | false, alias?: string  } 
+  | { name: 'experienceProjects', args?: QueryExperienceProjectsArgs[] | false, alias?: string  } 
+  | { name: 'experienceProjectsConnection', args?: QueryExperienceProjectsConnectionArgs[] | false, alias?: string  } 
   | { name: 'maker', args?: QueryMakerArgs[] | false, alias?: string  } 
   | { name: 'makers', args?: QueryMakersArgs[] | false, alias?: string  } 
   | { name: 'makersConnection', args?: QueryMakersConnectionArgs[] | false, alias?: string  } 
@@ -213,6 +235,9 @@ type QueryFields =
   | 'userPresence'
   | 'userPresences'
   | 'userPresencesConnection'
+  | 'experienceProject'
+  | 'experienceProjects'
+  | 'experienceProjectsConnection'
   | 'maker'
   | 'makers'
   | 'makersConnection'
@@ -271,6 +296,24 @@ type QueryUserPresencesArgs =
   | 'first'
   | 'last'
 type QueryUserPresencesConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryExperienceProjectArgs =
+  | 'where'
+type QueryExperienceProjectsArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryExperienceProjectsConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -451,6 +494,45 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserPresenceConnection> | prisma.UserPresenceConnection
+  }
+  experienceProject: {
+    type: 'ExperienceProject'
+    args: Record<QueryExperienceProjectArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: ExperienceProjectWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProject | null> | prisma.ExperienceProject | null
+  }
+  experienceProjects: {
+    type: 'ExperienceProject'
+    args: Record<QueryExperienceProjectsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ExperienceProjectWhereInput | null, orderBy?: prisma.ExperienceProjectOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProject[]> | prisma.ExperienceProject[]
+  }
+  experienceProjectsConnection: {
+    type: 'ExperienceProjectConnection'
+    args: Record<QueryExperienceProjectsConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ExperienceProjectWhereInput | null, orderBy?: prisma.ExperienceProjectOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProjectConnection> | prisma.ExperienceProjectConnection
   }
   maker: {
     type: 'Maker'
@@ -1311,6 +1393,206 @@ export interface AggregateUserPresenceFieldDetails {
 }
   
 
+// Types for ExperienceProject
+
+type ExperienceProjectObject =
+  | ExperienceProjectFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'user', args?: [] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
+  | { name: 'competencies', args?: [] | false, alias?: string  } 
+  | { name: 'informations', args?: [] | false, alias?: string  } 
+  | { name: 'status', args?: [] | false, alias?: string  } 
+
+type ExperienceProjectFields =
+  | 'id'
+  | 'user'
+  | 'description'
+  | 'competencies'
+  | 'informations'
+  | 'status'
+
+
+
+  
+
+export interface ExperienceProjectFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  user: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  description: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  competencies: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  informations: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  status: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for ExperienceProjectConnection
+
+type ExperienceProjectConnectionObject =
+  | ExperienceProjectConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type ExperienceProjectConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface ExperienceProjectConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ExperienceProjectConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'ExperienceProjectEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ExperienceProjectConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProjectEdge[]> | prisma.ExperienceProjectEdge[]
+  }
+  aggregate: {
+    type: 'AggregateExperienceProject'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ExperienceProjectConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateExperienceProject> | prisma.AggregateExperienceProject
+  }
+}
+  
+
+// Types for ExperienceProjectEdge
+
+type ExperienceProjectEdgeObject =
+  | ExperienceProjectEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type ExperienceProjectEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface ExperienceProjectEdgeFieldDetails {
+  node: {
+    type: 'ExperienceProject'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ExperienceProjectEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProject> | prisma.ExperienceProject
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateExperienceProject
+
+type AggregateExperienceProjectObject =
+  | AggregateExperienceProjectFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateExperienceProjectFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateExperienceProjectFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for Maker
 
 type MakerObject =
@@ -1963,6 +2245,12 @@ type MutationObject =
   | { name: 'upsertUserPresence', args?: MutationUpsertUserPresenceArgs[] | false, alias?: string  } 
   | { name: 'deleteUserPresence', args?: MutationDeleteUserPresenceArgs[] | false, alias?: string  } 
   | { name: 'deleteManyUserPresences', args?: MutationDeleteManyUserPresencesArgs[] | false, alias?: string  } 
+  | { name: 'createExperienceProject', args?: MutationCreateExperienceProjectArgs[] | false, alias?: string  } 
+  | { name: 'updateExperienceProject', args?: MutationUpdateExperienceProjectArgs[] | false, alias?: string  } 
+  | { name: 'updateManyExperienceProjects', args?: MutationUpdateManyExperienceProjectsArgs[] | false, alias?: string  } 
+  | { name: 'upsertExperienceProject', args?: MutationUpsertExperienceProjectArgs[] | false, alias?: string  } 
+  | { name: 'deleteExperienceProject', args?: MutationDeleteExperienceProjectArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyExperienceProjects', args?: MutationDeleteManyExperienceProjectsArgs[] | false, alias?: string  } 
   | { name: 'createMaker', args?: MutationCreateMakerArgs[] | false, alias?: string  } 
   | { name: 'updateMaker', args?: MutationUpdateMakerArgs[] | false, alias?: string  } 
   | { name: 'updateManyMakers', args?: MutationUpdateManyMakersArgs[] | false, alias?: string  } 
@@ -2001,6 +2289,12 @@ type MutationFields =
   | 'upsertUserPresence'
   | 'deleteUserPresence'
   | 'deleteManyUserPresences'
+  | 'createExperienceProject'
+  | 'updateExperienceProject'
+  | 'updateManyExperienceProjects'
+  | 'upsertExperienceProject'
+  | 'deleteExperienceProject'
+  | 'deleteManyExperienceProjects'
   | 'createMaker'
   | 'updateMaker'
   | 'updateManyMakers'
@@ -2068,6 +2362,22 @@ type MutationUpsertUserPresenceArgs =
 type MutationDeleteUserPresenceArgs =
   | 'where'
 type MutationDeleteManyUserPresencesArgs =
+  | 'where'
+type MutationCreateExperienceProjectArgs =
+  | 'data'
+type MutationUpdateExperienceProjectArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyExperienceProjectsArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertExperienceProjectArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteExperienceProjectArgs =
+  | 'where'
+type MutationDeleteManyExperienceProjectsArgs =
   | 'where'
 type MutationCreateMakerArgs =
   | 'data'
@@ -2354,6 +2664,84 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createExperienceProject: {
+    type: 'ExperienceProject'
+    args: Record<MutationCreateExperienceProjectArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ExperienceProjectCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProject> | prisma.ExperienceProject
+  }
+  updateExperienceProject: {
+    type: 'ExperienceProject'
+    args: Record<MutationUpdateExperienceProjectArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ExperienceProjectUpdateInput, where: ExperienceProjectWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProject | null> | prisma.ExperienceProject | null
+  }
+  updateManyExperienceProjects: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyExperienceProjectsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ExperienceProjectUpdateManyMutationInput, where?: ExperienceProjectWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertExperienceProject: {
+    type: 'ExperienceProject'
+    args: Record<MutationUpsertExperienceProjectArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ExperienceProjectWhereUniqueInput, create: ExperienceProjectCreateInput, update: ExperienceProjectUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProject> | prisma.ExperienceProject
+  }
+  deleteExperienceProject: {
+    type: 'ExperienceProject'
+    args: Record<MutationDeleteExperienceProjectArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ExperienceProjectWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProject | null> | prisma.ExperienceProject | null
+  }
+  deleteManyExperienceProjects: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyExperienceProjectsArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: ExperienceProjectWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
   createMaker: {
     type: 'Maker'
     args: Record<MutationCreateMakerArgs, core.NexusArgDef<string>>
@@ -2623,6 +3011,7 @@ type SubscriptionObject =
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
   | { name: 'activity', args?: SubscriptionActivityArgs[] | false, alias?: string  } 
   | { name: 'userPresence', args?: SubscriptionUserPresenceArgs[] | false, alias?: string  } 
+  | { name: 'experienceProject', args?: SubscriptionExperienceProjectArgs[] | false, alias?: string  } 
   | { name: 'maker', args?: SubscriptionMakerArgs[] | false, alias?: string  } 
   | { name: 'sharing', args?: SubscriptionSharingArgs[] | false, alias?: string  } 
   | { name: 'databaseRefresh', args?: SubscriptionDatabaseRefreshArgs[] | false, alias?: string  } 
@@ -2631,6 +3020,7 @@ type SubscriptionFields =
   | 'user'
   | 'activity'
   | 'userPresence'
+  | 'experienceProject'
   | 'maker'
   | 'sharing'
   | 'databaseRefresh'
@@ -2641,6 +3031,8 @@ type SubscriptionUserArgs =
 type SubscriptionActivityArgs =
   | 'where'
 type SubscriptionUserPresenceArgs =
+  | 'where'
+type SubscriptionExperienceProjectArgs =
   | 'where'
 type SubscriptionMakerArgs =
   | 'where'
@@ -2689,6 +3081,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserPresenceSubscriptionPayload | null> | prisma.UserPresenceSubscriptionPayload | null
+  }
+  experienceProject: {
+    type: 'ExperienceProjectSubscriptionPayload'
+    args: Record<SubscriptionExperienceProjectArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: ExperienceProjectSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProjectSubscriptionPayload | null> | prisma.ExperienceProjectSubscriptionPayload | null
   }
   maker: {
     type: 'MakerSubscriptionPayload'
@@ -3167,6 +3572,151 @@ export interface UserPresencePreviousValuesFieldDetails {
     resolve: undefined
   }
   xp: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for ExperienceProjectSubscriptionPayload
+
+type ExperienceProjectSubscriptionPayloadObject =
+  | ExperienceProjectSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type ExperienceProjectSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface ExperienceProjectSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ExperienceProjectSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'ExperienceProject'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ExperienceProjectSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProject | null> | prisma.ExperienceProject | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'ExperienceProjectPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ExperienceProjectSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ExperienceProjectPreviousValues | null> | prisma.ExperienceProjectPreviousValues | null
+  }
+}
+  
+
+// Types for ExperienceProjectPreviousValues
+
+type ExperienceProjectPreviousValuesObject =
+  | ExperienceProjectPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'user', args?: [] | false, alias?: string  } 
+  | { name: 'description', args?: [] | false, alias?: string  } 
+  | { name: 'competencies', args?: [] | false, alias?: string  } 
+  | { name: 'informations', args?: [] | false, alias?: string  } 
+  | { name: 'status', args?: [] | false, alias?: string  } 
+
+type ExperienceProjectPreviousValuesFields =
+  | 'id'
+  | 'user'
+  | 'description'
+  | 'competencies'
+  | 'informations'
+  | 'status'
+
+
+
+  
+
+export interface ExperienceProjectPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  user: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  description: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  competencies: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  informations: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  status: {
     type: 'Int'
     args: {}
     description: string
@@ -4124,6 +4674,176 @@ export type UserPresenceWhereUniqueInputInputObject =
   | Extract<keyof UserPresenceWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
   | { name: 'code', alias?: string  } 
+  
+export interface ExperienceProjectWhereUniqueInput {
+  id?: string | null
+}
+export type ExperienceProjectWhereUniqueInputInputObject =
+  | Extract<keyof ExperienceProjectWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
+  
+export interface ExperienceProjectWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  user?: string | null
+  user_not?: string | null
+  user_in?: string[]
+  user_not_in?: string[]
+  user_lt?: string | null
+  user_lte?: string | null
+  user_gt?: string | null
+  user_gte?: string | null
+  user_contains?: string | null
+  user_not_contains?: string | null
+  user_starts_with?: string | null
+  user_not_starts_with?: string | null
+  user_ends_with?: string | null
+  user_not_ends_with?: string | null
+  description?: string | null
+  description_not?: string | null
+  description_in?: string[]
+  description_not_in?: string[]
+  description_lt?: string | null
+  description_lte?: string | null
+  description_gt?: string | null
+  description_gte?: string | null
+  description_contains?: string | null
+  description_not_contains?: string | null
+  description_starts_with?: string | null
+  description_not_starts_with?: string | null
+  description_ends_with?: string | null
+  description_not_ends_with?: string | null
+  competencies?: string | null
+  competencies_not?: string | null
+  competencies_in?: string[]
+  competencies_not_in?: string[]
+  competencies_lt?: string | null
+  competencies_lte?: string | null
+  competencies_gt?: string | null
+  competencies_gte?: string | null
+  competencies_contains?: string | null
+  competencies_not_contains?: string | null
+  competencies_starts_with?: string | null
+  competencies_not_starts_with?: string | null
+  competencies_ends_with?: string | null
+  competencies_not_ends_with?: string | null
+  informations?: string | null
+  informations_not?: string | null
+  informations_in?: string[]
+  informations_not_in?: string[]
+  informations_lt?: string | null
+  informations_lte?: string | null
+  informations_gt?: string | null
+  informations_gte?: string | null
+  informations_contains?: string | null
+  informations_not_contains?: string | null
+  informations_starts_with?: string | null
+  informations_not_starts_with?: string | null
+  informations_ends_with?: string | null
+  informations_not_ends_with?: string | null
+  status?: number | null
+  status_not?: number | null
+  status_in?: number[]
+  status_not_in?: number[]
+  status_lt?: number | null
+  status_lte?: number | null
+  status_gt?: number | null
+  status_gte?: number | null
+  AND?: ExperienceProjectWhereInput[]
+}
+export type ExperienceProjectWhereInputInputObject =
+  | Extract<keyof ExperienceProjectWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'user_not', alias?: string  } 
+  | { name: 'user_in', alias?: string  } 
+  | { name: 'user_not_in', alias?: string  } 
+  | { name: 'user_lt', alias?: string  } 
+  | { name: 'user_lte', alias?: string  } 
+  | { name: 'user_gt', alias?: string  } 
+  | { name: 'user_gte', alias?: string  } 
+  | { name: 'user_contains', alias?: string  } 
+  | { name: 'user_not_contains', alias?: string  } 
+  | { name: 'user_starts_with', alias?: string  } 
+  | { name: 'user_not_starts_with', alias?: string  } 
+  | { name: 'user_ends_with', alias?: string  } 
+  | { name: 'user_not_ends_with', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'description_not', alias?: string  } 
+  | { name: 'description_in', alias?: string  } 
+  | { name: 'description_not_in', alias?: string  } 
+  | { name: 'description_lt', alias?: string  } 
+  | { name: 'description_lte', alias?: string  } 
+  | { name: 'description_gt', alias?: string  } 
+  | { name: 'description_gte', alias?: string  } 
+  | { name: 'description_contains', alias?: string  } 
+  | { name: 'description_not_contains', alias?: string  } 
+  | { name: 'description_starts_with', alias?: string  } 
+  | { name: 'description_not_starts_with', alias?: string  } 
+  | { name: 'description_ends_with', alias?: string  } 
+  | { name: 'description_not_ends_with', alias?: string  } 
+  | { name: 'competencies', alias?: string  } 
+  | { name: 'competencies_not', alias?: string  } 
+  | { name: 'competencies_in', alias?: string  } 
+  | { name: 'competencies_not_in', alias?: string  } 
+  | { name: 'competencies_lt', alias?: string  } 
+  | { name: 'competencies_lte', alias?: string  } 
+  | { name: 'competencies_gt', alias?: string  } 
+  | { name: 'competencies_gte', alias?: string  } 
+  | { name: 'competencies_contains', alias?: string  } 
+  | { name: 'competencies_not_contains', alias?: string  } 
+  | { name: 'competencies_starts_with', alias?: string  } 
+  | { name: 'competencies_not_starts_with', alias?: string  } 
+  | { name: 'competencies_ends_with', alias?: string  } 
+  | { name: 'competencies_not_ends_with', alias?: string  } 
+  | { name: 'informations', alias?: string  } 
+  | { name: 'informations_not', alias?: string  } 
+  | { name: 'informations_in', alias?: string  } 
+  | { name: 'informations_not_in', alias?: string  } 
+  | { name: 'informations_lt', alias?: string  } 
+  | { name: 'informations_lte', alias?: string  } 
+  | { name: 'informations_gt', alias?: string  } 
+  | { name: 'informations_gte', alias?: string  } 
+  | { name: 'informations_contains', alias?: string  } 
+  | { name: 'informations_not_contains', alias?: string  } 
+  | { name: 'informations_starts_with', alias?: string  } 
+  | { name: 'informations_not_starts_with', alias?: string  } 
+  | { name: 'informations_ends_with', alias?: string  } 
+  | { name: 'informations_not_ends_with', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  | { name: 'status_not', alias?: string  } 
+  | { name: 'status_in', alias?: string  } 
+  | { name: 'status_not_in', alias?: string  } 
+  | { name: 'status_lt', alias?: string  } 
+  | { name: 'status_lte', alias?: string  } 
+  | { name: 'status_gt', alias?: string  } 
+  | { name: 'status_gte', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
   
 export interface MakerWhereUniqueInput {
   id?: string | null
@@ -5197,6 +5917,53 @@ export type UserPresenceUpdateManyMutationInputInputObject =
   | { name: 'presence', alias?: string  } 
   | { name: 'xp', alias?: string  } 
   
+export interface ExperienceProjectCreateInput {
+  id?: string | null
+  user?: string
+  description?: string
+  competencies?: string
+  informations?: string
+  status?: number
+}
+export type ExperienceProjectCreateInputInputObject =
+  | Extract<keyof ExperienceProjectCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'user', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'competencies', alias?: string  } 
+  | { name: 'informations', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  
+export interface ExperienceProjectUpdateInput {
+  user?: string | null
+  description?: string | null
+  competencies?: string | null
+  informations?: string | null
+  status?: number | null
+}
+export type ExperienceProjectUpdateInputInputObject =
+  | Extract<keyof ExperienceProjectUpdateInput, string>
+  | { name: 'user', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'competencies', alias?: string  } 
+  | { name: 'informations', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  
+export interface ExperienceProjectUpdateManyMutationInput {
+  user?: string | null
+  description?: string | null
+  competencies?: string | null
+  informations?: string | null
+  status?: number | null
+}
+export type ExperienceProjectUpdateManyMutationInputInputObject =
+  | Extract<keyof ExperienceProjectUpdateManyMutationInput, string>
+  | { name: 'user', alias?: string  } 
+  | { name: 'description', alias?: string  } 
+  | { name: 'competencies', alias?: string  } 
+  | { name: 'informations', alias?: string  } 
+  | { name: 'status', alias?: string  } 
+  
 export interface MakerCreateInput {
   id?: string | null
   title?: string
@@ -5435,6 +6202,23 @@ export type UserPresenceSubscriptionWhereInputInputObject =
   | { name: 'node', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface ExperienceProjectSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: ExperienceProjectWhereInput | null
+  AND?: ExperienceProjectSubscriptionWhereInput[]
+}
+export type ExperienceProjectSubscriptionWhereInputInputObject =
+  | Extract<keyof ExperienceProjectSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 export interface MakerSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -5530,6 +6314,20 @@ export type ActivityOrderByInputValues =
   | 'begin_DESC'
   | 'end_ASC'
   | 'end_DESC'
+  
+export type ExperienceProjectOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'user_ASC'
+  | 'user_DESC'
+  | 'description_ASC'
+  | 'description_DESC'
+  | 'competencies_ASC'
+  | 'competencies_DESC'
+  | 'informations_ASC'
+  | 'informations_DESC'
+  | 'status_ASC'
+  | 'status_DESC'
   
 export type MakerOrderByInputValues =
   | 'id_ASC'

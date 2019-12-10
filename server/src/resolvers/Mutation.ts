@@ -62,6 +62,27 @@ async function submitSharing(parent, args, context, userId) {
   return true;
 }
 
+async function submitExperienceProject(parent, args, context, userId) {
+  if (userId === undefined || userId === '' || args.data === undefined || args.data === '') {
+    throw new Error('Empty code');
+  }
+  const data = JSON.parse(args.data);
+  try {
+    await prisma.createExperienceProject(
+      {
+        user: data.user,
+        description: data.description,
+        competencies: data.competencies,
+        informations: data.informations,
+        status: 0
+      }
+    );
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
 async function setYear(parent, args, context, userId) {
   if (userId === undefined || userId === '' || args.year === undefined) {
     throw new Error('Empty code');
@@ -104,6 +125,7 @@ export const Mutation = {
   refresh: handleErrors_login(refresh),
   submitMaker: handleErrors_login(submitMaker),
   submitSharing: handleErrors_login(submitSharing),
+  submitExperienceProject: handleErrors_login(submitExperienceProject),
   setYear: handleErrors_login(setYear),
   setPlan: handleErrors_login(setPlan),
 };
