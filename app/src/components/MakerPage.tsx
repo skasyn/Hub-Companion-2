@@ -28,7 +28,6 @@ import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import {ReviewContainer, useSharingMakerStyles, isEmailValid} from "./SharingMakerUtils";
 
 const MakerForm: React.FC = () => {
-  const steps = 6;
   const [jwt] = useGlobalState('jwt');
   const [user] = useGlobalState('user');
   const classes = useSharingMakerStyles();
@@ -137,6 +136,7 @@ const MakerForm: React.FC = () => {
       ]
     }
   ];
+  const steps = formData.length + 2;
 
   const next = async () => {
     setActiveStep(activeStep.valueOf() + 1);

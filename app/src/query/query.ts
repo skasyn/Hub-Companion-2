@@ -92,3 +92,15 @@ export const GET_USER_MAKER: any = gql`
       }
   }
 `
+
+export const GET_USER_EXPERIENCE_PROJECT: any = gql`
+    query GET_USER_EXPERIENCE_PROJECT($jwt: String!) {
+        getUserExperienceProjects(code: $jwt) {
+            title
+            description
+            competencies
+            informations
+            status
+        }
+    }
+`

@@ -33,6 +33,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EventIcon from '@material-ui/icons/Event';
 import PeopleAltIcon from '@material-ui/icons/PeopleAlt';
 import UnarchiveIcon from '@material-ui/icons/Unarchive';
+import CommentIcon from '@material-ui/icons/Comment';
 
 import {
   BrowserRouter as Router,
@@ -41,6 +42,7 @@ import {
 } from "react-router-dom";
 import {SharingPage} from "./SharingPage";
 import {MakerPage} from "./MakerPage";
+import {ExperienceProjectPage} from "./ExperienceProjectPage";
 
 const drawerWidth = 240;
 
@@ -105,6 +107,7 @@ const HomeDrawerRoute: React.FC = (props: any) => {
     {path: '/calendar', text: 'Calendar', icon: (<ListItemIcon><EventIcon/></ListItemIcon>)},
     {path: '/sharing', text: 'Sharing', icon: (<ListItemIcon><PeopleAltIcon/></ListItemIcon>)},
     {path: '/maker', text: 'Maker', icon: (<ListItemIcon><UnarchiveIcon/></ListItemIcon>)},
+    {path: '/experience', text: 'Experience Project', icon: (<ListItemIcon><CommentIcon/></ListItemIcon>)},
     {path: '/settings', text: 'Settings', icon: (<ListItemIcon><StyledBadge badgeContent={(user.year !== 0 && user.plan !== -1) ? 0 : ""} color="secondary" variant="dot"><TuneIcon/></StyledBadge></ListItemIcon>)}
   ];
 
@@ -248,6 +251,9 @@ const Content: React.FC = () => {
         </Route>
         <Route path="/maker">
           <MakerPage/>
+        </Route>
+        <Route path="/experience">
+          <ExperienceProjectPage/>
         </Route>
     </main>
   )

@@ -44,6 +44,15 @@ export interface Maker {
   status: Number
 }
 
+export interface ExperienceProject {
+  user: String,
+  title: String,
+  description: String,
+  competencies: String,
+  informations: String,
+  status: Number
+}
+
 
 export interface LoginData {
   login: {
@@ -96,6 +105,15 @@ export interface SubmitMakerData {
   submitMaker: Boolean
 }
 
+export interface SubmitExperienceProjectVars {
+  jwt: String,
+  data: String
+}
+
+export interface SubmitExperienceProjectData {
+  submitExperienceProject: Boolean
+}
+
 export interface UserSharingData {
   getUserSharing: Sharing[]
 }
@@ -117,6 +135,14 @@ export interface UserMakerData {
 }
 
 export interface UserMakerVars {
+  jwt: String
+}
+
+export interface UserExperienceProjectData {
+  getUserExperienceProjects: ExperienceProject[]
+}
+
+export interface UserExperienceProjectVars {
   jwt: String
 }
 

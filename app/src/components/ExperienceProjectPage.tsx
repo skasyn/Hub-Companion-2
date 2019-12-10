@@ -14,43 +14,46 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import {useMutation, useQuery} from "@apollo/react-hooks";
 import {
+  SubmitExperienceProjectData, SubmitExperienceProjectVars,
   SubmitSharingData,
-  SubmitSharingVars,
+  SubmitSharingVars, UserExperienceProjectData, UserExperienceProjectVars,
   UserSharingData,
   UserSharingVars
 } from "../types/types";
-import {SUBMIT_SHARING} from "../query/mutation";
+import {SUBMIT_EXPERIENCE_PROJECT, SUBMIT_SHARING} from "../query/mutation";
 import {useGlobalState} from "../reducers/reducers";
-import {GET_USER_SHARING} from "../query/query";
+import {GET_USER_EXPERIENCE_PROJECT, GET_USER_SHARING} from "../query/query";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import {ReviewContainer, useSharingMakerStyles, isEmailValid, toMultiline} from "./SharingMakerUtils";
+import {getMaxListeners} from "cluster";
 
-const SharingForm: React.FC = () => {
+const ExperienceProjectForm: React.FC = () => {
   const [jwt] = useGlobalState('jwt');
   const [user] = useGlobalState('user');
   const classes = useSharingMakerStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [result, setResult] = useState(0);
-  const [submitSharing] = useMutation<SubmitSharingData, SubmitSharingVars>(SUBMIT_SHARING);
+  const [submitExperienceProject] = useMutation<SubmitExperienceProjectData, SubmitExperienceProjectVars>(SUBMIT_EXPERIENCE_PROJECT);
 
   const [data, setData] = useState({
     title: '',
     description: '',
-    co_workers: [{email: user.email.toString(), error: false}]
+    competencies: '',
+    informations: ''
   });
   const formData = [
     {
-      title: "Title and Description",
+      title: "Experience Project",
       canNext: () => { return data.title.length !== 0 && data.description.length !== 0},
       items: [
         {
           name: "title",
           label: "Title",
-          text: "Name of the talk/workshop",
+          text: "Name of the technology learned / project",
           value: data.title,
           multiline: false,
           onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, title: event.target.value})
@@ -58,15 +61,36 @@ const SharingForm: React.FC = () => {
         {
           name: "description",
           label: "Description",
-          text: "",
-          multiline: true,
+          text: "Description of your experience project",
           value: data.description,
+          multiline: true,
           onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, description: event.target.value})
+        },
+      ]
+    },
+    {
+      title: "Additional informations",
+      canNext: () => { return data.competencies.length !== 0 && data.informations.length !== 0},
+      items: [
+        {
+          name: "competencies",
+          label: "Competencies",
+          text: "What can this project learn you ?",
+          multiline: true,
+          value: data.competencies,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, competencies: event.target.value})
+        },
+        {
+          name: "informations",
+          label: "Complementary Informations",
+          multiline: true,
+          value: data.informations,
+          onChange: (event: React.ChangeEvent<HTMLInputElement>) => setData({...data, informations: event.target.value})
         }
       ]
     }
   ];
-  const steps = formData.length + 2;
+  const steps = formData.length + 1;
 
   const next = async () => {
     setActiveStep(activeStep.valueOf() + 1);
@@ -74,10 +98,12 @@ const SharingForm: React.FC = () => {
       const dataSend = {
         title: data.title,
         description: data.description,
-        co_workers: data.co_workers.map((elem) => elem.email),
+        competencies: data.competencies,
+        informations: data.informations,
+        user: user.email
       };
-      const response = await submitSharing({variables: {jwt: jwt, data: JSON.stringify(dataSend)}});
-      if (response !== undefined && response.data !== undefined && response.data.submitSharing)
+      const response = await submitExperienceProject({variables: {jwt: jwt, data: JSON.stringify(dataSend)}});
+      if (response !== undefined && response.data !== undefined && response.data.submitExperienceProject)
         setResult(1);
       else
         setResult(2);
@@ -87,31 +113,8 @@ const SharingForm: React.FC = () => {
     if (step < formData.length) {
       return formData[step].canNext();
     }
-    if (step === formData.length) {
-      let emailValid = true;
-      data.co_workers.forEach((value) => {
-        if (emailValid)
-          emailValid = isEmailValid(value.email);
-      });
-      return emailValid;
-    }
-    if (step === formData.length + 1)
+    if (step === formData.length)
       return true;
-  };
-  const updateEmail = (event: React.ChangeEvent<HTMLInputElement>, index: number) =>{
-    const isError = !isEmailValid(event.target.value);
-    let newEmail = [...data.co_workers];
-    newEmail[index].email = event.target.value;
-    newEmail[index].error = isError;
-    setData({...data, co_workers: newEmail});
-    setActiveStep(activeStep);
-  };
-  const removeEmail = () => {
-    if (data.co_workers.length === 1)
-      return;
-    let newEmail = [...data.co_workers];
-    newEmail.pop();
-    setData({...data, co_workers: newEmail});
   };
   const resultRender = () => {
     if (result === 0) return (<StepLabel>Processing ...</StepLabel>);
@@ -158,46 +161,6 @@ const SharingForm: React.FC = () => {
         }
         <Step>
           <StepLabel>
-            Co-Workers
-          </StepLabel>
-          <StepContent>
-            {
-              data.co_workers.map((value, index) => {
-                return (
-                  <TextField
-                    key={index}
-                    variant="outlined"
-                    margin="normal"
-                    required
-                    fullWidth
-                    id="email"
-                    label={(index === 0) ? "Group Leader" : `Co-Worker ${index}`}
-                    name="email"
-                    autoFocus
-                    defaultValue={value.email}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => updateEmail(event, index)}
-                    error={value.error}
-                    disabled={(index === 0)}
-                  />
-                );
-              })
-            }
-            <Grid container spacing={2} justify="flex-end">
-              <Grid item>
-              <Fab color="primary" aria-label="add" onClick={() => setData({...data, co_workers: [...data.co_workers, {email: '', error: false}]})}>
-                <AddIcon />
-              </Fab>
-              </Grid>
-              <Grid item>
-              <Fab color="secondary" aria-label="delete" onClick={removeEmail}>
-                <RemoveIcon />
-              </Fab>
-              </Grid>
-            </Grid>
-          </StepContent>
-        </Step>
-        <Step>
-          <StepLabel>
             Review your Request
           </StepLabel>
           <StepContent>
@@ -216,22 +179,6 @@ const SharingForm: React.FC = () => {
                 );
               })
             }
-            <div className={classes.reviewContainer}>
-              <Typography variant="h6">
-                Co-Workers
-              </Typography>
-              <List>
-                {
-                  data.co_workers.map((value, index) => {
-                    return (
-                      <ListItem key={index}>
-                        <ListItemText primary={(index === 0) ? "Group Leader" : `Co-Worker ${index}`} secondary={value.email}/>
-                      </ListItem>
-                    );
-                  })
-                }
-              </List>
-            </div>
           </StepContent>
         </Step>
         <Step>
@@ -271,10 +218,10 @@ const SharingForm: React.FC = () => {
   );
 };
 
-const SharingList: React.FC = () => {
+const ExperienceProjectList: React.FC = () => {
   const [jwt] = useGlobalState('jwt');
-  const { data } = useQuery<UserSharingData, UserSharingVars>(
-    GET_USER_SHARING,
+  const { data } = useQuery<UserExperienceProjectData, UserExperienceProjectVars>(
+    GET_USER_EXPERIENCE_PROJECT,
     { variables: { jwt: jwt }}
   );
 
@@ -290,27 +237,6 @@ const SharingList: React.FC = () => {
         <MaterialTable
           columns={[
             {title: "Title", field: "title"},
-            {title: "Co-Workers", field: "co_workers", render: (rowData) => {
-              return (<p>{rowData['co_workers'].join(' - ')}</p>)
-            }},
-            {title: "Date", field: "date", type: "date", render: (rowData) => {
-              const date = new Date(rowData['date'].toString());
-              if (date.getTime() === 0)
-                return (<p>N/A</p>);
-              else
-                return (<p>{date.toDateString()}</p>);
-            }, customSort: (data1, data2) => {
-              const date1 = new Date(data1['date'].toString());
-              const date2 = new Date(data2['date'].toString());
-              return date1.getTime() - date2.getTime();
-            }},
-            {title: "XP", field: "xp", render: (rowData) => {
-                if (rowData['xp'] !== 0) {
-                  return (<p>{rowData['xp']}</p>);
-                } else {
-                  return (<p>N/A</p>);
-                }
-            }},
             {title: "Status", field: "status", render: (rowData) => {
               const status = rowData['status'];
               if (status === 0) {
@@ -342,7 +268,9 @@ const SharingList: React.FC = () => {
           detailPanel={rowData => {
             return (
               <div style={{padding: "20px"}}>
-                {toMultiline(rowData['description'])}
+                <ReviewContainer title="Description" data={rowData['description']}/>
+                <ReviewContainer title="Competencies" data={rowData['competencies']}/>
+                <ReviewContainer title="Informations" data={rowData['informations']}/>
               </div>
             );
           }}
@@ -357,7 +285,7 @@ const SharingList: React.FC = () => {
             sorting: true,
             pageSize: 10
           }}
-          data={data.getUserSharing}
+          data={data.getUserExperienceProjects}
           title=""
         />
       </Container>
@@ -365,11 +293,11 @@ const SharingList: React.FC = () => {
   }
 };
 
-export const SharingPage: React.FC = () => {
+export const ExperienceProjectPage: React.FC = () => {
   return (
     <div>
-      <SharingForm/>
-      <SharingList/>
+      <ExperienceProjectForm/>
+      <ExperienceProjectList/>
     </div>
   );
 };

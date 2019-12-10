@@ -18,6 +18,12 @@ export const SUBMIT_MAKER: any = gql`
   }
 `;
 
+export const SUBMIT_EXPERIENCE_PROJECT: any = gql`
+    mutation SUBMIT_EXPERIENCE_PROJECT($jwt: String!, $data: String!) {
+        submitExperienceProject(code: $jwt, data: $data)
+    }
+`;
+
 export const CHANGE_YEAR: any = gql`
   mutation CHANGE_YEAR($jwt: String!, $year: Int!) {
       setYear(code: $jwt, year: $year)
