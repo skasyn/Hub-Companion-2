@@ -56,6 +56,9 @@ async function activityUpsert(event, activity, studentList, hubModule) {
       end: endString
     }
   });
+  await prisma.deleteManyUserPresences({
+    code_ends_with: event.code
+  });
   for (let student of studentList) {
     let user_found = await prisma.user({
       email: student.email
@@ -106,16 +109,18 @@ async function getEvents(year, hubModule, city, event, activity) {
 
 export async function getActivities(year, hubModule, city) {
   try {
+    console.log(new Date().toISOString() + ': Refresh started');
     const responseActivities = await axios.get(`${process.env.URLAUTO}module/${year}/${hubModule}/${city}-0-1?format=json`);
     if (responseActivities === undefined)
       return;
-    for (let activity of responseActivities.data.activites) {
+    await Promise.all(responseActivities.data.activites.map(async (activity) => {
       if (activity.events !== undefined && activity.events.length !== 0) {
         for (let event of activity.events) {
-          getEvents(year, hubModule, city, event, activity);
+          await getEvents(year, hubModule, city, event, activity);
         }
       }
-    }
+    }));
+    console.log(new Date().toISOString() + ': Refresh finished');
   } catch(error) {
     console.error(error);
   }
