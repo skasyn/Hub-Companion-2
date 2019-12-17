@@ -1,35 +1,27 @@
 import React, { useState } from "react";
 import {
   Button, Chip, Container,
-  Fab, Grid, List, ListItem, ListItemText,
   Step,
   StepContent,
   StepLabel,
   Stepper,
   TextField,
-  Typography
 } from "@material-ui/core";
 
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 import {useMutation, useQuery} from "@apollo/react-hooks";
 import {
   SubmitExperienceProjectData, SubmitExperienceProjectVars,
-  SubmitSharingData,
-  SubmitSharingVars, UserExperienceProjectData, UserExperienceProjectVars,
-  UserSharingData,
-  UserSharingVars
+  UserExperienceProjectData, UserExperienceProjectVars,
 } from "../types/types";
-import {SUBMIT_EXPERIENCE_PROJECT, SUBMIT_SHARING} from "../query/mutation";
+import {SUBMIT_EXPERIENCE_PROJECT} from "../query/mutation";
 import {useGlobalState} from "../reducers/reducers";
-import {GET_USER_EXPERIENCE_PROJECT, GET_USER_SHARING} from "../query/query";
+import {GET_USER_EXPERIENCE_PROJECT} from "../query/query";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import {ReviewContainer, useSharingMakerStyles, isEmailValid, toMultiline} from "./SharingMakerUtils";
-import {getMaxListeners} from "cluster";
+import {ReviewContainer, useSharingMakerStyles} from "./SharingMakerUtils";
 
 const ExperienceProjectForm: React.FC = () => {
   const [jwt] = useGlobalState('jwt');
@@ -239,29 +231,11 @@ const ExperienceProjectList: React.FC = () => {
             {title: "Title", field: "title"},
             {title: "Status", field: "status", render: (rowData) => {
               const status = rowData['status'];
-              if (status === 0) {
-                return (
-                  <Chip
-                    icon={<HourglassEmptyIcon/>}
-                    label="To be reviewed"
-                  />
-                );
-              } else if (status === 1) {
-                return (
-                  <Chip
-                    icon={<CheckIcon/>}
-                    label="Accepted"
-                    color="primary"
-                  />
-                );
-              } else {
-                return (
-                  <Chip
-                    icon={<ClearIcon/>}
-                    label="Refused"
-                    color="secondary"
-                  />
-                );
+              switch (status) {
+                case 1: return (<Chip icon={<CheckIcon/>} label="Accepted" color="primary"/>);
+                case 2: return (<Chip icon={<ClearIcon/>} label="Refused"  color="secondary"/>);
+                case 3: return (<Chip icon={<CheckIcon/>} label="Finished" color="primary" style={{backgroundColor: '#37BB08'}}/>);
+                default: return (<Chip icon={<HourglassEmptyIcon/>} label="To be reviewed"/>);
               }
             }}
           ]}

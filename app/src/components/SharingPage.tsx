@@ -313,30 +313,12 @@ const SharingList: React.FC = () => {
             }},
             {title: "Status", field: "status", render: (rowData) => {
               const status = rowData['status'];
-              if (status === 0) {
-                return (
-                  <Chip
-                    icon={<HourglassEmptyIcon/>}
-                    label="To be reviewed"
-                  />
-                );
-              } else if (status === 1) {
-                return (
-                  <Chip
-                    icon={<CheckIcon/>}
-                    label="Accepted"
-                    color="primary"
-                  />
-                );
-              } else {
-                return (
-                  <Chip
-                    icon={<ClearIcon/>}
-                    label="Refused"
-                    color="secondary"
-                  />
-                );
-              }
+                switch (status) {
+                  case 1: return (<Chip icon={<CheckIcon/>} label="Accepted" color="primary"/>);
+                  case 2: return (<Chip icon={<ClearIcon/>} label="Refused"  color="secondary"/>);
+                  case 3: return (<Chip icon={<CheckIcon/>} label="Finished" color="primary" style={{backgroundColor: '#37BB08'}}/>);
+                  default: return (<Chip icon={<HourglassEmptyIcon/>} label="To be reviewed"/>);
+                }
             }}
           ]}
           detailPanel={rowData => {

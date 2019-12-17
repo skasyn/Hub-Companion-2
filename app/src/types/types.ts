@@ -18,6 +18,7 @@ export interface Activity {
 
 export interface UserPresence {
   presence: Boolean,
+  xp: Number,
   activity: Activity
 }
 
