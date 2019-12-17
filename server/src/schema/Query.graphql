@@ -3,10 +3,21 @@ type LoginResponse {
     jwt: String!
 }
 
+type XpResponse {
+    got: Int!
+    pending: Int!
+}
+
 type Query {
     login(code: String!): LoginResponse
     loginCookie(code: String!): User
-    getXp(code: String!): Int!
+
+    getXp(code: String!): XpResponse!
+    getActivitiesXp(code: String!): XpResponse!
+    getMakerXp(code: String!): XpResponse!
+    getSharingXp(code: String!): XpResponse!
+    getExperienceProjectXp(code: String!): XpResponse!
+
     getUserActivities(code: String!): [GetUserPresences!]!
     getAllActivities: [Activity!]!
     getUserMaker(code: String!): [Maker!]!

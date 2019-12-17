@@ -1,3 +1,5 @@
+import {prisma} from "../generated/prisma-client";
+
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
@@ -19,7 +21,9 @@ export function handleErrors_login(fn) {
         process.env.JWT_SECRET
       );
       const userId = payload.id;
-
+      if (userId === undefined || userId === '') {
+        throw new Error('Empty code');
+      }
       return await fn(parent, args, context, userId);
     } catch (e) {
       console.error(e.message);
@@ -37,4 +41,12 @@ export function generateJwt(user) {
       console.error(err);
   });
   return token;
+}
+
+export async function getUser(userId) {
+  const user = await prisma.user({id: userId});
+  if (user === undefined || user === null) {
+    throw new Error('Invalid user');
+  }
+  return user;
 }

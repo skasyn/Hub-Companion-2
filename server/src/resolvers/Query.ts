@@ -1,6 +1,8 @@
 import {refresh} from "./Mutation";
-import {generateJwt, handleErrors, handleErrors_login} from "./utils";
+import {generateJwt, getUser, handleErrors, handleErrors_login} from "./utils";
 import {prisma} from "../generated/prisma-client";
+import {STATUS} from "../consts";
+
 const axios = require("axios").default;
 const querystring = require("querystring");
 
@@ -20,7 +22,7 @@ async function checkShouldRefresh(parent, args, context) {
   } else {
     const then: Date = new Date(Date.parse(lastRefresh[0].date));
     const diff: number = now.getTime() - then.getTime();
-    if (diff > 1 * 60 * 60 * 1000) {
+    if (diff > 60 * 60 * 1000) {
       await refresh(parent, args, context, "");
       await prisma.updateDatabaseRefresh({
         where: {
@@ -74,9 +76,6 @@ async function login(parent, args, context) {
 }
 
 async function loginCookie(parent, args, context, userId) {
-  if (userId === undefined || userId === '') {
-    throw new Error('Empty code');
-  }
   await checkShouldRefresh(parent, args, context);
   return prisma.user({
     id: userId
@@ -84,26 +83,50 @@ async function loginCookie(parent, args, context, userId) {
 }
 
 async function getXp(parent, args, context, userId) {
-  if (userId === undefined || userId === '') {
-    throw new Error('Empty code');
-  }
-  let activities = await prisma.user({
-    id: userId
-  }).activities();
-  if (activities === null) {
-   throw new Error('User not found');
-  }
-  let xp = 0;
-  for (let activityPresence of activities) {
-      xp += activityPresence.xp;
-  }
-  return xp;
+  const activities = await getActivitiesXp(parent, args, context, userId);
+  const makers = await getMakerXp(parent, args, context, userId);
+  const sharings = await getSharingXp(parent, args, context, userId);
+  const experienceProjects = await getExperienceProjectXp(parent, args, context, userId);
+  return {
+    got: activities.got + makers.got + sharings.got + experienceProjects.got,
+    pending: activities.pending + makers.pending + sharings.pending + experienceProjects.pending
+  };
+}
+
+async function getActivitiesXp(parent, args, context, userId) {
+  let activities = await getUserActivities(parent, args, context, userId);
+  const now = new Date(Date.now());
+
+  let got = activities.reduce((acc, elem) => elem.presence === true ? acc + elem.xp : acc, 0);
+  let pending = activities.reduce((acc, elem) => {
+    const elemDate = new Date(elem['activity']['end']);
+    return elem.presence === false && elemDate < now ? acc + elem.xp : acc
+  }, 0);
+  return {got: got, pending: pending};
+}
+
+async function getMakerXp(parent, args, context, userId) {
+  let makers = await getUserMaker(parent, args, context, userId);
+  let got = makers.reduce((acc, elem) => elem.status === STATUS.FINISHED ? acc + elem.xp : acc, 0);
+  let pending = makers.reduce((acc, elem) => elem.status === STATUS.ACCEPTED ? acc + elem.xp : acc, 0);
+  return {got: got, pending: pending};
+}
+
+async function getSharingXp(parent, args, context, userId) {
+  let sharings = await getUserSharing(parent, args, context, userId);
+  let got = sharings.reduce((acc, elem) => elem.status === STATUS.FINISHED ? acc + elem.xp : acc, 0);
+  let pending = sharings.reduce((acc, elem) => elem.status === STATUS.ACCEPTED ? acc + elem.xp : acc, 0);
+  return {got: got, pending: pending};
+}
+
+async function getExperienceProjectXp(parent, args, context, userId) {
+  let experienceProjects = await getUserExperienceProjects(parent, args, context, userId);
+  let got = experienceProjects.reduce((acc, elem) => elem.status === STATUS.FINISHED ? acc + 3 : acc, 0);
+  let pending = experienceProjects.reduce((acc, elem) => elem.status === STATUS.ACCEPTED ? acc + 3 : acc, 0);
+  return {got: got, pending: pending};
 }
 
 async function getUserActivities(parent, args, context, userId) {
-  if (userId === undefined || userId === '') {
-    throw new Error('Empty code');
-  }
   const query = `
     query {
       userPresences(
@@ -114,6 +137,7 @@ async function getUserActivities(parent, args, context, userId) {
         }
       ) {
         presence
+        xp
         activity {
           code
           title
@@ -129,62 +153,53 @@ async function getUserActivities(parent, args, context, userId) {
   return userPresences.userPresences;
 }
 
-async function getAllActivities(parent, args, context) {
+async function getAllActivities(_parent, _args, _context) {
   return prisma.activities({});
 }
 
 async function getUserMaker(parent, args, context, userId) {
-  if (userId === undefined || userId === '') {
-    throw new Error('Empty code');
-  }
   const user = await prisma.user({id: userId});
   if (user === undefined || user === null) {
     throw new Error('Invalid user');
   }
   const allMakers = await prisma.makers({});
-  const userMakers = allMakers.map((elem) => {
+  return allMakers.map((elem) => {
     if (elem.co_workers.find(e => e === user.email) !== undefined)
       return elem;
   }).filter((elem) => elem !== undefined);
-  return userMakers;
 }
 
 async function getUserSharing(parent, args, context, userId) {
-  if (userId === undefined || userId === '') {
-    throw new Error('Empty code');
-  }
-  const user = await prisma.user({id: userId});
-  if (user === undefined || user === null) {
-    throw new Error('Invalid user');
-  }
-  const allSharings = await prisma.sharings({});
-  const userSharings = allSharings.map((elem) => {
+  const user = await getUser(userId);
+  const allSharing = await prisma.sharings({});
+  return allSharing.map((elem) => {
     if (elem.co_workers.find(e => e === user.email) !== undefined)
       return elem;
   }).filter((elem) => elem !== undefined);
-  return userSharings;
 }
 
 async function getUserExperienceProjects(parent, args, context, userId) {
-  if (userId === undefined || userId === '') {
-    throw new Error('Empty code');
-  }
   const user = await prisma.user({id: userId});
   if (user === undefined || user === null) {
     throw new Error('Invalid user');
   }
   const allProjects = await prisma.experienceProjects({});
-  const userProjects = allProjects.map((elem) => {
+  return allProjects.map((elem) => {
     if (elem.user === user.email)
       return elem;
   }).filter((elem) => elem !== undefined);
-  return userProjects;
 }
 
 export const Query = {
   login: handleErrors(login),
   loginCookie: handleErrors_login(loginCookie),
+
   getXp: handleErrors_login(getXp),
+  getActivitiesXp: handleErrors_login(getActivitiesXp),
+  getMakerXp: handleErrors_login(getMakerXp),
+  getSharingXp: handleErrors_login(getSharingXp),
+  getExperienceProjectXp: handleErrors_login(getExperienceProjectXp),
+
   getUserActivities: handleErrors_login(getUserActivities),
   getAllActivities: handleErrors(getAllActivities),
   getUserMaker: handleErrors_login(getUserMaker),
