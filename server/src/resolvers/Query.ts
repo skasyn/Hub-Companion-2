@@ -103,7 +103,7 @@ async function getActivitiesXp(parent, args, context, userId) {
   let got = activities.reduce((acc, elem) => elem.presence === true ? acc + elem.xp : acc, 0);
   let pending = activities.reduce((acc, elem) => {
     const elemDate = new Date(elem['activity']['end']);
-    return elem.presence === false && elemDate < now ? acc + elem.xp : acc
+    return elem.presence === false && elemDate > now ? acc + elem['activity']['xp'] : acc
   }, 0);
   return {got: got, pending: pending};
 }
@@ -142,6 +142,7 @@ async function getUserActivities(parent, args, context, userId) {
         presence
         xp
         activity {
+          xp
           code
           title
           description
