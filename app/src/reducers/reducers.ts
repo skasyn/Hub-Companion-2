@@ -1,4 +1,4 @@
-import { User } from '../types/types';
+import {User, XpVars} from '../types/types';
 import { createStore } from 'react-hooks-global-state';
 
 const InitialState = {
@@ -10,8 +10,8 @@ const InitialState = {
 };
 
 export type Action =
-  | { type: 'loginUser', user: User, jwt: String }
-  | { type: 'loginUserCookie', user: User, jwt: String }
+  | { type: 'loginUser', user: User, jwt: String, xp: XpVars }
+  | { type: 'loginUserCookie', user: User, jwt: String, xp: XpVars }
   | { type: 'changePage', page: Number }
   | { type: 'disconnect' }
   | { type: 'updateUser', user: User};
@@ -24,6 +24,7 @@ export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
         date.setTime(date.getTime() + (2 * 60 * 60 * 1000));
         document.cookie = "id = " + action.jwt + "; expires = " + date.toString();
         window.history.pushState({}, document.title, '/');
+        action.user.xp = action.xp;
         return {
           ...state,
           user: action.user,
@@ -31,6 +32,7 @@ export const { GlobalStateProvider, dispatch, useGlobalState } = createStore(
         };
       }
       case 'loginUserCookie': {
+        action.user.xp = action.xp;
         return {
           ...state,
           user: action.user,

@@ -13,8 +13,8 @@ require('dotenv').config();
 const LoginButton: React.FC = () => {
   return (
     <Button variant="contained" color="primary" href={process.env.REACT_APP_OFFICELINK}>
+      <LockOpenIcon style={{paddingRight: '0.5em'}}/>
       Login
-      <LockOpenIcon/>
     </Button>
   );
 };
@@ -29,7 +29,7 @@ export const LoadingConnectionCookie: React.FC<LoadingConnectionProps> = (props)
     { variables: { code: props.code }}
   );
   if (data !== undefined) {
-    dispatch({type: 'loginUserCookie', user: data.loginCookie, jwt: props.code});
+    dispatch({type: 'loginUserCookie', user: data.loginCookie.user, jwt: props.code, xp: data.loginCookie.xp});
   }
   return (
     <div>
@@ -45,7 +45,7 @@ export const LoadingConnectionOffice: React.FC<LoadingConnectionProps> = (props)
   );
   if (data !== undefined) {
     if (data.login !== null )
-      dispatch({type: 'loginUser', user: data.login.user, jwt: data.login.jwt});
+      dispatch({type: 'loginUser', user: data.login.user, jwt: data.login.jwt, xp: data.login.xp});
     else
       return (
         <div>

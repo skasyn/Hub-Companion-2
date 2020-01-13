@@ -11,6 +11,10 @@ export const LOGIN: any = gql`
         privilege
       }
       jwt
+      xp {
+        pending
+        got
+      }
     }
   }
 `;
@@ -18,18 +22,27 @@ export const LOGIN: any = gql`
 export const LOGIN_COOKIE: any = gql`
   query LOGIN_COOKIE($code: String!) {
     loginCookie(code: $code) {
-      name
-      email
-      year
-      plan
-      privilege
+      user {
+        name
+        email
+        year
+        plan
+        privilege
+      }
+      xp {
+        pending
+        got
+      }
     }
   }
 `;
 
 export const GET_XP: any = gql`
   query GET_XP($jwt: String!) {
-    getXp(code: $jwt)
+    getXp(code: $jwt) {
+        got
+        pending
+    }
   }
 `;
 
@@ -73,7 +86,7 @@ export const GET_USER_SHARING: any = gql`
           status
       }
   }
-`
+`;
 
 export const GET_USER_MAKER: any = gql`
   query GET_USER_MAKER($jwt: String!) {
@@ -91,7 +104,7 @@ export const GET_USER_MAKER: any = gql`
           status
       }
   }
-`
+`;
 
 export const GET_USER_EXPERIENCE_PROJECT: any = gql`
     query GET_USER_EXPERIENCE_PROJECT($jwt: String!) {
@@ -103,4 +116,4 @@ export const GET_USER_EXPERIENCE_PROJECT: any = gql`
             status
         }
     }
-`
+`;

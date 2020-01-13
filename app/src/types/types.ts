@@ -1,11 +1,16 @@
 export interface User {
   name: String,
-  xp: Number,
+  xp: XpVars,
   email: String,
   year: Number,
   plan: Number,
   privilege: Number,
   activities: Array<{title: String}>
+}
+
+export interface XpVars {
+  got: Number,
+  pending: Number
 }
 
 export interface Activity {
@@ -59,6 +64,7 @@ export interface LoginData {
   login: {
     user: User
     jwt: String
+    xp: XpVars
   }
 }
 export interface LoginVars {
@@ -66,7 +72,10 @@ export interface LoginVars {
 }
 
 export interface LoginCookieData {
-  loginCookie: User
+  loginCookie: {
+    user: User
+    xp: XpVars
+  }
 }
 
 export interface XpData {

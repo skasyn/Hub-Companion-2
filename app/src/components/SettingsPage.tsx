@@ -37,7 +37,7 @@ export const SettingsPage: React.FC = () => {
     const plan = Number(event.target.value);
     const response = await changePlan({variables: {jwt: jwt, plan: plan}});
     if (response !== undefined && response.data !== undefined && response.data.setPlan) {
-      user.plan = plan;
+      user.plan = plan as Number;
       dispatch({type: 'updateUser', user: user});
       setPlan(plan);
     }
