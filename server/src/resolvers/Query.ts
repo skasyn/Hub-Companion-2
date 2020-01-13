@@ -72,14 +72,17 @@ async function login(parent, args, context) {
     await checkShouldRefresh(parent, args, context);
   }
   const jwt = await generateJwt({id: user_found.id });
-  return {user: user_found, jwt: jwt};
+  const xp = await getXp(parent, args, context, user_found.id);
+  return {user: user_found, jwt: jwt, xp: xp};
 }
 
 async function loginCookie(parent, args, context, userId) {
   await checkShouldRefresh(parent, args, context);
-  return prisma.user({
-    id: userId
-  });
+  const xp = await getXp(parent, args, context, userId);
+  return {
+    user: prisma.user({id: userId}),
+    xp: xp
+  };
 }
 
 async function getXp(parent, args, context, userId) {

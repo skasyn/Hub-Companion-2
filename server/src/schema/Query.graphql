@@ -1,6 +1,12 @@
 type LoginResponse {
     user: User!
     jwt: String!
+    xp: XpResponse!
+}
+
+type LoginCookieResponse {
+    user: User!
+    xp: XpResponse!
 }
 
 type XpResponse {
@@ -10,7 +16,7 @@ type XpResponse {
 
 type Query {
     login(code: String!): LoginResponse
-    loginCookie(code: String!): User
+    loginCookie(code: String!): LoginCookieResponse
 
     getXp(code: String!): XpResponse!
     getActivitiesXp(code: String!): XpResponse!
