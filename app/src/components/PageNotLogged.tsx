@@ -58,6 +58,7 @@ export const LoadingConnectionOffice: React.FC<LoadingConnectionProps> = (props)
   return (
     <div>
       <CircularProgress/>
+      <Typography variant="h5" style={{padding: '1em'}}>It might take a few moments on your first connection</Typography>
     </div>
   );
 };
