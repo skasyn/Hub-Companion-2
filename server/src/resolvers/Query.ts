@@ -8,6 +8,29 @@ const querystring = require("querystring");
 
 require('dotenv').config();
 
+async function forceRefresh(parent, args, context) {
+  let lastRefresh = await prisma.databaseRefreshes();
+  const now: Date = new Date(Date.now());
+
+  if (lastRefresh.length === 0) {
+    await prisma.createDatabaseRefresh(
+      {
+        date: now.toISOString()
+      }
+    );
+  } else {
+    await prisma.updateDatabaseRefresh({
+      where: {
+        id: lastRefresh[0].id
+      },
+      data: {
+        date: now.toISOString()
+      }
+    })
+  }
+  await refresh(parent, args, context, "");
+}
+
 async function checkShouldRefresh(parent, args, context) {
   let lastRefresh = await prisma.databaseRefreshes();
   const now: Date = new Date(Date.now());
@@ -23,7 +46,6 @@ async function checkShouldRefresh(parent, args, context) {
     const then: Date = new Date(Date.parse(lastRefresh[0].date));
     const diff: number = now.getTime() - then.getTime();
     if (diff > 60 * 60 * 1000) {
-      await refresh(parent, args, context, "");
       await prisma.updateDatabaseRefresh({
         where: {
           id: lastRefresh[0].id
@@ -31,7 +53,8 @@ async function checkShouldRefresh(parent, args, context) {
         data: {
           date: now.toISOString()
         }
-      })
+      });
+      refresh(parent, args, context, "");
     }
   }
 }
@@ -67,7 +90,7 @@ async function login(parent, args, context) {
       name: user_data.data.displayName,
       email: user_data.data.mail,
     });
-    await refresh(parent, args, context, "");
+    await forceRefresh(parent, args, context);
   } else {
     await checkShouldRefresh(parent, args, context);
   }
