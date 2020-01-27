@@ -14,6 +14,11 @@ type XpResponse {
     pending: Int!
 }
 
+type AdminUserXp {
+    email: String!
+    xp: XpResponse!
+}
+
 type Query {
     login(code: String!): LoginResponse
     loginCookie(code: String!): LoginCookieResponse
@@ -29,4 +34,6 @@ type Query {
     getUserMaker(code: String!): [Maker!]!
     getUserSharing(code: String!): [Sharing!]!
     getUserExperienceProjects(code: String!): [ExperienceProject!]!
+
+    getAllUserXp(code: String!): [AdminUserXp!]!
 }

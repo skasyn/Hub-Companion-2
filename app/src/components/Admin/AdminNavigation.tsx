@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 
 import HomeIcon from '@material-ui/icons/Home';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 
 import {
   BrowserRouter as Router,
@@ -19,6 +20,7 @@ import {
 } from "react-router-dom";
 import {NavBar, navigationTheme, useNavigationStyles} from "../Shared/SharedNavigation";
 import {AdminHomePage} from "./AdminHomepage";
+import {DataDownloadPage} from "./DataDownloadPage";
 
 const Content: React.FC = () => {
   const classes = useNavigationStyles();
@@ -29,6 +31,9 @@ const Content: React.FC = () => {
         <Route path="/" exact>
           <AdminHomePage/>
         </Route>
+        <Route path="/data">
+          <DataDownloadPage/>
+        </Route>
     </main>
   )
 };
@@ -37,9 +42,9 @@ const HomeDrawerRoute: React.FC = (props: any) => {
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const classes = useNavigationStyles();
   const [, setPage] = useGlobalState('currentPage');
-  const [user] = useGlobalState('user');
   const pages = [
     {path: '/', text: 'Home', icon: (<ListItemIcon><HomeIcon/></ListItemIcon>)},
+    {path: '/data', text: 'Download Data', icon: (<ListItemIcon><FileCopyIcon/></ListItemIcon>)}
   ];
 
   const handleListItemClick = (

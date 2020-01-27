@@ -117,3 +117,15 @@ export const GET_USER_EXPERIENCE_PROJECT: any = gql`
         }
     }
 `;
+
+export const GET_ALL_USER_XP: any = gql`
+    query GET_ALL_USER_XP($jwt: String!) {
+        getAllUserXp(code: $jwt) {
+            email
+            xp {
+                got
+                pending
+            }
+        }
+    }
+`;

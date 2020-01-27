@@ -173,3 +173,14 @@ export interface ChangePlanVars {
 export interface ChangePlanData {
   setPlan: Boolean
 }
+
+export interface GetAllUserXpVars {
+  jwt: String,
+}
+
+export interface GetAllUserXpData {
+  getAllUserXp: [{
+    email: String,
+    xp: XpVars
+  }]
+}

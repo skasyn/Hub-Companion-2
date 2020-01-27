@@ -217,6 +217,20 @@ async function getUserExperienceProjects(parent, args, context, userId) {
   }).filter((elem) => elem !== undefined);
 }
 
+async function getAllUserXp(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid user');
+  }
+  await checkShouldRefresh(parent, args, context);
+  const allUsers = await prisma.users();
+  const allXp = allUsers.map((user) => {
+    const xp = getXp(parent, args, context, user.id);
+    return {email: user.email, xp: xp};
+  });
+  return allXp;
+}
+
 export const Query = {
   login: handleErrors(login),
   loginCookie: handleErrors_login(loginCookie),
@@ -232,4 +246,6 @@ export const Query = {
   getUserMaker: handleErrors_login(getUserMaker),
   getUserSharing: handleErrors_login(getUserSharing),
   getUserExperienceProjects: handleErrors_login(getUserExperienceProjects),
+
+  getAllUserXp: handleErrors_login(getAllUserXp),
 };

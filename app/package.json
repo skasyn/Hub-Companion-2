@@ -11,6 +11,7 @@
     "@types/jest": "24.0.18",
     "@types/node": "12.7.5",
     "@types/react": "16.9.2",
+    "@types/react-csv": "^1.1.1",
     "@types/react-dom": "16.9.0",
     "@types/react-router-dom": "^5.1.0",
     "apollo-boost": "^0.4.4",
@@ -19,10 +20,11 @@
     "material-table": "^1.53.0",
     "react": "^16.9.0",
     "react-apollo": "^3.1.1",
+    "react-csv": "^1.1.2",
     "react-dom": "^16.9.0",
     "react-hooks-global-state": "^0.15.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.1.2"
+    "react-scripts": "^3.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

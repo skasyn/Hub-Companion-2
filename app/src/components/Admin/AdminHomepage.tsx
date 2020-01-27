@@ -6,5 +6,5 @@ export const AdminHomePage: React.FC = () => {
     <Container>
       Admin Page
     </Container>
-  )
-}
+  );
+};
