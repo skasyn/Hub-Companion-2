@@ -3,7 +3,7 @@ import {
   Container, Grid,
   Typography
 } from "@material-ui/core";
-import { useGlobalState } from "../reducers/reducers";
+import { useGlobalState } from "../../reducers/reducers";
 
 const getPlanXp = (xp: Number) => {
   if (xp === 0)

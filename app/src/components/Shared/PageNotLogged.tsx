@@ -2,9 +2,9 @@ import React from 'react';
 import { useQuery } from 'react-apollo';
 import Button from '@material-ui/core/Button';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-import {LOGIN, LOGIN_COOKIE} from '../query/query';
-import {LoginCookieData, LoginData, LoginVars} from '../types/types';
-import { dispatch } from "../reducers/reducers";
+import {LOGIN, LOGIN_COOKIE} from '../../query/query';
+import {LoginCookieData, LoginData, LoginVars} from '../../types/types';
+import { dispatch } from "../../reducers/reducers";
 import {Card, Grid, CardMedia, CardContent, makeStyles, Typography} from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
@@ -112,7 +112,7 @@ const ConnectionDispatch: React.FC = () => {
       <Card className={classes.card} elevation={0}>
         <CardMedia
             className={classes.media}
-            image={require('../assets/hub_companion_2.png')}
+            image={require('../../assets/hub_companion_2.png')}
         />
         <CardContent className={classes.cardContent}>
           <CardNotLoggedContent/>

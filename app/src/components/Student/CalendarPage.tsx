@@ -5,11 +5,11 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import "@fullcalendar/core/main.css";
 import "@fullcalendar/timegrid/main.css";
 import {useQuery} from "@apollo/react-hooks";
-import {Activity, ActivityData, ActivityVars, AllActivitiesData} from "../types/types";
-import {GET_ACTIVITIES, GET_ALL_ACTIVITIES} from "../query/query";
+import {Activity, ActivityData, ActivityVars, AllActivitiesData} from "../../types/types";
+import {GET_ACTIVITIES, GET_ALL_ACTIVITIES} from "../../query/query";
 import {Container} from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import {useGlobalState} from "../reducers/reducers";
+import {useGlobalState} from "../../reducers/reducers";
 
 export const CalendarPage: React.FC = () => {
   const [jwt] = useGlobalState('jwt');

@@ -1,7 +1,8 @@
 import React from 'react';
 import { PageNotLogged } from './PageNotLogged';
-import { Navigation } from './Navigation';
-import {dispatch, GlobalStateProvider, useGlobalState} from "../reducers/reducers";
+import { Navigation } from '../Student/Navigation';
+import {AdminNavigation} from "../Admin/AdminNavigation";
+import {dispatch, GlobalStateProvider, useGlobalState} from "../../reducers/reducers";
 
 const LoginDispatch: React.FC = () => {
   const [user] = useGlobalState('user');
@@ -14,10 +15,12 @@ const LoginDispatch: React.FC = () => {
         <PageNotLogged/>
     );
   } else {
-    return (
-      <Navigation/>
-    );
+    if (user.privilege === 0)
+      return (<Navigation/>);
+    else if (user.privilege === 1)
+      return (<AdminNavigation/>);
   }
+  return (<div>Error</div>);
 };
 
 const App: React.FC = () => {

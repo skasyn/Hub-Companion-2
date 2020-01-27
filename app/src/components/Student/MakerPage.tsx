@@ -16,10 +16,10 @@ import {useMutation, useQuery} from "@apollo/react-hooks";
 import {
   SubmitMakerData, SubmitMakerVars,
   UserMakerData, UserMakerVars,
-} from "../types/types";
-import {SUBMIT_MAKER} from "../query/mutation";
-import {useGlobalState} from "../reducers/reducers";
-import {GET_USER_MAKER} from "../query/query";
+} from "../../types/types";
+import {SUBMIT_MAKER} from "../../query/mutation";
+import {useGlobalState} from "../../reducers/reducers";
+import {GET_USER_MAKER} from "../../query/query";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';

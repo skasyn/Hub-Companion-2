@@ -1,9 +1,9 @@
 import React from "react";
 import MaterialTable from "material-table";
 import {useQuery} from "@apollo/react-hooks";
-import {ActivityData, ActivityVars } from "../types/types";
-import {GET_ACTIVITIES} from "../query/query";
-import { useGlobalState } from "../reducers/reducers";
+import {ActivityData, ActivityVars } from "../../types/types";
+import {GET_ACTIVITIES} from "../../query/query";
+import { useGlobalState } from "../../reducers/reducers";
 
 import {
   Container,

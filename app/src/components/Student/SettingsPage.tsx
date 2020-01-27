@@ -5,10 +5,10 @@ import {
   Select, Divider,
 } from "@material-ui/core";
 import {useMutation} from "@apollo/react-hooks";
-import {useGlobalState} from "../reducers/reducers";
-import { dispatch } from "../reducers/reducers";
-import {ChangePlanData, ChangePlanVars, ChangeYearData, ChangeYearVars} from "../types/types";
-import {CHANGE_PLAN, CHANGE_YEAR} from "../query/mutation";
+import {useGlobalState} from "../../reducers/reducers";
+import { dispatch } from "../../reducers/reducers";
+import {ChangePlanData, ChangePlanVars, ChangeYearData, ChangeYearVars} from "../../types/types";
+import {CHANGE_PLAN, CHANGE_YEAR} from "../../query/mutation";
 
 const SpacedContainer = withStyles({
   root: {
