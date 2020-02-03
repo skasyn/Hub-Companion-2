@@ -129,3 +129,37 @@ export const GET_ALL_USER_XP: any = gql`
         }
     }
 `;
+
+export const GET_ADMIN_USER_DATA: any = gql`
+    query GET_ADMIN_USER_DATA($jwt: String!, $email: String!) {
+        getAdminUserInfo(code: $jwt, email: $email) {
+            user {
+                name
+                email
+                year
+                plan
+                privilege
+            }
+            xp {
+                got
+                pending
+            }
+            activitiesXp {
+                got
+                pending
+            }
+            makerXp {
+                got
+                pending
+            }
+            sharingXp {
+                got
+                pending
+            }
+            experienceProjectXp {
+                got
+                pending
+            }
+        }
+    }
+`;

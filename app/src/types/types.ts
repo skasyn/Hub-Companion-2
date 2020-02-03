@@ -184,3 +184,19 @@ export interface GetAllUserXpData {
     xp: XpVars
   }]
 }
+
+export interface AdminGetUserVars {
+  jwt: String,
+  email: String
+}
+
+export interface AdminGetUserData {
+  getAdminUserInfo: {
+    user: User,
+    xp: XpVars,
+    activitiesXp: XpVars,
+    makerXp: XpVars,
+    sharingXp: XpVars,
+    experienceProjectXp: XpVars
+  }
+}

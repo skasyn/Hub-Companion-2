@@ -19,6 +19,15 @@ type AdminUserXp {
     xp: XpResponse!
 }
 
+type AdminUserSearch {
+    user: User!
+    xp: XpResponse!
+    activitiesXp: XpResponse!
+    makerXp: XpResponse!
+    sharingXp: XpResponse!
+    experienceProjectXp: XpResponse!
+}
+
 type Query {
     login(code: String!): LoginResponse
     loginCookie(code: String!): LoginCookieResponse
@@ -36,4 +45,5 @@ type Query {
     getUserExperienceProjects(code: String!): [ExperienceProject!]!
 
     getAllUserXp(code: String!): [AdminUserXp!]!
+    getAdminUserInfo(code: String!, email: String!): AdminUserSearch
 }

@@ -231,6 +231,27 @@ async function getAllUserXp(parent, args, context, userId) {
   return allXp;
 }
 
+async function getAdminUserInfo(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid user');
+  }
+  if (args.email === undefined) {
+    throw new Error('No args');
+  }
+  let user_found = await prisma.user({
+    email: args.email
+  });
+  if (user_found === undefined || user_found === null)
+    return null;
+  const activities = await getActivitiesXp(parent, args, context, user_found.id);
+  const makers = await getMakerXp(parent, args, context, user_found.id);
+  const sharings = await getSharingXp(parent, args, context, user_found.id);
+  const experienceProjects = await getExperienceProjectXp(parent, args, context, user_found.id);
+  const allXp = await getXp(parent, args, context, user_found.id);
+  return {user: user_found, xp: allXp, activitiesXp: activities, makerXp: makers, sharingXp: sharings, experienceProjectXp: experienceProjects};
+};
+
 export const Query = {
   login: handleErrors(login),
   loginCookie: handleErrors_login(loginCookie),
@@ -248,4 +269,5 @@ export const Query = {
   getUserExperienceProjects: handleErrors_login(getUserExperienceProjects),
 
   getAllUserXp: handleErrors_login(getAllUserXp),
+  getAdminUserInfo: handleErrors_login(getAdminUserInfo),
 };

@@ -12,6 +12,7 @@ import {
 
 import HomeIcon from '@material-ui/icons/Home';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
+import SearchIcon from '@material-ui/icons/Search';
 
 import {
   BrowserRouter as Router,
@@ -21,6 +22,7 @@ import {
 import {NavBar, navigationTheme, useNavigationStyles} from "../Shared/SharedNavigation";
 import {AdminHomePage} from "./AdminHomepage";
 import {DataDownloadPage} from "./DataDownloadPage";
+import {SearchStudentPage} from "./SearchStudentPage";
 
 const Content: React.FC = () => {
   const classes = useNavigationStyles();
@@ -30,6 +32,9 @@ const Content: React.FC = () => {
       <div className={classes.toolbar}/>
         <Route path="/" exact>
           <AdminHomePage/>
+        </Route>
+        <Route path="/search_student">
+          <SearchStudentPage/>
         </Route>
         <Route path="/data">
           <DataDownloadPage/>
@@ -44,6 +49,7 @@ const HomeDrawerRoute: React.FC = (props: any) => {
   const [, setPage] = useGlobalState('currentPage');
   const pages = [
     {path: '/', text: 'Home', icon: (<ListItemIcon><HomeIcon/></ListItemIcon>)},
+    {path: '/search_student', text: 'Search Student', icon: (<ListItemIcon><SearchIcon/></ListItemIcon>)},
     {path: '/data', text: 'Download Data', icon: (<ListItemIcon><FileCopyIcon/></ListItemIcon>)}
   ];
 
