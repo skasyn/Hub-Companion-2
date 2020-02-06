@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {
-  Button,
+  Button, CircularProgress,
   Container,
   Grid,
   Table, TableBody,
@@ -31,6 +31,14 @@ interface UserInfosProps {
 
 const UserInfos: React.FC<UserInfosProps> = (props) => {
   console.log(props.data);
+  if (props.data === null || props.data.user === null) {
+    return (
+      <Container style={{marginTop: '5vh'}}>
+        Student not found
+      </Container>
+    );
+  }
+
   const xpData = [
     {name: 'Activities', xp: props.data.activitiesXp},
     {name: 'Makers', xp: props.data.makerXp},
@@ -81,9 +89,8 @@ const UserInfos: React.FC<UserInfosProps> = (props) => {
 
 export const SearchStudentPage: React.FC = () => {
   const [jwt] = useGlobalState('jwt');
-  const [student, setStudent] = useState('henri.roumegoux@epitech.eu');
+  const [student, setStudent] = useState('');
   const [searchStudent, { loading, data }] = useLazyQuery<AdminGetUserData, AdminGetUserVars>(GET_ADMIN_USER_DATA);
-  const [searched, setSearched] = useState(false);
 
   const handleChange = (event: any) => {
     setStudent(event.target.value);
@@ -91,12 +98,6 @@ export const SearchStudentPage: React.FC = () => {
   const search = () => {
     searchStudent({ variables: { jwt: jwt, email: student }});
   };
-  if (searched === false) {
-    search();
-    setSearched(true);
-  }
-  console.log(data);
-  console.log(loading);
 
   return (
     <Container>
@@ -106,7 +107,9 @@ export const SearchStudentPage: React.FC = () => {
             <AccountCircle/>
           </Grid>
           <Grid item xs={6}>
-            <TextField label="Search student" onChange={handleChange} style={{width: '100%'}}/>
+            <form onSubmit={(e) => {search(); e.preventDefault();}}>
+              <TextField label="Search student" onChange={handleChange} style={{width: '100%'}}/>
+            </form>
           </Grid>
           <Grid item>
             <Button onClick={search} variant="outlined">
@@ -114,6 +117,11 @@ export const SearchStudentPage: React.FC = () => {
             </Button>
           </Grid>
         </Grid>
+        {
+          loading === true && (
+            <CircularProgress/>
+          )
+        }
         {
           data !== undefined && data['getAdminUserInfo'] !== undefined && (
             <UserInfos data={data['getAdminUserInfo']}/>
