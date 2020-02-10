@@ -197,6 +197,7 @@ export interface AdminGetUserData {
     activitiesXp: XpVars,
     makerXp: XpVars,
     sharingXp: XpVars,
-    experienceProjectXp: XpVars
+    experienceProjectXp: XpVars,
+    activities: UserPresence[]
   }
 }

@@ -160,6 +160,17 @@ export const GET_ADMIN_USER_DATA: any = gql`
                 got
                 pending
             }
+            activities {
+                presence
+                activity {
+                    code
+                    title
+                    description
+                    begin
+                    end
+                    type
+                }
+            }
         }
     }
 `;

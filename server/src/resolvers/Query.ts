@@ -244,13 +244,14 @@ async function getAdminUserInfo(parent, args, context, userId) {
   });
   if (user_found === undefined || user_found === null)
     return null;
-  const activities = await getActivitiesXp(parent, args, context, user_found.id);
+  const activitiesXp = await getActivitiesXp(parent, args, context, user_found.id);
   const makers = await getMakerXp(parent, args, context, user_found.id);
   const sharings = await getSharingXp(parent, args, context, user_found.id);
   const experienceProjects = await getExperienceProjectXp(parent, args, context, user_found.id);
   const allXp = await getXp(parent, args, context, user_found.id);
-  return {user: user_found, xp: allXp, activitiesXp: activities, makerXp: makers, sharingXp: sharings, experienceProjectXp: experienceProjects};
-};
+  const activities = await getUserActivities(parent ,args, context, user_found.id);
+  return {user: user_found, xp: allXp, activitiesXp: activitiesXp, makerXp: makers, sharingXp: sharings, experienceProjectXp: experienceProjects, activities: activities};
+}
 
 export const Query = {
   login: handleErrors(login),

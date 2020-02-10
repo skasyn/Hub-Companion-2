@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {
   Button, CircularProgress,
   Container,
-  Grid,
+  Grid, Paper,
   Table, TableBody,
   TableCell,
   TableHead,
@@ -13,10 +13,11 @@ import {
 
 import "../../styles/index.css";
 import {AccountCircle} from "@material-ui/icons";
-import {AdminGetUserData, AdminGetUserVars, User, XpVars} from "../../types/types";
+import {AdminGetUserData, AdminGetUserVars, User, UserPresence, XpVars} from "../../types/types";
 import {GET_ADMIN_USER_DATA} from "../../query/query";
 import {useGlobalState} from "../../reducers/reducers";
 import {useLazyQuery} from "@apollo/react-hooks";
+import {ActivitiesTable} from "../Shared/ActivitiesTable";
 
 interface UserInfosProps {
   data: {
@@ -25,7 +26,8 @@ interface UserInfosProps {
     activitiesXp: XpVars,
     makerXp: XpVars,
     sharingXp: XpVars,
-    experienceProjectXp: XpVars
+    experienceProjectXp: XpVars,
+    activities: UserPresence[]
   }
 }
 
@@ -49,40 +51,46 @@ const UserInfos: React.FC<UserInfosProps> = (props) => {
 
   return (
     <Container style={{marginTop: '5vh'}}>
-      <Grid container direction="row">
-        <Grid item>
-          <Typography variant="h5">
-            {props.data.user.name}
-          </Typography>
-        </Grid>
-      </Grid>
-      <Table aria-label="xp-table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="left"   colSpan={3} className="table-border-right">Type</TableCell>
-            <TableCell align="center" colSpan={4}>XP</TableCell>
-            <TableCell align="right"  colSpan={3} className="table-border-left">Total</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell align="left"   colSpan={3} className="table-border-right"/>
-            <TableCell align="center" colSpan={2}>Got</TableCell>
-            <TableCell align="center" colSpan={2}>Expected</TableCell>
-            <TableCell align="left"   colSpan={3} className="table-border-left"/>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {
-            xpData.map(row => (
-              <TableRow key={row.name}>
-                <TableCell colSpan={3} className="table-border-right">{row.name}</TableCell>
-                <TableCell colSpan={2}>{row.xp.got}</TableCell>
-                <TableCell colSpan={2}>{row.xp.pending}</TableCell>
-                <TableCell colSpan={3} className="table-border-left">{(row.xp.got as number) + (row.xp.pending as number)}</TableCell>
+      <Paper elevation={2}>
+        <Container style={{paddingTop: '3vh', paddingBottom: '3vh'}}>
+          <Grid container direction="row">
+            <Grid item>
+              <Typography variant="h5">
+                {props.data.user.name}
+              </Typography>
+            </Grid>
+          </Grid>
+          <Table aria-label="xp-table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="left"   colSpan={3} className="table-border-right">Type</TableCell>
+                <TableCell align="center" colSpan={4}>XP</TableCell>
+                <TableCell align="right"  colSpan={3} className="table-border-left">Total</TableCell>
               </TableRow>
-            ))
-          }
-        </TableBody>
-      </Table>
+              <TableRow>
+                <TableCell align="left"   colSpan={3} className="table-border-right"/>
+                <TableCell align="center" colSpan={2}>Got</TableCell>
+                <TableCell align="center" colSpan={2}>Expected</TableCell>
+                <TableCell align="left"   colSpan={3} className="table-border-left"/>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {
+                xpData.map(row => (
+                  <TableRow key={row.name}>
+                    <TableCell colSpan={3} className="table-border-right">{row.name}</TableCell>
+                    <TableCell colSpan={2}>{row.xp.got}</TableCell>
+                    <TableCell colSpan={2}>{row.xp.pending}</TableCell>
+                    <TableCell colSpan={3} className="table-border-left">{(row.xp.got as number) + (row.xp.pending as number)}</TableCell>
+                  </TableRow>
+                ))
+              }
+            </TableBody>
+          </Table>
+        </Container>
+      </Paper>
+      <Container style={{height: '5vh'}}/>
+      <ActivitiesTable activities={props.data['activities']}/>
     </Container>
   );
 };
@@ -118,7 +126,7 @@ export const SearchStudentPage: React.FC = () => {
           </Grid>
         </Grid>
         {
-          loading === true && (
+          loading && (
             <CircularProgress/>
           )
         }

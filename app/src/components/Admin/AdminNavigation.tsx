@@ -5,7 +5,7 @@ import {useGlobalState} from "../../reducers/reducers";
 
 import {
   CssBaseline, Divider,
-  Drawer,
+  Drawer, Hidden,
   List,
   ListItem, ListItemIcon, ListItemText,
 } from "@material-ui/core";
@@ -79,14 +79,16 @@ const HomeDrawerRoute: React.FC = (props: any) => {
           pages.map((page, index) => {
             return (
               <div key={index}>
-                <ListItem
-                  button
-                  selected={selectedIndex === index}
-                  onClick={event => handleListItemClick(event, index, page['path'])}
-                >
-                  {page.icon}
-                  <ListItemText primary={page['text']}/>
-                </ListItem>
+                  <ListItem
+                    button
+                    selected={selectedIndex === index}
+                    onClick={event => handleListItemClick(event, index, page['path'])}
+                  >
+                    {page.icon}
+                    <Hidden smDown>
+                      <ListItemText primary={page['text']}/>
+                    </Hidden>
+                  </ListItem>
                 <Divider/>
               </div>
             );

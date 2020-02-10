@@ -9,7 +9,7 @@ import {useGlobalState} from "../../reducers/reducers";
 
 import {
   CssBaseline, Divider,
-  Drawer,
+  Drawer, Hidden,
   List,
   ListItem, ListItemIcon, ListItemText,
 } from "@material-ui/core";
@@ -110,7 +110,9 @@ const HomeDrawerRoute: React.FC = (props: any) => {
                   onClick={event => handleListItemClick(event, index, page['path'])}
                 >
                   {page.icon}
-                  <ListItemText primary={page['text']}/>
+                  <Hidden smDown>
+                    <ListItemText primary={page['text']}/>
+                  </Hidden>
                 </ListItem>
                 <Divider/>
               </div>

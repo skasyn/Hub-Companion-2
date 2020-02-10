@@ -26,6 +26,7 @@ type AdminUserSearch {
     makerXp: XpResponse!
     sharingXp: XpResponse!
     experienceProjectXp: XpResponse!
+    activities: [GetUserPresences!]!
 }
 
 type Query {

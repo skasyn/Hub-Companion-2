@@ -29,8 +29,6 @@ export const navigationTheme = createMuiTheme({
   },
 });
 
-const drawerWidth = 240;
-
 export const useNavigationStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -40,11 +38,21 @@ export const useNavigationStyles = makeStyles((theme: Theme) =>
       zIndex: theme.zIndex.drawer + 1,
     },
     drawer: {
-      width: drawerWidth,
+      [theme.breakpoints.down('md')]: {
+        width: 60
+      },
+      [theme.breakpoints.up('md')]: {
+        width: 240
+      },
       flexShrink: 0,
     },
     drawerPaper: {
-      width: drawerWidth,
+      [theme.breakpoints.down('md')]: {
+        width: 60
+      },
+      [theme.breakpoints.up('md')]: {
+        width: 240
+      },
     },
     content: {
       flexGrow: 1,
