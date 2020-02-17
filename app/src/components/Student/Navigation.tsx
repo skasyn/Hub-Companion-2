@@ -66,7 +66,7 @@ const Content: React.FC = () => {
 const HomeDrawerRoute: React.FC = (props: any) => {
   const [selectedIndex, setSelectedIndex] = React.useState(-1);
   const classes = useNavigationStyles();
-  const [, setPage] = useGlobalState('currentPage');
+  const [currPage, setPage] = useGlobalState('currentPage');
   const [user] = useGlobalState('user');
   const pages = [
     {path: '/', text: 'Home', icon: (<ListItemIcon><HomeIcon/></ListItemIcon>)},
@@ -78,6 +78,8 @@ const HomeDrawerRoute: React.FC = (props: any) => {
     {path: '/settings', text: 'Settings', icon: (<ListItemIcon><StyledBadge badgeContent={(user.year !== 0 && user.plan !== -1) ? 0 : ""} color="secondary" variant="dot"><TuneIcon/></StyledBadge></ListItemIcon>)}
   ];
 
+  if (selectedIndex !== currPage)
+    setSelectedIndex(currPage as number);
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,

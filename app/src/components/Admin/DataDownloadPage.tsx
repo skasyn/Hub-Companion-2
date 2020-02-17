@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Container} from "@material-ui/core";
+import {Button, Container, createStyles, makeStyles, Theme} from "@material-ui/core";
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import {useGlobalState} from "../../reducers/reducers";
 import {useQuery} from "@apollo/react-hooks";
@@ -14,7 +14,16 @@ const csvHeaders = [
   { label: "xp_potential", key: "xp.pending"}
 ];
 
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    cloudButton: {
+      marginRight: '0.5em'
+    }
+  })
+);
+
 export const DataDownloadPage: React.FC = () => {
+  const classes = useStyles();
   const [jwt] = useGlobalState('jwt');
   const { loading, error, data } = useQuery<GetAllUserXpData, GetAllUserXpVars>(
     GET_ALL_USER_XP,
@@ -43,7 +52,7 @@ export const DataDownloadPage: React.FC = () => {
         style={{textDecoration: "none"}}
       >
         <Button variant="contained" color="primary">
-          <CloudDownloadIcon style={{marginRight: '0.5em'}}/>
+          <CloudDownloadIcon className={classes.cloudButton}/>
           Download
         </Button>
       </CSVLink>

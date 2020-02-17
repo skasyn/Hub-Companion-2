@@ -1,9 +1,11 @@
 import React from "react";
 import {
+  Button,
   Container, Grid,
   Typography
 } from "@material-ui/core";
 import { useGlobalState } from "../../reducers/reducers";
+import {withRouter} from "react-router-dom";
 
 const getPlanXp = (xp: Number) => {
   if (xp === 0)
@@ -26,8 +28,14 @@ const calc_percent = (nb: Number, max: number) => {
   return xp_percent
 };
 
-export const HomePage: React.FC = () => {
+const HomePageRoute: React.FC = (props: any) => {
   const [user] = useGlobalState('user');
+  const [, setPage] = useGlobalState('currentPage');
+
+  const handleSettingsButtonClick = () => {
+    setPage(6);
+    props.history.push('/settings');
+  };
 
   if (!user)
     return (<div/>);
@@ -40,13 +48,15 @@ export const HomePage: React.FC = () => {
       </Typography>
       <Container style={{paddingTop: '10vh'}}>
         <Grid container direction="column" justify="center" alignItems="center" spacing={1}>
-          <Grid item>
+          <Grid item style={{filter: getPlanXp(user.plan) === -1 ? 'blur(3px)' : ''}}>
             <Typography style={{fontSize: "2em", fontWeight: 400, borderLeft: '0.5em solid #0277bd', paddingLeft: '0.5em'}}>{user.xp.got} acquired XP</Typography>
             <Typography style={{fontSize: "2em", fontWeight: 400, borderLeft: '0.5em solid #02a7dd', paddingLeft: '0.5em'}}>{user.xp.pending} potential XP </Typography>
-            <Typography style={{fontSize: "2em", fontWeight: 400}}>Total: {(user.xp.got as number) + (user.xp.pending as number)}XP / {getPlanXp(user.plan)}XP </Typography>
+            <Typography style={{fontSize: "2em", fontWeight: 400}}>Total: {(user.xp.got as number) + (user.xp.pending as number)}XP{user.plan > 0 ? " / " + getPlanXp(user.plan) + "XP" : ""} </Typography>
           </Grid>
           {getPlanXp(user.plan) === -1 &&
-          <Typography style={{fontSize: "2em", fontWeight: 400, color: "red"}}>You need to select a XP Goal</Typography>
+            <Button style={{marginTop: "-10vh", borderRadius: "1em"}} variant="contained" color="secondary" onClick={handleSettingsButtonClick}>
+                <Typography style={{fontSize: "2em", fontWeight: 400}}>You need to select a XP Goal</Typography>
+            </Button>
           }
           {getPlanXp(user.plan) !== -1 &&
             <svg viewBox="0 0 100 100" style={{maxHeight: '50vh'}}>
@@ -60,3 +70,5 @@ export const HomePage: React.FC = () => {
     </Container>
   );
 };
+
+export const HomePage = withRouter(HomePageRoute);

@@ -54,7 +54,7 @@ async function checkShouldRefresh(parent, args, context) {
           date: now.toISOString()
         }
       });
-      refresh(parent, args, context, "");
+      await refresh(parent, args, context, "");
     }
   }
 }
@@ -224,11 +224,10 @@ async function getAllUserXp(parent, args, context, userId) {
   }
   await checkShouldRefresh(parent, args, context);
   const allUsers = await prisma.users();
-  const allXp = allUsers.map((user) => {
+  return allUsers.map((user) => {
     const xp = getXp(parent, args, context, user.id);
     return {email: user.email, xp: xp};
   });
-  return allXp;
 }
 
 async function getAdminUserInfo(parent, args, context, userId) {
