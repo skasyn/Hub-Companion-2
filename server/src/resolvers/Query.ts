@@ -252,6 +252,30 @@ async function getAdminUserInfo(parent, args, context, userId) {
   return {user: user_found, xp: allXp, activitiesXp: activitiesXp, makerXp: makers, sharingXp: sharings, experienceProjectXp: experienceProjects, activities: activities};
 }
 
+async function getAdminMakers(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid user');
+  }
+  return prisma.makers({});
+}
+
+async function getAdminSharings(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid user');
+  }
+  return prisma.sharings({});
+}
+
+async function getAdminExperienceProjects(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid user');
+  }
+  return prisma.experienceProjects({});
+}
+
 export const Query = {
   login: handleErrors(login),
   loginCookie: handleErrors_login(loginCookie),
@@ -270,4 +294,7 @@ export const Query = {
 
   getAllUserXp: handleErrors_login(getAllUserXp),
   getAdminUserInfo: handleErrors_login(getAdminUserInfo),
+  getAdminMakers: handleErrors_login(getAdminMakers),
+  getAdminSharings: handleErrors_login(getAdminSharings),
+  getAdminExperienceProjects: handleErrors_login(getAdminExperienceProjects)
 };

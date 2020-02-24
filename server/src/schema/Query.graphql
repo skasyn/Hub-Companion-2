@@ -47,4 +47,7 @@ type Query {
 
     getAllUserXp(code: String!): [AdminUserXp!]!
     getAdminUserInfo(code: String!, email: String!): AdminUserSearch
+    getAdminMakers(code: String!): [Maker!]!
+    getAdminSharings(code: String!): [Sharing!]!
+    getAdminExperienceProjects(code: String!): [ExperienceProject!]!
 }

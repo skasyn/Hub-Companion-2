@@ -174,3 +174,46 @@ export const GET_ADMIN_USER_DATA: any = gql`
         }
     }
 `;
+
+export const GET_ADMIN_MAKERS: any = gql`
+    query GET_ADMIN_MAKER($jwt: String!) {
+        getAdminMakers(code: $jwt) {
+            title
+            description
+            co_workers
+            functionalities
+            technologies
+            delivery
+            organisation
+            resources
+            informations
+            xp
+            status
+        }
+    }
+`;
+
+export const GET_ADMIN_SHARINGS: any = gql`
+    query GET_ADMIN_SHARINGS($jwt: String!){
+        getAdminSharings(code: $jwt) {
+            title
+            co_workers
+            description
+            date
+            xp
+            status
+        }
+    }
+`;
+
+export const GET_ADMIN_EXPERIENCE_PROJECT: any = gql`
+    query GET_ADMIN_EXPERIENCE_PROJECT($jwt: String!) {
+        getAdminExperienceProjects(code: $jwt) {
+            title
+            description
+            competencies
+            informations
+            status
+        }
+    }
+`;

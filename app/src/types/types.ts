@@ -201,3 +201,27 @@ export interface AdminGetUserData {
     activities: UserPresence[]
   }
 }
+
+export interface AdminGetMakersVars {
+  jwt: String
+}
+
+export interface AdminGetMakersData {
+  getAdminMakers: Maker[]
+}
+
+export interface AdminGetSharingsVars {
+  jwt: String
+}
+
+export interface AdminGetSharingsData {
+  getAdminSharings: Sharing[]
+}
+
+export interface AdminGetExperienceProjectsVars {
+  jwt: String
+}
+
+export interface AdminGetExperienceProjectsData {
+  getAdminExperienceProjects: ExperienceProject[]
+}
