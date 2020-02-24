@@ -123,7 +123,10 @@ async function getActivitiesXp(parent, args, context, userId) {
   let activities = await getUserActivities(parent, args, context, userId);
   const now = new Date(Date.now());
 
-  let got = activities.reduce((acc, elem) => elem.presence === true ? acc + elem.xp : acc, 0);
+  let got = activities.reduce((acc, elem) => {
+    const elemDate = new Date(elem['activity']['end']);
+    return elem.presence || (!elem.presence && elemDate < now) ? acc + elem.xp : acc;
+  }, 0);
   let pending = activities.reduce((acc, elem) => {
     const elemDate = new Date(elem['activity']['end']);
     return elem.presence === false && elemDate > now ? acc + elem['activity']['xp'] : acc
