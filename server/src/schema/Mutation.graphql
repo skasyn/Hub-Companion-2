@@ -5,4 +5,7 @@ type Mutation {
     submitExperienceProject(code: String!, data: String!): Boolean!
     setYear(code: String!, year: Int!): Boolean!
     setPlan(code: String!, plan: Int!): Boolean!
+    changeMakerStatus(code: String!, data: String!): Boolean!
+    changeSharingStatus(code: String!, data: String!): Boolean!
+    changeExperienceProjectStatus(code: String!, data: String!): Boolean!
 }

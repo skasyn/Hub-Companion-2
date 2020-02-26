@@ -191,8 +191,30 @@ async function getUserMaker(parent, args, context, userId) {
   if (user === undefined || user === null) {
     throw new Error('Invalid user');
   }
-  const allMakers = await prisma.makers({});
-  return allMakers.map((elem) => {
+  const query = `
+    query {
+      makers {
+        title
+        description
+        co_workers
+        functionalities
+        technologies
+        delivery
+        organisation
+        resources
+        informations
+        xp
+        status
+        messages {
+          author
+          date
+          message
+        }
+      }
+    }
+  `;
+  let allMakers = await prisma.$graphql(query);
+  return allMakers.makers.map((elem) => {
     if (elem.co_workers.find(e => e === user.email) !== undefined)
       return elem;
   }).filter((elem) => elem !== undefined);
@@ -200,8 +222,25 @@ async function getUserMaker(parent, args, context, userId) {
 
 async function getUserSharing(parent, args, context, userId) {
   const user = await getUser(userId);
-  const allSharing = await prisma.sharings({});
-  return allSharing.map((elem) => {
+  const query = `
+    query {
+      sharings {
+        title
+        co_workers
+        description
+        date
+        xp
+        status
+        messages {
+          author
+          date
+          message
+        }
+      }
+    }
+  `;
+  const allSharing = await prisma.$graphql(query);
+  return allSharing.sharings.map((elem) => {
     if (elem.co_workers.find(e => e === user.email) !== undefined)
       return elem;
   }).filter((elem) => elem !== undefined);
@@ -212,8 +251,25 @@ async function getUserExperienceProjects(parent, args, context, userId) {
   if (user === undefined || user === null) {
     throw new Error('Invalid user');
   }
-  const allProjects = await prisma.experienceProjects({});
-  return allProjects.map((elem) => {
+  const query = `
+    query {
+      experienceProjects {
+        title
+        user
+        description
+        competencies
+        informations
+        status
+        messages {
+          author
+          date
+          message
+        }
+      }
+    }
+  `;
+  const allProjects = await prisma.$graphql(query);
+  return allProjects.experienceProjects.map((elem) => {
     if (elem.user === user.email)
       return elem;
   }).filter((elem) => elem !== undefined);
@@ -259,7 +315,31 @@ async function getAdminMakers(parent, args, context, userId) {
   if ((admin === undefined || admin === null) || admin.privilege === 0) {
     throw new Error('Invalid user');
   }
-  return prisma.makers({});
+  const query = `
+    query {
+      makers {
+        id
+        title
+        description
+        co_workers
+        functionalities
+        technologies
+        delivery
+        organisation
+        resources
+        informations
+        xp
+        status
+        messages {
+          author
+          date
+          message
+        }
+      }
+    }
+  `;
+  const allMakers = await prisma.$graphql(query);
+  return allMakers.makers;
 }
 
 async function getAdminSharings(parent, args, context, userId) {
@@ -267,7 +347,26 @@ async function getAdminSharings(parent, args, context, userId) {
   if ((admin === undefined || admin === null) || admin.privilege === 0) {
     throw new Error('Invalid user');
   }
-  return prisma.sharings({});
+  const query = `
+    query {
+      sharings {
+        id
+        title
+        co_workers
+        description
+        date
+        xp
+        status
+        messages {
+          author
+          date
+          message
+        }
+      }
+    }
+  `;
+  const allSharings = await prisma.$graphql(query);
+  return allSharings.sharings;
 }
 
 async function getAdminExperienceProjects(parent, args, context, userId) {
@@ -275,7 +374,26 @@ async function getAdminExperienceProjects(parent, args, context, userId) {
   if ((admin === undefined || admin === null) || admin.privilege === 0) {
     throw new Error('Invalid user');
   }
-  return prisma.experienceProjects({});
+  const query = `
+    query {
+      experienceProjects {
+        id
+        title
+        user
+        description
+        competencies
+        informations
+        status
+        messages {
+          author
+          date
+          message
+        }
+      }
+    }
+  `;
+  const allExperience = await prisma.$graphql(query);
+  return allExperience.experienceProjects;
 }
 
 export const Query = {

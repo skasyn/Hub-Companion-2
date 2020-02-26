@@ -84,6 +84,11 @@ export const GET_USER_SHARING: any = gql`
           date
           xp
           status
+          messages {
+              author
+              date
+              message
+          }
       }
   }
 `;
@@ -102,6 +107,11 @@ export const GET_USER_MAKER: any = gql`
           informations
           xp
           status
+          messages {
+              author
+              date
+              message
+          }
       }
   }
 `;
@@ -114,6 +124,11 @@ export const GET_USER_EXPERIENCE_PROJECT: any = gql`
             competencies
             informations
             status
+            messages {
+                author
+                date
+                message
+            }
         }
     }
 `;
@@ -178,6 +193,7 @@ export const GET_ADMIN_USER_DATA: any = gql`
 export const GET_ADMIN_MAKERS: any = gql`
     query GET_ADMIN_MAKER($jwt: String!) {
         getAdminMakers(code: $jwt) {
+            id
             title
             description
             co_workers
@@ -189,6 +205,11 @@ export const GET_ADMIN_MAKERS: any = gql`
             informations
             xp
             status
+            messages {
+                author
+                date
+                message
+            }
         }
     }
 `;
@@ -196,12 +217,18 @@ export const GET_ADMIN_MAKERS: any = gql`
 export const GET_ADMIN_SHARINGS: any = gql`
     query GET_ADMIN_SHARINGS($jwt: String!){
         getAdminSharings(code: $jwt) {
+            id
             title
             co_workers
             description
             date
             xp
             status
+            messages {
+                author
+                date
+                message
+            }
         }
     }
 `;
@@ -209,11 +236,18 @@ export const GET_ADMIN_SHARINGS: any = gql`
 export const GET_ADMIN_EXPERIENCE_PROJECT: any = gql`
     query GET_ADMIN_EXPERIENCE_PROJECT($jwt: String!) {
         getAdminExperienceProjects(code: $jwt) {
+            id
             title
+            user
             description
             competencies
             informations
             status
+            messages {
+                author
+                date
+                message
+            }
         }
     }
 `;

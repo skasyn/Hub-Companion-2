@@ -35,3 +35,21 @@ export const CHANGE_PLAN: any = gql`
       setPlan(code: $jwt, plan: $plan)
   }
 `;
+
+export const CHANGE_STATUS_MAKER: any = gql`
+  mutation CHANGE_STATUS_MAKER($jwt: String!, $data: String!) {
+      changeMakerStatus(code: $jwt, data: $data)
+  }
+`;
+
+export const CHANGE_STATUS_SHARING: any = gql`
+    mutation CHANGE_STATUS_SHARING($jwt: String!, $data: String!) {
+        changeSharingStatus(code: $jwt, data: $data)
+    }
+`;
+
+export const CHANGE_STATUS_EXPERIENCE_PROJECT: any = gql`
+    mutation CHANGE_STATUS_EXPERIENCE_PROJECT($jwt: String!, $data: String!) {
+        changeExperienceProjectStatus(code: $jwt, data: $data)
+    }
+`;

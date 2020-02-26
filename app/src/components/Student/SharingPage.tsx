@@ -27,7 +27,7 @@ import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import {ReviewContainer, useSharingMakerStyles, isEmailValid, toMultiline} from "./SharingMakerUtils";
+import {ReviewContainer, useSharingMakerStyles, isEmailValid, toMultiline, MessageHistory} from "./SharingMakerUtils";
 
 const SharingForm: React.FC = () => {
   const [jwt] = useGlobalState('jwt');
@@ -324,6 +324,7 @@ const SharingList: React.FC = () => {
           detailPanel={rowData => {
             return (
               <div style={{padding: "20px"}}>
+                <MessageHistory data={rowData['messages']}/>
                 {toMultiline(rowData['description'])}
               </div>
             );

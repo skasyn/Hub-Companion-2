@@ -6,7 +6,7 @@ type Sharing {
     date: DateTime!
     xp: Int!
     status: Int!
-    messages: [ProjectMessages!]!
+    messages: [ProjectMessages!]
 }
 
 type Maker {
@@ -22,17 +22,18 @@ type Maker {
     informations: String!
     xp: Int!
     status: Int!
-    messages: [ProjectMessages!]!
+    messages: [ProjectMessages!]
 }
 
 type ExperienceProject {
     id: ID!
     title: String!
+    user: String!
     description: String!
     competencies: String!
     informations: String!
     status: Int!
-    messages: [ProjectMessages!]!
+    messages: [ProjectMessages!]
 }
 
 type ProjectMessages {

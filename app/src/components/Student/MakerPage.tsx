@@ -25,7 +25,7 @@ import MaterialTable from "material-table";
 import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
-import {ReviewContainer, useSharingMakerStyles, isEmailValid} from "./SharingMakerUtils";
+import {ReviewContainer, useSharingMakerStyles, isEmailValid, MessageHistory} from "./SharingMakerUtils";
 
 const MakerForm: React.FC = () => {
   const [jwt] = useGlobalState('jwt');
@@ -389,6 +389,7 @@ const MakerList: React.FC = () => {
           detailPanel={(rowData) => {
             return (
               <div style={{padding: "20px"}}>
+                <MessageHistory data={rowData['messages']}/>
                 <ReviewContainer title="Description" data={rowData['description']}/>
                 <ReviewContainer title="Functionalities" data={rowData['functionalities']}/>
                 <ReviewContainer title="Technologies" data={rowData['technologies']}/>

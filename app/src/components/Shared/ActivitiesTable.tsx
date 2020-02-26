@@ -12,7 +12,6 @@ interface ActivitiesPageProps {
 }
 
 export const ActivitiesTable: React.FC<ActivitiesPageProps> = (props) => {
-  console.log(props.activities);
   return (
     <MaterialTable
       columns={[
@@ -32,7 +31,7 @@ export const ActivitiesTable: React.FC<ActivitiesPageProps> = (props) => {
             const diff = (date.getTime() - now.getTime()) / (1000 * 3600 * 24);
             if (rowData.presence) {
               return <CheckIcon htmlColor="green"/>
-            } else if (diff > - 1) {
+            } else if (diff > - 0.5) {
               return <AlarmIcon htmlColor="orange"/>
             } else {
               return <ClearIcon htmlColor="red"/>

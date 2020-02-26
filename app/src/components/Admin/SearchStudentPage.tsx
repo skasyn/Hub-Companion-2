@@ -32,7 +32,6 @@ interface UserInfosProps {
 }
 
 const UserInfos: React.FC<UserInfosProps> = (props) => {
-  console.log(props.data);
   if (props.data === null || props.data.user === null) {
     return (
       <Container style={{marginTop: '5vh'}}>

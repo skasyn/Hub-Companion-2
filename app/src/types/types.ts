@@ -28,15 +28,18 @@ export interface UserPresence {
 }
 
 export interface Sharing {
+  id: String,
   title: String,
   co_workers: String[],
   description: String,
   date: String,
   xp: Number,
-  status: Number
+  status: Number,
+  messages: ProjectMessages[]
 }
 
 export interface Maker {
+  id: String,
   title: String,
   description: String,
   co_workers: String[],
@@ -47,16 +50,25 @@ export interface Maker {
   resources: String,
   informations: String,
   xp: Number,
-  status: Number
+  status: Number,
+  messages: ProjectMessages[]
 }
 
 export interface ExperienceProject {
+  id: String,
   user: String,
   title: String,
   description: String,
   competencies: String,
   informations: String,
-  status: Number
+  status: Number,
+  messages: ProjectMessages[]
+}
+
+export interface ProjectMessages {
+  author: String,
+  date: String,
+  message: String
 }
 
 
@@ -224,4 +236,31 @@ export interface AdminGetExperienceProjectsVars {
 
 export interface AdminGetExperienceProjectsData {
   getAdminExperienceProjects: ExperienceProject[]
+}
+
+export interface ChangeStatusMakerVars {
+  jwt: String,
+  data: String
+}
+
+export interface ChangeStatusMakerData {
+  submitExperienceProject: Boolean
+}
+
+export interface ChangeStatusSharingVars {
+  jwt: String,
+  data: String
+}
+
+export interface ChangeStatusSharingData {
+  submitExperienceProject: Boolean
+}
+
+export interface ChangeStatusExperienceProjectVars {
+  jwt: String,
+  data: String
+}
+
+export interface ChangeStatusExperienceProjectData {
+  submitExperienceProject: Boolean
 }

@@ -31,7 +31,7 @@ async function submitMaker(parent, args, context, userId) {
         organisation: data.organisation,
         resources: data.resources,
         informations: data.informations,
-        status: 0
+        status: 0,
       }
     )
   } catch (e) {
@@ -53,7 +53,7 @@ async function submitSharing(parent, args, context, userId) {
         description: data.description,
         co_workers: { set: data.co_workers },
         date: zeroDate.toISOString(),
-        status: 0
+        status: 0,
       }
     );
   } catch (e) {
@@ -75,7 +75,7 @@ async function submitExperienceProject(parent, args, context, userId) {
         description: data.description,
         competencies: data.competencies,
         informations: data.informations,
-        status: 0
+        status: 0,
       }
     );
   } catch (e) {
@@ -122,6 +122,98 @@ async function setPlan(parent, args, context, userId) {
   return true;
 }
 
+async function changeMakerStatus(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid User');
+  }
+  const data = JSON.parse(args.data);
+  const now = new Date(Date.now());
+  try {
+    const mess = await prisma.createProjectMessages({
+      date: now.toISOString(),
+      author: data.author,
+      message: data.message
+    });
+    await prisma.updateMaker({
+      where: {
+        id: data.id
+      },
+      data: {
+        status: data.status,
+        xp: data.xp,
+        messages: {
+          connect: {id: mess.id}
+        }
+      }
+    });
+  } catch (e) {
+    return false
+  }
+  return true;
+}
+async function changeSharingStatus(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid User');
+  }
+  try {
+    const data = JSON.parse(args.data);
+    const zeroDate = new Date(0);
+    const now = new Date(Date.now());
+    const mess = await prisma.createProjectMessages({
+      date: now.toISOString(),
+      author: data.author,
+      message: data.message
+    });
+    await prisma.updateSharing({
+      where: {
+        id: data.id
+      },
+      data: {
+        status: data.status,
+        xp: data.xp,
+        date: data.date !== '' ? data.date : zeroDate.toISOString(),
+        messages: {
+          connect: { id: mess.id }
+        }
+      }
+    });
+  } catch (e) {
+    return false
+  }
+  return true;
+}
+async function changeExperienceProjectStatus(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid User');
+  }
+  try {
+    const data = JSON.parse(args.data);
+    const now = new Date(Date.now());
+    const mess = await prisma.createProjectMessages({
+      date: now.toISOString(),
+      author: data.author,
+      message: data.message
+    });
+    await prisma.updateExperienceProject({
+      where: {
+        id: data.id
+      },
+      data: {
+        status: data.status,
+        messages: {
+          connect: { id: mess.id }
+        }
+      }
+    });
+  } catch (e) {
+    return false
+  }
+  return true;
+}
+
 export const Mutation = {
   refresh: handleErrors_login(refresh),
   submitMaker: handleErrors_login(submitMaker),
@@ -129,4 +221,7 @@ export const Mutation = {
   submitExperienceProject: handleErrors_login(submitExperienceProject),
   setYear: handleErrors_login(setYear),
   setPlan: handleErrors_login(setPlan),
+  changeMakerStatus: handleErrors_login(changeMakerStatus),
+  changeSharingStatus: handleErrors_login(changeSharingStatus),
+  changeExperienceProjectStatus: handleErrors_login(changeExperienceProjectStatus),
 };
