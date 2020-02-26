@@ -281,10 +281,81 @@ async function getAllUserXp(parent, args, context, userId) {
     throw new Error('Invalid user');
   }
   await checkShouldRefresh(parent, args, context);
+  const allUserActivities = await prisma.$graphql(`
+    query {
+      userPresences {
+        user {
+          id
+        }
+        presence
+        xp
+        activity {
+          xp
+          end
+        }
+      }
+    }
+  `);
+  const allMakers = await prisma.$graphql(`
+    query {
+      makers {
+        co_workers
+        status
+        xp
+      }
+    }
+  `);
+  const allSharings = await prisma.$graphql(`
+    query {
+      sharings {
+        co_workers
+        status
+        xp
+      }
+    }
+  `);
+  const allXpProjects = await prisma.$graphql(`
+    query {
+      experienceProjects {
+        user
+        status
+      }
+    }
+  `);
+  const now = new Date(Date.now());
   const allUsers = await prisma.users();
   return allUsers.map((user) => {
-    const xp = getXp(parent, args, context, user.id);
-    return {email: user.email, xp: xp};
+    const userMakers = allMakers.makers.map((elem) => {
+      if (elem.co_workers.find(e => e === user.email) !== undefined)
+        return elem;
+    }).filter((elem) => elem !== undefined);
+    let got = userMakers.reduce((acc, elem) => elem.status === STATUS.FINISHED ? acc + elem.xp : acc, 0);
+    let pending = userMakers.reduce((acc, elem) => elem.status === STATUS.ACCEPTED ? acc + elem.xp : acc, 0);
+    const userSharings = allSharings.sharings.map((elem) => {
+      if (elem.co_workers.find(e => e === user.email) !== undefined)
+        return elem;
+    }).filter((elem) => elem !== undefined);
+    got += userSharings.reduce((acc, elem) => elem.status === STATUS.FINISHED ? acc + elem.xp : acc, 0);
+    pending += userSharings.reduce((acc, elem) => elem.status === STATUS.ACCEPTED ? acc + elem.xp : acc, 0);
+    const userExperienceProjects = allXpProjects.experienceProjects.map((elem) => {
+      if (elem.user === user.email)
+        return elem;
+    }).filter((elem) => elem !== undefined);
+    got += userExperienceProjects.reduce((acc, elem) => elem.status === STATUS.FINISHED ? acc + 3 : acc, 0);
+    pending += userExperienceProjects.reduce((acc, elem) => elem.status === STATUS.ACCEPTED ? acc + 3 : acc, 0);
+    const userActivities = allUserActivities.userPresences.map((elem) => {
+      if (elem.user.id === user.id)
+        return elem;
+    }).filter((elem) => elem !== undefined);
+    got += userActivities.reduce((acc, elem) => {
+      const elemDate = new Date(elem['activity']['end']);
+      return elem.presence || (!elem.presence && elemDate < now) ? acc + elem.xp : acc;
+    }, 0);
+    pending += userActivities.reduce((acc, elem) => {
+      const elemDate = new Date(elem['activity']['end']);
+      return elem.presence === false && elemDate > now ? acc + elem['activity']['xp'] : acc
+    }, 0);
+    return {email: user.email, xp: {got: got, pending: pending}};
   });
 }
 

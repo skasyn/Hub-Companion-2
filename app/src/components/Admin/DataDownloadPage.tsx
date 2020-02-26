@@ -1,5 +1,5 @@
 import React from "react";
-import {Button, Container, createStyles, makeStyles, Theme} from "@material-ui/core";
+import {Button, Container, createStyles, Dialog, DialogActions, makeStyles, Theme} from "@material-ui/core";
 import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import {useGlobalState} from "../../reducers/reducers";
 import {useQuery} from "@apollo/react-hooks";
@@ -22,7 +22,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export const DataDownloadPage: React.FC = () => {
+interface DownloadModalProps {
+  handleClose: () => void
+}
+
+const DownloadModal: React.FC<DownloadModalProps> = (props) => {
   const classes = useStyles();
   const [jwt] = useGlobalState('jwt');
   const { loading, error, data } = useQuery<GetAllUserXpData, GetAllUserXpVars>(
@@ -30,10 +34,9 @@ export const DataDownloadPage: React.FC = () => {
     { variables: { jwt: jwt }}
   );
 
-  if (loading) return (<Container><CircularProgress/></Container>);
+  if (loading) return (<Container style={{height: '55px', width: '300px'}}><CircularProgress style={{marginTop: '0.5em', marginLeft: '7em'}}/></Container>);
   if (error) return (<Container>Error</Container>);
   if (data === undefined || data.getAllUserXp === null) return (<Container>Error</Container>);
-
   const getFormattedDate = () => {
     const now = new Date(Date.now());
 
@@ -44,18 +47,43 @@ export const DataDownloadPage: React.FC = () => {
   };
 
   return (
-    <Container>
-      <CSVLink
-        data={data.getAllUserXp}
-        headers={csvHeaders}
-        filename={`hub_export_${getFormattedDate()}.csv`}
-        style={{textDecoration: "none"}}
-      >
-        <Button variant="contained" color="primary">
-          <CloudDownloadIcon className={classes.cloudButton}/>
-          Download
+    <Container style={{height: '55px', width: '300px'}}>
+      <DialogActions>
+        <Button onClick={props.handleClose} color="primary">
+          Cancel
         </Button>
-      </CSVLink>
+        <CSVLink
+          data={data.getAllUserXp}
+          headers={csvHeaders}
+          filename={`hub_export_${getFormattedDate()}.csv`}
+          style={{textDecoration: "none"}}
+        >
+          <Button variant="contained" color="primary">
+            <CloudDownloadIcon className={classes.cloudButton}/>
+            Download
+          </Button>
+        </CSVLink>
+      </DialogActions>
+    </Container>
+  );
+};
+
+export const DataDownloadPage: React.FC = () => {
+  const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Container>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <DownloadModal handleClose={() => setOpen(false)}/>
+      </Dialog>
+      <Button variant="contained" color="primary" onClick={() => setOpen(true)}>
+        <CloudDownloadIcon className={classes.cloudButton}/>
+        Download
+      </Button>
     </Container>
   );
 };
