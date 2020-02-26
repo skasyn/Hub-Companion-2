@@ -1,6 +1,5 @@
 type User {
     id: ID!
-    outlookId: String!
     name: String!
     email: String!
     year: Int

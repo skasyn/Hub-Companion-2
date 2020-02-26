@@ -29,6 +29,7 @@ export interface NexusPrismaTypes {
       UserPresenceEdge: UserPresenceEdgeObject
       AggregateUserPresence: AggregateUserPresenceObject
       ExperienceProject: ExperienceProjectObject
+      ProjectMessages: ProjectMessagesObject
       ExperienceProjectConnection: ExperienceProjectConnectionObject
       ExperienceProjectEdge: ExperienceProjectEdgeObject
       AggregateExperienceProject: AggregateExperienceProjectObject
@@ -40,6 +41,9 @@ export interface NexusPrismaTypes {
       SharingConnection: SharingConnectionObject
       SharingEdge: SharingEdgeObject
       AggregateSharing: AggregateSharingObject
+      ProjectMessagesConnection: ProjectMessagesConnectionObject
+      ProjectMessagesEdge: ProjectMessagesEdgeObject
+      AggregateProjectMessages: AggregateProjectMessagesObject
       DatabaseRefresh: DatabaseRefreshObject
       DatabaseRefreshConnection: DatabaseRefreshConnectionObject
       DatabaseRefreshEdge: DatabaseRefreshEdgeObject
@@ -59,6 +63,8 @@ export interface NexusPrismaTypes {
       MakerPreviousValues: MakerPreviousValuesObject
       SharingSubscriptionPayload: SharingSubscriptionPayloadObject
       SharingPreviousValues: SharingPreviousValuesObject
+      ProjectMessagesSubscriptionPayload: ProjectMessagesSubscriptionPayloadObject
+      ProjectMessagesPreviousValues: ProjectMessagesPreviousValuesObject
       DatabaseRefreshSubscriptionPayload: DatabaseRefreshSubscriptionPayloadObject
       DatabaseRefreshPreviousValues: DatabaseRefreshPreviousValuesObject
     }
@@ -78,6 +84,7 @@ export interface NexusPrismaTypes {
       UserPresenceEdge: UserPresenceEdgeFieldDetails
       AggregateUserPresence: AggregateUserPresenceFieldDetails
       ExperienceProject: ExperienceProjectFieldDetails
+      ProjectMessages: ProjectMessagesFieldDetails
       ExperienceProjectConnection: ExperienceProjectConnectionFieldDetails
       ExperienceProjectEdge: ExperienceProjectEdgeFieldDetails
       AggregateExperienceProject: AggregateExperienceProjectFieldDetails
@@ -89,6 +96,9 @@ export interface NexusPrismaTypes {
       SharingConnection: SharingConnectionFieldDetails
       SharingEdge: SharingEdgeFieldDetails
       AggregateSharing: AggregateSharingFieldDetails
+      ProjectMessagesConnection: ProjectMessagesConnectionFieldDetails
+      ProjectMessagesEdge: ProjectMessagesEdgeFieldDetails
+      AggregateProjectMessages: AggregateProjectMessagesFieldDetails
       DatabaseRefresh: DatabaseRefreshFieldDetails
       DatabaseRefreshConnection: DatabaseRefreshConnectionFieldDetails
       DatabaseRefreshEdge: DatabaseRefreshEdgeFieldDetails
@@ -108,6 +118,8 @@ export interface NexusPrismaTypes {
       MakerPreviousValues: MakerPreviousValuesFieldDetails
       SharingSubscriptionPayload: SharingSubscriptionPayloadFieldDetails
       SharingPreviousValues: SharingPreviousValuesFieldDetails
+      ProjectMessagesSubscriptionPayload: ProjectMessagesSubscriptionPayloadFieldDetails
+      ProjectMessagesPreviousValues: ProjectMessagesPreviousValuesFieldDetails
       DatabaseRefreshSubscriptionPayload: DatabaseRefreshSubscriptionPayloadFieldDetails
       DatabaseRefreshPreviousValues: DatabaseRefreshPreviousValuesFieldDetails
     }
@@ -121,11 +133,13 @@ export interface NexusPrismaTypes {
       ActivityWhereUniqueInput: ActivityWhereUniqueInputInputObject
       UserPresenceWhereUniqueInput: UserPresenceWhereUniqueInputInputObject
       ExperienceProjectWhereUniqueInput: ExperienceProjectWhereUniqueInputInputObject
+      ProjectMessagesWhereInput: ProjectMessagesWhereInputInputObject
       ExperienceProjectWhereInput: ExperienceProjectWhereInputInputObject
       MakerWhereUniqueInput: MakerWhereUniqueInputInputObject
       MakerWhereInput: MakerWhereInputInputObject
       SharingWhereUniqueInput: SharingWhereUniqueInputInputObject
       SharingWhereInput: SharingWhereInputInputObject
+      ProjectMessagesWhereUniqueInput: ProjectMessagesWhereUniqueInputInputObject
       DatabaseRefreshWhereUniqueInput: DatabaseRefreshWhereUniqueInputInputObject
       DatabaseRefreshWhereInput: DatabaseRefreshWhereInputInputObject
       UserCreateInput: UserCreateInputInputObject
@@ -163,7 +177,16 @@ export interface NexusPrismaTypes {
       UserPresenceUpdateInput: UserPresenceUpdateInputInputObject
       UserPresenceUpdateManyMutationInput: UserPresenceUpdateManyMutationInputInputObject
       ExperienceProjectCreateInput: ExperienceProjectCreateInputInputObject
+      ProjectMessagesCreateManyInput: ProjectMessagesCreateManyInputInputObject
+      ProjectMessagesCreateInput: ProjectMessagesCreateInputInputObject
       ExperienceProjectUpdateInput: ExperienceProjectUpdateInputInputObject
+      ProjectMessagesUpdateManyInput: ProjectMessagesUpdateManyInputInputObject
+      ProjectMessagesUpdateWithWhereUniqueNestedInput: ProjectMessagesUpdateWithWhereUniqueNestedInputInputObject
+      ProjectMessagesUpdateDataInput: ProjectMessagesUpdateDataInputInputObject
+      ProjectMessagesUpsertWithWhereUniqueNestedInput: ProjectMessagesUpsertWithWhereUniqueNestedInputInputObject
+      ProjectMessagesScalarWhereInput: ProjectMessagesScalarWhereInputInputObject
+      ProjectMessagesUpdateManyWithWhereNestedInput: ProjectMessagesUpdateManyWithWhereNestedInputInputObject
+      ProjectMessagesUpdateManyDataInput: ProjectMessagesUpdateManyDataInputInputObject
       ExperienceProjectUpdateManyMutationInput: ExperienceProjectUpdateManyMutationInputInputObject
       MakerCreateInput: MakerCreateInputInputObject
       MakerCreateco_workersInput: MakerCreateco_workersInputInputObject
@@ -175,6 +198,8 @@ export interface NexusPrismaTypes {
       SharingUpdateInput: SharingUpdateInputInputObject
       SharingUpdateco_workersInput: SharingUpdateco_workersInputInputObject
       SharingUpdateManyMutationInput: SharingUpdateManyMutationInputInputObject
+      ProjectMessagesUpdateInput: ProjectMessagesUpdateInputInputObject
+      ProjectMessagesUpdateManyMutationInput: ProjectMessagesUpdateManyMutationInputInputObject
       DatabaseRefreshCreateInput: DatabaseRefreshCreateInputInputObject
       DatabaseRefreshUpdateInput: DatabaseRefreshUpdateInputInputObject
       DatabaseRefreshUpdateManyMutationInput: DatabaseRefreshUpdateManyMutationInputInputObject
@@ -184,6 +209,7 @@ export interface NexusPrismaTypes {
       ExperienceProjectSubscriptionWhereInput: ExperienceProjectSubscriptionWhereInputInputObject
       MakerSubscriptionWhereInput: MakerSubscriptionWhereInputInputObject
       SharingSubscriptionWhereInput: SharingSubscriptionWhereInputInputObject
+      ProjectMessagesSubscriptionWhereInput: ProjectMessagesSubscriptionWhereInputInputObject
       DatabaseRefreshSubscriptionWhereInput: DatabaseRefreshSubscriptionWhereInputInputObject
     }
   }
@@ -191,6 +217,7 @@ export interface NexusPrismaTypes {
     UserPresenceOrderByInput: UserPresenceOrderByInputValues,
     UserOrderByInput: UserOrderByInputValues,
     ActivityOrderByInput: ActivityOrderByInputValues,
+    ProjectMessagesOrderByInput: ProjectMessagesOrderByInputValues,
     ExperienceProjectOrderByInput: ExperienceProjectOrderByInputValues,
     MakerOrderByInput: MakerOrderByInputValues,
     SharingOrderByInput: SharingOrderByInputValues,
@@ -221,6 +248,9 @@ type QueryObject =
   | { name: 'sharing', args?: QuerySharingArgs[] | false, alias?: string  } 
   | { name: 'sharings', args?: QuerySharingsArgs[] | false, alias?: string  } 
   | { name: 'sharingsConnection', args?: QuerySharingsConnectionArgs[] | false, alias?: string  } 
+  | { name: 'projectMessages', args?: QueryProjectMessagesArgs[] | false, alias?: string  } 
+  | { name: 'projectMessageses', args?: QueryProjectMessagesesArgs[] | false, alias?: string  } 
+  | { name: 'projectMessagesesConnection', args?: QueryProjectMessagesesConnectionArgs[] | false, alias?: string  } 
   | { name: 'databaseRefresh', args?: QueryDatabaseRefreshArgs[] | false, alias?: string  } 
   | { name: 'databaseRefreshes', args?: QueryDatabaseRefreshesArgs[] | false, alias?: string  } 
   | { name: 'databaseRefreshesConnection', args?: QueryDatabaseRefreshesConnectionArgs[] | false, alias?: string  } 
@@ -244,6 +274,9 @@ type QueryFields =
   | 'sharing'
   | 'sharings'
   | 'sharingsConnection'
+  | 'projectMessages'
+  | 'projectMessageses'
+  | 'projectMessagesesConnection'
   | 'databaseRefresh'
   | 'databaseRefreshes'
   | 'databaseRefreshesConnection'
@@ -350,6 +383,24 @@ type QuerySharingsArgs =
   | 'first'
   | 'last'
 type QuerySharingsConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryProjectMessagesArgs =
+  | 'where'
+type QueryProjectMessagesesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryProjectMessagesesConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -612,6 +663,45 @@ export interface QueryFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.SharingConnection> | prisma.SharingConnection
   }
+  projectMessages: {
+    type: 'ProjectMessages'
+    args: Record<QueryProjectMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: ProjectMessagesWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages | null> | prisma.ProjectMessages | null
+  }
+  projectMessageses: {
+    type: 'ProjectMessages'
+    args: Record<QueryProjectMessagesesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ProjectMessagesWhereInput | null, orderBy?: prisma.ProjectMessagesOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages[]> | prisma.ProjectMessages[]
+  }
+  projectMessagesesConnection: {
+    type: 'ProjectMessagesConnection'
+    args: Record<QueryProjectMessagesesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: ProjectMessagesWhereInput | null, orderBy?: prisma.ProjectMessagesOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessagesConnection> | prisma.ProjectMessagesConnection
+  }
   databaseRefresh: {
     type: 'DatabaseRefresh'
     args: Record<QueryDatabaseRefreshArgs, core.NexusArgDef<string>>
@@ -659,7 +749,6 @@ export interface QueryFieldDetails {
 type UserObject =
   | UserFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'outlookId', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'year', args?: [] | false, alias?: string  } 
@@ -669,7 +758,6 @@ type UserObject =
 
 type UserFields =
   | 'id'
-  | 'outlookId'
   | 'name'
   | 'email'
   | 'year'
@@ -691,14 +779,6 @@ type UserActivitiesArgs =
 export interface UserFieldDetails {
   id: {
     type: 'ID'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  outlookId: {
-    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -1404,6 +1484,7 @@ type ExperienceProjectObject =
   | { name: 'competencies', args?: [] | false, alias?: string  } 
   | { name: 'informations', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
+  | { name: 'messages', args?: ExperienceProjectMessagesArgs[] | false, alias?: string  } 
 
 type ExperienceProjectFields =
   | 'id'
@@ -1413,9 +1494,17 @@ type ExperienceProjectFields =
   | 'competencies'
   | 'informations'
   | 'status'
+  | 'messages'
 
 
-
+type ExperienceProjectMessagesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
   
 
 export interface ExperienceProjectFieldDetails {
@@ -1469,6 +1558,74 @@ export interface ExperienceProjectFieldDetails {
   }
   status: {
     type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  messages: {
+    type: 'ProjectMessages'
+    args: Record<ExperienceProjectMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ExperienceProject">,
+      args: { where?: ProjectMessagesWhereInput | null, orderBy?: prisma.ProjectMessagesOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages[]> | prisma.ProjectMessages[]
+  }
+}
+  
+
+// Types for ProjectMessages
+
+type ProjectMessagesObject =
+  | ProjectMessagesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'author', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'message', args?: [] | false, alias?: string  } 
+
+type ProjectMessagesFields =
+  | 'id'
+  | 'author'
+  | 'date'
+  | 'message'
+
+
+
+  
+
+export interface ProjectMessagesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  author: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  message: {
+    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -1619,6 +1776,7 @@ type MakerObject =
   | { name: 'informations', args?: [] | false, alias?: string  } 
   | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
+  | { name: 'messages', args?: MakerMessagesArgs[] | false, alias?: string  } 
 
 type MakerFields =
   | 'id'
@@ -1633,9 +1791,17 @@ type MakerFields =
   | 'informations'
   | 'xp'
   | 'status'
+  | 'messages'
 
 
-
+type MakerMessagesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
   
 
 export interface MakerFieldDetails {
@@ -1734,6 +1900,19 @@ export interface MakerFieldDetails {
     list: undefined
     nullable: false
     resolve: undefined
+  }
+  messages: {
+    type: 'ProjectMessages'
+    args: Record<MakerMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Maker">,
+      args: { where?: ProjectMessagesWhereInput | null, orderBy?: prisma.ProjectMessagesOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages[]> | prisma.ProjectMessages[]
   }
 }
   
@@ -1874,6 +2053,7 @@ type SharingObject =
   | { name: 'date', args?: [] | false, alias?: string  } 
   | { name: 'xp', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
+  | { name: 'messages', args?: SharingMessagesArgs[] | false, alias?: string  } 
 
 type SharingFields =
   | 'id'
@@ -1883,9 +2063,17 @@ type SharingFields =
   | 'date'
   | 'xp'
   | 'status'
+  | 'messages'
 
 
-
+type SharingMessagesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
   
 
 export interface SharingFieldDetails {
@@ -1944,6 +2132,19 @@ export interface SharingFieldDetails {
     list: undefined
     nullable: false
     resolve: undefined
+  }
+  messages: {
+    type: 'ProjectMessages'
+    args: Record<SharingMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Sharing">,
+      args: { where?: ProjectMessagesWhereInput | null, orderBy?: prisma.ProjectMessagesOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages[]> | prisma.ProjectMessages[]
   }
 }
   
@@ -2062,6 +2263,131 @@ type AggregateSharingFields =
   
 
 export interface AggregateSharingFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for ProjectMessagesConnection
+
+type ProjectMessagesConnectionObject =
+  | ProjectMessagesConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type ProjectMessagesConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface ProjectMessagesConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ProjectMessagesConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'ProjectMessagesEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ProjectMessagesConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessagesEdge[]> | prisma.ProjectMessagesEdge[]
+  }
+  aggregate: {
+    type: 'AggregateProjectMessages'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ProjectMessagesConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateProjectMessages> | prisma.AggregateProjectMessages
+  }
+}
+  
+
+// Types for ProjectMessagesEdge
+
+type ProjectMessagesEdgeObject =
+  | ProjectMessagesEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type ProjectMessagesEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface ProjectMessagesEdgeFieldDetails {
+  node: {
+    type: 'ProjectMessages'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ProjectMessagesEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages> | prisma.ProjectMessages
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateProjectMessages
+
+type AggregateProjectMessagesObject =
+  | AggregateProjectMessagesFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateProjectMessagesFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateProjectMessagesFieldDetails {
   count: {
     type: 'Int'
     args: {}
@@ -2273,6 +2599,12 @@ type MutationObject =
   | { name: 'upsertSharing', args?: MutationUpsertSharingArgs[] | false, alias?: string  } 
   | { name: 'deleteSharing', args?: MutationDeleteSharingArgs[] | false, alias?: string  } 
   | { name: 'deleteManySharings', args?: MutationDeleteManySharingsArgs[] | false, alias?: string  } 
+  | { name: 'createProjectMessages', args?: MutationCreateProjectMessagesArgs[] | false, alias?: string  } 
+  | { name: 'updateProjectMessages', args?: MutationUpdateProjectMessagesArgs[] | false, alias?: string  } 
+  | { name: 'updateManyProjectMessageses', args?: MutationUpdateManyProjectMessagesesArgs[] | false, alias?: string  } 
+  | { name: 'upsertProjectMessages', args?: MutationUpsertProjectMessagesArgs[] | false, alias?: string  } 
+  | { name: 'deleteProjectMessages', args?: MutationDeleteProjectMessagesArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyProjectMessageses', args?: MutationDeleteManyProjectMessagesesArgs[] | false, alias?: string  } 
   | { name: 'createDatabaseRefresh', args?: MutationCreateDatabaseRefreshArgs[] | false, alias?: string  } 
   | { name: 'updateDatabaseRefresh', args?: MutationUpdateDatabaseRefreshArgs[] | false, alias?: string  } 
   | { name: 'updateManyDatabaseRefreshes', args?: MutationUpdateManyDatabaseRefreshesArgs[] | false, alias?: string  } 
@@ -2317,6 +2649,12 @@ type MutationFields =
   | 'upsertSharing'
   | 'deleteSharing'
   | 'deleteManySharings'
+  | 'createProjectMessages'
+  | 'updateProjectMessages'
+  | 'updateManyProjectMessageses'
+  | 'upsertProjectMessages'
+  | 'deleteProjectMessages'
+  | 'deleteManyProjectMessageses'
   | 'createDatabaseRefresh'
   | 'updateDatabaseRefresh'
   | 'updateManyDatabaseRefreshes'
@@ -2420,6 +2758,22 @@ type MutationUpsertSharingArgs =
 type MutationDeleteSharingArgs =
   | 'where'
 type MutationDeleteManySharingsArgs =
+  | 'where'
+type MutationCreateProjectMessagesArgs =
+  | 'data'
+type MutationUpdateProjectMessagesArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyProjectMessagesesArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertProjectMessagesArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteProjectMessagesArgs =
+  | 'where'
+type MutationDeleteManyProjectMessagesesArgs =
   | 'where'
 type MutationCreateDatabaseRefreshArgs =
   | 'data'
@@ -2908,6 +3262,84 @@ export interface MutationFieldDetails {
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
   }
+  createProjectMessages: {
+    type: 'ProjectMessages'
+    args: Record<MutationCreateProjectMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ProjectMessagesCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages> | prisma.ProjectMessages
+  }
+  updateProjectMessages: {
+    type: 'ProjectMessages'
+    args: Record<MutationUpdateProjectMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ProjectMessagesUpdateInput, where: ProjectMessagesWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages | null> | prisma.ProjectMessages | null
+  }
+  updateManyProjectMessageses: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyProjectMessagesesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: ProjectMessagesUpdateManyMutationInput, where?: ProjectMessagesWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertProjectMessages: {
+    type: 'ProjectMessages'
+    args: Record<MutationUpsertProjectMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ProjectMessagesWhereUniqueInput, create: ProjectMessagesCreateInput, update: ProjectMessagesUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages> | prisma.ProjectMessages
+  }
+  deleteProjectMessages: {
+    type: 'ProjectMessages'
+    args: Record<MutationDeleteProjectMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: ProjectMessagesWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages | null> | prisma.ProjectMessages | null
+  }
+  deleteManyProjectMessageses: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyProjectMessagesesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: ProjectMessagesWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
   createDatabaseRefresh: {
     type: 'DatabaseRefresh'
     args: Record<MutationCreateDatabaseRefreshArgs, core.NexusArgDef<string>>
@@ -3024,6 +3456,7 @@ type SubscriptionObject =
   | { name: 'experienceProject', args?: SubscriptionExperienceProjectArgs[] | false, alias?: string  } 
   | { name: 'maker', args?: SubscriptionMakerArgs[] | false, alias?: string  } 
   | { name: 'sharing', args?: SubscriptionSharingArgs[] | false, alias?: string  } 
+  | { name: 'projectMessages', args?: SubscriptionProjectMessagesArgs[] | false, alias?: string  } 
   | { name: 'databaseRefresh', args?: SubscriptionDatabaseRefreshArgs[] | false, alias?: string  } 
 
 type SubscriptionFields =
@@ -3033,6 +3466,7 @@ type SubscriptionFields =
   | 'experienceProject'
   | 'maker'
   | 'sharing'
+  | 'projectMessages'
   | 'databaseRefresh'
 
 
@@ -3047,6 +3481,8 @@ type SubscriptionExperienceProjectArgs =
 type SubscriptionMakerArgs =
   | 'where'
 type SubscriptionSharingArgs =
+  | 'where'
+type SubscriptionProjectMessagesArgs =
   | 'where'
 type SubscriptionDatabaseRefreshArgs =
   | 'where'
@@ -3130,6 +3566,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.SharingSubscriptionPayload | null> | prisma.SharingSubscriptionPayload | null
+  }
+  projectMessages: {
+    type: 'ProjectMessagesSubscriptionPayload'
+    args: Record<SubscriptionProjectMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: ProjectMessagesSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessagesSubscriptionPayload | null> | prisma.ProjectMessagesSubscriptionPayload | null
   }
   databaseRefresh: {
     type: 'DatabaseRefreshSubscriptionPayload'
@@ -3222,7 +3671,6 @@ export interface UserSubscriptionPayloadFieldDetails {
 type UserPreviousValuesObject =
   | UserPreviousValuesFields
   | { name: 'id', args?: [] | false, alias?: string  } 
-  | { name: 'outlookId', args?: [] | false, alias?: string  } 
   | { name: 'name', args?: [] | false, alias?: string  } 
   | { name: 'email', args?: [] | false, alias?: string  } 
   | { name: 'year', args?: [] | false, alias?: string  } 
@@ -3231,7 +3679,6 @@ type UserPreviousValuesObject =
 
 type UserPreviousValuesFields =
   | 'id'
-  | 'outlookId'
   | 'name'
   | 'email'
   | 'year'
@@ -3245,14 +3692,6 @@ type UserPreviousValuesFields =
 export interface UserPreviousValuesFieldDetails {
   id: {
     type: 'ID'
-    args: {}
-    description: string
-    list: undefined
-    nullable: false
-    resolve: undefined
-  }
-  outlookId: {
-    type: 'String'
     args: {}
     description: string
     list: undefined
@@ -4107,6 +4546,131 @@ export interface SharingPreviousValuesFieldDetails {
 }
   
 
+// Types for ProjectMessagesSubscriptionPayload
+
+type ProjectMessagesSubscriptionPayloadObject =
+  | ProjectMessagesSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type ProjectMessagesSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface ProjectMessagesSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"ProjectMessagesSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'ProjectMessages'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ProjectMessagesSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessages | null> | prisma.ProjectMessages | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'ProjectMessagesPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"ProjectMessagesSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.ProjectMessagesPreviousValues | null> | prisma.ProjectMessagesPreviousValues | null
+  }
+}
+  
+
+// Types for ProjectMessagesPreviousValues
+
+type ProjectMessagesPreviousValuesObject =
+  | ProjectMessagesPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'author', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'message', args?: [] | false, alias?: string  } 
+
+type ProjectMessagesPreviousValuesFields =
+  | 'id'
+  | 'author'
+  | 'date'
+  | 'message'
+
+
+
+  
+
+export interface ProjectMessagesPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  author: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  message: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for DatabaseRefreshSubscriptionPayload
 
 type DatabaseRefreshSubscriptionPayloadObject =
@@ -4215,13 +4779,11 @@ export interface DatabaseRefreshPreviousValuesFieldDetails {
 
 export interface UserWhereUniqueInput {
   id?: string | null
-  outlookId?: string | null
   email?: string | null
 }
 export type UserWhereUniqueInputInputObject =
   | Extract<keyof UserWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'outlookId', alias?: string  } 
   | { name: 'email', alias?: string  } 
   
 export interface UserPresenceWhereInput {
@@ -4326,20 +4888,6 @@ export interface UserWhereInput {
   id_not_starts_with?: string | null
   id_ends_with?: string | null
   id_not_ends_with?: string | null
-  outlookId?: string | null
-  outlookId_not?: string | null
-  outlookId_in?: string[]
-  outlookId_not_in?: string[]
-  outlookId_lt?: string | null
-  outlookId_lte?: string | null
-  outlookId_gt?: string | null
-  outlookId_gte?: string | null
-  outlookId_contains?: string | null
-  outlookId_not_contains?: string | null
-  outlookId_starts_with?: string | null
-  outlookId_not_starts_with?: string | null
-  outlookId_ends_with?: string | null
-  outlookId_not_ends_with?: string | null
   name?: string | null
   name_not?: string | null
   name_in?: string[]
@@ -4411,20 +4959,6 @@ export type UserWhereInputInputObject =
   | { name: 'id_not_starts_with', alias?: string  } 
   | { name: 'id_ends_with', alias?: string  } 
   | { name: 'id_not_ends_with', alias?: string  } 
-  | { name: 'outlookId', alias?: string  } 
-  | { name: 'outlookId_not', alias?: string  } 
-  | { name: 'outlookId_in', alias?: string  } 
-  | { name: 'outlookId_not_in', alias?: string  } 
-  | { name: 'outlookId_lt', alias?: string  } 
-  | { name: 'outlookId_lte', alias?: string  } 
-  | { name: 'outlookId_gt', alias?: string  } 
-  | { name: 'outlookId_gte', alias?: string  } 
-  | { name: 'outlookId_contains', alias?: string  } 
-  | { name: 'outlookId_not_contains', alias?: string  } 
-  | { name: 'outlookId_starts_with', alias?: string  } 
-  | { name: 'outlookId_not_starts_with', alias?: string  } 
-  | { name: 'outlookId_ends_with', alias?: string  } 
-  | { name: 'outlookId_not_ends_with', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'name_not', alias?: string  } 
   | { name: 'name_in', alias?: string  } 
@@ -4702,6 +5236,113 @@ export type ExperienceProjectWhereUniqueInputInputObject =
   | Extract<keyof ExperienceProjectWhereUniqueInput, string>
   | { name: 'id', alias?: string  } 
   
+export interface ProjectMessagesWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  author?: string | null
+  author_not?: string | null
+  author_in?: string[]
+  author_not_in?: string[]
+  author_lt?: string | null
+  author_lte?: string | null
+  author_gt?: string | null
+  author_gte?: string | null
+  author_contains?: string | null
+  author_not_contains?: string | null
+  author_starts_with?: string | null
+  author_not_starts_with?: string | null
+  author_ends_with?: string | null
+  author_not_ends_with?: string | null
+  date?: string | null
+  date_not?: string | null
+  date_in?: string[]
+  date_not_in?: string[]
+  date_lt?: string | null
+  date_lte?: string | null
+  date_gt?: string | null
+  date_gte?: string | null
+  message?: string | null
+  message_not?: string | null
+  message_in?: string[]
+  message_not_in?: string[]
+  message_lt?: string | null
+  message_lte?: string | null
+  message_gt?: string | null
+  message_gte?: string | null
+  message_contains?: string | null
+  message_not_contains?: string | null
+  message_starts_with?: string | null
+  message_not_starts_with?: string | null
+  message_ends_with?: string | null
+  message_not_ends_with?: string | null
+  AND?: ProjectMessagesWhereInput[]
+}
+export type ProjectMessagesWhereInputInputObject =
+  | Extract<keyof ProjectMessagesWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'author_not', alias?: string  } 
+  | { name: 'author_in', alias?: string  } 
+  | { name: 'author_not_in', alias?: string  } 
+  | { name: 'author_lt', alias?: string  } 
+  | { name: 'author_lte', alias?: string  } 
+  | { name: 'author_gt', alias?: string  } 
+  | { name: 'author_gte', alias?: string  } 
+  | { name: 'author_contains', alias?: string  } 
+  | { name: 'author_not_contains', alias?: string  } 
+  | { name: 'author_starts_with', alias?: string  } 
+  | { name: 'author_not_starts_with', alias?: string  } 
+  | { name: 'author_ends_with', alias?: string  } 
+  | { name: 'author_not_ends_with', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'date_not', alias?: string  } 
+  | { name: 'date_in', alias?: string  } 
+  | { name: 'date_not_in', alias?: string  } 
+  | { name: 'date_lt', alias?: string  } 
+  | { name: 'date_lte', alias?: string  } 
+  | { name: 'date_gt', alias?: string  } 
+  | { name: 'date_gte', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  | { name: 'message_not', alias?: string  } 
+  | { name: 'message_in', alias?: string  } 
+  | { name: 'message_not_in', alias?: string  } 
+  | { name: 'message_lt', alias?: string  } 
+  | { name: 'message_lte', alias?: string  } 
+  | { name: 'message_gt', alias?: string  } 
+  | { name: 'message_gte', alias?: string  } 
+  | { name: 'message_contains', alias?: string  } 
+  | { name: 'message_not_contains', alias?: string  } 
+  | { name: 'message_starts_with', alias?: string  } 
+  | { name: 'message_not_starts_with', alias?: string  } 
+  | { name: 'message_ends_with', alias?: string  } 
+  | { name: 'message_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 export interface ExperienceProjectWhereInput {
   id?: string | null
   id_not?: string | null
@@ -4795,6 +5436,7 @@ export interface ExperienceProjectWhereInput {
   status_lte?: number | null
   status_gt?: number | null
   status_gte?: number | null
+  messages_some?: ProjectMessagesWhereInput | null
   AND?: ExperienceProjectWhereInput[]
 }
 export type ExperienceProjectWhereInputInputObject =
@@ -4891,6 +5533,7 @@ export type ExperienceProjectWhereInputInputObject =
   | { name: 'status_lte', alias?: string  } 
   | { name: 'status_gt', alias?: string  } 
   | { name: 'status_gte', alias?: string  } 
+  | { name: 'messages_some', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface MakerWhereUniqueInput {
@@ -5043,6 +5686,7 @@ export interface MakerWhereInput {
   status_lte?: number | null
   status_gt?: number | null
   status_gte?: number | null
+  messages_some?: ProjectMessagesWhereInput | null
   AND?: MakerWhereInput[]
 }
 export type MakerWhereInputInputObject =
@@ -5189,6 +5833,7 @@ export type MakerWhereInputInputObject =
   | { name: 'status_lte', alias?: string  } 
   | { name: 'status_gt', alias?: string  } 
   | { name: 'status_gte', alias?: string  } 
+  | { name: 'messages_some', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface SharingWhereUniqueInput {
@@ -5267,6 +5912,7 @@ export interface SharingWhereInput {
   status_lte?: number | null
   status_gt?: number | null
   status_gte?: number | null
+  messages_some?: ProjectMessagesWhereInput | null
   AND?: SharingWhereInput[]
 }
 export type SharingWhereInputInputObject =
@@ -5337,7 +5983,15 @@ export type SharingWhereInputInputObject =
   | { name: 'status_lte', alias?: string  } 
   | { name: 'status_gt', alias?: string  } 
   | { name: 'status_gte', alias?: string  } 
+  | { name: 'messages_some', alias?: string  } 
   | { name: 'AND', alias?: string  } 
+  
+export interface ProjectMessagesWhereUniqueInput {
+  id?: string | null
+}
+export type ProjectMessagesWhereUniqueInputInputObject =
+  | Extract<keyof ProjectMessagesWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
   
 export interface DatabaseRefreshWhereUniqueInput {
   id?: string | null
@@ -5399,7 +6053,6 @@ export type DatabaseRefreshWhereInputInputObject =
   
 export interface UserCreateInput {
   id?: string | null
-  outlookId?: string
   name?: string
   email?: string
   year?: number | null
@@ -5410,7 +6063,6 @@ export interface UserCreateInput {
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -5473,7 +6125,6 @@ export type ActivityCreateWithoutRegisteredInputInputObject =
   | { name: 'end', alias?: string  } 
   
 export interface UserUpdateInput {
-  outlookId?: string | null
   name?: string | null
   email?: string | null
   year?: number | null
@@ -5483,7 +6134,6 @@ export interface UserUpdateInput {
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
-  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -5696,7 +6346,6 @@ export type UserPresenceUpdateManyDataInputInputObject =
   | { name: 'xp', alias?: string  } 
   
 export interface UserUpdateManyMutationInput {
-  outlookId?: string | null
   name?: string | null
   email?: string | null
   year?: number | null
@@ -5705,7 +6354,6 @@ export interface UserUpdateManyMutationInput {
 }
 export type UserUpdateManyMutationInputInputObject =
   | Extract<keyof UserUpdateManyMutationInput, string>
-  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -5770,7 +6418,6 @@ export type UserCreateOneWithoutActivitiesInputInputObject =
   
 export interface UserCreateWithoutActivitiesInput {
   id?: string | null
-  outlookId?: string
   name?: string
   email?: string
   year?: number | null
@@ -5780,7 +6427,6 @@ export interface UserCreateWithoutActivitiesInput {
 export type UserCreateWithoutActivitiesInputInputObject =
   | Extract<keyof UserCreateWithoutActivitiesInput, string>
   | { name: 'id', alias?: string  } 
-  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -5867,7 +6513,6 @@ export type UserUpdateOneRequiredWithoutActivitiesInputInputObject =
   | { name: 'connect', alias?: string  } 
   
 export interface UserUpdateWithoutActivitiesDataInput {
-  outlookId?: string | null
   name?: string | null
   email?: string | null
   year?: number | null
@@ -5876,7 +6521,6 @@ export interface UserUpdateWithoutActivitiesDataInput {
 }
 export type UserUpdateWithoutActivitiesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutActivitiesDataInput, string>
-  | { name: 'outlookId', alias?: string  } 
   | { name: 'name', alias?: string  } 
   | { name: 'email', alias?: string  } 
   | { name: 'year', alias?: string  } 
@@ -5973,6 +6617,7 @@ export interface ExperienceProjectCreateInput {
   competencies?: string
   informations?: string
   status?: number
+  messages?: ProjectMessagesCreateManyInput | null
 }
 export type ExperienceProjectCreateInputInputObject =
   | Extract<keyof ExperienceProjectCreateInput, string>
@@ -5983,6 +6628,29 @@ export type ExperienceProjectCreateInputInputObject =
   | { name: 'competencies', alias?: string  } 
   | { name: 'informations', alias?: string  } 
   | { name: 'status', alias?: string  } 
+  | { name: 'messages', alias?: string  } 
+  
+export interface ProjectMessagesCreateManyInput {
+  create?: ProjectMessagesCreateInput[]
+  connect?: ProjectMessagesWhereUniqueInput[]
+}
+export type ProjectMessagesCreateManyInputInputObject =
+  | Extract<keyof ProjectMessagesCreateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface ProjectMessagesCreateInput {
+  id?: string | null
+  author?: string
+  date?: string
+  message?: string
+}
+export type ProjectMessagesCreateInputInputObject =
+  | Extract<keyof ProjectMessagesCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
   
 export interface ExperienceProjectUpdateInput {
   title?: string | null
@@ -5991,6 +6659,7 @@ export interface ExperienceProjectUpdateInput {
   competencies?: string | null
   informations?: string | null
   status?: number | null
+  messages?: ProjectMessagesUpdateManyInput | null
 }
 export type ExperienceProjectUpdateInputInputObject =
   | Extract<keyof ExperienceProjectUpdateInput, string>
@@ -6000,6 +6669,192 @@ export type ExperienceProjectUpdateInputInputObject =
   | { name: 'competencies', alias?: string  } 
   | { name: 'informations', alias?: string  } 
   | { name: 'status', alias?: string  } 
+  | { name: 'messages', alias?: string  } 
+  
+export interface ProjectMessagesUpdateManyInput {
+  create?: ProjectMessagesCreateInput[]
+  update?: ProjectMessagesUpdateWithWhereUniqueNestedInput[]
+  upsert?: ProjectMessagesUpsertWithWhereUniqueNestedInput[]
+  delete?: ProjectMessagesWhereUniqueInput[]
+  connect?: ProjectMessagesWhereUniqueInput[]
+  set?: ProjectMessagesWhereUniqueInput[]
+  disconnect?: ProjectMessagesWhereUniqueInput[]
+  deleteMany?: ProjectMessagesScalarWhereInput[]
+  updateMany?: ProjectMessagesUpdateManyWithWhereNestedInput[]
+}
+export type ProjectMessagesUpdateManyInputInputObject =
+  | Extract<keyof ProjectMessagesUpdateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface ProjectMessagesUpdateWithWhereUniqueNestedInput {
+  where?: ProjectMessagesWhereUniqueInput
+  data?: ProjectMessagesUpdateDataInput
+}
+export type ProjectMessagesUpdateWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof ProjectMessagesUpdateWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ProjectMessagesUpdateDataInput {
+  author?: string | null
+  date?: string | null
+  message?: string | null
+}
+export type ProjectMessagesUpdateDataInputInputObject =
+  | Extract<keyof ProjectMessagesUpdateDataInput, string>
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  
+export interface ProjectMessagesUpsertWithWhereUniqueNestedInput {
+  where?: ProjectMessagesWhereUniqueInput
+  update?: ProjectMessagesUpdateDataInput
+  create?: ProjectMessagesCreateInput
+}
+export type ProjectMessagesUpsertWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof ProjectMessagesUpsertWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface ProjectMessagesScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  author?: string | null
+  author_not?: string | null
+  author_in?: string[]
+  author_not_in?: string[]
+  author_lt?: string | null
+  author_lte?: string | null
+  author_gt?: string | null
+  author_gte?: string | null
+  author_contains?: string | null
+  author_not_contains?: string | null
+  author_starts_with?: string | null
+  author_not_starts_with?: string | null
+  author_ends_with?: string | null
+  author_not_ends_with?: string | null
+  date?: string | null
+  date_not?: string | null
+  date_in?: string[]
+  date_not_in?: string[]
+  date_lt?: string | null
+  date_lte?: string | null
+  date_gt?: string | null
+  date_gte?: string | null
+  message?: string | null
+  message_not?: string | null
+  message_in?: string[]
+  message_not_in?: string[]
+  message_lt?: string | null
+  message_lte?: string | null
+  message_gt?: string | null
+  message_gte?: string | null
+  message_contains?: string | null
+  message_not_contains?: string | null
+  message_starts_with?: string | null
+  message_not_starts_with?: string | null
+  message_ends_with?: string | null
+  message_not_ends_with?: string | null
+  AND?: ProjectMessagesScalarWhereInput[]
+  OR?: ProjectMessagesScalarWhereInput[]
+  NOT?: ProjectMessagesScalarWhereInput[]
+}
+export type ProjectMessagesScalarWhereInputInputObject =
+  | Extract<keyof ProjectMessagesScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'author_not', alias?: string  } 
+  | { name: 'author_in', alias?: string  } 
+  | { name: 'author_not_in', alias?: string  } 
+  | { name: 'author_lt', alias?: string  } 
+  | { name: 'author_lte', alias?: string  } 
+  | { name: 'author_gt', alias?: string  } 
+  | { name: 'author_gte', alias?: string  } 
+  | { name: 'author_contains', alias?: string  } 
+  | { name: 'author_not_contains', alias?: string  } 
+  | { name: 'author_starts_with', alias?: string  } 
+  | { name: 'author_not_starts_with', alias?: string  } 
+  | { name: 'author_ends_with', alias?: string  } 
+  | { name: 'author_not_ends_with', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'date_not', alias?: string  } 
+  | { name: 'date_in', alias?: string  } 
+  | { name: 'date_not_in', alias?: string  } 
+  | { name: 'date_lt', alias?: string  } 
+  | { name: 'date_lte', alias?: string  } 
+  | { name: 'date_gt', alias?: string  } 
+  | { name: 'date_gte', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  | { name: 'message_not', alias?: string  } 
+  | { name: 'message_in', alias?: string  } 
+  | { name: 'message_not_in', alias?: string  } 
+  | { name: 'message_lt', alias?: string  } 
+  | { name: 'message_lte', alias?: string  } 
+  | { name: 'message_gt', alias?: string  } 
+  | { name: 'message_gte', alias?: string  } 
+  | { name: 'message_contains', alias?: string  } 
+  | { name: 'message_not_contains', alias?: string  } 
+  | { name: 'message_starts_with', alias?: string  } 
+  | { name: 'message_not_starts_with', alias?: string  } 
+  | { name: 'message_ends_with', alias?: string  } 
+  | { name: 'message_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface ProjectMessagesUpdateManyWithWhereNestedInput {
+  where?: ProjectMessagesScalarWhereInput
+  data?: ProjectMessagesUpdateManyDataInput
+}
+export type ProjectMessagesUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof ProjectMessagesUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface ProjectMessagesUpdateManyDataInput {
+  author?: string | null
+  date?: string | null
+  message?: string | null
+}
+export type ProjectMessagesUpdateManyDataInputInputObject =
+  | Extract<keyof ProjectMessagesUpdateManyDataInput, string>
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
   
 export interface ExperienceProjectUpdateManyMutationInput {
   title?: string | null
@@ -6031,6 +6886,7 @@ export interface MakerCreateInput {
   informations?: string
   xp?: number | null
   status?: number
+  messages?: ProjectMessagesCreateManyInput | null
 }
 export type MakerCreateInputInputObject =
   | Extract<keyof MakerCreateInput, string>
@@ -6046,6 +6902,7 @@ export type MakerCreateInputInputObject =
   | { name: 'informations', alias?: string  } 
   | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
+  | { name: 'messages', alias?: string  } 
   
 export interface MakerCreateco_workersInput {
   set?: string[]
@@ -6066,6 +6923,7 @@ export interface MakerUpdateInput {
   informations?: string | null
   xp?: number | null
   status?: number | null
+  messages?: ProjectMessagesUpdateManyInput | null
 }
 export type MakerUpdateInputInputObject =
   | Extract<keyof MakerUpdateInput, string>
@@ -6080,6 +6938,7 @@ export type MakerUpdateInputInputObject =
   | { name: 'informations', alias?: string  } 
   | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
+  | { name: 'messages', alias?: string  } 
   
 export interface MakerUpdateco_workersInput {
   set?: string[]
@@ -6123,6 +6982,7 @@ export interface SharingCreateInput {
   date?: string
   xp?: number | null
   status?: number
+  messages?: ProjectMessagesCreateManyInput | null
 }
 export type SharingCreateInputInputObject =
   | Extract<keyof SharingCreateInput, string>
@@ -6133,6 +6993,7 @@ export type SharingCreateInputInputObject =
   | { name: 'date', alias?: string  } 
   | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
+  | { name: 'messages', alias?: string  } 
   
 export interface SharingCreateco_workersInput {
   set?: string[]
@@ -6148,6 +7009,7 @@ export interface SharingUpdateInput {
   date?: string | null
   xp?: number | null
   status?: number | null
+  messages?: ProjectMessagesUpdateManyInput | null
 }
 export type SharingUpdateInputInputObject =
   | Extract<keyof SharingUpdateInput, string>
@@ -6157,6 +7019,7 @@ export type SharingUpdateInputInputObject =
   | { name: 'date', alias?: string  } 
   | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
+  | { name: 'messages', alias?: string  } 
   
 export interface SharingUpdateco_workersInput {
   set?: string[]
@@ -6181,6 +7044,28 @@ export type SharingUpdateManyMutationInputInputObject =
   | { name: 'date', alias?: string  } 
   | { name: 'xp', alias?: string  } 
   | { name: 'status', alias?: string  } 
+  
+export interface ProjectMessagesUpdateInput {
+  author?: string | null
+  date?: string | null
+  message?: string | null
+}
+export type ProjectMessagesUpdateInputInputObject =
+  | Extract<keyof ProjectMessagesUpdateInput, string>
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  
+export interface ProjectMessagesUpdateManyMutationInput {
+  author?: string | null
+  date?: string | null
+  message?: string | null
+}
+export type ProjectMessagesUpdateManyMutationInputInputObject =
+  | Extract<keyof ProjectMessagesUpdateManyMutationInput, string>
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
   
 export interface DatabaseRefreshCreateInput {
   id?: string | null
@@ -6307,6 +7192,23 @@ export type SharingSubscriptionWhereInputInputObject =
   | { name: 'node', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface ProjectMessagesSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: ProjectMessagesWhereInput | null
+  AND?: ProjectMessagesSubscriptionWhereInput[]
+}
+export type ProjectMessagesSubscriptionWhereInputInputObject =
+  | Extract<keyof ProjectMessagesSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 export interface DatabaseRefreshSubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -6338,8 +7240,6 @@ export type UserPresenceOrderByInputValues =
 export type UserOrderByInputValues =
   | 'id_ASC'
   | 'id_DESC'
-  | 'outlookId_ASC'
-  | 'outlookId_DESC'
   | 'name_ASC'
   | 'name_DESC'
   | 'email_ASC'
@@ -6368,6 +7268,16 @@ export type ActivityOrderByInputValues =
   | 'begin_DESC'
   | 'end_ASC'
   | 'end_DESC'
+  
+export type ProjectMessagesOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'author_ASC'
+  | 'author_DESC'
+  | 'date_ASC'
+  | 'date_DESC'
+  | 'message_ASC'
+  | 'message_DESC'
   
 export type ExperienceProjectOrderByInputValues =
   | 'id_ASC'

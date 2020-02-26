@@ -82,11 +82,10 @@ async function login(parent, args, context) {
   if (user_data === undefined || user_data.data === undefined)
     return null;
   let user_found = await prisma.user({
-    outlookId: user_data.data.id
+    email: user_data.data.mail
   });
   if (user_found === null) {
     user_found = await prisma.createUser({
-      outlookId: user_data.data.id,
       name: user_data.data.displayName,
       email: user_data.data.mail,
     });

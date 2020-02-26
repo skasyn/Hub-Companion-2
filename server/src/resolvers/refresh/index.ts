@@ -66,7 +66,12 @@ async function activityUpsert(event, activity, studentList, hubModule) {
     let isPresent = (student.present === 'present' || student.present == 'N/A');
     if (!isPresent && end > now)
       xp = 0;
-
+    if (user_found === null) {
+      user_found = await prisma.createUser({
+        name: student.name,
+        email: student.email,
+      });
+    }
     if (user_found !== null) {
       await prisma.upsertUserPresence({
         where: {
@@ -98,7 +103,7 @@ async function getEvents(year, hubModule, city, event, activity) {
     if (responseEvent.data !== undefined && responseEvent.data !== null && !isEmpty(responseEvent.data)) {
       let studentList = [];
       for (let student of responseEvent.data) {
-        studentList.push({email: student.login, present: student.present});
+        studentList.push({name: student.title, email: student.login, present: student.present});
       }
       await activityUpsert(event, activity, studentList, hubModule);
     }

@@ -262,6 +262,10 @@ type AggregateMaker {
   count: Int!
 }
 
+type AggregateProjectMessages {
+  count: Int!
+}
+
 type AggregateSharing {
   count: Int!
 }
@@ -375,6 +379,7 @@ type ExperienceProject {
   competencies: String!
   informations: String!
   status: Int!
+  messages(where: ProjectMessagesWhereInput, orderBy: ProjectMessagesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProjectMessages!]
 }
 
 type ExperienceProjectConnection {
@@ -391,6 +396,7 @@ input ExperienceProjectCreateInput {
   competencies: String!
   informations: String!
   status: Int!
+  messages: ProjectMessagesCreateManyInput
 }
 
 type ExperienceProjectEdge {
@@ -448,6 +454,7 @@ input ExperienceProjectUpdateInput {
   competencies: String
   informations: String
   status: Int
+  messages: ProjectMessagesUpdateManyInput
 }
 
 input ExperienceProjectUpdateManyMutationInput {
@@ -552,6 +559,7 @@ input ExperienceProjectWhereInput {
   status_lte: Int
   status_gt: Int
   status_gte: Int
+  messages_some: ProjectMessagesWhereInput
   AND: [ExperienceProjectWhereInput!]
 }
 
@@ -574,6 +582,7 @@ type Maker {
   informations: String!
   xp: Int!
   status: Int!
+  messages(where: ProjectMessagesWhereInput, orderBy: ProjectMessagesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProjectMessages!]
 }
 
 type MakerConnection {
@@ -599,6 +608,7 @@ input MakerCreateInput {
   informations: String!
   xp: Int
   status: Int!
+  messages: ProjectMessagesCreateManyInput
 }
 
 type MakerEdge {
@@ -678,6 +688,7 @@ input MakerUpdateInput {
   informations: String
   xp: Int
   status: Int
+  messages: ProjectMessagesUpdateManyInput
 }
 
 input MakerUpdateManyMutationInput {
@@ -837,6 +848,7 @@ input MakerWhereInput {
   status_lte: Int
   status_gt: Int
   status_gte: Int
+  messages_some: ProjectMessagesWhereInput
   AND: [MakerWhereInput!]
 }
 
@@ -869,6 +881,12 @@ type Mutation {
   upsertMaker(where: MakerWhereUniqueInput!, create: MakerCreateInput!, update: MakerUpdateInput!): Maker!
   deleteMaker(where: MakerWhereUniqueInput!): Maker
   deleteManyMakers(where: MakerWhereInput): BatchPayload!
+  createProjectMessages(data: ProjectMessagesCreateInput!): ProjectMessages!
+  updateProjectMessages(data: ProjectMessagesUpdateInput!, where: ProjectMessagesWhereUniqueInput!): ProjectMessages
+  updateManyProjectMessageses(data: ProjectMessagesUpdateManyMutationInput!, where: ProjectMessagesWhereInput): BatchPayload!
+  upsertProjectMessages(where: ProjectMessagesWhereUniqueInput!, create: ProjectMessagesCreateInput!, update: ProjectMessagesUpdateInput!): ProjectMessages!
+  deleteProjectMessages(where: ProjectMessagesWhereUniqueInput!): ProjectMessages
+  deleteManyProjectMessageses(where: ProjectMessagesWhereInput): BatchPayload!
   createSharing(data: SharingCreateInput!): Sharing!
   updateSharing(data: SharingUpdateInput!, where: SharingWhereUniqueInput!): Sharing
   updateManySharings(data: SharingUpdateManyMutationInput!, where: SharingWhereInput): BatchPayload!
@@ -906,6 +924,236 @@ type PageInfo {
   endCursor: String
 }
 
+type ProjectMessages {
+  id: ID!
+  author: String!
+  date: DateTime!
+  message: String!
+}
+
+type ProjectMessagesConnection {
+  pageInfo: PageInfo!
+  edges: [ProjectMessagesEdge]!
+  aggregate: AggregateProjectMessages!
+}
+
+input ProjectMessagesCreateInput {
+  id: ID
+  author: String!
+  date: DateTime!
+  message: String!
+}
+
+input ProjectMessagesCreateManyInput {
+  create: [ProjectMessagesCreateInput!]
+  connect: [ProjectMessagesWhereUniqueInput!]
+}
+
+type ProjectMessagesEdge {
+  node: ProjectMessages!
+  cursor: String!
+}
+
+enum ProjectMessagesOrderByInput {
+  id_ASC
+  id_DESC
+  author_ASC
+  author_DESC
+  date_ASC
+  date_DESC
+  message_ASC
+  message_DESC
+}
+
+type ProjectMessagesPreviousValues {
+  id: ID!
+  author: String!
+  date: DateTime!
+  message: String!
+}
+
+input ProjectMessagesScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  author: String
+  author_not: String
+  author_in: [String!]
+  author_not_in: [String!]
+  author_lt: String
+  author_lte: String
+  author_gt: String
+  author_gte: String
+  author_contains: String
+  author_not_contains: String
+  author_starts_with: String
+  author_not_starts_with: String
+  author_ends_with: String
+  author_not_ends_with: String
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  message: String
+  message_not: String
+  message_in: [String!]
+  message_not_in: [String!]
+  message_lt: String
+  message_lte: String
+  message_gt: String
+  message_gte: String
+  message_contains: String
+  message_not_contains: String
+  message_starts_with: String
+  message_not_starts_with: String
+  message_ends_with: String
+  message_not_ends_with: String
+  AND: [ProjectMessagesScalarWhereInput!]
+  OR: [ProjectMessagesScalarWhereInput!]
+  NOT: [ProjectMessagesScalarWhereInput!]
+}
+
+type ProjectMessagesSubscriptionPayload {
+  mutation: MutationType!
+  node: ProjectMessages
+  updatedFields: [String!]
+  previousValues: ProjectMessagesPreviousValues
+}
+
+input ProjectMessagesSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: ProjectMessagesWhereInput
+  AND: [ProjectMessagesSubscriptionWhereInput!]
+}
+
+input ProjectMessagesUpdateDataInput {
+  author: String
+  date: DateTime
+  message: String
+}
+
+input ProjectMessagesUpdateInput {
+  author: String
+  date: DateTime
+  message: String
+}
+
+input ProjectMessagesUpdateManyDataInput {
+  author: String
+  date: DateTime
+  message: String
+}
+
+input ProjectMessagesUpdateManyInput {
+  create: [ProjectMessagesCreateInput!]
+  update: [ProjectMessagesUpdateWithWhereUniqueNestedInput!]
+  upsert: [ProjectMessagesUpsertWithWhereUniqueNestedInput!]
+  delete: [ProjectMessagesWhereUniqueInput!]
+  connect: [ProjectMessagesWhereUniqueInput!]
+  set: [ProjectMessagesWhereUniqueInput!]
+  disconnect: [ProjectMessagesWhereUniqueInput!]
+  deleteMany: [ProjectMessagesScalarWhereInput!]
+  updateMany: [ProjectMessagesUpdateManyWithWhereNestedInput!]
+}
+
+input ProjectMessagesUpdateManyMutationInput {
+  author: String
+  date: DateTime
+  message: String
+}
+
+input ProjectMessagesUpdateManyWithWhereNestedInput {
+  where: ProjectMessagesScalarWhereInput!
+  data: ProjectMessagesUpdateManyDataInput!
+}
+
+input ProjectMessagesUpdateWithWhereUniqueNestedInput {
+  where: ProjectMessagesWhereUniqueInput!
+  data: ProjectMessagesUpdateDataInput!
+}
+
+input ProjectMessagesUpsertWithWhereUniqueNestedInput {
+  where: ProjectMessagesWhereUniqueInput!
+  update: ProjectMessagesUpdateDataInput!
+  create: ProjectMessagesCreateInput!
+}
+
+input ProjectMessagesWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  author: String
+  author_not: String
+  author_in: [String!]
+  author_not_in: [String!]
+  author_lt: String
+  author_lte: String
+  author_gt: String
+  author_gte: String
+  author_contains: String
+  author_not_contains: String
+  author_starts_with: String
+  author_not_starts_with: String
+  author_ends_with: String
+  author_not_ends_with: String
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  message: String
+  message_not: String
+  message_in: [String!]
+  message_not_in: [String!]
+  message_lt: String
+  message_lte: String
+  message_gt: String
+  message_gte: String
+  message_contains: String
+  message_not_contains: String
+  message_starts_with: String
+  message_not_starts_with: String
+  message_ends_with: String
+  message_not_ends_with: String
+  AND: [ProjectMessagesWhereInput!]
+}
+
+input ProjectMessagesWhereUniqueInput {
+  id: ID
+}
+
 type Query {
   activity(where: ActivityWhereUniqueInput!): Activity
   activities(where: ActivityWhereInput, orderBy: ActivityOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Activity]!
@@ -919,6 +1167,9 @@ type Query {
   maker(where: MakerWhereUniqueInput!): Maker
   makers(where: MakerWhereInput, orderBy: MakerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Maker]!
   makersConnection(where: MakerWhereInput, orderBy: MakerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MakerConnection!
+  projectMessages(where: ProjectMessagesWhereUniqueInput!): ProjectMessages
+  projectMessageses(where: ProjectMessagesWhereInput, orderBy: ProjectMessagesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProjectMessages]!
+  projectMessagesesConnection(where: ProjectMessagesWhereInput, orderBy: ProjectMessagesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProjectMessagesConnection!
   sharing(where: SharingWhereUniqueInput!): Sharing
   sharings(where: SharingWhereInput, orderBy: SharingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Sharing]!
   sharingsConnection(where: SharingWhereInput, orderBy: SharingOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SharingConnection!
@@ -939,6 +1190,7 @@ type Sharing {
   date: DateTime!
   xp: Int!
   status: Int!
+  messages(where: ProjectMessagesWhereInput, orderBy: ProjectMessagesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProjectMessages!]
 }
 
 type SharingConnection {
@@ -959,6 +1211,7 @@ input SharingCreateInput {
   date: DateTime!
   xp: Int
   status: Int!
+  messages: ProjectMessagesCreateManyInput
 }
 
 type SharingEdge {
@@ -1018,6 +1271,7 @@ input SharingUpdateInput {
   date: DateTime
   xp: Int
   status: Int
+  messages: ProjectMessagesUpdateManyInput
 }
 
 input SharingUpdateManyMutationInput {
@@ -1096,6 +1350,7 @@ input SharingWhereInput {
   status_lte: Int
   status_gt: Int
   status_gte: Int
+  messages_some: ProjectMessagesWhereInput
   AND: [SharingWhereInput!]
 }
 
@@ -1109,6 +1364,7 @@ type Subscription {
   databaseRefresh(where: DatabaseRefreshSubscriptionWhereInput): DatabaseRefreshSubscriptionPayload
   experienceProject(where: ExperienceProjectSubscriptionWhereInput): ExperienceProjectSubscriptionPayload
   maker(where: MakerSubscriptionWhereInput): MakerSubscriptionPayload
+  projectMessages(where: ProjectMessagesSubscriptionWhereInput): ProjectMessagesSubscriptionPayload
   sharing(where: SharingSubscriptionWhereInput): SharingSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   userPresence(where: UserPresenceSubscriptionWhereInput): UserPresenceSubscriptionPayload
@@ -1116,7 +1372,6 @@ type Subscription {
 
 type User {
   id: ID!
-  outlookId: String!
   name: String!
   email: String!
   year: Int
@@ -1133,7 +1388,6 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  outlookId: String!
   name: String!
   email: String!
   year: Int
@@ -1149,7 +1403,6 @@ input UserCreateOneWithoutActivitiesInput {
 
 input UserCreateWithoutActivitiesInput {
   id: ID
-  outlookId: String!
   name: String!
   email: String!
   year: Int
@@ -1165,8 +1418,6 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  outlookId_ASC
-  outlookId_DESC
   name_ASC
   name_DESC
   email_ASC
@@ -1448,7 +1699,6 @@ input UserPresenceWhereUniqueInput {
 
 type UserPreviousValues {
   id: ID!
-  outlookId: String!
   name: String!
   email: String!
   year: Int
@@ -1473,7 +1723,6 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
-  outlookId: String
   name: String
   email: String
   year: Int
@@ -1483,7 +1732,6 @@ input UserUpdateInput {
 }
 
 input UserUpdateManyMutationInput {
-  outlookId: String
   name: String
   email: String
   year: Int
@@ -1499,7 +1747,6 @@ input UserUpdateOneRequiredWithoutActivitiesInput {
 }
 
 input UserUpdateWithoutActivitiesDataInput {
-  outlookId: String
   name: String
   email: String
   year: Int
@@ -1527,20 +1774,6 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  outlookId: String
-  outlookId_not: String
-  outlookId_in: [String!]
-  outlookId_not_in: [String!]
-  outlookId_lt: String
-  outlookId_lte: String
-  outlookId_gt: String
-  outlookId_gte: String
-  outlookId_contains: String
-  outlookId_not_contains: String
-  outlookId_starts_with: String
-  outlookId_not_starts_with: String
-  outlookId_ends_with: String
-  outlookId_not_ends_with: String
   name: String
   name_not: String
   name_in: [String!]
@@ -1599,7 +1832,6 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
-  outlookId: String
   email: String
 }
 `

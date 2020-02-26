@@ -1,6 +1,5 @@
 type User {
   id: ID! @id
-  outlookId: String! @unique
   name: String!
   email: String! @unique
   year: Int @default(value: 0)
@@ -38,6 +37,7 @@ type ExperienceProject {
     competencies: String!
     informations: String!
     status: Int!
+    messages: [ProjectMessages!]! @relation(link: INLINE)
 }
 
 type Maker {
@@ -53,6 +53,7 @@ type Maker {
     informations: String!
     xp: Int! @default(value: 0)
     status: Int!
+    messages: [ProjectMessages!]! @relation(link: INLINE)
 }
 
 type Sharing {
@@ -63,6 +64,14 @@ type Sharing {
     date: DateTime!
     xp: Int! @default(value: 0)
     status: Int!
+    messages: [ProjectMessages!]! @relation(link: INLINE)
+}
+
+type ProjectMessages {
+    id: ID! @id
+    author: String!
+    date: DateTime!
+    message: String!
 }
 
 type DatabaseRefresh {
