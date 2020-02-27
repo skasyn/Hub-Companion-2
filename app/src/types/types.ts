@@ -245,7 +245,7 @@ export interface ChangeStatusMakerVars {
 }
 
 export interface ChangeStatusMakerData {
-  submitExperienceProject: Boolean
+  changeMakerStatus: Boolean
 }
 
 export interface ChangeStatusSharingVars {
@@ -254,7 +254,7 @@ export interface ChangeStatusSharingVars {
 }
 
 export interface ChangeStatusSharingData {
-  submitExperienceProject: Boolean
+  changeSharingStatus: Boolean
 }
 
 export interface ChangeStatusExperienceProjectVars {
@@ -263,5 +263,32 @@ export interface ChangeStatusExperienceProjectVars {
 }
 
 export interface ChangeStatusExperienceProjectData {
-  submitExperienceProject: Boolean
+  changeExperienceProjectStatus: Boolean
+}
+
+export interface DeleteMakerVars {
+  jwt: String,
+  id: String
+}
+
+export interface DeleteMakerData {
+  deleteMaker: Boolean
+}
+
+export interface DeleteSharingVars {
+  jwt: String,
+  id: String
+}
+
+export interface DeleteSharingData {
+  deleteSharing: Boolean
+}
+
+export interface DeleteExperienceProjectVars {
+  jwt: String,
+  id: String
+}
+
+export interface DeleteExperienceProjectData {
+  deleteExperienceProject: Boolean
 }

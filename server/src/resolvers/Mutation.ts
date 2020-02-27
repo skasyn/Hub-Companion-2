@@ -219,6 +219,72 @@ async function changeExperienceProjectStatus(parent, args, context, userId) {
   return true;
 }
 
+async function deleteMaker(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid User');
+  }
+  try {
+    const messagesIds = await prisma.$graphql(`
+      mutation {
+        deleteMaker(where: {id: "${args.id}"}) {
+          messages {
+            id
+          }
+        }
+      }
+    `);
+    await prisma.deleteManyProjectMessageses({id_in: messagesIds.deleteMaker.messages.map((e) => e['id'])});
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
+async function deleteSharing(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid User');
+  }
+  try {
+    const messagesIds = await prisma.$graphql(`
+      mutation {
+        deleteSharing(where: {id: "${args.id}"}) {
+          messages {
+            id
+          }
+        }
+      }
+    `);
+    await prisma.deleteManyProjectMessageses({id_in: messagesIds.deleteSharing.messages.map((e) => e['id'])});
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
+async function deleteExperienceProject(parent, args, context, userId) {
+  const admin = await prisma.user({id: userId});
+  if ((admin === undefined || admin === null) || admin.privilege === 0) {
+    throw new Error('Invalid User');
+  }
+  try {
+    const messagesIds = await prisma.$graphql(`
+      mutation {
+        deleteExperienceProject(where: {id: "${args.id}"}) {
+          messages {
+            id
+          }
+        }
+      }
+    `);
+    await prisma.deleteManyProjectMessageses({id_in: messagesIds.deleteExperienceProject.messages.map((e) => e['id'])});
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
 export const Mutation = {
   refresh: handleErrors_login(refresh),
   submitMaker: handleErrors_login(submitMaker),
@@ -229,4 +295,7 @@ export const Mutation = {
   changeMakerStatus: handleErrors_login(changeMakerStatus),
   changeSharingStatus: handleErrors_login(changeSharingStatus),
   changeExperienceProjectStatus: handleErrors_login(changeExperienceProjectStatus),
+  deleteMaker: handleErrors_login(deleteMaker),
+  deleteSharing: handleErrors_login(deleteSharing),
+  deleteExperienceProject: handleErrors_login(deleteExperienceProject),
 };

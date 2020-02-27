@@ -18,7 +18,13 @@ import {useQuery} from "@apollo/react-hooks";
 import {useMutation} from "@apollo/react-hooks";
 
 import {
-  AdminGetMakersData, AdminGetMakersVars, ChangeStatusMakerData, ChangeStatusMakerVars, Maker,
+  AdminGetMakersData,
+  AdminGetMakersVars,
+  ChangeStatusMakerData,
+  ChangeStatusMakerVars,
+  DeleteMakerData,
+  DeleteMakerVars,
+  Maker,
 } from "../../types/types";
 import {useGlobalState} from "../../reducers/reducers";
 import {GET_ADMIN_MAKERS} from "../../query/query";
@@ -30,7 +36,8 @@ import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import EditIcon from '@material-ui/icons/Edit';
-import {CHANGE_STATUS_MAKER} from "../../query/mutation";
+import {CHANGE_STATUS_MAKER, DELETE_MAKER} from "../../query/mutation";
+import {DeleteDialog} from "./AdminManageUtils";
 
 interface DialogChangeProps {
   maker: Maker
@@ -44,7 +51,16 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
   const [message, setMessage] = React.useState("");
   const [xp, setXp] = React.useState(props.maker.xp);
   const [changeStatus] = useMutation<ChangeStatusMakerData, ChangeStatusMakerVars>(CHANGE_STATUS_MAKER);
+  const [deleteMaker] = useMutation<DeleteMakerData, DeleteMakerVars>(DELETE_MAKER);
+  const [openDialog, setOpenDialog] = React.useState(false);
 
+  const handleClose = async (value: boolean) => {
+    setOpenDialog(false);
+    if (value) {
+      await deleteMaker({variables: {jwt: jwt, id: props.maker.id}});
+      props.handleClose();
+    }
+  };
   const sendChange = async () => {
     const dataSend = {
       id: props.maker.id,
@@ -61,6 +77,7 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
     return (<></>);
   return (
     <Container style={{width: '600px'}}>
+      <DeleteDialog open={openDialog} onClose={handleClose}/>
       <DialogTitle>
         Edit: {props.maker['title']}
       </DialogTitle>
@@ -118,6 +135,10 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
         </div>
       </DialogContent>
       <DialogActions>
+        <Button color="secondary" onClick={() => setOpenDialog(true)}>
+          Delete
+        </Button>
+        <div style={{flex: '1 0 0'}}/>
         <Button onClick={props.handleClose} color="primary">
           Cancel
         </Button>

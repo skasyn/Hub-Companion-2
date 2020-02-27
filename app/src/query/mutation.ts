@@ -53,3 +53,21 @@ export const CHANGE_STATUS_EXPERIENCE_PROJECT: any = gql`
         changeExperienceProjectStatus(code: $jwt, data: $data)
     }
 `;
+
+export const DELETE_MAKER: any = gql`
+    mutation DELETE_MAKER($jwt: String!, $id: String!) {
+        deleteMaker(code: $jwt, id: $id)
+    }
+`;
+
+export const DELETE_SHARING: any = gql`
+    mutation DELETE_SHARING($jwt: String!, $id: String!) {
+        deleteSharing(code: $jwt, id: $id)
+    }
+`;
+
+export const DELETE_EXPERIENCE_PROJECT: any = gql`
+    mutation DELETE_EXPERIENCE_PROJECT($jwt: String!, $id: String!) {
+        deleteExperienceProject(code: $jwt, id: $id)
+    }
+`;

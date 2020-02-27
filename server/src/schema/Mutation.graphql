@@ -8,4 +8,7 @@ type Mutation {
     changeMakerStatus(code: String!, data: String!): Boolean!
     changeSharingStatus(code: String!, data: String!): Boolean!
     changeExperienceProjectStatus(code: String!, data: String!): Boolean!
+    deleteMaker(code: String!, id: String!): Boolean!
+    deleteSharing(code: String!, id: String!): Boolean!
+    deleteExperienceProject(code: String!, id: String!): Boolean!
 }

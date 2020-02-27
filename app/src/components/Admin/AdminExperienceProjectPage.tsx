@@ -16,8 +16,13 @@ import {
 
 import {useMutation, useQuery} from "@apollo/react-hooks";
 import {
-  AdminGetExperienceProjectsData, AdminGetExperienceProjectsVars,
-  ChangeStatusExperienceProjectData, ChangeStatusExperienceProjectVars, ExperienceProject,
+  AdminGetExperienceProjectsData,
+  AdminGetExperienceProjectsVars,
+  ChangeStatusExperienceProjectData,
+  ChangeStatusExperienceProjectVars,
+  DeleteExperienceProjectData,
+  DeleteExperienceProjectVars,
+  ExperienceProject,
 } from "../../types/types";
 import {useGlobalState} from "../../reducers/reducers";
 import {GET_ADMIN_EXPERIENCE_PROJECT} from "../../query/query";
@@ -27,8 +32,9 @@ import CheckIcon from '@material-ui/icons/Check';
 import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import {MessageHistory, ReviewContainer} from "../Student/SharingMakerUtils";
-import {CHANGE_STATUS_EXPERIENCE_PROJECT} from "../../query/mutation";
+import {CHANGE_STATUS_EXPERIENCE_PROJECT, DELETE_EXPERIENCE_PROJECT} from "../../query/mutation";
 import EditIcon from "@material-ui/icons/Edit";
+import {DeleteDialog} from "./AdminManageUtils";
 
 interface DialogChangeProps {
   experienceProject: ExperienceProject
@@ -41,7 +47,16 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
   const [selectValue, setSelectValue] = React.useState(props.experienceProject.status);
   const [message, setMessage] = React.useState("");
   const [changeStatus] = useMutation<ChangeStatusExperienceProjectData, ChangeStatusExperienceProjectVars>(CHANGE_STATUS_EXPERIENCE_PROJECT);
+  const [deleteExperienceProject] = useMutation<DeleteExperienceProjectData, DeleteExperienceProjectVars>(DELETE_EXPERIENCE_PROJECT);
+  const [openDialog, setOpenDialog] = React.useState(false);
 
+  const handleClose = async (value: boolean) => {
+    setOpenDialog(false);
+    if (value) {
+      await deleteExperienceProject({variables: {jwt: jwt, id: props.experienceProject.id}});
+      props.handleClose();
+    }
+  };
   const sendChange = async () => {
     const dataSend = {
       id: props.experienceProject.id,
@@ -57,6 +72,7 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
     return (<></>);
   return (
     <Container style={{width: '600px'}}>
+      <DeleteDialog open={openDialog} onClose={handleClose}/>
       <DialogTitle>
         Edit: {props.experienceProject['title']}
       </DialogTitle>
@@ -101,6 +117,10 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
         </div>
       </DialogContent>
       <DialogActions>
+        <Button color="secondary" onClick={() => setOpenDialog(true)}>
+          Delete
+        </Button>
+        <div style={{flex: '1 0 0'}}/>
         <Button onClick={props.handleClose} color="primary">
           Cancel
         </Button>

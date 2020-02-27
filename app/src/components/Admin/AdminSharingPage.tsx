@@ -21,7 +21,7 @@ import {
   AdminGetSharingsData,
   AdminGetSharingsVars,
   ChangeStatusSharingData,
-  ChangeStatusSharingVars,
+  ChangeStatusSharingVars, DeleteSharingData, DeleteSharingVars,
   Sharing
 } from "../../types/types";
 import {useGlobalState} from "../../reducers/reducers";
@@ -33,8 +33,9 @@ import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import {MessageHistory, toMultiline} from "../Student/SharingMakerUtils";
 import EditIcon from "@material-ui/icons/Edit";
-import {CHANGE_STATUS_SHARING} from "../../query/mutation";
+import {CHANGE_STATUS_SHARING, DELETE_SHARING} from "../../query/mutation";
 import DateFnsUtils from "@date-io/date-fns";
+import {DeleteDialog} from "./AdminManageUtils";
 
 interface DialogChangeProps {
   sharing: Sharing
@@ -49,7 +50,16 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
   const [type, setType] = React.useState(props.sharing.type);
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(props.sharing.date === '1970-01-01T00:00:00.000Z' ? null : new Date(props.sharing.date as string));
   const [changeStatus] = useMutation<ChangeStatusSharingData, ChangeStatusSharingVars>(CHANGE_STATUS_SHARING);
+  const [deleteSharing] = useMutation<DeleteSharingData, DeleteSharingVars>(DELETE_SHARING);
+  const [openDialog, setOpenDialog] = React.useState(false);
 
+  const handleClose = async (value: boolean) => {
+    setOpenDialog(false);
+    if (value) {
+      await deleteSharing({variables: {jwt: jwt, id: props.sharing.id}});
+      props.handleClose();
+    }
+  };
   const sendChange = async () => {
     const dataSend = {
       id: props.sharing.id,
@@ -68,6 +78,7 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
   return (
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Container style={{width: '600px'}}>
+        <DeleteDialog open={openDialog} onClose={handleClose}/>
         <DialogTitle>
           Edit: {props.sharing['title']}
         </DialogTitle>
@@ -147,6 +158,10 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
           </div>
         </DialogContent>
         <DialogActions>
+          <Button color="secondary" onClick={() => setOpenDialog(true)}>
+            Delete
+          </Button>
+          <div style={{flex: '1 0 0'}}/>
           <Button onClick={props.handleClose} color="primary">
             Cancel
           </Button>
