@@ -305,11 +305,19 @@ const SharingList: React.FC = () => {
               return date1.getTime() - date2.getTime();
             }},
             {title: "XP", field: "xp", render: (rowData) => {
-                if (rowData['xp'] !== 0) {
-                  return (<p>{rowData['xp']}</p>);
-                } else {
-                  return (<p>N/A</p>);
-                }
+              if (rowData['xp'] !== 0) {
+                return (<p>{rowData['xp']}</p>);
+              } else {
+                return (<p>N/A</p>);
+              }
+            }},
+            {title: "Type", field: "type", render: (rowData) => {
+              switch (rowData['type']) {
+                case -1: return ('N/A');
+                case 0: return ('Talk');
+                case 1: return ('Workshop');
+                case 2: return ('Hackathon');
+              }
             }},
             {title: "Status", field: "status", render: (rowData) => {
               const status = rowData['status'];
@@ -317,6 +325,7 @@ const SharingList: React.FC = () => {
                   case 1: return (<Chip icon={<CheckIcon/>} label="Accepted" color="primary"/>);
                   case 2: return (<Chip icon={<ClearIcon/>} label="Refused"  color="secondary"/>);
                   case 3: return (<Chip icon={<CheckIcon/>} label="Finished" color="primary" style={{backgroundColor: '#37BB08'}}/>);
+                  case 4: return (<Chip icon={<ClearIcon/>} label="Absent"  color="secondary"/>);
                   default: return (<Chip icon={<HourglassEmptyIcon/>} label="To be reviewed"/>);
                 }
             }}

@@ -10,5 +10,6 @@ export const STATUS = {
   TO_REVIEW: 0,
   ACCEPTED: 1,
   REFUSED: 2,
-  FINISHED: 3
+  FINISHED: 3,
+  ABSENT: 4
 };

@@ -2052,6 +2052,7 @@ type SharingObject =
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'date', args?: [] | false, alias?: string  } 
   | { name: 'xp', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
   | { name: 'messages', args?: SharingMessagesArgs[] | false, alias?: string  } 
 
@@ -2062,6 +2063,7 @@ type SharingFields =
   | 'description'
   | 'date'
   | 'xp'
+  | 'type'
   | 'status'
   | 'messages'
 
@@ -2118,6 +2120,14 @@ export interface SharingFieldDetails {
     resolve: undefined
   }
   xp: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  type: {
     type: 'Int'
     args: {}
     description: string
@@ -4471,6 +4481,7 @@ type SharingPreviousValuesObject =
   | { name: 'description', args?: [] | false, alias?: string  } 
   | { name: 'date', args?: [] | false, alias?: string  } 
   | { name: 'xp', args?: [] | false, alias?: string  } 
+  | { name: 'type', args?: [] | false, alias?: string  } 
   | { name: 'status', args?: [] | false, alias?: string  } 
 
 type SharingPreviousValuesFields =
@@ -4480,6 +4491,7 @@ type SharingPreviousValuesFields =
   | 'description'
   | 'date'
   | 'xp'
+  | 'type'
   | 'status'
 
 
@@ -4528,6 +4540,14 @@ export interface SharingPreviousValuesFieldDetails {
     resolve: undefined
   }
   xp: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  type: {
     type: 'Int'
     args: {}
     description: string
@@ -5904,6 +5924,14 @@ export interface SharingWhereInput {
   xp_lte?: number | null
   xp_gt?: number | null
   xp_gte?: number | null
+  type?: number | null
+  type_not?: number | null
+  type_in?: number[]
+  type_not_in?: number[]
+  type_lt?: number | null
+  type_lte?: number | null
+  type_gt?: number | null
+  type_gte?: number | null
   status?: number | null
   status_not?: number | null
   status_in?: number[]
@@ -5975,6 +6003,14 @@ export type SharingWhereInputInputObject =
   | { name: 'xp_lte', alias?: string  } 
   | { name: 'xp_gt', alias?: string  } 
   | { name: 'xp_gte', alias?: string  } 
+  | { name: 'type', alias?: string  } 
+  | { name: 'type_not', alias?: string  } 
+  | { name: 'type_in', alias?: string  } 
+  | { name: 'type_not_in', alias?: string  } 
+  | { name: 'type_lt', alias?: string  } 
+  | { name: 'type_lte', alias?: string  } 
+  | { name: 'type_gt', alias?: string  } 
+  | { name: 'type_gte', alias?: string  } 
   | { name: 'status', alias?: string  } 
   | { name: 'status_not', alias?: string  } 
   | { name: 'status_in', alias?: string  } 
@@ -6981,6 +7017,7 @@ export interface SharingCreateInput {
   description?: string
   date?: string
   xp?: number | null
+  type?: number | null
   status?: number
   messages?: ProjectMessagesCreateManyInput | null
 }
@@ -6992,6 +7029,7 @@ export type SharingCreateInputInputObject =
   | { name: 'description', alias?: string  } 
   | { name: 'date', alias?: string  } 
   | { name: 'xp', alias?: string  } 
+  | { name: 'type', alias?: string  } 
   | { name: 'status', alias?: string  } 
   | { name: 'messages', alias?: string  } 
   
@@ -7008,6 +7046,7 @@ export interface SharingUpdateInput {
   description?: string | null
   date?: string | null
   xp?: number | null
+  type?: number | null
   status?: number | null
   messages?: ProjectMessagesUpdateManyInput | null
 }
@@ -7018,6 +7057,7 @@ export type SharingUpdateInputInputObject =
   | { name: 'description', alias?: string  } 
   | { name: 'date', alias?: string  } 
   | { name: 'xp', alias?: string  } 
+  | { name: 'type', alias?: string  } 
   | { name: 'status', alias?: string  } 
   | { name: 'messages', alias?: string  } 
   
@@ -7034,6 +7074,7 @@ export interface SharingUpdateManyMutationInput {
   description?: string | null
   date?: string | null
   xp?: number | null
+  type?: number | null
   status?: number | null
 }
 export type SharingUpdateManyMutationInputInputObject =
@@ -7043,6 +7084,7 @@ export type SharingUpdateManyMutationInputInputObject =
   | { name: 'description', alias?: string  } 
   | { name: 'date', alias?: string  } 
   | { name: 'xp', alias?: string  } 
+  | { name: 'type', alias?: string  } 
   | { name: 'status', alias?: string  } 
   
 export interface ProjectMessagesUpdateInput {
@@ -7330,6 +7372,8 @@ export type SharingOrderByInputValues =
   | 'date_DESC'
   | 'xp_ASC'
   | 'xp_DESC'
+  | 'type_ASC'
+  | 'type_DESC'
   | 'status_ASC'
   | 'status_DESC'
   

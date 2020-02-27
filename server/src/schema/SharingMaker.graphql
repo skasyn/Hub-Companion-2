@@ -5,6 +5,7 @@ type Sharing {
     description: String!
     date: DateTime!
     xp: Int!
+    type: Int!
     status: Int!
     messages: [ProjectMessages!]
 }

@@ -1,6 +1,7 @@
 import {handleErrors_login} from "./utils";
 import {getActivities} from "./refresh";
 import {prisma} from "../generated/prisma-client";
+import {STATUS} from "../consts";
 
 require('dotenv').config();
 
@@ -166,13 +167,17 @@ async function changeSharingStatus(parent, args, context, userId) {
       author: data.author,
       message: data.message
     });
+    const xp_present = [4, 10, 15];
+    const xp_absent = [-6, -15, -20];
+    let xp = (data.status !== STATUS.ABSENT) ? xp_present[data.type] : xp_absent[data.type];
     await prisma.updateSharing({
       where: {
         id: data.id
       },
       data: {
         status: data.status,
-        xp: data.xp,
+        xp: xp,
+        type: data.type,
         date: data.date !== '' ? data.date : zeroDate.toISOString(),
         messages: {
           connect: { id: mess.id }

@@ -142,7 +142,7 @@ async function getMakerXp(parent, args, context, userId) {
 
 async function getSharingXp(parent, args, context, userId) {
   let sharings = await getUserSharing(parent, args, context, userId);
-  let got = sharings.reduce((acc, elem) => elem.status === STATUS.FINISHED ? acc + elem.xp : acc, 0);
+  let got = sharings.reduce((acc, elem) => (elem.status === STATUS.FINISHED || elem.status === STATUS.ABSENT) ? acc + elem.xp : acc, 0);
   let pending = sharings.reduce((acc, elem) => elem.status === STATUS.ACCEPTED ? acc + elem.xp : acc, 0);
   return {got: got, pending: pending};
 }
@@ -230,6 +230,7 @@ async function getUserSharing(parent, args, context, userId) {
         description
         date
         xp
+        type
         status
         messages {
           author
@@ -335,7 +336,7 @@ async function getAllUserXp(parent, args, context, userId) {
       if (elem.co_workers.find(e => e === user.email) !== undefined)
         return elem;
     }).filter((elem) => elem !== undefined);
-    got += userSharings.reduce((acc, elem) => elem.status === STATUS.FINISHED ? acc + elem.xp : acc, 0);
+    got += userSharings.reduce((acc, elem) => (elem.status === STATUS.FINISHED || elem.status === STATUS.ABSENT) ? acc + elem.xp : acc, 0);
     pending += userSharings.reduce((acc, elem) => elem.status === STATUS.ACCEPTED ? acc + elem.xp : acc, 0);
     const userExperienceProjects = allXpProjects.experienceProjects.map((elem) => {
       if (elem.user === user.email)
@@ -427,6 +428,7 @@ async function getAdminSharings(parent, args, context, userId) {
         description
         date
         xp
+        type
         status
         messages {
           author

@@ -34,6 +34,7 @@ export interface Sharing {
   description: String,
   date: String,
   xp: Number,
+  type: Number,
   status: Number,
   messages: ProjectMessages[]
 }

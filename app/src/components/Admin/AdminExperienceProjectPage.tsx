@@ -116,7 +116,7 @@ const ExperienceProjectList: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState(-1);
   const [jwt] = useGlobalState('jwt');
-  const { data } = useQuery<AdminGetExperienceProjectsData, AdminGetExperienceProjectsVars>(
+  const { data, refetch } = useQuery<AdminGetExperienceProjectsData, AdminGetExperienceProjectsVars>(
     GET_ADMIN_EXPERIENCE_PROJECT,
     { variables: { jwt: jwt }}
   );
@@ -125,9 +125,10 @@ const ExperienceProjectList: React.FC = () => {
     setOpen(true);
     setSelected(id);
   };
-  const handleClose = () => {
+  const handleClose = async () => {
     setOpen(false);
     setSelected(-1);
+    await refetch();
   };
   if (data === undefined) {
     return (

@@ -1189,6 +1189,7 @@ type Sharing {
   description: String!
   date: DateTime!
   xp: Int!
+  type: Int!
   status: Int!
   messages(where: ProjectMessagesWhereInput, orderBy: ProjectMessagesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [ProjectMessages!]
 }
@@ -1210,6 +1211,7 @@ input SharingCreateInput {
   description: String!
   date: DateTime!
   xp: Int
+  type: Int
   status: Int!
   messages: ProjectMessagesCreateManyInput
 }
@@ -1230,6 +1232,8 @@ enum SharingOrderByInput {
   date_DESC
   xp_ASC
   xp_DESC
+  type_ASC
+  type_DESC
   status_ASC
   status_DESC
 }
@@ -1241,6 +1245,7 @@ type SharingPreviousValues {
   description: String!
   date: DateTime!
   xp: Int!
+  type: Int!
   status: Int!
 }
 
@@ -1270,6 +1275,7 @@ input SharingUpdateInput {
   description: String
   date: DateTime
   xp: Int
+  type: Int
   status: Int
   messages: ProjectMessagesUpdateManyInput
 }
@@ -1280,6 +1286,7 @@ input SharingUpdateManyMutationInput {
   description: String
   date: DateTime
   xp: Int
+  type: Int
   status: Int
 }
 
@@ -1342,6 +1349,14 @@ input SharingWhereInput {
   xp_lte: Int
   xp_gt: Int
   xp_gte: Int
+  type: Int
+  type_not: Int
+  type_in: [Int!]
+  type_not_in: [Int!]
+  type_lt: Int
+  type_lte: Int
+  type_gt: Int
+  type_gte: Int
   status: Int
   status_not: Int
   status_in: [Int!]

@@ -499,6 +499,8 @@ export type SharingOrderByInput =
   | "date_DESC"
   | "xp_ASC"
   | "xp_DESC"
+  | "type_ASC"
+  | "type_DESC"
   | "status_ASC"
   | "status_DESC";
 
@@ -535,6 +537,7 @@ export interface SharingUpdateInput {
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
   xp?: Maybe<Int>;
+  type?: Maybe<Int>;
   status?: Maybe<Int>;
   messages?: Maybe<ProjectMessagesUpdateManyInput>;
 }
@@ -568,6 +571,7 @@ export interface SharingCreateInput {
   description: String;
   date: DateTimeInput;
   xp?: Maybe<Int>;
+  type?: Maybe<Int>;
   status: Int;
   messages?: Maybe<ProjectMessagesCreateManyInput>;
 }
@@ -1152,6 +1156,7 @@ export interface SharingUpdateManyMutationInput {
   description?: Maybe<String>;
   date?: Maybe<DateTimeInput>;
   xp?: Maybe<Int>;
+  type?: Maybe<Int>;
   status?: Maybe<Int>;
 }
 
@@ -1452,6 +1457,14 @@ export interface SharingWhereInput {
   xp_lte?: Maybe<Int>;
   xp_gt?: Maybe<Int>;
   xp_gte?: Maybe<Int>;
+  type?: Maybe<Int>;
+  type_not?: Maybe<Int>;
+  type_in?: Maybe<Int[] | Int>;
+  type_not_in?: Maybe<Int[] | Int>;
+  type_lt?: Maybe<Int>;
+  type_lte?: Maybe<Int>;
+  type_gt?: Maybe<Int>;
+  type_gte?: Maybe<Int>;
   status?: Maybe<Int>;
   status_not?: Maybe<Int>;
   status_in?: Maybe<Int[] | Int>;
@@ -2843,6 +2856,7 @@ export interface Sharing {
   description: String;
   date: DateTimeOutput;
   xp: Int;
+  type: Int;
   status: Int;
 }
 
@@ -2853,6 +2867,7 @@ export interface SharingPromise extends Promise<Sharing>, Fragmentable {
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
   xp: () => Promise<Int>;
+  type: () => Promise<Int>;
   status: () => Promise<Int>;
   messages: <T = FragmentableArray<ProjectMessages>>(args?: {
     where?: ProjectMessagesWhereInput;
@@ -2874,6 +2889,7 @@ export interface SharingSubscription
   description: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
   xp: () => Promise<AsyncIterator<Int>>;
+  type: () => Promise<AsyncIterator<Int>>;
   status: () => Promise<AsyncIterator<Int>>;
   messages: <T = Promise<AsyncIterator<ProjectMessagesSubscription>>>(args?: {
     where?: ProjectMessagesWhereInput;
@@ -2895,6 +2911,7 @@ export interface SharingNullablePromise
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
   xp: () => Promise<Int>;
+  type: () => Promise<Int>;
   status: () => Promise<Int>;
   messages: <T = FragmentableArray<ProjectMessages>>(args?: {
     where?: ProjectMessagesWhereInput;
@@ -3084,6 +3101,7 @@ export interface SharingPreviousValues {
   description: String;
   date: DateTimeOutput;
   xp: Int;
+  type: Int;
   status: Int;
 }
 
@@ -3096,6 +3114,7 @@ export interface SharingPreviousValuesPromise
   description: () => Promise<String>;
   date: () => Promise<DateTimeOutput>;
   xp: () => Promise<Int>;
+  type: () => Promise<Int>;
   status: () => Promise<Int>;
 }
 
@@ -3108,6 +3127,7 @@ export interface SharingPreviousValuesSubscription
   description: () => Promise<AsyncIterator<String>>;
   date: () => Promise<AsyncIterator<DateTimeOutput>>;
   xp: () => Promise<AsyncIterator<Int>>;
+  type: () => Promise<AsyncIterator<Int>>;
   status: () => Promise<AsyncIterator<Int>>;
 }
 

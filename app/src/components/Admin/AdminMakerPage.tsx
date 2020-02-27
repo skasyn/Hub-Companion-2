@@ -133,7 +133,7 @@ const AdminMakerList: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState(-1);
   const [jwt] = useGlobalState('jwt');
-  const { data } = useQuery<AdminGetMakersData, AdminGetMakersVars>(
+  const { data, refetch } = useQuery<AdminGetMakersData, AdminGetMakersVars>(
     GET_ADMIN_MAKERS,
     { variables: { jwt: jwt }}
   );
@@ -142,9 +142,10 @@ const AdminMakerList: React.FC = () => {
     setOpen(true);
     setSelected(id);
   };
-  const handleClose = () => {
+  const handleClose = async () => {
     setOpen(false);
     setSelected(-1);
+    await refetch();
   };
   if (data === undefined) {
     return (

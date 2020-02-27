@@ -63,6 +63,7 @@ type Sharing {
     description: String!
     date: DateTime!
     xp: Int! @default(value: 0)
+    type: Int! @default(value: -1)
     status: Int!
     messages: [ProjectMessages!]! @relation(link: INLINE)
 }

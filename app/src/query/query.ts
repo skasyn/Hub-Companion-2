@@ -83,6 +83,7 @@ export const GET_USER_SHARING: any = gql`
           description
           date
           xp
+          type
           status
           messages {
               author
@@ -223,6 +224,7 @@ export const GET_ADMIN_SHARINGS: any = gql`
             description
             date
             xp
+            type
             status
             messages {
                 author

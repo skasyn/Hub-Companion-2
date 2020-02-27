@@ -33,7 +33,7 @@ import ClearIcon from '@material-ui/icons/Clear';
 import HourglassEmptyIcon from '@material-ui/icons/HourglassEmpty';
 import {MessageHistory, toMultiline} from "../Student/SharingMakerUtils";
 import EditIcon from "@material-ui/icons/Edit";
-import {CHANGE_STATUS_MAKER, CHANGE_STATUS_SHARING} from "../../query/mutation";
+import {CHANGE_STATUS_SHARING} from "../../query/mutation";
 import DateFnsUtils from "@date-io/date-fns";
 
 interface DialogChangeProps {
@@ -46,7 +46,7 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
   const [user] = useGlobalState('user');
   const [selectValue, setSelectValue] = React.useState(props.sharing.status);
   const [message, setMessage] = React.useState("");
-  const [xp, setXp] = React.useState(props.sharing.xp);
+  const [type, setType] = React.useState(props.sharing.type);
   const [selectedDate, setSelectedDate] = React.useState<Date | null>(props.sharing.date === '1970-01-01T00:00:00.000Z' ? null : new Date(props.sharing.date as string));
   const [changeStatus] = useMutation<ChangeStatusSharingData, ChangeStatusSharingVars>(CHANGE_STATUS_SHARING);
 
@@ -56,7 +56,7 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
       author: user.name,
       message: message,
       status: selectValue,
-      xp: xp,
+      type: type,
       date: (selectedDate !== null) ? selectedDate.toISOString() : '',
     };
     await changeStatus({variables: {jwt: jwt, data: JSON.stringify(dataSend)}});
@@ -95,21 +95,31 @@ const DialogChange: React.FC<DialogChangeProps> = (props) => {
                   <MenuItem value={2}>
                     <Chip style={{cursor: 'pointer'}} icon={<ClearIcon/>} label="Refused"  color="secondary"/>
                   </MenuItem>
+                  <MenuItem value={4}>
+                    <Chip style={{cursor: 'pointer'}} icon={<ClearIcon/>} label="Absent"  color="secondary"/>
+                  </MenuItem>
                   }
                 </Select>
               </Grid>
               <Grid item>
-                <TextField
-                  label="xp"
-                  type="number"
-                  value={xp}
-                  onChange={(e) => {
-                    if (e.target.value !== '')
-                      setXp(parseInt(e.target.value));
-                    else
-                      setXp(0);
-                  }}
-                />
+                <Select
+                  value={type}
+                  onChange={(e) => setType(e.target.value as number)}
+                  style={{minWidth: '200px', minHeight: '45px'}}
+                >
+                  <MenuItem value={-1}>
+                    N/A
+                  </MenuItem>
+                  <MenuItem value={0}>
+                    Talk
+                  </MenuItem>
+                  <MenuItem value={1}>
+                    Workshop
+                  </MenuItem>
+                  <MenuItem value={2}>
+                    Hackathon
+                  </MenuItem>
+                </Select>
               </Grid>
               <Grid item>
                   <KeyboardDateTimePicker
@@ -153,7 +163,7 @@ const SharingList: React.FC = () => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState(-1);
   const [jwt] = useGlobalState('jwt');
-  const { data } = useQuery<AdminGetSharingsData, AdminGetSharingsVars>(
+  const { data, refetch } = useQuery<AdminGetSharingsData, AdminGetSharingsVars>(
     GET_ADMIN_SHARINGS,
     { variables: { jwt: jwt }}
   );
@@ -162,9 +172,10 @@ const SharingList: React.FC = () => {
     setOpen(true);
     setSelected(id);
   };
-  const handleClose = () => {
+  const handleClose = async () => {
     setOpen(false);
     setSelected(-1);
+    await refetch();
   };
   if (data === undefined) {
     return (
@@ -208,12 +219,21 @@ const SharingList: React.FC = () => {
                   return (<p>N/A</p>);
                 }
             }},
+            {title: "Type", field: "type", render: (rowData) => {
+                switch (rowData['type']) {
+                  case -1: return ('N/A');
+                  case 0: return ('Talk');
+                  case 1: return ('Workshop');
+                  case 2: return ('Hackathon');
+                }
+            }},
             {title: "Status", field: "status", render: (rowData) => {
               const status = rowData['status'];
                 switch (status) {
                   case 1: return (<Chip icon={<CheckIcon/>} label="Accepted" color="primary"/>);
                   case 2: return (<Chip icon={<ClearIcon/>} label="Refused"  color="secondary"/>);
                   case 3: return (<Chip icon={<CheckIcon/>} label="Finished" color="primary" style={{backgroundColor: '#37BB08'}}/>);
+                  case 4: return (<Chip icon={<ClearIcon/>} label="Absent"  color="secondary"/>);
                   default: return (<Chip icon={<HourglassEmptyIcon/>} label="To be reviewed"/>);
                 }
             }},
