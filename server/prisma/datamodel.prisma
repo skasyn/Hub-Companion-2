@@ -6,6 +6,15 @@ type User {
   plan: Int @default(value: -1)
   privilege: Int @default(value: 0)
   activities: [UserPresence!]! @relation(name: "PresenceUser", link: INLINE)
+  notifications: [UserMessages!]! @relation(link: INLINE)
+}
+
+type UserMessages {
+    id: ID! @id
+    seen: Boolean!
+    author: String!
+    date: DateTime!
+    message: String!
 }
 
 type Activity {

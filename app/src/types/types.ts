@@ -6,6 +6,15 @@ export interface User {
   plan: Number,
   privilege: Number,
   activities: Array<{title: String}>
+  notifications: UserMessages[]
+}
+
+export interface UserMessages {
+  id: String,
+  seen: Boolean,
+  author: String,
+  date: String,
+  message: String
 }
 
 export interface XpVars {
@@ -291,4 +300,22 @@ export interface DeleteExperienceProjectVars {
 
 export interface DeleteExperienceProjectData {
   deleteExperienceProject: Boolean
+}
+
+export interface ReadUserNotificationVars {
+  jwt: String,
+  id: String
+}
+
+export interface ReadUserNotificationData {
+  readUserNotification: Boolean
+}
+
+export interface DeleteUserNotificationVars {
+  jwt: String,
+  id: String
+}
+
+export interface DeleteUserNotificationData {
+  deleteUserNotification: Boolean
 }

@@ -274,6 +274,10 @@ type AggregateUser {
   count: Int!
 }
 
+type AggregateUserMessages {
+  count: Int!
+}
+
 type AggregateUserPresence {
   count: Int!
 }
@@ -899,6 +903,12 @@ type Mutation {
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createUserMessages(data: UserMessagesCreateInput!): UserMessages!
+  updateUserMessages(data: UserMessagesUpdateInput!, where: UserMessagesWhereUniqueInput!): UserMessages
+  updateManyUserMessageses(data: UserMessagesUpdateManyMutationInput!, where: UserMessagesWhereInput): BatchPayload!
+  upsertUserMessages(where: UserMessagesWhereUniqueInput!, create: UserMessagesCreateInput!, update: UserMessagesUpdateInput!): UserMessages!
+  deleteUserMessages(where: UserMessagesWhereUniqueInput!): UserMessages
+  deleteManyUserMessageses(where: UserMessagesWhereInput): BatchPayload!
   createUserPresence(data: UserPresenceCreateInput!): UserPresence!
   updateUserPresence(data: UserPresenceUpdateInput!, where: UserPresenceWhereUniqueInput!): UserPresence
   updateManyUserPresences(data: UserPresenceUpdateManyMutationInput!, where: UserPresenceWhereInput): BatchPayload!
@@ -1176,6 +1186,9 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  userMessages(where: UserMessagesWhereUniqueInput!): UserMessages
+  userMessageses(where: UserMessagesWhereInput, orderBy: UserMessagesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserMessages]!
+  userMessagesesConnection(where: UserMessagesWhereInput, orderBy: UserMessagesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserMessagesConnection!
   userPresence(where: UserPresenceWhereUniqueInput!): UserPresence
   userPresences(where: UserPresenceWhereInput, orderBy: UserPresenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserPresence]!
   userPresencesConnection(where: UserPresenceWhereInput, orderBy: UserPresenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserPresenceConnection!
@@ -1382,6 +1395,7 @@ type Subscription {
   projectMessages(where: ProjectMessagesSubscriptionWhereInput): ProjectMessagesSubscriptionPayload
   sharing(where: SharingSubscriptionWhereInput): SharingSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  userMessages(where: UserMessagesSubscriptionWhereInput): UserMessagesSubscriptionPayload
   userPresence(where: UserPresenceSubscriptionWhereInput): UserPresenceSubscriptionPayload
 }
 
@@ -1393,6 +1407,7 @@ type User {
   plan: Int
   privilege: Int
   activities(where: UserPresenceWhereInput, orderBy: UserPresenceOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserPresence!]
+  notifications(where: UserMessagesWhereInput, orderBy: UserMessagesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserMessages!]
 }
 
 type UserConnection {
@@ -1409,6 +1424,7 @@ input UserCreateInput {
   plan: Int
   privilege: Int
   activities: UserPresenceCreateManyWithoutUserInput
+  notifications: UserMessagesCreateManyInput
 }
 
 input UserCreateOneWithoutActivitiesInput {
@@ -1423,11 +1439,255 @@ input UserCreateWithoutActivitiesInput {
   year: Int
   plan: Int
   privilege: Int
+  notifications: UserMessagesCreateManyInput
 }
 
 type UserEdge {
   node: User!
   cursor: String!
+}
+
+type UserMessages {
+  id: ID!
+  seen: Boolean!
+  author: String!
+  date: DateTime!
+  message: String!
+}
+
+type UserMessagesConnection {
+  pageInfo: PageInfo!
+  edges: [UserMessagesEdge]!
+  aggregate: AggregateUserMessages!
+}
+
+input UserMessagesCreateInput {
+  id: ID
+  seen: Boolean!
+  author: String!
+  date: DateTime!
+  message: String!
+}
+
+input UserMessagesCreateManyInput {
+  create: [UserMessagesCreateInput!]
+  connect: [UserMessagesWhereUniqueInput!]
+}
+
+type UserMessagesEdge {
+  node: UserMessages!
+  cursor: String!
+}
+
+enum UserMessagesOrderByInput {
+  id_ASC
+  id_DESC
+  seen_ASC
+  seen_DESC
+  author_ASC
+  author_DESC
+  date_ASC
+  date_DESC
+  message_ASC
+  message_DESC
+}
+
+type UserMessagesPreviousValues {
+  id: ID!
+  seen: Boolean!
+  author: String!
+  date: DateTime!
+  message: String!
+}
+
+input UserMessagesScalarWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  seen: Boolean
+  seen_not: Boolean
+  author: String
+  author_not: String
+  author_in: [String!]
+  author_not_in: [String!]
+  author_lt: String
+  author_lte: String
+  author_gt: String
+  author_gte: String
+  author_contains: String
+  author_not_contains: String
+  author_starts_with: String
+  author_not_starts_with: String
+  author_ends_with: String
+  author_not_ends_with: String
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  message: String
+  message_not: String
+  message_in: [String!]
+  message_not_in: [String!]
+  message_lt: String
+  message_lte: String
+  message_gt: String
+  message_gte: String
+  message_contains: String
+  message_not_contains: String
+  message_starts_with: String
+  message_not_starts_with: String
+  message_ends_with: String
+  message_not_ends_with: String
+  AND: [UserMessagesScalarWhereInput!]
+  OR: [UserMessagesScalarWhereInput!]
+  NOT: [UserMessagesScalarWhereInput!]
+}
+
+type UserMessagesSubscriptionPayload {
+  mutation: MutationType!
+  node: UserMessages
+  updatedFields: [String!]
+  previousValues: UserMessagesPreviousValues
+}
+
+input UserMessagesSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: UserMessagesWhereInput
+  AND: [UserMessagesSubscriptionWhereInput!]
+}
+
+input UserMessagesUpdateDataInput {
+  seen: Boolean
+  author: String
+  date: DateTime
+  message: String
+}
+
+input UserMessagesUpdateInput {
+  seen: Boolean
+  author: String
+  date: DateTime
+  message: String
+}
+
+input UserMessagesUpdateManyDataInput {
+  seen: Boolean
+  author: String
+  date: DateTime
+  message: String
+}
+
+input UserMessagesUpdateManyInput {
+  create: [UserMessagesCreateInput!]
+  update: [UserMessagesUpdateWithWhereUniqueNestedInput!]
+  upsert: [UserMessagesUpsertWithWhereUniqueNestedInput!]
+  delete: [UserMessagesWhereUniqueInput!]
+  connect: [UserMessagesWhereUniqueInput!]
+  set: [UserMessagesWhereUniqueInput!]
+  disconnect: [UserMessagesWhereUniqueInput!]
+  deleteMany: [UserMessagesScalarWhereInput!]
+  updateMany: [UserMessagesUpdateManyWithWhereNestedInput!]
+}
+
+input UserMessagesUpdateManyMutationInput {
+  seen: Boolean
+  author: String
+  date: DateTime
+  message: String
+}
+
+input UserMessagesUpdateManyWithWhereNestedInput {
+  where: UserMessagesScalarWhereInput!
+  data: UserMessagesUpdateManyDataInput!
+}
+
+input UserMessagesUpdateWithWhereUniqueNestedInput {
+  where: UserMessagesWhereUniqueInput!
+  data: UserMessagesUpdateDataInput!
+}
+
+input UserMessagesUpsertWithWhereUniqueNestedInput {
+  where: UserMessagesWhereUniqueInput!
+  update: UserMessagesUpdateDataInput!
+  create: UserMessagesCreateInput!
+}
+
+input UserMessagesWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  seen: Boolean
+  seen_not: Boolean
+  author: String
+  author_not: String
+  author_in: [String!]
+  author_not_in: [String!]
+  author_lt: String
+  author_lte: String
+  author_gt: String
+  author_gte: String
+  author_contains: String
+  author_not_contains: String
+  author_starts_with: String
+  author_not_starts_with: String
+  author_ends_with: String
+  author_not_ends_with: String
+  date: DateTime
+  date_not: DateTime
+  date_in: [DateTime!]
+  date_not_in: [DateTime!]
+  date_lt: DateTime
+  date_lte: DateTime
+  date_gt: DateTime
+  date_gte: DateTime
+  message: String
+  message_not: String
+  message_in: [String!]
+  message_not_in: [String!]
+  message_lt: String
+  message_lte: String
+  message_gt: String
+  message_gte: String
+  message_contains: String
+  message_not_contains: String
+  message_starts_with: String
+  message_not_starts_with: String
+  message_ends_with: String
+  message_not_ends_with: String
+  AND: [UserMessagesWhereInput!]
+}
+
+input UserMessagesWhereUniqueInput {
+  id: ID
 }
 
 enum UserOrderByInput {
@@ -1744,6 +2004,7 @@ input UserUpdateInput {
   plan: Int
   privilege: Int
   activities: UserPresenceUpdateManyWithoutUserInput
+  notifications: UserMessagesUpdateManyInput
 }
 
 input UserUpdateManyMutationInput {
@@ -1767,6 +2028,7 @@ input UserUpdateWithoutActivitiesDataInput {
   year: Int
   plan: Int
   privilege: Int
+  notifications: UserMessagesUpdateManyInput
 }
 
 input UserUpsertWithoutActivitiesInput {
@@ -1842,6 +2104,7 @@ input UserWhereInput {
   privilege_gt: Int
   privilege_gte: Int
   activities_some: UserPresenceWhereInput
+  notifications_some: UserMessagesWhereInput
   AND: [UserWhereInput!]
 }
 

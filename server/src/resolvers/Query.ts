@@ -84,6 +84,7 @@ async function login(parent, args, context) {
   let user_found = await prisma.user({
     email: user_data.data.mail
   });
+  let notifications = [];
   if (user_found === null) {
     user_found = await prisma.createUser({
       name: user_data.data.displayName,
@@ -92,17 +93,20 @@ async function login(parent, args, context) {
     await forceRefresh(parent, args, context);
   } else {
     await checkShouldRefresh(parent, args, context);
+    notifications = await prisma.user({email: user_data.data.mail}).notifications();
   }
   const jwt = await generateJwt({id: user_found.id });
   const xp = await getXp(parent, args, context, user_found.id);
-  return {user: user_found, jwt: jwt, xp: xp};
+  return {user: {...user_found, notifications: notifications}, jwt: jwt, xp: xp};
 }
 
 async function loginCookie(parent, args, context, userId) {
   await checkShouldRefresh(parent, args, context);
   const xp = await getXp(parent, args, context, userId);
+  const user = await prisma.user({id: userId});
+  const notifications = await prisma.user({id: userId}).notifications();
   return {
-    user: prisma.user({id: userId}),
+    user: {...user, notifications: notifications},
     xp: xp
   };
 }

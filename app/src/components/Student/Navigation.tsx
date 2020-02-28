@@ -136,7 +136,7 @@ export const Navigation: React.FC = () => {
       <ThemeProvider theme={navigationTheme}>
         <div className={classes.root}>
           <CssBaseline />
-          <NavBar/>
+          <NavBar showNotifications={true}/>
           <HomeDrawer/>
           <Content/>
         </div>

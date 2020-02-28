@@ -127,7 +127,7 @@ export const AdminNavigation: React.FC = () => {
       <ThemeProvider theme={navigationTheme}>
         <div className={classes.root}>
           <CssBaseline />
-          <NavBar/>
+          <NavBar showNotifications={false}/>
           <HomeDrawer/>
           <Content/>
         </div>

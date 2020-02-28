@@ -5,9 +5,13 @@ type Mutation {
     submitExperienceProject(code: String!, data: String!): Boolean!
     setYear(code: String!, year: Int!): Boolean!
     setPlan(code: String!, plan: Int!): Boolean!
+    readUserNotification(code: String!, id: String!): Boolean!
+    deleteUserNotification(code: String!, id: String!): Boolean!
+
     changeMakerStatus(code: String!, data: String!): Boolean!
     changeSharingStatus(code: String!, data: String!): Boolean!
     changeExperienceProjectStatus(code: String!, data: String!): Boolean!
+
     deleteMaker(code: String!, id: String!): Boolean!
     deleteSharing(code: String!, id: String!): Boolean!
     deleteExperienceProject(code: String!, id: String!): Boolean!

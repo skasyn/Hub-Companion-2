@@ -74,7 +74,7 @@ export const MessageHistory: React.FC<MessageHistoryProps> = (props) => {
               <Grid item key={id}>
                 <Divider style={{marginTop: '1em', marginBottom: '1em'}}/>
                 <Typography variant="h5" style={{fontSize: '1em'}}>
-                  <b>{e.author}</b> | {date.toLocaleString()}
+                  <b>{e.author}</b> | {date.toLocaleString('en-GB')}
                 </Typography>
                 {e.message}
               </Grid>

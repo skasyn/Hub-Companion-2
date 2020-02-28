@@ -71,3 +71,15 @@ export const DELETE_EXPERIENCE_PROJECT: any = gql`
         deleteExperienceProject(code: $jwt, id: $id)
     }
 `;
+
+export const READ_USER_NOTIFICATION: any = gql`
+    mutation READ_USER_NOTIFICATION($jwt: String!, $id: String!) {
+        readUserNotification(code: $jwt, id: $id)
+    }
+`;
+
+export const DELETE_USER_NOTIFICATION: any = gql`
+    mutation DELETE_USER_NOTIFICATION($jwt: String!, $id: String!) {
+        deleteUserNotification(code: $jwt, id: $id)
+    }
+`;

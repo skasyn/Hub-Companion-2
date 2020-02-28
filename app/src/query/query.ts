@@ -9,6 +9,13 @@ export const LOGIN: any = gql`
         year
         plan
         privilege
+        notifications {
+          id
+          seen
+          author
+          date
+          message
+        }
       }
       jwt
       xp {
@@ -28,6 +35,13 @@ export const LOGIN_COOKIE: any = gql`
         year
         plan
         privilege
+        notifications {
+          id
+          seen
+          author
+          date
+          message
+        }
       }
       xp {
         pending

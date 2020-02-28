@@ -123,6 +123,38 @@ async function setPlan(parent, args, context, userId) {
   return true;
 }
 
+async function readUserNotification(parent, args, context, userId) {
+  if (userId === undefined || userId === '' || args.id === undefined) {
+    throw new Error('Empty code');
+  }
+  try {
+    await prisma.updateUserMessages({
+      where: {
+        id: args.id
+      },
+      data: {
+        seen: true
+      }
+    });
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
+async function deleteUserNotification(parent, args, context, userId) {
+  if (userId === undefined || userId === '' || args.id === undefined) {
+    throw new Error('Empty code');
+  }
+  try {
+    await prisma.deleteUserMessages({ id: args.id });
+  } catch (e) {
+    return false;
+  }
+  return true;
+}
+
+
 async function changeMakerStatus(parent, args, context, userId) {
   const admin = await prisma.user({id: userId});
   if ((admin === undefined || admin === null) || admin.privilege === 0) {
@@ -136,7 +168,7 @@ async function changeMakerStatus(parent, args, context, userId) {
       author: data.author,
       message: data.message
     });
-    await prisma.updateMaker({
+    const maker = await prisma.updateMaker({
       where: {
         id: data.id
       },
@@ -148,11 +180,32 @@ async function changeMakerStatus(parent, args, context, userId) {
         }
       }
     });
+    maker.co_workers.map(async (co_worker) => {
+      try {
+        const user_mess = await prisma.createUserMessages({
+          seen: false,
+          date: now.toISOString(),
+          author: data.author,
+          message: `Updated status on "${maker.title}"`
+        });
+        await prisma.updateUser({
+          where: {
+            email: co_worker
+          },
+          data: {
+            notifications: {
+              connect: {id: user_mess.id}
+            }
+          }
+        })
+      } catch (e) {}
+    });
   } catch (e) {
     return false
   }
   return true;
 }
+
 async function changeSharingStatus(parent, args, context, userId) {
   const admin = await prisma.user({id: userId});
   if ((admin === undefined || admin === null) || admin.privilege === 0) {
@@ -170,7 +223,7 @@ async function changeSharingStatus(parent, args, context, userId) {
     const xp_present = [4, 10, 15];
     const xp_absent = [-6, -15, -20];
     let xp = (data.status !== STATUS.ABSENT) ? xp_present[data.type] : xp_absent[data.type];
-    await prisma.updateSharing({
+    const sharing = await prisma.updateSharing({
       where: {
         id: data.id
       },
@@ -184,11 +237,32 @@ async function changeSharingStatus(parent, args, context, userId) {
         }
       }
     });
+    sharing.co_workers.map(async (co_worker) => {
+      try {
+        const user_mess = await prisma.createUserMessages({
+          seen: false,
+          date: now.toISOString(),
+          author: data.author,
+          message: `Updated status on "${sharing.title}"`
+        });
+        await prisma.updateUser({
+          where: {
+            email: co_worker
+          },
+          data: {
+            notifications: {
+              connect: {id: user_mess.id}
+            }
+          }
+        })
+      } catch (e) {}
+    });
   } catch (e) {
     return false
   }
   return true;
 }
+
 async function changeExperienceProjectStatus(parent, args, context, userId) {
   const admin = await prisma.user({id: userId});
   if ((admin === undefined || admin === null) || admin.privilege === 0) {
@@ -202,7 +276,7 @@ async function changeExperienceProjectStatus(parent, args, context, userId) {
       author: data.author,
       message: data.message
     });
-    await prisma.updateExperienceProject({
+    const experienceProject = await prisma.updateExperienceProject({
       where: {
         id: data.id
       },
@@ -210,6 +284,22 @@ async function changeExperienceProjectStatus(parent, args, context, userId) {
         status: data.status,
         messages: {
           connect: { id: mess.id }
+        }
+      }
+    });
+    const user_mess = await prisma.createUserMessages({
+      seen: false,
+      date: now.toISOString(),
+      author: data.author,
+      message: `Updated status on "${experienceProject.title}"`
+    });
+    await prisma.updateUser({
+      where: {
+        email: experienceProject.user
+      },
+      data: {
+        notifications: {
+          connect: {id: user_mess.id}
         }
       }
     });
@@ -287,14 +377,20 @@ async function deleteExperienceProject(parent, args, context, userId) {
 
 export const Mutation = {
   refresh: handleErrors_login(refresh),
+
   submitMaker: handleErrors_login(submitMaker),
   submitSharing: handleErrors_login(submitSharing),
   submitExperienceProject: handleErrors_login(submitExperienceProject),
   setYear: handleErrors_login(setYear),
   setPlan: handleErrors_login(setPlan),
+
+  readUserNotification: handleErrors_login(readUserNotification),
+  deleteUserNotification: handleErrors_login(deleteUserNotification),
+
   changeMakerStatus: handleErrors_login(changeMakerStatus),
   changeSharingStatus: handleErrors_login(changeSharingStatus),
   changeExperienceProjectStatus: handleErrors_login(changeExperienceProjectStatus),
+
   deleteMaker: handleErrors_login(deleteMaker),
   deleteSharing: handleErrors_login(deleteSharing),
   deleteExperienceProject: handleErrors_login(deleteExperienceProject),

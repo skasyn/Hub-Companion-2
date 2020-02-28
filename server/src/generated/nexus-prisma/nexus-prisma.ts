@@ -18,10 +18,14 @@ export interface NexusPrismaTypes {
       User: UserObject
       UserPresence: UserPresenceObject
       Activity: ActivityObject
+      UserMessages: UserMessagesObject
       UserConnection: UserConnectionObject
       PageInfo: PageInfoObject
       UserEdge: UserEdgeObject
       AggregateUser: AggregateUserObject
+      UserMessagesConnection: UserMessagesConnectionObject
+      UserMessagesEdge: UserMessagesEdgeObject
+      AggregateUserMessages: AggregateUserMessagesObject
       ActivityConnection: ActivityConnectionObject
       ActivityEdge: ActivityEdgeObject
       AggregateActivity: AggregateActivityObject
@@ -53,6 +57,8 @@ export interface NexusPrismaTypes {
       Subscription: SubscriptionObject
       UserSubscriptionPayload: UserSubscriptionPayloadObject
       UserPreviousValues: UserPreviousValuesObject
+      UserMessagesSubscriptionPayload: UserMessagesSubscriptionPayloadObject
+      UserMessagesPreviousValues: UserMessagesPreviousValuesObject
       ActivitySubscriptionPayload: ActivitySubscriptionPayloadObject
       ActivityPreviousValues: ActivityPreviousValuesObject
       UserPresenceSubscriptionPayload: UserPresenceSubscriptionPayloadObject
@@ -73,10 +79,14 @@ export interface NexusPrismaTypes {
       User: UserFieldDetails
       UserPresence: UserPresenceFieldDetails
       Activity: ActivityFieldDetails
+      UserMessages: UserMessagesFieldDetails
       UserConnection: UserConnectionFieldDetails
       PageInfo: PageInfoFieldDetails
       UserEdge: UserEdgeFieldDetails
       AggregateUser: AggregateUserFieldDetails
+      UserMessagesConnection: UserMessagesConnectionFieldDetails
+      UserMessagesEdge: UserMessagesEdgeFieldDetails
+      AggregateUserMessages: AggregateUserMessagesFieldDetails
       ActivityConnection: ActivityConnectionFieldDetails
       ActivityEdge: ActivityEdgeFieldDetails
       AggregateActivity: AggregateActivityFieldDetails
@@ -108,6 +118,8 @@ export interface NexusPrismaTypes {
       Subscription: SubscriptionFieldDetails
       UserSubscriptionPayload: UserSubscriptionPayloadFieldDetails
       UserPreviousValues: UserPreviousValuesFieldDetails
+      UserMessagesSubscriptionPayload: UserMessagesSubscriptionPayloadFieldDetails
+      UserMessagesPreviousValues: UserMessagesPreviousValuesFieldDetails
       ActivitySubscriptionPayload: ActivitySubscriptionPayloadFieldDetails
       ActivityPreviousValues: ActivityPreviousValuesFieldDetails
       UserPresenceSubscriptionPayload: UserPresenceSubscriptionPayloadFieldDetails
@@ -129,7 +141,9 @@ export interface NexusPrismaTypes {
       UserWhereUniqueInput: UserWhereUniqueInputInputObject
       UserPresenceWhereInput: UserPresenceWhereInputInputObject
       UserWhereInput: UserWhereInputInputObject
+      UserMessagesWhereInput: UserMessagesWhereInputInputObject
       ActivityWhereInput: ActivityWhereInputInputObject
+      UserMessagesWhereUniqueInput: UserMessagesWhereUniqueInputInputObject
       ActivityWhereUniqueInput: ActivityWhereUniqueInputInputObject
       UserPresenceWhereUniqueInput: UserPresenceWhereUniqueInputInputObject
       ExperienceProjectWhereUniqueInput: ExperienceProjectWhereUniqueInputInputObject
@@ -147,6 +161,8 @@ export interface NexusPrismaTypes {
       UserPresenceCreateWithoutUserInput: UserPresenceCreateWithoutUserInputInputObject
       ActivityCreateOneWithoutRegisteredInput: ActivityCreateOneWithoutRegisteredInputInputObject
       ActivityCreateWithoutRegisteredInput: ActivityCreateWithoutRegisteredInputInputObject
+      UserMessagesCreateManyInput: UserMessagesCreateManyInputInputObject
+      UserMessagesCreateInput: UserMessagesCreateInputInputObject
       UserUpdateInput: UserUpdateInputInputObject
       UserPresenceUpdateManyWithoutUserInput: UserPresenceUpdateManyWithoutUserInputInputObject
       UserPresenceUpdateWithWhereUniqueWithoutUserInput: UserPresenceUpdateWithWhereUniqueWithoutUserInputInputObject
@@ -158,7 +174,16 @@ export interface NexusPrismaTypes {
       UserPresenceScalarWhereInput: UserPresenceScalarWhereInputInputObject
       UserPresenceUpdateManyWithWhereNestedInput: UserPresenceUpdateManyWithWhereNestedInputInputObject
       UserPresenceUpdateManyDataInput: UserPresenceUpdateManyDataInputInputObject
+      UserMessagesUpdateManyInput: UserMessagesUpdateManyInputInputObject
+      UserMessagesUpdateWithWhereUniqueNestedInput: UserMessagesUpdateWithWhereUniqueNestedInputInputObject
+      UserMessagesUpdateDataInput: UserMessagesUpdateDataInputInputObject
+      UserMessagesUpsertWithWhereUniqueNestedInput: UserMessagesUpsertWithWhereUniqueNestedInputInputObject
+      UserMessagesScalarWhereInput: UserMessagesScalarWhereInputInputObject
+      UserMessagesUpdateManyWithWhereNestedInput: UserMessagesUpdateManyWithWhereNestedInputInputObject
+      UserMessagesUpdateManyDataInput: UserMessagesUpdateManyDataInputInputObject
       UserUpdateManyMutationInput: UserUpdateManyMutationInputInputObject
+      UserMessagesUpdateInput: UserMessagesUpdateInputInputObject
+      UserMessagesUpdateManyMutationInput: UserMessagesUpdateManyMutationInputInputObject
       ActivityCreateInput: ActivityCreateInputInputObject
       UserPresenceCreateManyWithoutActivityInput: UserPresenceCreateManyWithoutActivityInputInputObject
       UserPresenceCreateWithoutActivityInput: UserPresenceCreateWithoutActivityInputInputObject
@@ -204,6 +229,7 @@ export interface NexusPrismaTypes {
       DatabaseRefreshUpdateInput: DatabaseRefreshUpdateInputInputObject
       DatabaseRefreshUpdateManyMutationInput: DatabaseRefreshUpdateManyMutationInputInputObject
       UserSubscriptionWhereInput: UserSubscriptionWhereInputInputObject
+      UserMessagesSubscriptionWhereInput: UserMessagesSubscriptionWhereInputInputObject
       ActivitySubscriptionWhereInput: ActivitySubscriptionWhereInputInputObject
       UserPresenceSubscriptionWhereInput: UserPresenceSubscriptionWhereInputInputObject
       ExperienceProjectSubscriptionWhereInput: ExperienceProjectSubscriptionWhereInputInputObject
@@ -215,6 +241,7 @@ export interface NexusPrismaTypes {
   }
   enumTypes: {
     UserPresenceOrderByInput: UserPresenceOrderByInputValues,
+    UserMessagesOrderByInput: UserMessagesOrderByInputValues,
     UserOrderByInput: UserOrderByInputValues,
     ActivityOrderByInput: ActivityOrderByInputValues,
     ProjectMessagesOrderByInput: ProjectMessagesOrderByInputValues,
@@ -233,6 +260,9 @@ type QueryObject =
   | { name: 'user', args?: QueryUserArgs[] | false, alias?: string  } 
   | { name: 'users', args?: QueryUsersArgs[] | false, alias?: string  } 
   | { name: 'usersConnection', args?: QueryUsersConnectionArgs[] | false, alias?: string  } 
+  | { name: 'userMessages', args?: QueryUserMessagesArgs[] | false, alias?: string  } 
+  | { name: 'userMessageses', args?: QueryUserMessagesesArgs[] | false, alias?: string  } 
+  | { name: 'userMessagesesConnection', args?: QueryUserMessagesesConnectionArgs[] | false, alias?: string  } 
   | { name: 'activity', args?: QueryActivityArgs[] | false, alias?: string  } 
   | { name: 'activities', args?: QueryActivitiesArgs[] | false, alias?: string  } 
   | { name: 'activitiesConnection', args?: QueryActivitiesConnectionArgs[] | false, alias?: string  } 
@@ -259,6 +289,9 @@ type QueryFields =
   | 'user'
   | 'users'
   | 'usersConnection'
+  | 'userMessages'
+  | 'userMessageses'
+  | 'userMessagesesConnection'
   | 'activity'
   | 'activities'
   | 'activitiesConnection'
@@ -293,6 +326,24 @@ type QueryUsersArgs =
   | 'first'
   | 'last'
 type QueryUsersConnectionArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryUserMessagesArgs =
+  | 'where'
+type QueryUserMessagesesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type QueryUserMessagesesConnectionArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -467,6 +518,45 @@ export interface QueryFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserConnection> | prisma.UserConnection
+  }
+  userMessages: {
+    type: 'UserMessages'
+    args: Record<QueryUserMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where: UserMessagesWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessages | null> | prisma.UserMessages | null
+  }
+  userMessageses: {
+    type: 'UserMessages'
+    args: Record<QueryUserMessagesesArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: UserMessagesWhereInput | null, orderBy?: prisma.UserMessagesOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessages[]> | prisma.UserMessages[]
+  }
+  userMessagesesConnection: {
+    type: 'UserMessagesConnection'
+    args: Record<QueryUserMessagesesConnectionArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Query">,
+      args: { where?: UserMessagesWhereInput | null, orderBy?: prisma.UserMessagesOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessagesConnection> | prisma.UserMessagesConnection
   }
   activity: {
     type: 'Activity'
@@ -755,6 +845,7 @@ type UserObject =
   | { name: 'plan', args?: [] | false, alias?: string  } 
   | { name: 'privilege', args?: [] | false, alias?: string  } 
   | { name: 'activities', args?: UserActivitiesArgs[] | false, alias?: string  } 
+  | { name: 'notifications', args?: UserNotificationsArgs[] | false, alias?: string  } 
 
 type UserFields =
   | 'id'
@@ -764,9 +855,18 @@ type UserFields =
   | 'plan'
   | 'privilege'
   | 'activities'
+  | 'notifications'
 
 
 type UserActivitiesArgs =
+  | 'where'
+  | 'orderBy'
+  | 'skip'
+  | 'after'
+  | 'before'
+  | 'first'
+  | 'last'
+type UserNotificationsArgs =
   | 'where'
   | 'orderBy'
   | 'skip'
@@ -837,6 +937,19 @@ export interface UserFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserPresence[]> | prisma.UserPresence[]
+  }
+  notifications: {
+    type: 'UserMessages'
+    args: Record<UserNotificationsArgs, core.NexusArgDef<string>>
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"User">,
+      args: { where?: UserMessagesWhereInput | null, orderBy?: prisma.UserMessagesOrderByInput | null, skip?: number | null, after?: string | null, before?: string | null, first?: number | null, last?: number | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessages[]> | prisma.UserMessages[]
   }
 }
   
@@ -1043,6 +1156,71 @@ export interface ActivityFieldDetails {
 }
   
 
+// Types for UserMessages
+
+type UserMessagesObject =
+  | UserMessagesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'seen', args?: [] | false, alias?: string  } 
+  | { name: 'author', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'message', args?: [] | false, alias?: string  } 
+
+type UserMessagesFields =
+  | 'id'
+  | 'seen'
+  | 'author'
+  | 'date'
+  | 'message'
+
+
+
+  
+
+export interface UserMessagesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  seen: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  author: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  message: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
 // Types for UserConnection
 
 type UserConnectionObject =
@@ -1212,6 +1390,131 @@ type AggregateUserFields =
   
 
 export interface AggregateUserFieldDetails {
+  count: {
+    type: 'Int'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for UserMessagesConnection
+
+type UserMessagesConnectionObject =
+  | UserMessagesConnectionFields
+  | { name: 'pageInfo', args?: [] | false, alias?: string  } 
+  | { name: 'edges', args?: [] | false, alias?: string  } 
+  | { name: 'aggregate', args?: [] | false, alias?: string  } 
+
+type UserMessagesConnectionFields =
+  | 'pageInfo'
+  | 'edges'
+  | 'aggregate'
+
+
+
+  
+
+export interface UserMessagesConnectionFieldDetails {
+  pageInfo: {
+    type: 'PageInfo'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserMessagesConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.PageInfo> | prisma.PageInfo
+  }
+  edges: {
+    type: 'UserMessagesEdge'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserMessagesConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessagesEdge[]> | prisma.UserMessagesEdge[]
+  }
+  aggregate: {
+    type: 'AggregateUserMessages'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserMessagesConnection">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.AggregateUserMessages> | prisma.AggregateUserMessages
+  }
+}
+  
+
+// Types for UserMessagesEdge
+
+type UserMessagesEdgeObject =
+  | UserMessagesEdgeFields
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'cursor', args?: [] | false, alias?: string  } 
+
+type UserMessagesEdgeFields =
+  | 'node'
+  | 'cursor'
+
+
+
+  
+
+export interface UserMessagesEdgeFieldDetails {
+  node: {
+    type: 'UserMessages'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserMessagesEdge">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessages> | prisma.UserMessages
+  }
+  cursor: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+}
+  
+
+// Types for AggregateUserMessages
+
+type AggregateUserMessagesObject =
+  | AggregateUserMessagesFields
+  | { name: 'count', args?: [] | false, alias?: string  } 
+
+type AggregateUserMessagesFields =
+  | 'count'
+
+
+
+  
+
+export interface AggregateUserMessagesFieldDetails {
   count: {
     type: 'Int'
     args: {}
@@ -2579,6 +2882,12 @@ type MutationObject =
   | { name: 'upsertUser', args?: MutationUpsertUserArgs[] | false, alias?: string  } 
   | { name: 'deleteUser', args?: MutationDeleteUserArgs[] | false, alias?: string  } 
   | { name: 'deleteManyUsers', args?: MutationDeleteManyUsersArgs[] | false, alias?: string  } 
+  | { name: 'createUserMessages', args?: MutationCreateUserMessagesArgs[] | false, alias?: string  } 
+  | { name: 'updateUserMessages', args?: MutationUpdateUserMessagesArgs[] | false, alias?: string  } 
+  | { name: 'updateManyUserMessageses', args?: MutationUpdateManyUserMessagesesArgs[] | false, alias?: string  } 
+  | { name: 'upsertUserMessages', args?: MutationUpsertUserMessagesArgs[] | false, alias?: string  } 
+  | { name: 'deleteUserMessages', args?: MutationDeleteUserMessagesArgs[] | false, alias?: string  } 
+  | { name: 'deleteManyUserMessageses', args?: MutationDeleteManyUserMessagesesArgs[] | false, alias?: string  } 
   | { name: 'createActivity', args?: MutationCreateActivityArgs[] | false, alias?: string  } 
   | { name: 'updateActivity', args?: MutationUpdateActivityArgs[] | false, alias?: string  } 
   | { name: 'updateManyActivities', args?: MutationUpdateManyActivitiesArgs[] | false, alias?: string  } 
@@ -2629,6 +2938,12 @@ type MutationFields =
   | 'upsertUser'
   | 'deleteUser'
   | 'deleteManyUsers'
+  | 'createUserMessages'
+  | 'updateUserMessages'
+  | 'updateManyUserMessageses'
+  | 'upsertUserMessages'
+  | 'deleteUserMessages'
+  | 'deleteManyUserMessageses'
   | 'createActivity'
   | 'updateActivity'
   | 'updateManyActivities'
@@ -2688,6 +3003,22 @@ type MutationUpsertUserArgs =
 type MutationDeleteUserArgs =
   | 'where'
 type MutationDeleteManyUsersArgs =
+  | 'where'
+type MutationCreateUserMessagesArgs =
+  | 'data'
+type MutationUpdateUserMessagesArgs =
+  | 'data'
+  | 'where'
+type MutationUpdateManyUserMessagesesArgs =
+  | 'data'
+  | 'where'
+type MutationUpsertUserMessagesArgs =
+  | 'where'
+  | 'create'
+  | 'update'
+type MutationDeleteUserMessagesArgs =
+  | 'where'
+type MutationDeleteManyUserMessagesesArgs =
   | 'where'
 type MutationCreateActivityArgs =
   | 'data'
@@ -2878,6 +3209,84 @@ export interface MutationFieldDetails {
     resolve: (
       root: core.RootValue<"Mutation">,
       args: { where?: UserWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  createUserMessages: {
+    type: 'UserMessages'
+    args: Record<MutationCreateUserMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: UserMessagesCreateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessages> | prisma.UserMessages
+  }
+  updateUserMessages: {
+    type: 'UserMessages'
+    args: Record<MutationUpdateUserMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: UserMessagesUpdateInput, where: UserMessagesWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessages | null> | prisma.UserMessages | null
+  }
+  updateManyUserMessageses: {
+    type: 'BatchPayload'
+    args: Record<MutationUpdateManyUserMessagesesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { data: UserMessagesUpdateManyMutationInput, where?: UserMessagesWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
+  }
+  upsertUserMessages: {
+    type: 'UserMessages'
+    args: Record<MutationUpsertUserMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: UserMessagesWhereUniqueInput, create: UserMessagesCreateInput, update: UserMessagesUpdateInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessages> | prisma.UserMessages
+  }
+  deleteUserMessages: {
+    type: 'UserMessages'
+    args: Record<MutationDeleteUserMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where: UserMessagesWhereUniqueInput }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessages | null> | prisma.UserMessages | null
+  }
+  deleteManyUserMessageses: {
+    type: 'BatchPayload'
+    args: Record<MutationDeleteManyUserMessagesesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"Mutation">,
+      args: { where?: UserMessagesWhereInput | null }  ,
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.BatchPayload> | prisma.BatchPayload
@@ -3461,6 +3870,7 @@ export interface BatchPayloadFieldDetails {
 type SubscriptionObject =
   | SubscriptionFields
   | { name: 'user', args?: SubscriptionUserArgs[] | false, alias?: string  } 
+  | { name: 'userMessages', args?: SubscriptionUserMessagesArgs[] | false, alias?: string  } 
   | { name: 'activity', args?: SubscriptionActivityArgs[] | false, alias?: string  } 
   | { name: 'userPresence', args?: SubscriptionUserPresenceArgs[] | false, alias?: string  } 
   | { name: 'experienceProject', args?: SubscriptionExperienceProjectArgs[] | false, alias?: string  } 
@@ -3471,6 +3881,7 @@ type SubscriptionObject =
 
 type SubscriptionFields =
   | 'user'
+  | 'userMessages'
   | 'activity'
   | 'userPresence'
   | 'experienceProject'
@@ -3481,6 +3892,8 @@ type SubscriptionFields =
 
 
 type SubscriptionUserArgs =
+  | 'where'
+type SubscriptionUserMessagesArgs =
   | 'where'
 type SubscriptionActivityArgs =
   | 'where'
@@ -3511,6 +3924,19 @@ export interface SubscriptionFieldDetails {
       context: core.GetGen<"context">,
       info?: GraphQLResolveInfo
     ) => Promise<prisma.UserSubscriptionPayload | null> | prisma.UserSubscriptionPayload | null
+  }
+  userMessages: {
+    type: 'UserMessagesSubscriptionPayload'
+    args: Record<SubscriptionUserMessagesArgs, core.NexusArgDef<string>>
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"Subscription">,
+      args: { where?: UserMessagesSubscriptionWhereInput | null }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessagesSubscriptionPayload | null> | prisma.UserMessagesSubscriptionPayload | null
   }
   activity: {
     type: 'ActivitySubscriptionPayload'
@@ -3746,6 +4172,141 @@ export interface UserPreviousValuesFieldDetails {
     description: string
     list: undefined
     nullable: true
+    resolve: undefined
+  }
+}
+  
+
+// Types for UserMessagesSubscriptionPayload
+
+type UserMessagesSubscriptionPayloadObject =
+  | UserMessagesSubscriptionPayloadFields
+  | { name: 'mutation', args?: [] | false, alias?: string  } 
+  | { name: 'node', args?: [] | false, alias?: string  } 
+  | { name: 'updatedFields', args?: [] | false, alias?: string  } 
+  | { name: 'previousValues', args?: [] | false, alias?: string  } 
+
+type UserMessagesSubscriptionPayloadFields =
+  | 'mutation'
+  | 'node'
+  | 'updatedFields'
+  | 'previousValues'
+
+
+
+  
+
+export interface UserMessagesSubscriptionPayloadFieldDetails {
+  mutation: {
+    type: 'MutationType'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: (
+      root: core.RootValue<"UserMessagesSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.MutationType> | prisma.MutationType
+  }
+  node: {
+    type: 'UserMessages'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"UserMessagesSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessages | null> | prisma.UserMessages | null
+  }
+  updatedFields: {
+    type: 'String'
+    args: {}
+    description: string
+    list: true
+    nullable: false
+    resolve: undefined
+  }
+  previousValues: {
+    type: 'UserMessagesPreviousValues'
+    args: {}
+    description: string
+    list: undefined
+    nullable: true
+    resolve: (
+      root: core.RootValue<"UserMessagesSubscriptionPayload">,
+      args: {  }  ,
+      context: core.GetGen<"context">,
+      info?: GraphQLResolveInfo
+    ) => Promise<prisma.UserMessagesPreviousValues | null> | prisma.UserMessagesPreviousValues | null
+  }
+}
+  
+
+// Types for UserMessagesPreviousValues
+
+type UserMessagesPreviousValuesObject =
+  | UserMessagesPreviousValuesFields
+  | { name: 'id', args?: [] | false, alias?: string  } 
+  | { name: 'seen', args?: [] | false, alias?: string  } 
+  | { name: 'author', args?: [] | false, alias?: string  } 
+  | { name: 'date', args?: [] | false, alias?: string  } 
+  | { name: 'message', args?: [] | false, alias?: string  } 
+
+type UserMessagesPreviousValuesFields =
+  | 'id'
+  | 'seen'
+  | 'author'
+  | 'date'
+  | 'message'
+
+
+
+  
+
+export interface UserMessagesPreviousValuesFieldDetails {
+  id: {
+    type: 'ID'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  seen: {
+    type: 'Boolean'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  author: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  date: {
+    type: 'DateTime'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
+    resolve: undefined
+  }
+  message: {
+    type: 'String'
+    args: {}
+    description: string
+    list: undefined
+    nullable: false
     resolve: undefined
   }
 }
@@ -4961,6 +5522,7 @@ export interface UserWhereInput {
   privilege_gt?: number | null
   privilege_gte?: number | null
   activities_some?: UserPresenceWhereInput | null
+  notifications_some?: UserMessagesWhereInput | null
   AND?: UserWhereInput[]
 }
 export type UserWhereInputInputObject =
@@ -5032,6 +5594,118 @@ export type UserWhereInputInputObject =
   | { name: 'privilege_gt', alias?: string  } 
   | { name: 'privilege_gte', alias?: string  } 
   | { name: 'activities_some', alias?: string  } 
+  | { name: 'notifications_some', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
+export interface UserMessagesWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  seen?: boolean | null
+  seen_not?: boolean | null
+  author?: string | null
+  author_not?: string | null
+  author_in?: string[]
+  author_not_in?: string[]
+  author_lt?: string | null
+  author_lte?: string | null
+  author_gt?: string | null
+  author_gte?: string | null
+  author_contains?: string | null
+  author_not_contains?: string | null
+  author_starts_with?: string | null
+  author_not_starts_with?: string | null
+  author_ends_with?: string | null
+  author_not_ends_with?: string | null
+  date?: string | null
+  date_not?: string | null
+  date_in?: string[]
+  date_not_in?: string[]
+  date_lt?: string | null
+  date_lte?: string | null
+  date_gt?: string | null
+  date_gte?: string | null
+  message?: string | null
+  message_not?: string | null
+  message_in?: string[]
+  message_not_in?: string[]
+  message_lt?: string | null
+  message_lte?: string | null
+  message_gt?: string | null
+  message_gte?: string | null
+  message_contains?: string | null
+  message_not_contains?: string | null
+  message_starts_with?: string | null
+  message_not_starts_with?: string | null
+  message_ends_with?: string | null
+  message_not_ends_with?: string | null
+  AND?: UserMessagesWhereInput[]
+}
+export type UserMessagesWhereInputInputObject =
+  | Extract<keyof UserMessagesWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'seen', alias?: string  } 
+  | { name: 'seen_not', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'author_not', alias?: string  } 
+  | { name: 'author_in', alias?: string  } 
+  | { name: 'author_not_in', alias?: string  } 
+  | { name: 'author_lt', alias?: string  } 
+  | { name: 'author_lte', alias?: string  } 
+  | { name: 'author_gt', alias?: string  } 
+  | { name: 'author_gte', alias?: string  } 
+  | { name: 'author_contains', alias?: string  } 
+  | { name: 'author_not_contains', alias?: string  } 
+  | { name: 'author_starts_with', alias?: string  } 
+  | { name: 'author_not_starts_with', alias?: string  } 
+  | { name: 'author_ends_with', alias?: string  } 
+  | { name: 'author_not_ends_with', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'date_not', alias?: string  } 
+  | { name: 'date_in', alias?: string  } 
+  | { name: 'date_not_in', alias?: string  } 
+  | { name: 'date_lt', alias?: string  } 
+  | { name: 'date_lte', alias?: string  } 
+  | { name: 'date_gt', alias?: string  } 
+  | { name: 'date_gte', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  | { name: 'message_not', alias?: string  } 
+  | { name: 'message_in', alias?: string  } 
+  | { name: 'message_not_in', alias?: string  } 
+  | { name: 'message_lt', alias?: string  } 
+  | { name: 'message_lte', alias?: string  } 
+  | { name: 'message_gt', alias?: string  } 
+  | { name: 'message_gte', alias?: string  } 
+  | { name: 'message_contains', alias?: string  } 
+  | { name: 'message_not_contains', alias?: string  } 
+  | { name: 'message_starts_with', alias?: string  } 
+  | { name: 'message_not_starts_with', alias?: string  } 
+  | { name: 'message_ends_with', alias?: string  } 
+  | { name: 'message_not_ends_with', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
 export interface ActivityWhereInput {
@@ -5230,6 +5904,13 @@ export type ActivityWhereInputInputObject =
   | { name: 'end_gte', alias?: string  } 
   | { name: 'registered_some', alias?: string  } 
   | { name: 'AND', alias?: string  } 
+  
+export interface UserMessagesWhereUniqueInput {
+  id?: string | null
+}
+export type UserMessagesWhereUniqueInputInputObject =
+  | Extract<keyof UserMessagesWhereUniqueInput, string>
+  | { name: 'id', alias?: string  } 
   
 export interface ActivityWhereUniqueInput {
   id?: string | null
@@ -6095,6 +6776,7 @@ export interface UserCreateInput {
   plan?: number | null
   privilege?: number | null
   activities?: UserPresenceCreateManyWithoutUserInput | null
+  notifications?: UserMessagesCreateManyInput | null
 }
 export type UserCreateInputInputObject =
   | Extract<keyof UserCreateInput, string>
@@ -6105,6 +6787,7 @@ export type UserCreateInputInputObject =
   | { name: 'plan', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
   | { name: 'activities', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   
 export interface UserPresenceCreateManyWithoutUserInput {
   create?: UserPresenceCreateWithoutUserInput[]
@@ -6160,6 +6843,30 @@ export type ActivityCreateWithoutRegisteredInputInputObject =
   | { name: 'begin', alias?: string  } 
   | { name: 'end', alias?: string  } 
   
+export interface UserMessagesCreateManyInput {
+  create?: UserMessagesCreateInput[]
+  connect?: UserMessagesWhereUniqueInput[]
+}
+export type UserMessagesCreateManyInputInputObject =
+  | Extract<keyof UserMessagesCreateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  
+export interface UserMessagesCreateInput {
+  id?: string | null
+  seen?: boolean
+  author?: string
+  date?: string
+  message?: string
+}
+export type UserMessagesCreateInputInputObject =
+  | Extract<keyof UserMessagesCreateInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'seen', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  
 export interface UserUpdateInput {
   name?: string | null
   email?: string | null
@@ -6167,6 +6874,7 @@ export interface UserUpdateInput {
   plan?: number | null
   privilege?: number | null
   activities?: UserPresenceUpdateManyWithoutUserInput | null
+  notifications?: UserMessagesUpdateManyInput | null
 }
 export type UserUpdateInputInputObject =
   | Extract<keyof UserUpdateInput, string>
@@ -6176,6 +6884,7 @@ export type UserUpdateInputInputObject =
   | { name: 'plan', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
   | { name: 'activities', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   
 export interface UserPresenceUpdateManyWithoutUserInput {
   create?: UserPresenceCreateWithoutUserInput[]
@@ -6381,6 +7090,199 @@ export type UserPresenceUpdateManyDataInputInputObject =
   | { name: 'presence', alias?: string  } 
   | { name: 'xp', alias?: string  } 
   
+export interface UserMessagesUpdateManyInput {
+  create?: UserMessagesCreateInput[]
+  update?: UserMessagesUpdateWithWhereUniqueNestedInput[]
+  upsert?: UserMessagesUpsertWithWhereUniqueNestedInput[]
+  delete?: UserMessagesWhereUniqueInput[]
+  connect?: UserMessagesWhereUniqueInput[]
+  set?: UserMessagesWhereUniqueInput[]
+  disconnect?: UserMessagesWhereUniqueInput[]
+  deleteMany?: UserMessagesScalarWhereInput[]
+  updateMany?: UserMessagesUpdateManyWithWhereNestedInput[]
+}
+export type UserMessagesUpdateManyInputInputObject =
+  | Extract<keyof UserMessagesUpdateManyInput, string>
+  | { name: 'create', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'upsert', alias?: string  } 
+  | { name: 'delete', alias?: string  } 
+  | { name: 'connect', alias?: string  } 
+  | { name: 'set', alias?: string  } 
+  | { name: 'disconnect', alias?: string  } 
+  | { name: 'deleteMany', alias?: string  } 
+  | { name: 'updateMany', alias?: string  } 
+  
+export interface UserMessagesUpdateWithWhereUniqueNestedInput {
+  where?: UserMessagesWhereUniqueInput
+  data?: UserMessagesUpdateDataInput
+}
+export type UserMessagesUpdateWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof UserMessagesUpdateWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserMessagesUpdateDataInput {
+  seen?: boolean | null
+  author?: string | null
+  date?: string | null
+  message?: string | null
+}
+export type UserMessagesUpdateDataInputInputObject =
+  | Extract<keyof UserMessagesUpdateDataInput, string>
+  | { name: 'seen', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  
+export interface UserMessagesUpsertWithWhereUniqueNestedInput {
+  where?: UserMessagesWhereUniqueInput
+  update?: UserMessagesUpdateDataInput
+  create?: UserMessagesCreateInput
+}
+export type UserMessagesUpsertWithWhereUniqueNestedInputInputObject =
+  | Extract<keyof UserMessagesUpsertWithWhereUniqueNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'update', alias?: string  } 
+  | { name: 'create', alias?: string  } 
+  
+export interface UserMessagesScalarWhereInput {
+  id?: string | null
+  id_not?: string | null
+  id_in?: string[]
+  id_not_in?: string[]
+  id_lt?: string | null
+  id_lte?: string | null
+  id_gt?: string | null
+  id_gte?: string | null
+  id_contains?: string | null
+  id_not_contains?: string | null
+  id_starts_with?: string | null
+  id_not_starts_with?: string | null
+  id_ends_with?: string | null
+  id_not_ends_with?: string | null
+  seen?: boolean | null
+  seen_not?: boolean | null
+  author?: string | null
+  author_not?: string | null
+  author_in?: string[]
+  author_not_in?: string[]
+  author_lt?: string | null
+  author_lte?: string | null
+  author_gt?: string | null
+  author_gte?: string | null
+  author_contains?: string | null
+  author_not_contains?: string | null
+  author_starts_with?: string | null
+  author_not_starts_with?: string | null
+  author_ends_with?: string | null
+  author_not_ends_with?: string | null
+  date?: string | null
+  date_not?: string | null
+  date_in?: string[]
+  date_not_in?: string[]
+  date_lt?: string | null
+  date_lte?: string | null
+  date_gt?: string | null
+  date_gte?: string | null
+  message?: string | null
+  message_not?: string | null
+  message_in?: string[]
+  message_not_in?: string[]
+  message_lt?: string | null
+  message_lte?: string | null
+  message_gt?: string | null
+  message_gte?: string | null
+  message_contains?: string | null
+  message_not_contains?: string | null
+  message_starts_with?: string | null
+  message_not_starts_with?: string | null
+  message_ends_with?: string | null
+  message_not_ends_with?: string | null
+  AND?: UserMessagesScalarWhereInput[]
+  OR?: UserMessagesScalarWhereInput[]
+  NOT?: UserMessagesScalarWhereInput[]
+}
+export type UserMessagesScalarWhereInputInputObject =
+  | Extract<keyof UserMessagesScalarWhereInput, string>
+  | { name: 'id', alias?: string  } 
+  | { name: 'id_not', alias?: string  } 
+  | { name: 'id_in', alias?: string  } 
+  | { name: 'id_not_in', alias?: string  } 
+  | { name: 'id_lt', alias?: string  } 
+  | { name: 'id_lte', alias?: string  } 
+  | { name: 'id_gt', alias?: string  } 
+  | { name: 'id_gte', alias?: string  } 
+  | { name: 'id_contains', alias?: string  } 
+  | { name: 'id_not_contains', alias?: string  } 
+  | { name: 'id_starts_with', alias?: string  } 
+  | { name: 'id_not_starts_with', alias?: string  } 
+  | { name: 'id_ends_with', alias?: string  } 
+  | { name: 'id_not_ends_with', alias?: string  } 
+  | { name: 'seen', alias?: string  } 
+  | { name: 'seen_not', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'author_not', alias?: string  } 
+  | { name: 'author_in', alias?: string  } 
+  | { name: 'author_not_in', alias?: string  } 
+  | { name: 'author_lt', alias?: string  } 
+  | { name: 'author_lte', alias?: string  } 
+  | { name: 'author_gt', alias?: string  } 
+  | { name: 'author_gte', alias?: string  } 
+  | { name: 'author_contains', alias?: string  } 
+  | { name: 'author_not_contains', alias?: string  } 
+  | { name: 'author_starts_with', alias?: string  } 
+  | { name: 'author_not_starts_with', alias?: string  } 
+  | { name: 'author_ends_with', alias?: string  } 
+  | { name: 'author_not_ends_with', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'date_not', alias?: string  } 
+  | { name: 'date_in', alias?: string  } 
+  | { name: 'date_not_in', alias?: string  } 
+  | { name: 'date_lt', alias?: string  } 
+  | { name: 'date_lte', alias?: string  } 
+  | { name: 'date_gt', alias?: string  } 
+  | { name: 'date_gte', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  | { name: 'message_not', alias?: string  } 
+  | { name: 'message_in', alias?: string  } 
+  | { name: 'message_not_in', alias?: string  } 
+  | { name: 'message_lt', alias?: string  } 
+  | { name: 'message_lte', alias?: string  } 
+  | { name: 'message_gt', alias?: string  } 
+  | { name: 'message_gte', alias?: string  } 
+  | { name: 'message_contains', alias?: string  } 
+  | { name: 'message_not_contains', alias?: string  } 
+  | { name: 'message_starts_with', alias?: string  } 
+  | { name: 'message_not_starts_with', alias?: string  } 
+  | { name: 'message_ends_with', alias?: string  } 
+  | { name: 'message_not_ends_with', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  | { name: 'OR', alias?: string  } 
+  | { name: 'NOT', alias?: string  } 
+  
+export interface UserMessagesUpdateManyWithWhereNestedInput {
+  where?: UserMessagesScalarWhereInput
+  data?: UserMessagesUpdateManyDataInput
+}
+export type UserMessagesUpdateManyWithWhereNestedInputInputObject =
+  | Extract<keyof UserMessagesUpdateManyWithWhereNestedInput, string>
+  | { name: 'where', alias?: string  } 
+  | { name: 'data', alias?: string  } 
+  
+export interface UserMessagesUpdateManyDataInput {
+  seen?: boolean | null
+  author?: string | null
+  date?: string | null
+  message?: string | null
+}
+export type UserMessagesUpdateManyDataInputInputObject =
+  | Extract<keyof UserMessagesUpdateManyDataInput, string>
+  | { name: 'seen', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  
 export interface UserUpdateManyMutationInput {
   name?: string | null
   email?: string | null
@@ -6395,6 +7297,32 @@ export type UserUpdateManyMutationInputInputObject =
   | { name: 'year', alias?: string  } 
   | { name: 'plan', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
+  
+export interface UserMessagesUpdateInput {
+  seen?: boolean | null
+  author?: string | null
+  date?: string | null
+  message?: string | null
+}
+export type UserMessagesUpdateInputInputObject =
+  | Extract<keyof UserMessagesUpdateInput, string>
+  | { name: 'seen', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
+  
+export interface UserMessagesUpdateManyMutationInput {
+  seen?: boolean | null
+  author?: string | null
+  date?: string | null
+  message?: string | null
+}
+export type UserMessagesUpdateManyMutationInputInputObject =
+  | Extract<keyof UserMessagesUpdateManyMutationInput, string>
+  | { name: 'seen', alias?: string  } 
+  | { name: 'author', alias?: string  } 
+  | { name: 'date', alias?: string  } 
+  | { name: 'message', alias?: string  } 
   
 export interface ActivityCreateInput {
   id?: string | null
@@ -6459,6 +7387,7 @@ export interface UserCreateWithoutActivitiesInput {
   year?: number | null
   plan?: number | null
   privilege?: number | null
+  notifications?: UserMessagesCreateManyInput | null
 }
 export type UserCreateWithoutActivitiesInputInputObject =
   | Extract<keyof UserCreateWithoutActivitiesInput, string>
@@ -6468,6 +7397,7 @@ export type UserCreateWithoutActivitiesInputInputObject =
   | { name: 'year', alias?: string  } 
   | { name: 'plan', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   
 export interface ActivityUpdateInput {
   code?: string | null
@@ -6554,6 +7484,7 @@ export interface UserUpdateWithoutActivitiesDataInput {
   year?: number | null
   plan?: number | null
   privilege?: number | null
+  notifications?: UserMessagesUpdateManyInput | null
 }
 export type UserUpdateWithoutActivitiesDataInputInputObject =
   | Extract<keyof UserUpdateWithoutActivitiesDataInput, string>
@@ -6562,6 +7493,7 @@ export type UserUpdateWithoutActivitiesDataInputInputObject =
   | { name: 'year', alias?: string  } 
   | { name: 'plan', alias?: string  } 
   | { name: 'privilege', alias?: string  } 
+  | { name: 'notifications', alias?: string  } 
   
 export interface UserUpsertWithoutActivitiesInput {
   update?: UserUpdateWithoutActivitiesDataInput
@@ -7149,6 +8081,23 @@ export type UserSubscriptionWhereInputInputObject =
   | { name: 'node', alias?: string  } 
   | { name: 'AND', alias?: string  } 
   
+export interface UserMessagesSubscriptionWhereInput {
+  mutation_in?: prisma.MutationType[]
+  updatedFields_contains?: string | null
+  updatedFields_contains_every?: string[]
+  updatedFields_contains_some?: string[]
+  node?: UserMessagesWhereInput | null
+  AND?: UserMessagesSubscriptionWhereInput[]
+}
+export type UserMessagesSubscriptionWhereInputInputObject =
+  | Extract<keyof UserMessagesSubscriptionWhereInput, string>
+  | { name: 'mutation_in', alias?: string  } 
+  | { name: 'updatedFields_contains', alias?: string  } 
+  | { name: 'updatedFields_contains_every', alias?: string  } 
+  | { name: 'updatedFields_contains_some', alias?: string  } 
+  | { name: 'node', alias?: string  } 
+  | { name: 'AND', alias?: string  } 
+  
 export interface ActivitySubscriptionWhereInput {
   mutation_in?: prisma.MutationType[]
   updatedFields_contains?: string | null
@@ -7278,6 +8227,18 @@ export type UserPresenceOrderByInputValues =
   | 'presence_DESC'
   | 'xp_ASC'
   | 'xp_DESC'
+  
+export type UserMessagesOrderByInputValues =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'seen_ASC'
+  | 'seen_DESC'
+  | 'author_ASC'
+  | 'author_DESC'
+  | 'date_ASC'
+  | 'date_DESC'
+  | 'message_ASC'
+  | 'message_DESC'
   
 export type UserOrderByInputValues =
   | 'id_ASC'
